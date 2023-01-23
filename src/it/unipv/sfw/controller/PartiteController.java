@@ -33,6 +33,7 @@ public class PartiteController implements IController {
 				int codePartita = ((UtenteButton)e.getSource()).getCode();
 				System.out.println("Selezionata partita numero: " + codePartita + ".");
 				Sessione.getIstance().resetAcquistoPartita();
+				ControllerManager.getInstance().loadController(2);
 			}
 		};
 		

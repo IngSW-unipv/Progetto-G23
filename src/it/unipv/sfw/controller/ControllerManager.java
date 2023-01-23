@@ -19,6 +19,8 @@ public class ControllerManager {
 		controllers = new IController[7];
 		controllers[0] = new LoginController();
 		controllers[1] = new RegistrazioneController();
+		controllers[2] = new SectorController();
+		controllers[3] = new BloccoController();
 		controllers[6] = new PartiteController();
 		
 		currentController = null;
@@ -34,6 +36,7 @@ public class ControllerManager {
 	}
 	
 	public void loadController(int id) {
+		// TODO: check if id is valid
 		currentController = controllers[id];
 		f.loadView(currentController.getView());
 		currentController.onLoad();
