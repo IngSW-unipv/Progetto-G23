@@ -21,6 +21,8 @@ public class ControllerManager {
 		controllers[1] = new RegistrazioneController();
 		controllers[2] = new SectorController();
 		controllers[3] = new BloccoController();
+		controllers[4] = new AnelloController();
+		controllers[5] = new PostoController();
 		controllers[6] = new PartiteController();
 		
 		currentController = null;
