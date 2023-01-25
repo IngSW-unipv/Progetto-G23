@@ -8,6 +8,13 @@ import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.RegistrazioneView;
 
+
+/**
+ * Controller che si occupa della RegistrazioneView.
+ * @author Gabriele Invernizzi
+ * @see IController
+ * @see it.unipv.sfw.view.RegistrazioneView
+ */
 public class RegistrazioneController implements IController {
 	
 	private RegistrazioneView v;

@@ -10,6 +10,13 @@ import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.SectorView;
 import it.unipv.sfw.view.buttons.SectorButton;
 
+
+/**
+ * Controller che si occupa della SectorView.
+ * @author Gabriele Invernizzi
+ * @see IController
+ * @see it.unipv.sfw.view.SectorView
+ */
 public class SectorController implements IController {
 	
 	private SectorView v;

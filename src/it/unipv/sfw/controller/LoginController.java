@@ -8,6 +8,14 @@ import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.LoginView;
 
+
+
+/**
+ * Controller che si occupa della LoginView.
+ * @author Gabriele Invernizzi
+ * @see IController
+ * @see it.unipv.sfw.view.LoginView
+ */
 public class LoginController implements IController {
 	
 	private LoginView v;

@@ -10,6 +10,13 @@ import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.PostoView;
 import it.unipv.sfw.view.buttons.PostoButton;
 
+
+/**
+ * Controller che si occupa della PostoView.
+ * @author Gabriele Invernizzi
+ * @see IController
+ * @see it.unipv.sfw.view.PostoView
+ */
 public class PostoController implements IController {
 	
 	private PostoView v;

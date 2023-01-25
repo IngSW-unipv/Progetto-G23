@@ -12,6 +12,14 @@ import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.PartiteView;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
+
+
+/**
+ * Controller che si occupa della PartiteView.
+ * @author Gabriele Invernizzi
+ * @see IController
+ * @see it.unipv.sfw.view.PartiteView
+ */
 public class PartiteController implements IController {
 	
 	private PartiteView v;

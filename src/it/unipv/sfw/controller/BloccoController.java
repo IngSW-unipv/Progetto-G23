@@ -10,6 +10,13 @@ import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.BloccoView;
 import it.unipv.sfw.view.buttons.BloccoButton;
 
+
+/**
+ * Controller che si occupa della BloccoView.
+ * @author Gabriele Invernizzi
+ * @see IController
+ * @see it.unipv.sfw.view.BloccoView
+ */
 public class BloccoController implements IController {
 	
 	private BloccoView v;

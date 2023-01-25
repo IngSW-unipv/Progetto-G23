@@ -10,6 +10,13 @@ import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.AnelloView;
 import it.unipv.sfw.view.buttons.AnelloButton;
 
+
+/**
+ * Controller che si occupa della AnelloView.
+ * @author Gabriele Invernizzi
+ * @see IController
+ * @see it.unipv.sfw.view.AnelloView
+ */
 public class AnelloController implements IController {
 	
 	private AnelloView v;
