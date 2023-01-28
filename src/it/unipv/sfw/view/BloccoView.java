@@ -10,7 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import it.unipv.sfw.view.buttons.BloccoButton;
-
+/**
+ *Classe che crea la view dei vari blocchi di un anello 
+ *
+ * @author Jacopo Piccoli
+ *
+ *@see it.unipv.sfw.view
+ */
 public class BloccoView extends AView {
 
 	private JPanel tabellone;

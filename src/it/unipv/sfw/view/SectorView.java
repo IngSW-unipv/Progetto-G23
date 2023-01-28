@@ -14,6 +14,15 @@ import javax.swing.JPanel;
 
 import it.unipv.sfw.view.buttons.SectorButton;
 
+
+/**
+ *Classe che crea la view degli 8 settori del campo 
+ *
+ * @author Jacopo Piccoli
+ *
+ *@see it.unipv.sfw.view
+ */
+
 public class SectorView extends AView {
 
 	private JPanel middle, north, east, south, west, prova, settori;

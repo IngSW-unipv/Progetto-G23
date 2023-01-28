@@ -15,6 +15,14 @@ import javax.swing.JPanel;
 
 import it.unipv.sfw.view.buttons.PostoButton;
 
+
+/**
+ *Classe che crea la view dei posti di un blocco 
+ *
+ * @author Jacopo Piccoli
+ *
+ *@see it.unipv.sfw.view
+ */
 public class PostoView extends AView {
 
 	private JPanel blocco;

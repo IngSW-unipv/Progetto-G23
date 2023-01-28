@@ -21,6 +21,15 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
+/**
+ *Classe che crea la view della sezione partite nella pagina
+ *principale dell'utente
+ *
+ * @author Jacopo Piccoli
+ *
+ *@see it.unipv.sfw.view
+ */
 public class PartiteView extends AView {
 
 	JPanel panel;

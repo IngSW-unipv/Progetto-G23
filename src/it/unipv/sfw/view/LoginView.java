@@ -11,6 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+
+/**
+ *Classe che crea la view della pagina di login usata 
+ *dagli utenti per accedere al sistema 
+ *
+ * @author Jacopo Piccoli
+ *
+ *@see it.unipv.sfw.view
+ */
 public class LoginView extends AView {
 	private static final long serialVersionUID = 1L;
 	JPanel testo, bottoni, titolo, nome, codice, login, b, ba;

@@ -12,6 +12,15 @@ import javax.swing.JPanel;
 
 import it.unipv.sfw.view.buttons.AnelloButton;
 
+
+
+/**
+ *Classe che crea la view deli 3 anelli di ogni settore
+ *
+ * @author Jacopo Piccoli
+ *
+ *@see it.unipv.sfw.view
+ */
 public class AnelloView extends AView {
 
 	private final int n_anelli = 3;
