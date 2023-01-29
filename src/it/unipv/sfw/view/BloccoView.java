@@ -15,7 +15,7 @@ import it.unipv.sfw.view.buttons.BloccoButton;
  *
  * @author Jacopo Piccoli
  *
- *@see it.unipv.sfw.view
+ *@see it.unipv.sfw.view.buttons.BloccoButton
  */
 public class BloccoView extends AView {
 

@@ -21,7 +21,7 @@ import it.unipv.sfw.view.buttons.PostoButton;
  *
  * @author Jacopo Piccoli
  *
- *@see it.unipv.sfw.view
+ *@see it.unipv.sfw.view.buttons.PostoButton
  */
 public class PostoView extends AView {
 

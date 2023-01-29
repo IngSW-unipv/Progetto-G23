@@ -20,7 +20,7 @@ import it.unipv.sfw.view.buttons.SectorButton;
  *
  * @author Jacopo Piccoli
  *
- *@see it.unipv.sfw.view
+ *@see it.unipv.sfw.view.buttons.SectorButton
  */
 
 public class SectorView extends AView {

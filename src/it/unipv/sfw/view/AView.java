@@ -4,6 +4,12 @@ package it.unipv.sfw.view;
 
 import javax.swing.JPanel;
 
+/**
+ *Classe astratta che rapresenta una view generica
+ *
+ * @author Jacopo Piccoli
+ */
+
 public abstract class AView extends JPanel {
 	public enum Type {
 		LOGIN,
@@ -14,6 +20,10 @@ public abstract class AView extends JPanel {
 		POSTO,
 		BLOCCO
 	}
+	
+	/**
+	 *@return restituisce il tipo della classe
+	 */
 	
 	public abstract Type getType();
 }

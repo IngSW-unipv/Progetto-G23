@@ -17,8 +17,6 @@ import javax.swing.JTextField;
  *dagli utenti per accedere al sistema 
  *
  * @author Jacopo Piccoli
- *
- *@see it.unipv.sfw.view
  */
 public class LoginView extends AView {
 	private static final long serialVersionUID = 1L;

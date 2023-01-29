@@ -28,7 +28,7 @@ import java.util.Collection;
  *
  * @author Jacopo Piccoli
  *
- *@see it.unipv.sfw.view
+ *@see it.unipv.sfw.view.buttons.UtenteButton
  */
 public class PartiteView extends AView {
 

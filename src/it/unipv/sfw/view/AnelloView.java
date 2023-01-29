@@ -19,7 +19,7 @@ import it.unipv.sfw.view.buttons.AnelloButton;
  *
  * @author Jacopo Piccoli
  *
- *@see it.unipv.sfw.view
+ *@see it.unipv.sfw.view.buttons.AnelloButton
  */
 public class AnelloView extends AView {
 
