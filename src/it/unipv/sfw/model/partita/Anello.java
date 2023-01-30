@@ -2,6 +2,11 @@ package it.unipv.sfw.model.partita;
 
 import java.util.ArrayList;
 
+/**
+ * Classe che rappresenta un anello dello {@link Stadio}.
+ * @author Lorenzo Reale
+ * @see Stadio
+ */
 public class Anello {
 
 	private int nAnello;
@@ -14,14 +19,25 @@ public class Anello {
 		posti = new ArrayList<Posto>();
 	}
 
+	/**
+	 * Funzione utilizzata per segnalare che l'anello è pieno.
+	 * @param False se è pieno, altrimenti true.
+	 */
 	public void setLibero(boolean lib) {
 		libero = lib;
 	}
 
+	/**
+	 * @return False se l'anello è occupato, altrimenti true.
+	 */
 	public boolean getLibero() {
 		return libero;
 	}
 
+	/**
+	 * Funzione utilizzata per aggiungere posti all'anello.
+	 * @param numero di posti da aggiungere
+	 */
 	public void generaPosti(int nPosti) {
 		for (int i = 0; i < nPosti; i++) {
 			Posto p = new Posto(i);
@@ -29,14 +45,16 @@ public class Anello {
 		}
 	}
 
-	public void addPosto() {
-		posti.add(new Posto(posti.size()));
-	}
-
+	/**
+	 * Funzione utilizzata per rimuovere un posto.
+	 */
 	public void removePosto() {
 		posti.remove(posti.size());
 	}
 
+	/**
+	 * Funzione utilizzata per settare l'anello occupato se non ci sono più posti liberi.
+	 */
 	public void checkLibero() {
 		int lib = 0;
 
@@ -49,6 +67,9 @@ public class Anello {
 			libero = false;
 	}
 
+	/**
+	 * @return Il numero dell'anello.
+	 */
 	public int getNAnello() {
 		return nAnello;
 	}

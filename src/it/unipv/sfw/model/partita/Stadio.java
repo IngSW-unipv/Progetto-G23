@@ -2,6 +2,11 @@ package it.unipv.sfw.model.partita;
 
 import java.util.ArrayList;
 
+/**
+ * Classe che rappresenta lo stadio accessibile al {@link Cliente}.
+ * @author Lorenzo Reale
+ * @see it.unipv.sfw.model.utente.Cliente
+ */
 public class Stadio {
 
 	private ArrayList<Settore> settori;
@@ -12,14 +17,25 @@ public class Stadio {
 		settori = new ArrayList<Settore>();
 	}
 
+	/**
+	 * Funzione utilizzata per segnalare che lo stadio è pieno.
+	 * @param False se è pieno, altrimenti true.
+	 */
 	public void setLibero(boolean lib) {
 		libero = lib;
 	}
 
+	/**
+	 * @return False se lo stadio è occupato, altrimenti true.
+	 */
 	public boolean getLibero() {
 		return libero;
 	}
 
+	/**
+	 * Funzione utilizzata per aggiungere settori allo stadio.
+	 * @param Numero settori da aggiungere.
+	 */
 	public void generaSettori(int nSettori) {
 		for (int i = 0; i < nSettori; i++) {
 			Settore s = new Settore(i);
@@ -27,14 +43,16 @@ public class Stadio {
 		}
 	}
 
-	public void addSettore() {
-		settori.add(new Settore(settori.size()));
-	}
-
+	/**
+	 * Funzione utilizzata per rimuovere un settore.
+	 */
 	public void removeSettore() {
 		settori.remove(settori.size());
 	}
 
+	/**
+	 * Funzione utilizzata per settare lo stadio occupato se non ci sono più settori liberi.
+	 */
 	public void checkLibero() {
 		int lib = 0;
 
