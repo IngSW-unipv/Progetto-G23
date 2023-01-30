@@ -3,6 +3,13 @@ package it.unipv.sfw.view;
 import javax.swing.*;
 import java.awt.*;
 
+/** 
+ * Classe che rappresenta la schermata di registrazione
+ * dell'utente. 
+ *  
+ * @author Simone Platano
+ * @see AView
+ */
 public class RegistrazioneView extends AView {
 
 	private static final long serialVersionUID = 1L;
