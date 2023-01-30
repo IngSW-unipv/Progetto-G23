@@ -17,11 +17,10 @@ import it.unipv.sfw.view.buttons.PostoButton;
 
 
 /**
- *Classe che crea la view dei posti di un blocco 
+ * Classe che crea la view dei posti di un blocco.
  *
  * @author Jacopo Piccoli
- *
- *@see it.unipv.sfw.view.buttons.PostoButton
+ * @see it.unipv.sfw.view.buttons.PostoButton
  */
 public class PostoView extends AView {
 

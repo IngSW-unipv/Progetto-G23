@@ -15,11 +15,10 @@ import it.unipv.sfw.view.buttons.AnelloButton;
 
 
 /**
- *Classe che crea la view deli 3 anelli di ogni settore
+ * Classe che crea la view deli 3 anelli di ogni settore.
  *
  * @author Jacopo Piccoli
- *
- *@see it.unipv.sfw.view.buttons.AnelloButton
+ * @see it.unipv.sfw.view.buttons.AnelloButton
  */
 public class AnelloView extends AView {
 

@@ -16,11 +16,10 @@ import it.unipv.sfw.view.buttons.SectorButton;
 
 
 /**
- *Classe che crea la view degli 8 settori del campo 
+ * Classe che crea la view degli 8 settori del campo. 
  *
  * @author Jacopo Piccoli
- *
- *@see it.unipv.sfw.view.buttons.SectorButton
+ * @see it.unipv.sfw.view.buttons.SectorButton
  */
 
 public class SectorView extends AView {

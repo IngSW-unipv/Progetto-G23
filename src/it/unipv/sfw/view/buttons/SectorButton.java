@@ -4,11 +4,10 @@ import javax.swing.JButton;
 
 
 /**
- *Classe che utilizza i JButton per creare dei nuovi bottoni
- *con caratteristiche ulteriori chiamati SectorButton
+ * Classe che utilizza i JButton per creare dei nuovi bottoni
+ * con caratteristiche ulteriori chiamati SectorButton.
  *
  * @author Jacopo Piccoli
- *
  */
 
 public class SectorButton extends JButton {

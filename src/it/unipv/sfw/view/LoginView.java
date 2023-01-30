@@ -13,8 +13,8 @@ import javax.swing.JTextField;
 
 
 /**
- *Classe che crea la view della pagina di login usata 
- *dagli utenti per accedere al sistema 
+ * Classe che crea la view della pagina di login usata 
+ * dagli utenti per accedere al sistema. 
  *
  * @author Jacopo Piccoli
  */
