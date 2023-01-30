@@ -33,7 +33,7 @@ public abstract class Utente {
 	
 	/**
 	 * Funzione che cambia la password.
-	 * @param pass
+	 * @param pass Password nuova dell'utente.
 	 */
 	public void changePassword(String pass) {
 		this.password = pass;
@@ -48,7 +48,7 @@ public abstract class Utente {
 	
 	/**
 	 * Funzione che cambia il nome.
-	 * @param nome
+	 * @param nome Nome nuovo dell'utente.
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -56,7 +56,7 @@ public abstract class Utente {
 	
 	/**
 	 * Funzione che cambia il cognome.
-	 * @param cognome
+	 * @param cognome Cognome nuovo del'utente.
 	 */
 	public void setCognome(String cognome) {
 		this.cognome = cognome;

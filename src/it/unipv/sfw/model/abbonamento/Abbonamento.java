@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 
 
 /**
- * Classe che rappresenta l'abbonamento acquistabile dal {@link Cliente}.
+ * Classe che rappresenta l'abbonamento acquistabile dal {@link it.unipv.sfw.model.utente.Cliente}.
  * @author Federico Romano
  * @see TipoAbb
  * @see it.unipv.sfw.model.utente.Cliente
@@ -70,7 +70,7 @@ public class Abbonamento {
 	
 	/**
 	 * Funzione utilizzata per cambiare il tipo di abbonamento.
-	 * @param tipo
+	 * @param tipo Tipo dell'abbonamento.
 	 */
 	public void setTipoAbb(TipoAbb tipo) {
 		tipoAbb = tipo;

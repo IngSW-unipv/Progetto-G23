@@ -2,9 +2,9 @@ package it.unipv.sfw.model.store;
 
 
 /**
- * Classe che rappresenta il prodotto acquistabile dallo {@link StoreOnilne}.
+ * Classe che rappresenta il prodotto acquistabile dallo {@link StoreOnline}.
  * @author Federico Romano
- * @see StoreOnilne
+ * @see StoreOnline
  */
 public class Merchandising implements Comparable<Merchandising> {
 	public enum Merch {
@@ -21,7 +21,7 @@ public class Merchandising implements Comparable<Merchandising> {
 
 	/**
 	 * Funzione che permette di cambiare il tipo del merch a quello passato come parametro.
-	 * @param tipo
+	 * @param tipo Tipo del Merch.
 	 */
 	public void setTipoMerch(Merch tipo) {
 		tipoMerch = tipo;

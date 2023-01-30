@@ -93,7 +93,7 @@ public class Sessione {
 	/**
 	 * Funzione che permette di impostare come {@link Utente} corrente 
 	 * quello passato come parametro.
-	 * @param currentU
+	 * @param currentU Utente corrente della sessione.
 	 */
 	public void setCurrentUtente(Utente currentU) {
 		currentUtente = currentU;
@@ -102,7 +102,7 @@ public class Sessione {
 	/**
 	 * Funzione che permette di impostare come {@link Anello} corrente
 	 * quello passato come parametro.
-	 * @param currentA
+	 * @param currentA Anello corrente della sessione.
 	 */
 	public void setCurrentAnello(Anello currentA) {
 		currentAnello = currentA;
@@ -111,7 +111,7 @@ public class Sessione {
 	/**
 	 * Funzione che permette di impostare come {@link Settore} corrente
 	 * quello passato come parametro.
-	 * @param currentS
+	 * @param currentS Settore corrente della sessione.
 	 */
 	public void setCurrentSettore(Settore currentS) {
 		currentSettore = currentS;
@@ -120,7 +120,7 @@ public class Sessione {
 	/**
 	 * Funzione che permette di impostare come {@link Posto} corrente
 	 * quello passato come parametro.
-	 * @param currentP
+	 * @param currentP Posto corrente della sessione.
 	 */
 	public void setCurrentPosto(Posto currentP) {
 		currentPosto = currentP;
@@ -129,7 +129,7 @@ public class Sessione {
 	/**
 	 * Funzione che permette di impostare come {@link Blocco} corrente
 	 * quello passato come parametro.
-	 * @param currentB
+	 * @param currentB Blocco corrente della sessione.
 	 */
 	public void setCurrentBlocco(Blocco currentB) {
 		currentBlocco = currentB;
