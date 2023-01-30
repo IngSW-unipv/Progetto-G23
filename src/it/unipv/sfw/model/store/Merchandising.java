@@ -1,5 +1,11 @@
 package it.unipv.sfw.model.store;
 
+
+/**
+ * Classe che rappresenta il prodotto acquistabile dallo {@link StoreOnilne}.
+ * @author Federico Romano
+ * @see StoreOnilne
+ */
 public class Merchandising implements Comparable<Merchandising> {
 	public enum Merch {
 		MAGLIETTA, CAPPELLO, SCIARPA, TUTA, PANTALONCINI, CALZETTONI, TSHIRT;
@@ -13,18 +19,32 @@ public class Merchandising implements Comparable<Merchandising> {
 		this.prezzo = prezzo;
 	}
 
+	/**
+	 * Funzione che permette di cambiare il tipo del merch a quello passato come parametro.
+	 * @param tipo
+	 */
 	public void setTipoMerch(Merch tipo) {
 		tipoMerch = tipo;
 	}
 
+	/**
+	 * Funzione che permette di cambiare il prezzo del merch a quello passato come parametro.
+	 * @param prezzo
+	 */
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
-
+	
+	/**
+	 * @return Il tipo del merch.
+	 */
 	public Merch getTipoMerch() {
 		return tipoMerch;
 	}
 
+	/**
+	 * @return Il prezzo del merch.
+	 */
 	public double getPrezzo() {
 		return prezzo;
 	}

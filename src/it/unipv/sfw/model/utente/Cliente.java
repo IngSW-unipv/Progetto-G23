@@ -11,6 +11,8 @@ import it.unipv.sfw.model.abbonamento.TipoAbb;
  * Classe che estende {@link Utente} e rappresenta un cliente.
  * @author Federico Romano
  * @see Utente 
+ * @see it.unipv.sfw.model.abbonamento.Abbonamento
+ * @see it.unipv.sfw.model.abbonamento.TipoAbb
  */
 public class Cliente extends Utente {
 	private Calendar dataNascita;

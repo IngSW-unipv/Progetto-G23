@@ -4,6 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+
+/**
+ * Classe che rappresenta l'abbonamento acquistabile dal {@link Cliente}.
+ * @author Federico Romano
+ * @see TipoAbb
+ * @see it.unipv.sfw.model.utente.Cliente
+ */
 public class Abbonamento {
 	private TipoAbb tipoAbb;
 	private Calendar dataInizio;
@@ -15,11 +22,17 @@ public class Abbonamento {
 		this.prezzo = this.getPrezzo();
 	}
 	
+	/**
+	 * @return La data di inizio validità dell'abbonamento.
+	 */
 	public String getDataInizio() {
 		SimpleDateFormat formattedDate = new SimpleDateFormat("dd / MMM / YYYY");
 		return formattedDate.format(dataInizio);
 	}
 	
+	/**
+	 * @return Il prezzo dell'abbonamento.
+	 */
 	public double getPrezzo() {   
 		switch(this.tipoAbb) {
 			case TESSERA:
@@ -35,6 +48,11 @@ public class Abbonamento {
 		}
 	}
 	
+	/**
+	 * Funzione utilizzata per cambiare il prezzo dell'abbonamento.
+	 * @param prezzo
+	 * @return True se l'operazione è andata a buon fine, altrimenti false.
+	 */
 	public boolean setPrezzo(double prezzo) {   
 		if(prezzo >= 0) {
 			this.prezzo = prezzo;
@@ -43,10 +61,17 @@ public class Abbonamento {
 		else return false;
 	}
 	
+	/**
+	 * @return Il tipo di abbonamento.
+	 */
 	public TipoAbb getTipoAbb() {
 		return tipoAbb;
 	}
 	
+	/**
+	 * Funzione utilizzata per cambiare il tipo di abbonamento.
+	 * @param tipo
+	 */
 	public void setTipoAbb(TipoAbb tipo) {
 		tipoAbb = tipo;
 	}

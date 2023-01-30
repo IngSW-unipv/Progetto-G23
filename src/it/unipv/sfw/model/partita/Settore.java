@@ -2,6 +2,11 @@ package it.unipv.sfw.model.partita;
 
 import java.util.ArrayList;
 
+/**
+ * Classe che rappresenta un settore dello {@link Stadio}.
+ * @author Lorenzo Reale
+ * @see Stadio
+ */
 public class Settore {
 
 	private int nSettore;
@@ -14,14 +19,25 @@ public class Settore {
 		blocchi = new ArrayList<>();
 	}
 
+	/**
+	 * Funzione utilizzata per segnalare che il settore è pieno.
+	 * @param False se è pieno, altrimenti true.
+	 */
 	public void setLibero(boolean lib) {
 		libero = lib;
 	}
 
+	/**
+	 * @return False se il settore è occupato, altrimenti true.
+	 */
 	public boolean getLibero() {
 		return libero;
 	}
 
+	/**
+	 * Funzione utilizzata per aggiungere blocchi allo stadio.
+	 * @param Numero di blocchi da generare.
+	 */
 	public void generaBlocchi(int nAnelli) {
 		for (int i = 0; i < nAnelli; i++) {
 			Blocco a = new Blocco(i);
@@ -29,14 +45,16 @@ public class Settore {
 		}
 	}
 
-	public void addBlocco() {
-		blocchi.add(new Blocco(blocchi.size()));
-	}
-
+	/**
+	 * Funzione utilizzata per rimuovere un blocco.
+	 */
 	public void removeBlocco() {
 		blocchi.remove(blocchi.size());
 	}
 
+	/**
+	 * Funzione utilizzata per settare il settore occupato se non ci sono più blocchi liberi.
+	 */
 	public void checkLibero() {
 		int lib = 0;
 
@@ -49,6 +67,9 @@ public class Settore {
 			libero = false;
 	}
 
+	/**
+	 * @return Il numero del settore.
+	 */
 	public int getNSettore() {
 		return nSettore;
 	}
