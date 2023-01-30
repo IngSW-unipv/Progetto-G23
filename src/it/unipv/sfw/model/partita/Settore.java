@@ -21,7 +21,7 @@ public class Settore {
 
 	/**
 	 * Funzione utilizzata per segnalare che il settore è pieno.
-	 * @param False se è pieno, altrimenti true.
+	 * @param lib False se è pieno, altrimenti true.
 	 */
 	public void setLibero(boolean lib) {
 		libero = lib;
@@ -36,7 +36,7 @@ public class Settore {
 
 	/**
 	 * Funzione utilizzata per aggiungere blocchi allo stadio.
-	 * @param Numero di blocchi da generare.
+	 * @param nAnelli Numero di blocchi da generare.
 	 */
 	public void generaBlocchi(int nAnelli) {
 		for (int i = 0; i < nAnelli; i++) {

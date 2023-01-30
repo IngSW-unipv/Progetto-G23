@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * Classe che rappresenta il museo visitabile dal {@link Cliente}.
+ * Classe che rappresenta il museo visitabile dal {@link it.unipv.sfw.model.utente.Cliente}.
  * @author Lorenzo Reale
  * @see it.unipv.sfw.model.utente.Cliente
  */
@@ -67,7 +67,7 @@ public class Museo {
 	
 	/**
 	 * Funzione utilizzata per aprire il museo.
-	 * @param True per aprire, false per chiudere
+	 * @param aperto True per aprire, false per chiudere.
 	 */
 	public void setAperto(boolean aperto) {
 		this.aperto = aperto;

@@ -21,7 +21,7 @@ public class Blocco {
 
 	/**
 	 * Funzione utilizzata per segnalare che il blocco è pieno.
-	 * @param False se è pieno, altrimenti true.
+	 * @param lib False se è pieno, altrimenti true.
 	 */
 	public void setLibero(boolean lib) {
 		libero = lib;
@@ -36,7 +36,7 @@ public class Blocco {
 
 	/**
 	 * Funzione utilizzata per generare degli anelli.
-	 * @param numero degli anelli da generare
+	 * @param nAnelli numero degli anelli da generare.
 	 */
 	public void generaAnelli(int nAnelli) {
 		for (int i = 0; i < nAnelli; i++) {

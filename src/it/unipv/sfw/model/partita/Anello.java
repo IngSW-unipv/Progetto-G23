@@ -21,7 +21,7 @@ public class Anello {
 
 	/**
 	 * Funzione utilizzata per segnalare che l'anello è pieno.
-	 * @param False se è pieno, altrimenti true.
+	 * @param lib False se è pieno, altrimenti true.
 	 */
 	public void setLibero(boolean lib) {
 		libero = lib;
@@ -36,7 +36,7 @@ public class Anello {
 
 	/**
 	 * Funzione utilizzata per aggiungere posti all'anello.
-	 * @param numero di posti da aggiungere
+	 * @param nPosti numero di posti da aggiungere.
 	 */
 	public void generaPosti(int nPosti) {
 		for (int i = 0; i < nPosti; i++) {

@@ -1,7 +1,7 @@
 package it.unipv.sfw.model.biglietti;
 
 /**
- * Classe che rappresenta il biglietto acquistabile dal {@link Cliente}.
+ * Classe che rappresenta il biglietto acquistabile dal {@link it.unipv.sfw.model.utente.Cliente}.
  * @author Lorenzo Reale
  * @see it.unipv.sfw.model.utente.Cliente
  */
