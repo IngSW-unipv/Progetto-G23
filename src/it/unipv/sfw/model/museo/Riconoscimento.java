@@ -1,13 +1,16 @@
 package it.unipv.sfw.model.museo;
 
 /**
- * Classe che rappresenta il riconoscimento visibile dal {@link Cliente} nel {@link Museo}.
+ * Classe che rappresenta il riconoscimento visibile dal {@link it.unipv.sfw.model.utente.Cliente} nel {@link Museo}.
  * @author Lorenzo Reale
  * @see Museo
  * @see it.unipv.sfw.model.utente.Cliente
  */
 public class Riconoscimento {
 
+	/**
+	 * Enumerazione che descrive il tipo del riconoscimento.
+	 */
 	public enum TipoRiconoscimento{
 		Coppa,
 		Trofeo,

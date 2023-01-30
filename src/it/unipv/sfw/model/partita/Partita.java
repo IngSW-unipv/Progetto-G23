@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * Classe che rappresenta la partita visibile dal {@link Cliente}.
+ * Classe che rappresenta la partita visibile dal {@link it.unipv.sfw.model.utente.Cliente}.
  * @author Lorenzo Reale
  * @see it.unipv.sfw.model.utente.Cliente
  */
@@ -13,6 +13,9 @@ public class Partita {
 
 	private final String casa = "Inter";
 
+	/**
+	 * Enumerazione che descrive le squadre.
+	 */
 	public enum Squadre {
 		Atalanta, Bologna, Cremonese, Empoli, Fiorentina, Inter, Juventus, Lazio, Lecce, Milan, Monza, Napoli, Roma,
 		Salernitana, Sampdoria, Sassuolo, Spezia, Torino, Udinese, Verona
@@ -43,7 +46,7 @@ public class Partita {
 
 	/**
 	 * Funzione utilizzata cambiare la squadra ospite.
-	 * @param nome squadra ospite
+	 * @param ospiti nome squadra ospite.
 	 */
 	public void setOspiti(Squadre ospiti) {
 		this.ospiti = "" + ospiti;

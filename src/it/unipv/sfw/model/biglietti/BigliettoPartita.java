@@ -3,7 +3,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * Classe che rappresenta il biglietto della partita acquistabile dal {@link Cliente}.
+ * Classe che rappresenta il biglietto della partita acquistabile dal {@link it.unipv.sfw.model.utente.Cliente}.
  * @author Lorenzo Reale
  * @see it.unipv.sfw.model.utente.Cliente
  */
@@ -70,7 +70,7 @@ public class BigliettoPartita extends Biglietto{
 	
 	/**
 	 * Funzione utilizzata per cambiare la visibilità del biglietto.
-	 * @param True per rendere visibile il biglietto, altrimenti false.
+	 * @param visibilita True per rendere visibile il biglietto, altrimenti false.
 	 */
 	public void setVisibilita(boolean visibilita) {
 		this.visibilita = visibilita;

@@ -17,7 +17,7 @@ public class Posto {
 
 	/**
 	 * Funzione utilizzata per segnalare che un posto è pieno.
-	 * @param False se è pieno, altrimenti true.
+	 * @param  lib False se è pieno, altrimenti true.
 	 */
 	public void setLibero(boolean lib) {
 		libero = lib;
