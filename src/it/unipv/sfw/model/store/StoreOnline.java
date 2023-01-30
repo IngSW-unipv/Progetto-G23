@@ -5,7 +5,7 @@ import java.util.List;
 
 
 /**
- * Classe che rappresenta lo Store del sito per l'acquisto del {@link Mechandising}.
+ * Classe che rappresenta lo Store del sito per l'acquisto del {@link Merchandising}.
  * @author Federico Romano
  * @see Merchandising
  */
@@ -18,8 +18,8 @@ public class StoreOnline {
 	
 	/**
 	 * Funzione che permette di aggiungere un merch di una certa quantità passandoli come parametri.
-	 * @param merchItem
-	 * @param quantita
+	 * @param merchItem Item da aggiungere allo store.
+	 * @param quantita Numero di quell'item da aggiungere.
 	 */
 	public void addMerch(Merchandising merchItem, int quantita) {
 		int i;
@@ -31,7 +31,7 @@ public class StoreOnline {
 	/**
 	 * Funzione che permette di rimuovere totalmente dallo store 
 	 * il merch passato come parametro
-	 * @param merchItem
+	 * @param merchItem Item da aggiungere allo store.
 	 */
 	public void removeMerch(Merchandising merchItem) {
 		for (Merchandising merch : archivioMerch) {
@@ -42,7 +42,7 @@ public class StoreOnline {
 	}
 
 	/**
-	 * @param merchItem
+	 * @param merchItem Item da aggiungere allo store.
 	 * @return Il numero di merch uguali a quello passato
 	 * come parametro ancora disponibili.
 	 */

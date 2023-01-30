@@ -14,10 +14,10 @@ public class Admin extends Utente {
 	
 	/**
 	 * Funzione che crea un {@link Cliente} di tipo giornalista.
-	 * @param nome
-	 * @param cognome
-	 * @param email
-	 * @param pass
+	 * @param nome Nome del giornalista.
+	 * @param cognome Cognome del gionalista.
+	 * @param email Email del giornalista.
+	 * @param pass Password del giornalista.
 	 */
 	public void addGiornalista(String nome, String cognome, String email, String pass) {
 		Cliente giornalista = new Cliente(nome, cognome, email, pass);

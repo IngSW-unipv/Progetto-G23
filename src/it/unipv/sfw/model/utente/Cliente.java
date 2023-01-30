@@ -34,7 +34,7 @@ public class Cliente extends Utente {
 	}
 
 	/**
-	 * @param tipo
+	 * @param tipo Tipo di abbonamento.
 	 * @return Il prezzo del {@link TipoAbb} passato come parametro.
 	 */
 	public double getPrezzoAbb(TipoAbb tipo) {
@@ -46,7 +46,7 @@ public class Cliente extends Utente {
 	
 	/**
 	 * Funzione che permette al cliente di abbonarsi.
-	 * @param tipoAbb
+	 * @param tipoAbb Tipo di abbonamento.
 	 * @return True se il cliente non ha un abbonamento attivo
 	 * oppure False se il cliente ne ha già uno attivo.
 	 */
@@ -67,7 +67,7 @@ public class Cliente extends Utente {
 	}
 
 	/** 
-	 * @param tipoAbb
+	 * @param tipoAbb Tipo di abbonamento.
 	 * @return Il prezzo del {@link TipoAbb} passato come parametro.
 	 */
 	public int getLevel(TipoAbb tipoAbb) {
@@ -105,7 +105,7 @@ public class Cliente extends Utente {
 	
 	/**
 	 * Funzione che permette al cliente di aumentare il livello del proprio abbonamento.
-	 * @param tipoAbb
+	 * @param tipoAbb Tipo di abbonamento.
 	 * @return -1 se l'abbonamento passato come parametro è di un livello inferiore
 	 * rispetto a quello attuale altrimenti la differenza di prezzo. 
 	 */
