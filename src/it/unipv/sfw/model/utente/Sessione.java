@@ -17,17 +17,13 @@ import it.unipv.sfw.model.partita.Settore;
  */
 public class Sessione {
 	private static Sessione istance = null;
+	private String infoScelte;
 	private Utente currentUtente;
-	private Anello currentAnello;
-	private Settore currentSettore;
-	private Posto currentPosto;
-	private Blocco currentBlocco;
 
 	private Sessione() {
+		
 		currentUtente = null;
-		currentAnello = null;
-		currentSettore = null;
-		currentPosto = null;
+		infoScelte = "";
 	}
 	
 	
@@ -47,49 +43,17 @@ public class Sessione {
 	 * {@link Anello}, {@link Posto}, {@link Settore}, {@link Blocco}
 	 * a null.
 	 */
-	public void resetAcquistoPartita() {
-		this.setCurrentAnello(null);
-		this.setCurrentPosto(null);
-		this.setCurrentSettore(null);
-		this.setCurrentBlocco(null);
+	public void resetScelte() {
+		this.setinfoScelte(null);
 	}
 
-	
 	/**
 	 * @return {@link Utente} della sessione corrente.
 	 */
 	public Utente getCurrentUtente() {
 		return currentUtente;
 	}
-
-	/**
-	 * @return {@link Anello} della sessione corrente.
-	 */
-	public Anello getCurrentAnello() {
-		return currentAnello;
-	}
-
-	/**
-	 * @return {@link Settore} della sessione corrente.
-	 */
-	public Settore getCurrentSettore() {
-		return currentSettore;
-	}
-
-	/**
-	 * @return {@link Posto} della sessione corrente.
-	 */
-	public Posto getCurrentPosto() {
-		return currentPosto;
-	}
-
-	/**
-	 * @return {@link Blocco} della sessione corrente.
-	 */
-	public Blocco getCurrentBlocco() {
-		return currentBlocco;
-	}
-
+	
 	/**
 	 * Funzione che permette di impostare come {@link Utente} corrente 
 	 * quello passato come parametro.
@@ -98,40 +62,26 @@ public class Sessione {
 	public void setCurrentUtente(Utente currentU) {
 		currentUtente = currentU;
 	}
-
-	/**
-	 * Funzione che permette di impostare come {@link Anello} corrente
-	 * quello passato come parametro.
-	 * @param currentA Anello corrente della sessione.
-	 */
-	public void setCurrentAnello(Anello currentA) {
-		currentAnello = currentA;
+	
+	public void setinfoScelte(String newInfo) {
+		infoScelte = infoScelte + newInfo + "-";
 	}
-
-	/**
-	 * Funzione che permette di impostare come {@link Settore} corrente
-	 * quello passato come parametro.
-	 * @param currentS Settore corrente della sessione.
-	 */
-	public void setCurrentSettore(Settore currentS) {
-		currentSettore = currentS;
+	
+	public int getInfo(char info) {
+		int code = -1;
+		
+		for(int i=0; i<infoScelte.length(); i++) {
+			if(infoScelte.charAt(i) == info) {
+				String code2 = "";
+				for(int i2=1; i<infoScelte.length(); i++) {
+					if(infoScelte.charAt(i+i2) == '-') break;
+					else code2 = code2 + infoScelte.charAt(i+i2);
+				}
+				code = Integer.parseInt(code2);
+			}
+		}
+		
+		return code;
 	}
-
-	/**
-	 * Funzione che permette di impostare come {@link Posto} corrente
-	 * quello passato come parametro.
-	 * @param currentP Posto corrente della sessione.
-	 */
-	public void setCurrentPosto(Posto currentP) {
-		currentPosto = currentP;
-	}
-
-	/**
-	 * Funzione che permette di impostare come {@link Blocco} corrente
-	 * quello passato come parametro.
-	 * @param currentB Blocco corrente della sessione.
-	 */
-	public void setCurrentBlocco(Blocco currentB) {
-		currentBlocco = currentB;
-	}
+	
 }
