@@ -29,13 +29,13 @@ public class PostoController implements IController {
 			public void actionPerformed(ActionEvent e) {
 				int code = ((PostoButton)e.getSource()).getCode();
 				Sessione s = Sessione.getIstance();
-				s.setCurrentPosto(new Posto(code));
+				s.setinfoScelte("P" + code);
 				// temp stampa acquisto
 				System.out.println("Posto selezionato: S" +
-						s.getCurrentSettore().getNSettore() +
-						", B" + s.getCurrentBlocco().getNBlocco() +
-						", A" + s.getCurrentAnello().getNAnello() +
-						", P" + s.getCurrentPosto().getNPosto() + ".");
+						s.getInfo('S') +
+						", B" + s.getInfo('B') +
+						", A" + s.getInfo('A') +
+						", P" + s.getInfo('P'));
 				
 				ControllerManager.getInstance().loadController(6);
 			}

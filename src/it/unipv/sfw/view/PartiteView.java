@@ -120,7 +120,6 @@ public class PartiteView extends AView {
 		p.setPreferredSize(new Dimension(600, (150 * righe)));
 
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
-//		p.setLayout(new GridLayout(righe, 1));
 
 		for (JPanel t : tabellone) {
 			p.add(t);

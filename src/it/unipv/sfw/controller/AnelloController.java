@@ -28,7 +28,7 @@ public class AnelloController implements IController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int code = ((AnelloButton)e.getSource()).getCode();
-				Sessione.getIstance().setCurrentAnello(new Anello(code));
+				Sessione.getIstance().setinfoScelte("A" + code);
 				ControllerManager.getInstance().loadController(5);
 			}
 		};

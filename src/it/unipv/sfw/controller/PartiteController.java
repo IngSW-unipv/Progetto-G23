@@ -40,7 +40,7 @@ public class PartiteController implements IController {
 			public void actionPerformed(ActionEvent e) {
 				int codePartita = ((UtenteButton)e.getSource()).getCode();
 				System.out.println("Selezionata partita numero: " + codePartita + ".");
-				Sessione.getIstance().resetAcquistoPartita();
+				Sessione.getIstance().resetScelte();
 				ControllerManager.getInstance().loadController(2);
 			}
 		};

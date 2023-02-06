@@ -28,7 +28,7 @@ public class SectorController implements IController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int code = ((SectorButton)e.getSource()).getCode();
-				Sessione.getIstance().setCurrentSettore(new Settore(code));
+				Sessione.getIstance().setinfoScelte("S" + code);
 				ControllerManager.getInstance().loadController(3);
 			}
 		};
