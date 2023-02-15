@@ -28,7 +28,7 @@ public class BloccoController implements IController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int code = ((BloccoButton)e.getSource()).getCode();
-				Sessione.getIstance().setinfoScelte("B" + code);
+				Sessione.getIstance().setBlocco(code);;
 				ControllerManager.getInstance().loadController(4);
 			}
 		};
