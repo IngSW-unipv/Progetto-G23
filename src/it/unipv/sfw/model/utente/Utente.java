@@ -39,6 +39,10 @@ public abstract class Utente {
 		this.password = pass;
 	}
 	
+	public String getPassword() {
+		return this.password;
+	}
+	
 	/**
 	 * Funzione che cambia la mail.
 	 */
