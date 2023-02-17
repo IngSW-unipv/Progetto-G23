@@ -1,27 +1,28 @@
-package it.unipv.sfw.DAO;
+package it.unipv.sfw.dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.sfw.model.utente.Admin;
+import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
-public class AdminDAO implements IAdminDAO {
+public class ClienteDAO implements IClienteDAO {
+	
 	private String schema;
 	private Connection conn;
 	
-	public AdminDAO() {
+	public ClienteDAO() {
 		super();
 		this.schema = "UTENTI";
 	}
 	
 	@Override
-	public ArrayList<Admin> selectAll() {
+	public ArrayList<Cliente> selectAll() {
 		
-		ArrayList<Admin> result = new ArrayList<>();
+		ArrayList<Cliente> result = new ArrayList<>();
 		
 		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
@@ -30,12 +31,12 @@ public class AdminDAO implements IAdminDAO {
 		try
 		{
 			st1 = conn.createStatement();
-			String query = "SELECT (NOME, COGNOME, EMAIL, PASSWORD) FROM UTENTI WHERE TIPO='ADMIN'";
+			String query = "SELECT (NOME, COGNOME, EMAIL, PASSWORD) FROM UTENTI WHERE TIPO='CLIENTE'";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				Admin a = new Admin(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
-				result.add(a);
+				Cliente c = new Cliente(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
+				result.add(c);
 			}
 			
 		} catch (Exception e){e.printStackTrace();}
@@ -45,9 +46,9 @@ public class AdminDAO implements IAdminDAO {
 	}
 	
 	@Override
-	public Admin selectByEmail(String email) {
+	public Cliente selectByEmail(String email) {
 		
-		Admin result = null;
+		Cliente result = null;
 		
 		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
@@ -55,13 +56,13 @@ public class AdminDAO implements IAdminDAO {
 	
 		try
 		{
-			String query = "SELECT * FROM UTENTI WHERE EMAIL=? AND TIPO='ADMIN'";
+			String query = "SELECT * FROM UTENTI WHERE EMAIL=? AND TIPO='CLIENTE'";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				result = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
+				result = new Cliente(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
@@ -71,7 +72,7 @@ public class AdminDAO implements IAdminDAO {
 	}
 	
 	@Override
-	public boolean insertAdmin(Admin adminInput) {
+	public boolean insertCliente(Cliente clienteInput) {
 		
 		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
@@ -79,22 +80,23 @@ public class AdminDAO implements IAdminDAO {
 		
 		try
 		{
-			String query = "INSERT INTO UTENTI VALUES(?,?,?," + Type.ADMIN + ")";
+			String query = "INSERT INTO UTENTI VALUES(?,?,?," + Type.CLIENTE + ")";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(1, adminInput.getNome());
-			st1.setString(2, adminInput.getCognome());
-			st1.setString(3, adminInput.getEmail());
-			st1.setString(4, adminInput.getPassword());
+			st1.setString(1, clienteInput.getNome());
+			st1.setString(2, clienteInput.getCognome());
+			st1.setString(3, clienteInput.getEmail());
+			st1.setString(4, clienteInput.getPassword());
 			
 			st1.executeUpdate(query);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			esito = false;
-		}
+		} 
 		
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
+	
 }

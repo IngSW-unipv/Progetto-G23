@@ -1,4 +1,4 @@
-package it.unipv.sfw.DAO;
+package it.unipv.sfw.dao;
 
 import java.util.ArrayList;
 

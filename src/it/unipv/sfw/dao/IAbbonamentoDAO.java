@@ -1,4 +1,4 @@
-package it.unipv.sfw.DAO;
+package it.unipv.sfw.dao;
 
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;

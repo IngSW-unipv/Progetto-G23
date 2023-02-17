@@ -1,4 +1,4 @@
-package it.unipv.sfw.DAO;
+package it.unipv.sfw.dao;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -18,6 +18,7 @@ public class DBConnection {
 	private static String dbDriver;
 	private static String dbURL;
 	private static DBConnection conn;
+	private static boolean isInit = false;
 	
 	private static void init() {
 		Properties p = new Properties(System.getProperties());
@@ -29,14 +30,18 @@ public class DBConnection {
 			dbDriver =p.getProperty(PROPERTYDBDRIVER);
 			dbURL =p.getProperty(PROPERTYDBURL);
 			
+			isInit = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	public static Connection startConnection(Connection conn, String schema)
 	{
-		init();
+		if (!isInit)
+			init();
+		
 		System.out.println(dbURL);
 		
 		if ( isOpen(conn) )
