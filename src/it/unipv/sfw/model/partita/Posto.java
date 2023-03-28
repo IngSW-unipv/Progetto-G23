@@ -7,11 +7,14 @@ package it.unipv.sfw.model.partita;
  */
 public class Posto {
 
-	private int nPosto;
+	private int nSettore, nBlocco, nAnello, nPosto;
 	private boolean libero;
 
-	public Posto(int nPosto) {
+	public Posto(int nSettore, int nBlocco, int nAnello, int nPosto) {
 		this.nPosto = nPosto;
+		this.nBlocco = nBlocco;
+		this.nAnello = nAnello;
+		this.nSettore = nSettore;
 		libero = true;
 	}
 
@@ -36,4 +39,26 @@ public class Posto {
 	public int getNPosto() {
 		return nPosto;
 	}
+	
+	/**
+	 * @return Il numero del blocco.
+	 */
+	public int getNBlocco() {
+		return nBlocco;
+	}
+	
+	/**
+	 * @return Il numero dell'anello.
+	 */
+	public int getNAnello() {
+		return nAnello;
+	}
+	
+	/**
+	 * @return Il numero del settore.
+	 */
+	public int getNSettore() {
+		return nSettore;
+	}
+	
 }
