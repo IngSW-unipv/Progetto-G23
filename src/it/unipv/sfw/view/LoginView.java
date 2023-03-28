@@ -19,79 +19,90 @@ import javax.swing.JTextField;
  * @author Jacopo Piccoli
  */
 public class LoginView extends AView {
-	private static final long serialVersionUID = 1L;
-	JPanel testo, bottoni, titolo, nome, codice, login, b, ba;
+	
+	JPanel tutto,testo, bottoni, titolo,pagina, b,ba;
 	JTextField username;
 	JPasswordField password;
-	JLabel u, p, t, icona, vuota, stringa;
+	JLabel u, p,l, icona, stringa;
 	JButton accedi, registrati;
 	Image img;
 
 	public LoginView() {
 		this.setLayout(new BorderLayout());
 
+		tutto=new JPanel();
 		testo = new JPanel();
 		bottoni = new JPanel();
 		titolo = new JPanel();
-		nome = new JPanel();
-		codice = new JPanel();
-		login = new JPanel();
+		pagina = new JPanel();
 		b = new JPanel();
 
-		username = new JTextField();
-
-		username.setColumns(10);
+		
+		
+		username=new JTextField();
+		username.setColumns(15);
 
 		password = new JPasswordField();
-		password.setColumns(10);
+		password.setColumns(15);
 
 		u = new JLabel("Username");
+		u.setFont(new java.awt.Font("Arial", 1, 16));
 		p = new JLabel("Password");
-		t = new JLabel("LOGIN");
-		stringa = new JLabel("<html>Se non hai un account &nbsp  &nbsp  &nbsp  </html>");
-		vuota = new JLabel("");
+		p.setFont(new java.awt.Font("Arial", 1, 16));
+		l = new JLabel("LOGIN");
+		stringa = new JLabel("<html>Non hai un account?? &nbsp  &nbsp  &nbsp  </html>");
 		icona = new JLabel();
 
-		t.setFont(new java.awt.Font("Arial", 1, 24));
+		l.setFont(new java.awt.Font("Arial", 1, 24));
 
-		accedi = new JButton("Accedi");
+		accedi = new JButton("Login");
 		registrati = new JButton("Registrati");
 
 		img = new ImageIcon(this.getClass().getResource("/icona.jpg")).getImage();
 		icona.setIcon(new ImageIcon(img));
 
-		titolo.setLayout(new GridLayout(3, 1));
-		titolo.add(vuota);
-		titolo.add(t);
+		titolo.setLayout(new GridLayout(1, 1));
+		titolo.add(l);
 
-		t.setHorizontalAlignment(JLabel.CENTER);
-
-		nome.add(u);
-		nome.add(username);
-		codice.add(p);
-		codice.add(password);
-
+		l.setHorizontalAlignment(JLabel.CENTER);
+		
+		JPanel testi=new JPanel();
+		JPanel text=new JPanel();
+		
+		testi.setLayout(new GridLayout(2,1));
+		
+		testi.add(u);
+		testi.add(p);
+		
+		text.setLayout(new GridLayout(2,1));
+		text.add(username);
+		text.add(password);
+		
+		
+		testo.add(testi);
+		testo.add(text);
+		
 		ba = new JPanel();
 		ba.add(accedi);
+		
 
-		testo.setLayout(new GridLayout(4, 1));
-		testo.add(nome);
-		testo.add(codice);
-		testo.add(ba);
-
-		b.setLayout(new GridLayout(1, 2));
-		b.add(stringa);
-		b.add(registrati);
+		b.setLayout(new BorderLayout());
+		b.add(ba,BorderLayout.NORTH);
+		b.add(stringa,BorderLayout.WEST);
+		b.add(registrati,BorderLayout.EAST);
 
 		bottoni.add(b);
 
-		login.setLayout(new GridLayout(3, 1));
-		login.add(titolo);
-		login.add(testo);
-		login.add(bottoni);
+		tutto.setLayout(new GridLayout(3, 1));
+		tutto.add(titolo);
+		tutto.add(testo);
+		tutto.add(bottoni);
+		
+		pagina.setLayout(new BorderLayout());
+		pagina.add(tutto,BorderLayout.CENTER);
 
 		this.add(icona, BorderLayout.WEST);
-		this.add(login, BorderLayout.CENTER);
+		this.add(pagina, BorderLayout.CENTER);
 
 	}
 
