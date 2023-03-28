@@ -1,5 +1,6 @@
 package it.unipv.sfw.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -54,6 +55,10 @@ public class PostoController implements IController {
 
 
 	@Override
-	public void onLoad() {}
+	public void onLoad(Dimension dim) {}
+
+
+	@Override
+	public void onWindowResized(Dimension dim) {}
 
 }

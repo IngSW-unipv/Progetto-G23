@@ -1,5 +1,6 @@
 package it.unipv.sfw.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -24,7 +25,7 @@ public class PartiteController implements IController {
 	
 	private PartiteView v;
 	
-	public PartiteController() {
+	public PartiteController(Dimension dim) {
 		Partita[] p = new Partita[6];
 		p[0] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
 		p[1] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
@@ -33,7 +34,7 @@ public class PartiteController implements IController {
 		p[4] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
 		p[5] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
 		
-		v = new PartiteView(p);
+		v = new PartiteView(p, dim);
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -56,9 +57,15 @@ public class PartiteController implements IController {
 	}
 
 	@Override
-	public void onLoad() {
+	public void onLoad(Dimension dim) {
 		Utente u = Sessione.getIstance().getCurrentUtente();
 		System.out.println("Al momento loggato come: " + u.getEmail() + ".");
+		v.onWindowResized(dim);
+	}
+
+	@Override
+	public void onWindowResized(Dimension dim) {
+		v.onWindowResized(dim);	
 	}
 
 }
