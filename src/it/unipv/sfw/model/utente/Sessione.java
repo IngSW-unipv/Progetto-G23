@@ -1,5 +1,7 @@
 package it.unipv.sfw.model.utente;
 
+import java.util.HashMap;
+
 import it.unipv.sfw.model.partita.Anello;
 import it.unipv.sfw.model.partita.Blocco;
 import it.unipv.sfw.model.partita.Posto;
@@ -8,7 +10,7 @@ import it.unipv.sfw.model.partita.Settore;
 
 /**
  * Classe che rappresenta la sessione corrente.
- * @author Federico Romano
+ * @author Federico Romano, Lorenzo Reale
  * @see Utente
  * @see Anello
  * @see Settore
@@ -17,13 +19,13 @@ import it.unipv.sfw.model.partita.Settore;
  */
 public class Sessione {
 	private static Sessione istance = null;
-	private String infoScelte;
+	private HashMap<String, Integer> scelte;
 	private Utente currentUtente;
 
 	private Sessione() {
 		
 		currentUtente = null;
-		infoScelte = "";
+		scelte = new HashMap<String, Integer>();
 	}
 	
 	
@@ -44,7 +46,7 @@ public class Sessione {
 	 * a null.
 	 */
 	public void resetScelte() {
-		this.setinfoScelte(null);
+		scelte.clear();
 	}
 
 	/**
@@ -63,25 +65,64 @@ public class Sessione {
 		currentUtente = currentU;
 	}
 	
-	public void setinfoScelte(String newInfo) {
-		infoScelte = infoScelte + newInfo + "-";
+	/**
+	 * Funzione utilizzata per settare il {@link Blocco}.
+	 * @param blocco
+	 */
+	public void setBlocco(int blocco) {
+		scelte.put("Blocco", blocco);
 	}
 	
-	public int getInfo(char info) {
-		int code = -1;
-		
-		for(int i=0; i<infoScelte.length(); i++) {
-			if(infoScelte.charAt(i) == info) {
-				String code2 = "";
-				for(int i2=1; i<infoScelte.length(); i++) {
-					if(infoScelte.charAt(i+i2) == '-') break;
-					else code2 = code2 + infoScelte.charAt(i+i2);
-				}
-				code = Integer.parseInt(code2);
-			}
-		}
-		
-		return code;
+	/**
+	 * Funzione utilizzata per settare il {@link Anello}.
+	 * @param anello
+	 */
+	public void setAnello(int anello) {
+		scelte.put("Anello", anello);
+	}
+	
+	/**
+	 * Funzione utilizzata per settare il {@link Settore}.
+	 * @param settore
+	 */
+	public void setSettore(int settore) {
+		scelte.put("Settore", settore);
+	}
+	
+	/**
+	 * Funzione utilizzata per settare il {@link Posto}.
+	 * @param posto
+	 */
+	public void setPosto(int posto) {
+		scelte.put("Posto", posto);
+	}
+	
+	/**
+	 * @return {@link Blocco} della sessione corrente.
+	 */
+	public int getBlocco() {
+		return scelte.get("Blocco");
+	}
+	
+	/**
+	 * @return {@link Anello} della sessione corrente.
+	 */
+	public int getAnello() {
+		return scelte.get("Anello");
+	}
+	
+	/**
+	 * @return {@link Settore} della sessione corrente.
+	 */
+	public int getSettore() {
+		return scelte.get("Settore");
+	}
+	
+	/**
+	 * @return {@link Posto} della sessione corrente.
+	 */
+	public int getPosto() {
+		return scelte.get("Posto");
 	}
 	
 }
