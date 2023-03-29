@@ -13,7 +13,7 @@ import it.unipv.sfw.frame.Frame;
  * dei controllers e del caricamento della view corrente nel frame.
  * 
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see Frame
  * @see it.unipv.sfw.view.AView
  */
@@ -26,15 +26,15 @@ public class ControllerManager {
 	
 	private static ControllerManager instance = null;
 	private Frame f;
-	private IController currentController;
-	private final IController[] controllers;
+	private AController currentController;
+	private final AController[] controllers;
 	
 	private ControllerManager() {
 		// init frame
 		f = new Frame(900, 600);
 	
 		// init controllers
-		controllers = new IController[7];
+		controllers = new AController[7];
 		controllers[0] = new LoginController();
 		controllers[1] = new RegistrazioneController();
 		controllers[2] = new SectorController();
@@ -65,7 +65,7 @@ public class ControllerManager {
 	/**
 	 * Funzione utilizzata per caricare un controller e la sua rispettiva view nel {@link Frame}.
 	 * @param id Controller id
-	 * @see IController
+	 * @see AController
 	 * @see it.unipv.sfw.view.AView
 	 * @see Frame
 	 */

@@ -14,15 +14,13 @@ import it.unipv.sfw.view.buttons.SectorButton;
 /**
  * Controller che si occupa della SectorView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.SectorView
  */
-public class SectorController implements IController {
-	
-	private SectorView v;
+public class SectorController extends AController {
 	
 	public SectorController() {
-		v = new SectorView();
+		view = new SectorView();
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -33,23 +31,8 @@ public class SectorController implements IController {
 			}
 		};
 		
-		Collection<SectorButton> btns = v.getSectorButtons();
+		Collection<SectorButton> btns = ((SectorView)view).getSectorButtons();
 		for (SectorButton b : btns)
 			b.addActionListener(a);
 	}
-	
-
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-
-	@Override
-	public void onLoad(Dimension dim) {}
-
-
-	@Override
-	public void onWindowResized(Dimension dim) {}
-
 }

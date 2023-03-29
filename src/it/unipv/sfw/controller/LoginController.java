@@ -1,12 +1,10 @@
 package it.unipv.sfw.controller;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
-import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.LoginView;
 
 
@@ -14,15 +12,13 @@ import it.unipv.sfw.view.LoginView;
 /**
  * Controller che si occupa della LoginView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.LoginView
  */
-public class LoginController implements IController {
-	
-	private LoginView v;
+public class LoginController extends AController {
 	
 	public LoginController() {
-		v = new LoginView();
+		LoginView v = new LoginView();
 		
 		v.getAccediButton().addActionListener(new ActionListener() {
 			@Override
@@ -45,20 +41,7 @@ public class LoginController implements IController {
 				ControllerManager.getInstance().loadController(1);
 			}
 		});
+		
+		view = v;
 	}
-	
-	
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-
-	@Override
-	public void onLoad(Dimension dim) {}
-
-
-	@Override
-	public void onWindowResized(Dimension dim) {}
-
 }

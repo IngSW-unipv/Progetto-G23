@@ -18,12 +18,10 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 /**
  * Controller che si occupa della PartiteView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.PartiteView
  */
-public class PartiteController implements IController {
-	
-	private PartiteView v;
+public class PartiteController extends AController {
 	
 	public PartiteController(Dimension dim) {
 		Partita[] p = new Partita[6];
@@ -34,7 +32,7 @@ public class PartiteController implements IController {
 		p[4] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
 		p[5] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
 		
-		v = new PartiteView(p, dim);
+		PartiteView v = new PartiteView(p, dim);
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -49,24 +47,20 @@ public class PartiteController implements IController {
 		Collection<UtenteButton> btns = v.getButtons();
 		for (UtenteButton b : btns)
 			b.addActionListener(a);
-	}
-
-	@Override
-	public AView getView() {
-		return v;
+		
+		view = v;
 	}
 
 	@Override
 	public void onLoad(Dimension dim) {
 		Utente u = Sessione.getIstance().getCurrentUtente();
 		System.out.println("Al momento loggato come: " + u.getEmail() + ".");
-		v.onWindowResized(dim);
+		view.onWindowResized(dim);
 	}
 
 	@Override
 	public void onWindowResized(Dimension dim) {
-		v.onWindowResized(dim);	
+		view.onWindowResized(dim);	
 	}
-
 }
 

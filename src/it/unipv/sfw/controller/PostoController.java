@@ -15,15 +15,13 @@ import it.unipv.sfw.view.buttons.PostoButton;
 /**
  * Controller che si occupa della PostoView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.PostoView
  */
-public class PostoController implements IController {
-	
-	private PostoView v;
+public class PostoController extends AController {
 	
 	public PostoController() {
-		v = new PostoView(50);
+		PostoView v = new PostoView(50);
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -45,20 +43,7 @@ public class PostoController implements IController {
 		Collection<PostoButton> btns = v.getAllButtons();
 		for (PostoButton b : btns)
 			b.addActionListener(a);
+		
+		view = v;
 	}
-	
-
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-
-	@Override
-	public void onLoad(Dimension dim) {}
-
-
-	@Override
-	public void onWindowResized(Dimension dim) {}
-
 }

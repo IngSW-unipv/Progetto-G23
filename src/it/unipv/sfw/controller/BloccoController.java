@@ -1,12 +1,10 @@
 package it.unipv.sfw.controller;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
 import it.unipv.sfw.model.utente.Sessione;
-import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.BloccoView;
 import it.unipv.sfw.view.buttons.BloccoButton;
 
@@ -14,15 +12,13 @@ import it.unipv.sfw.view.buttons.BloccoButton;
 /**
  * Controller che si occupa della BloccoView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.BloccoView
  */
-public class BloccoController implements IController {
-	
-	private BloccoView v;
+public class BloccoController extends AController {
 	
 	public BloccoController() {
-		v = new BloccoView(2500);
+		view = new BloccoView(2500);
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -33,22 +29,8 @@ public class BloccoController implements IController {
 			}
 		};
 		
-		Collection<BloccoButton> btns = v.getAllBloccoButton();
+		Collection<BloccoButton> btns = ((BloccoView)view).getAllBloccoButton();
 		for (BloccoButton b : btns)
 			b.addActionListener(a);
 	}
-	
-
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-
-	@Override
-	public void onLoad(Dimension dim) {}
-
-
-	@Override
-	public void onWindowResized(Dimension dim) {}
 }

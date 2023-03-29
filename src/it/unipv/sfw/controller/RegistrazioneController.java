@@ -13,15 +13,13 @@ import it.unipv.sfw.view.RegistrazioneView;
 /**
  * Controller che si occupa della RegistrazioneView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.RegistrazioneView
  */
-public class RegistrazioneController implements IController {
-	
-	private RegistrazioneView v;
+public class RegistrazioneController extends AController {
 
 	public RegistrazioneController() {
-		v = new RegistrazioneView();
+		RegistrazioneView v = new RegistrazioneView();
 		
 		v.getRegistratiBtn().addActionListener(new ActionListener() {
 			@Override
@@ -44,17 +42,7 @@ public class RegistrazioneController implements IController {
 				ControllerManager.getInstance().loadController(0);
 			}
 		});
+		
+		view = v;
 	}
-
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-	@Override
-	public void onLoad(Dimension dim) {}
-
-	@Override
-	public void onWindowResized(Dimension dim) {}
-
 }
