@@ -2,10 +2,7 @@ package it.unipv.sfw.model.utente;
 
 import java.util.HashMap;
 
-import it.unipv.sfw.model.partita.Anello;
-import it.unipv.sfw.model.partita.Blocco;
 import it.unipv.sfw.model.partita.Posto;
-import it.unipv.sfw.model.partita.Settore;
 
 
 /**

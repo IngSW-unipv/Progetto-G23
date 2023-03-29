@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
-import it.unipv.sfw.model.partita.Blocco;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.BloccoView;
