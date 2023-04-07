@@ -19,8 +19,8 @@ import it.unipv.sfw.view.buttons.SectorButton;
  */
 public class SectorController extends AController {
 	
-	public SectorController() {
-		view = new SectorView();
+	public SectorController(Dimension d) {
+		view = new SectorView(d);
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -34,5 +34,9 @@ public class SectorController extends AController {
 		Collection<SectorButton> btns = ((SectorView)view).getSectorButtons();
 		for (SectorButton b : btns)
 			b.addActionListener(a);
+	}
+	
+	public void onWindowResized(Dimension dim) {
+		view.onWindowResized(dim);	
 	}
 }

@@ -1,5 +1,6 @@
 package it.unipv.sfw.view.buttons;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -13,14 +14,17 @@ public class BloccoButton extends JButton {
 	private int code;
 	private boolean stato;
 
-	public BloccoButton(String string, int code, boolean stato) {
-		super(string);
+	public BloccoButton( int code, ImageIcon img, boolean stato) {
+		super(img);
 		this.code = code;
 		this.stato = stato;
 	}
 
 	public int getCode() {
 		return code;
+	}
+	public void modificaImg(ImageIcon img) {
+		this.setIcon(img);
 	}
 
 }

@@ -26,5 +26,7 @@ public class SectorButton extends JButton {
 	public int getCode() {
 		return code;
 	}
-
+	public void modificaImg(ImageIcon img) {
+		this.setIcon(img);
+	}
 }

@@ -13,67 +13,76 @@ import java.awt.*;
 public class RegistrazioneView extends AView {
 
 
-	JPanel tutto,testo, bottoni, titolo,pagina, b, ba;
-	JTextField ce,cn,cc,cd;//casellaemail,casellanome,casellacognome,caselladata
-	JPasswordField password;
-	JLabel e, p, r, n, c, d, icona, stringa;
-	JButton login, registrati;
-	Image img;
+	private JPanel tutto,testo, bottoni, titolo, b, ba,contenitore,text,testi;
+	private JTextField ce,cn,cc,cd;//casellaemail,casellanome,casellacognome,caselladata
+	private JPasswordField password;
+	private JLabel e, p, r, n, c, d, icona, stringa;
+	private JButton login, registrati;
+	private ImageIcon img;
 
-	public RegistrazioneView() {
-		this.setLayout(new BorderLayout());
-
+	public RegistrazioneView(Dimension dim) {
+		
+		//inizializzazione JPanel
+		contenitore=new JPanel();
 		tutto=new JPanel();
 		testo = new JPanel();
 		bottoni = new JPanel();
 		titolo = new JPanel();
-		pagina = new JPanel();
 		b = new JPanel();
+		ba = new JPanel();
+		testi=new JPanel();
+		text=new JPanel();
 		
-		ce = new JTextField();
-		ce.setColumns(15);
-		
-		cn = new JTextField();
-		cn.setColumns(15);
-		
-		cc = new JTextField();
-		cc.setColumns(15);
-		
-		cd = new JTextField();
-		cd.setColumns(15);
-
-		password = new JPasswordField();
-		password.setColumns(15);
-
+		//Inizializzazione JLabel
 		e = new JLabel("email");
-		e.setFont(new java.awt.Font("Arial", 1, 16));
 		p = new JLabel("Password");
-		p.setFont(new java.awt.Font("Arial", 1, 16));
-		n=new JLabel("Nome");
-		n.setFont(new java.awt.Font("Arial", 1, 16));
-		c=new JLabel("Cognome");
-		c.setFont(new java.awt.Font("Arial", 1, 16));
-		d=new JLabel("Data di nascita");
-		d.setFont(new java.awt.Font("Arial", 1, 16));
 		r = new JLabel("REGISTRAZIONE");
-		stringa = new JLabel("<html>Hai già un account?? &nbsp  &nbsp  &nbsp  </html>");
+		n=new JLabel("Nome");
+		c=new JLabel("Cognome");
+		d=new JLabel("Data di nascita");
 		icona = new JLabel();
+		stringa = new JLabel("<html>Hai già un account?? &nbsp  &nbsp  &nbsp  </html>");
+		
+		//Inizializzazione JTextField
 
-		r.setFont(new java.awt.Font("Arial", 1, 24));
-
+		ce = new JTextField();
+		cn = new JTextField();
+		cc = new JTextField();
+		cd = new JTextField();
+		
+		//Inizializzazione JPasswordField
+		password = new JPasswordField();
+		
+		//Inizializzazione JButton
 		login = new JButton("Login");
 		registrati = new JButton("Registrati");
+		
+		//Inizializzazione ImageIcon
+		img = new ImageIcon(this.getClass().getResource("/icona.jpg"));
+		
+		//Specifiche, Layout e Font
+		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH)); 
+		
+		ce.setColumns(15);
+		cn.setColumns(15);		
+		cc.setColumns(15);		
+		cd.setColumns(15);
+		password.setColumns(15);
 
-		img = new ImageIcon(this.getClass().getResource("/icona.jpg")).getImage();
-		icona.setIcon(new ImageIcon(img));
+		
+		e.setFont(new java.awt.Font("Arial", 1, 16));
+		p.setFont(new java.awt.Font("Arial", 1, 16));
+		n.setFont(new java.awt.Font("Arial", 1, 16));
+		c.setFont(new java.awt.Font("Arial", 1, 16));
+		d.setFont(new java.awt.Font("Arial", 1, 16));
+		r.setFont(new java.awt.Font("Arial", 1, 24));
 
 		titolo.setLayout(new GridLayout(1, 1));
 		titolo.add(r);
-
 		r.setHorizontalAlignment(JLabel.CENTER);
-		
-		JPanel testi=new JPanel();
-		JPanel text=new JPanel();
 		
 		testi.setLayout(new GridLayout(5,1));
 		testi.add(n);
@@ -93,12 +102,9 @@ public class RegistrazioneView extends AView {
 		testo.add(testi);
 		testo.add(text);
 		
+		icona.setIcon(img);
 		
-		
-		ba = new JPanel();
 		ba.add(registrati);
-
-		
 
 		b.setLayout(new BorderLayout());
 		b.add(ba,BorderLayout.NORTH);
@@ -112,11 +118,11 @@ public class RegistrazioneView extends AView {
 		tutto.add(testo);
 		tutto.add(bottoni);
 		
-		pagina.setLayout(new BorderLayout());
-		pagina.add(tutto,BorderLayout.CENTER);
-
-		this.add(icona, BorderLayout.WEST);
-		this.add(pagina, BorderLayout.CENTER);
+		contenitore .setLayout(new GridLayout(1,2));
+		contenitore.add(icona);
+		contenitore.add(tutto);
+		
+		this.add(contenitore);
 
 	}
 
@@ -152,5 +158,16 @@ public class RegistrazioneView extends AView {
 	public Type getType() {
 		return AView.Type.REGISTRAZIONE;
 	}
-
+	public void onWindowResized(Dimension dim) {
+		
+		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH));
+		icona.setIcon(img);
+		
+		contenitore.revalidate();
+		
+		contenitore.repaint();
+		}
 }

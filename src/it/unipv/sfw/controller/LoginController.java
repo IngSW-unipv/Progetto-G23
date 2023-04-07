@@ -1,5 +1,6 @@
 package it.unipv.sfw.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,8 +18,8 @@ import it.unipv.sfw.view.LoginView;
  */
 public class LoginController extends AController {
 	
-	public LoginController() {
-		LoginView v = new LoginView();
+	public LoginController(Dimension dim) {
+		LoginView v = new LoginView(dim);
 		
 		v.getAccediButton().addActionListener(new ActionListener() {
 			@Override
@@ -43,5 +44,8 @@ public class LoginController extends AController {
 		});
 		
 		view = v;
+	}
+	public void onWindowResized(Dimension dim) {
+		view.onWindowResized(dim);	
 	}
 }

@@ -53,6 +53,7 @@ public class PartiteView extends AView {
 
 		righe = par.length;
 		panel = new JPanel();
+		panel.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
 		top = new JPanel();
 		bottoni = new JPanel();
 
@@ -119,7 +120,7 @@ public class PartiteView extends AView {
 			partite.get(i).setFont(new java.awt.Font("Arial", 1, 18));
 		}
 
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));
+		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150*righe)));
 
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 
@@ -128,7 +129,6 @@ public class PartiteView extends AView {
 		}
 
 		pane = new JScrollPane(p);
-		pane.setPreferredSize(new Dimension((int)((dim.width-20)), dim.height - 150));
 
 		middle.setLayout(new BorderLayout());
 		middle.add(titolo, BorderLayout.NORTH);
@@ -138,7 +138,7 @@ public class PartiteView extends AView {
 		panel.add(top, BorderLayout.NORTH);
 		panel.add(middle, BorderLayout.CENTER);
 
-		this.add(panel);
+		this.add(panel,BorderLayout.CENTER);
 
 	}
 
@@ -149,10 +149,10 @@ public class PartiteView extends AView {
 	@Override
 	public void onWindowResized(Dimension dim) {
 		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));
-		pane.setPreferredSize(new Dimension((int)((dim.width-20)), dim.height - 150));
+		panel.setPreferredSize(new Dimension((int)((dim.width-20)), dim.height - 45));
 		
-		pane.revalidate();
-		pane.repaint();	
+		panel.revalidate();
+		panel.repaint();	
 	}
 
 	@Override

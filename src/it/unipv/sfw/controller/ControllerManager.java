@@ -35,12 +35,12 @@ public class ControllerManager {
 	
 		// init controllers
 		controllers = new AController[7];
-		controllers[0] = new LoginController();
-		controllers[1] = new RegistrazioneController();
-		controllers[2] = new SectorController();
-		controllers[3] = new BloccoController();
-		controllers[4] = new AnelloController();
-		controllers[5] = new PostoController();
+		controllers[0] = new LoginController(f.getCurrentSize());
+		controllers[1] = new RegistrazioneController(f.getCurrentSize());
+		controllers[2] = new SectorController(f.getCurrentSize());
+		controllers[3] = new AnelloController(f.getCurrentSize());
+		controllers[4] = new BloccoController(f.getCurrentSize());
+		controllers[5] = new PostoController(f.getCurrentSize());
 		controllers[6] = new PartiteController(f.getCurrentSize());
 		
 		currentController = null;

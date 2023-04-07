@@ -2,7 +2,7 @@ package it.unipv.sfw.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,20 +28,23 @@ public class PostoView extends AView {
 	private ArrayList<PostoButton> posto;
 	private ArrayList<JLabel> nomeposto;
 	private ArrayList<JPanel> gruppo;
-	private Icon img;
+	private ImageIcon img;
 
-	public PostoView(int posti) {
+	public PostoView(int posti,Dimension dim) {
 
 		blocco = new JPanel();
+		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 		gruppo = new ArrayList<JPanel>();
 		posto = new ArrayList<PostoButton>();
 		nomeposto = new ArrayList<JLabel>();
 
-		img = new ImageIcon(getClass().getResource("/Posto.gif"));
+		img = new ImageIcon(getClass().getResource("/Posto.jpg"));
+		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-100)/5,java.awt.Image.SCALE_SMOOTH));
+
 
 		for (int i = 0; i < posti; i++) {
-			posto.add(new PostoButton(i + 1, img, true));
-			nomeposto.add(new JLabel("" + (i + 1)));
+			posto.add(new PostoButton(50-i, img, true));
+			nomeposto.add(new JLabel("" + (50-i)));
 			nomeposto.get(i).setBackground(Color.red);
 			gruppo.add(new JPanel());
 
@@ -49,15 +52,17 @@ public class PostoView extends AView {
 
 		for (int i = 0; i < posti; i++) {
 			gruppo.get(i).setLayout(new BorderLayout());
+			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			gruppo.get(i).add(posto.get(i), BorderLayout.CENTER);
 			gruppo.get(i).add(nomeposto.get(i), BorderLayout.SOUTH);
 			nomeposto.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
 			gruppo.get(i).setBackground(Color.GREEN);
 			gruppo.get(i).setOpaque(true);
 
+
 		}
 
-		blocco.setLayout(new GridLayout(5, 10));
+		blocco.setLayout(new GridLayout(5,10));
 
 		for (JPanel j : gruppo) {
 			j.setSize(50, 46);
@@ -74,6 +79,24 @@ public class PostoView extends AView {
 
 	public Collection<PostoButton> getAllButtons() {
 		return posto;
+	}
+	
+	public void onWindowResized(Dimension dim) {
+		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-100)/5,java.awt.Image.SCALE_SMOOTH));
+
+		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		
+		for(int i=0;i<50;i++) {
+			posto.get(i).modificaImg(img);
+			posto.get(i).revalidate();
+			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
+			gruppo.get(i).revalidate();
+			posto.get(i).revalidate();
+			gruppo.get(i).repaint();
+		}
+		
+		blocco.repaint();
+	
 	}
 
 	@Override

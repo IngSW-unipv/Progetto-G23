@@ -1,6 +1,8 @@
 package it.unipv.sfw.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 
@@ -20,57 +22,64 @@ import javax.swing.JTextField;
  */
 public class LoginView extends AView {
 	
-	JPanel tutto,testo, bottoni, titolo,pagina, b,ba;
-	JTextField username;
-	JPasswordField password;
-	JLabel u, p,l, icona, stringa;
-	JButton accedi, registrati;
-	Image img;
+	private JPanel tutto,testo, bottoni, titolo, b,ba,contenitore,testi,text;
+	private JTextField username;
+	private JPasswordField password;
+	private JLabel u, p,l, icona, stringa;
+	private JButton login, registrati;
+	private ImageIcon img;
 
-	public LoginView() {
-		this.setLayout(new BorderLayout());
-
+	public LoginView(Dimension dim) {
+		
+		//Inizializzazione JPanel
+		contenitore=new JPanel();
 		tutto=new JPanel();
 		testo = new JPanel();
 		bottoni = new JPanel();
 		titolo = new JPanel();
-		pagina = new JPanel();
 		b = new JPanel();
-
+		testi=new JPanel();
+		text=new JPanel();
+		ba = new JPanel();
 		
-		
-		username=new JTextField();
-		username.setColumns(15);
-
-		password = new JPasswordField();
-		password.setColumns(15);
-
+		//Inizializzazione JLabel
 		u = new JLabel("Username");
-		u.setFont(new java.awt.Font("Arial", 1, 16));
 		p = new JLabel("Password");
-		p.setFont(new java.awt.Font("Arial", 1, 16));
 		l = new JLabel("LOGIN");
-		stringa = new JLabel("<html>Non hai un account?? &nbsp  &nbsp  &nbsp  </html>");
 		icona = new JLabel();
-
-		l.setFont(new java.awt.Font("Arial", 1, 24));
-
-		accedi = new JButton("Login");
+		stringa = new JLabel("<html>Non hai un account?? &nbsp  &nbsp  &nbsp  </html>");
+		
+		//Inizializzazione JTextField
+		username=new JTextField();
+		
+		//Iniziallizzazione JPasswordField
+		password = new JPasswordField();
+		
+		//Inizializzazione JButton
+		login = new JButton("Login");
 		registrati = new JButton("Registrati");
-
-		img = new ImageIcon(this.getClass().getResource("/icona.jpg")).getImage();
-		icona.setIcon(new ImageIcon(img));
+		
+		//inizializzazione ImageIcon
+		img = new ImageIcon(this.getClass().getResource("/icona.jpg"));
+		
+		//Specifiche, Layout e Font
+		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH)); 
+		
+		username.setColumns(15);
+		password.setColumns(15);
+		
+		u.setFont(new java.awt.Font("Arial", 1, 16));
+		p.setFont(new java.awt.Font("Arial", 1, 16));
+		l.setFont(new java.awt.Font("Arial", 1, 24));
 
 		titolo.setLayout(new GridLayout(1, 1));
 		titolo.add(l);
-
 		l.setHorizontalAlignment(JLabel.CENTER);
-		
-		JPanel testi=new JPanel();
-		JPanel text=new JPanel();
-		
+
 		testi.setLayout(new GridLayout(2,1));
-		
 		testi.add(u);
 		testi.add(p);
 		
@@ -78,31 +87,30 @@ public class LoginView extends AView {
 		text.add(username);
 		text.add(password);
 		
-		
 		testo.add(testi);
 		testo.add(text);
 		
-		ba = new JPanel();
-		ba.add(accedi);
-		
+		icona.setIcon(img);
 
+		ba.add(login);
+		
 		b.setLayout(new BorderLayout());
 		b.add(ba,BorderLayout.NORTH);
 		b.add(stringa,BorderLayout.WEST);
 		b.add(registrati,BorderLayout.EAST);
-
+		
 		bottoni.add(b);
-
+		
 		tutto.setLayout(new GridLayout(3, 1));
 		tutto.add(titolo);
 		tutto.add(testo);
 		tutto.add(bottoni);
+				
+		contenitore .setLayout(new GridLayout(1,2));
+		contenitore.add(icona);
+		contenitore.add(tutto);
 		
-		pagina.setLayout(new BorderLayout());
-		pagina.add(tutto,BorderLayout.CENTER);
-
-		this.add(icona, BorderLayout.WEST);
-		this.add(pagina, BorderLayout.CENTER);
+		this.add(contenitore);
 
 	}
 
@@ -112,7 +120,7 @@ public class LoginView extends AView {
 	}
 
 	public JButton getAccediButton() {
-		return accedi;
+		return login;
 	}
 
 	public JButton getRegistratiButton() {
@@ -125,6 +133,19 @@ public class LoginView extends AView {
 
 	public JPasswordField getPasswordField() {
 		return password;
+	}
+	
+	public void onWindowResized(Dimension dim) {
+		
+	contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+	tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+	icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+	img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH));
+	icona.setIcon(img);
+	
+	contenitore.revalidate();
+	
+	contenitore.repaint();
 	}
 
 }

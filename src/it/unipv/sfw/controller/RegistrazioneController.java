@@ -18,8 +18,8 @@ import it.unipv.sfw.view.RegistrazioneView;
  */
 public class RegistrazioneController extends AController {
 
-	public RegistrazioneController() {
-		RegistrazioneView v = new RegistrazioneView();
+	public RegistrazioneController(Dimension dim) {
+		RegistrazioneView v = new RegistrazioneView(dim);
 		
 		v.getRegistratiBtn().addActionListener(new ActionListener() {
 			@Override
@@ -44,5 +44,8 @@ public class RegistrazioneController extends AController {
 		});
 		
 		view = v;
+	}
+	public void onWindowResized(Dimension dim) {
+		view.onWindowResized(dim);	
 	}
 }
