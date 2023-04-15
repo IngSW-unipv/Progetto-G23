@@ -30,7 +30,9 @@ public abstract class AController {
 	 * @param dim Dimensione corrente della finestra.
 	 * @see ControllerManager
 	 */
-	public void onLoad(Dimension dim) {}
+	public void onLoad(Dimension dim) {
+		this.onWindowResized(dim);
+	}
 	
 	/**
 	 * Fuzione chiamata quando viene attivato l'evento di window resize.
