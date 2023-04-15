@@ -26,7 +26,7 @@ public abstract class AController {
 	/**
 	 * onLoad viene chiamata da {@link ControllerManager} appena dopo
 	 * aver caricato l'istanza di {@link AController}. 
-	 * Implementata vuota, per comportamenti diversi bisogna svrascriverla nelle sottoclassi.
+	 * Implementata vuota, per comportamenti diversi bisogna sovrascriverla nelle sottoclassi.
 	 * @param dim Dimensione corrente della finestra.
 	 * @see ControllerManager
 	 */
