@@ -46,7 +46,4 @@ public class PostoController extends AController {
 		
 		view = v;
 	}
-	public void onWindowResized(Dimension dim) {
-		view.onWindowResized(dim);	
-	}
 }

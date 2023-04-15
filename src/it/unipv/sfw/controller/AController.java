@@ -37,5 +37,7 @@ public abstract class AController {
 	 * Implementata vuota, per comportamenti diversi bisogna svrascriverla nelle sottoclassi.
 	 * @param dim Nuova dimensione della finestra.
 	 */
-	public void onWindowResized(Dimension dim) {}
+	public void onWindowResized(Dimension dim) {
+		view.onWindowResized(dim);
+	}
 }

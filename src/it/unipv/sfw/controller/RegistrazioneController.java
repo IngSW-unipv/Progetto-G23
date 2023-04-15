@@ -45,7 +45,4 @@ public class RegistrazioneController extends AController {
 		
 		view = v;
 	}
-	public void onWindowResized(Dimension dim) {
-		view.onWindowResized(dim);	
-	}
 }

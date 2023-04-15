@@ -34,14 +34,15 @@ public class ControllerManager {
 		f = new Frame(900, 600);
 	
 		// init controllers
+		Dimension frame_dim = f.getCurrentSize();
 		controllers = new AController[7];
-		controllers[0] = new LoginController(f.getCurrentSize());
-		controllers[1] = new RegistrazioneController(f.getCurrentSize());
-		controllers[2] = new SectorController(f.getCurrentSize());
-		controllers[3] = new AnelloController(f.getCurrentSize());
-		controllers[4] = new BloccoController(f.getCurrentSize());
-		controllers[5] = new PostoController(f.getCurrentSize());
-		controllers[6] = new PartiteController(f.getCurrentSize());
+		controllers[0] = new LoginController(frame_dim);
+		controllers[1] = new RegistrazioneController(frame_dim);
+		controllers[2] = new SectorController(frame_dim);
+		controllers[3] = new AnelloController(frame_dim);
+		controllers[4] = new BloccoController(frame_dim);
+		controllers[5] = new PostoController(frame_dim);
+		controllers[6] = new PartiteController(frame_dim);
 		
 		currentController = null;
 		

@@ -34,7 +34,4 @@ public class AnelloController extends AController {
 		for (AnelloButton b : btns)
 			b.addActionListener(a);
 	}
-	public void onWindowResized(Dimension dim) {
-		view.onWindowResized(dim);	
-	}
 }

@@ -43,9 +43,6 @@ public class SectorView extends AView {
 		settori = new JPanel();
 		settori.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
 		
-		
-		
-
 		s = new ArrayList<SectorButton>();
 		
 		imgS1 = new ImageIcon(this.getClass().getResource("/Settore1.png"));
@@ -141,8 +138,9 @@ public class SectorView extends AView {
 		return s;
 	}
 	
+	@Override
 	public void onWindowResized(Dimension dim) {
-		
+		/*
 		imgS1=new ImageIcon(imgS1.getImage().getScaledInstance((int)((dim.width)/4), (dim.height)/4,java.awt.Image.SCALE_SMOOTH ));
 		imgS2=new ImageIcon(imgS2.getImage().getScaledInstance((int)((dim.width)/4), (dim.height)/4,java.awt.Image.SCALE_SMOOTH ));
 		imgS3=new ImageIcon(imgS3.getImage().getScaledInstance((int)((dim.width)/4), (dim.height-50)/2,java.awt.Image.SCALE_SMOOTH ));
@@ -160,10 +158,10 @@ public class SectorView extends AView {
 		s.get(5).modificaImg(imgS6);
 		s.get(6).modificaImg(imgS7);
 		s.get(7).modificaImg(imgS8);
-		
+		*/
 		
 		settori.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
-		campo.setIcon(new ImageIcon(imgC.getScaledInstance(dim.width/2,(dim.height-45)/2, java.awt.Image.SCALE_SMOOTH)));
+		//campo.setIcon(new ImageIcon(imgC.getScaledInstance(dim.width/2,(dim.height-45)/2, java.awt.Image.SCALE_SMOOTH)));
 		north.setPreferredSize(new Dimension((int)((dim.width)/2), (dim.height)/4));
 		south.setPreferredSize(new Dimension((int)((dim.width)/2), (dim.height)/4));
 		west.setPreferredSize(new Dimension((int)((dim.width)/4), (dim.height*2)/4));
@@ -182,8 +180,6 @@ public class SectorView extends AView {
 		east.repaint();
 		settori.revalidate();
 		settori.repaint();		
-		
-	
 	}
 
 	@Override

@@ -57,10 +57,5 @@ public class PartiteController extends AController {
 		System.out.println("Al momento loggato come: " + u.getEmail() + ".");
 		view.onWindowResized(dim);
 	}
-
-	@Override
-	public void onWindowResized(Dimension dim) {
-		view.onWindowResized(dim);	
-	}
 }
 

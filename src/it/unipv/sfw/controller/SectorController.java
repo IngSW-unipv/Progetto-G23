@@ -35,8 +35,4 @@ public class SectorController extends AController {
 		for (SectorButton b : btns)
 			b.addActionListener(a);
 	}
-	
-	public void onWindowResized(Dimension dim) {
-		view.onWindowResized(dim);	
-	}
 }

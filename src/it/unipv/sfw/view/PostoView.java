@@ -81,11 +81,12 @@ public class PostoView extends AView {
 		return posto;
 	}
 	
+	@Override
 	public void onWindowResized(Dimension dim) {
-		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-100)/5,java.awt.Image.SCALE_SMOOTH));
+		//img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-100)/5,java.awt.Image.SCALE_SMOOTH));
 
 		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		
+		/*
 		for(int i=0;i<50;i++) {
 			posto.get(i).modificaImg(img);
 			posto.get(i).revalidate();
@@ -94,9 +95,10 @@ public class PostoView extends AView {
 			posto.get(i).revalidate();
 			gruppo.get(i).repaint();
 		}
+		*/
 		
+		blocco.revalidate();
 		blocco.repaint();
-	
 	}
 
 	@Override

@@ -45,7 +45,4 @@ public class LoginController extends AController {
 		
 		view = v;
 	}
-	public void onWindowResized(Dimension dim) {
-		view.onWindowResized(dim);	
-	}
 }

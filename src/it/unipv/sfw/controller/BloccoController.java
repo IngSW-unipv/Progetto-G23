@@ -18,9 +18,7 @@ import it.unipv.sfw.view.buttons.BloccoButton;
  */
 public class BloccoController extends AController {
 	
-	public BloccoController(Dimension dim) {
-
-		
+	public BloccoController(Dimension dim) {	
 		view=new BloccoView(2500,dim);
 		
 		ActionListener a = new ActionListener() {
@@ -35,8 +33,5 @@ public class BloccoController extends AController {
 		Collection<BloccoButton> btns = ((BloccoView)view).getAllBloccoButton();
 		for (BloccoButton b : btns)
 			b.addActionListener(a);
-	}
-	public void onWindowResized(Dimension dim) {
-		view.onWindowResized(dim);	
 	}
 }
