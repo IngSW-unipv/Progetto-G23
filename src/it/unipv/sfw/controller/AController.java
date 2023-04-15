@@ -34,7 +34,7 @@ public abstract class AController {
 	
 	/**
 	 * Fuzione chiamata quando viene attivato l'evento di window resize.
-	 * Implementata vuota, per comportamenti diversi bisogna svrascriverla nelle sottoclassi.
+	 * Implementazione semplice, per comportamenti diversi bisogna svrascriverla nelle sottoclassi.
 	 * @param dim Nuova dimensione della finestra.
 	 */
 	public void onWindowResized(Dimension dim) {
