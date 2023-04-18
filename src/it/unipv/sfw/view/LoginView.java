@@ -141,8 +141,8 @@ public class LoginView extends AView {
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
 		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
-		//img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH));
-		//icona.setIcon(img);
+		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH));
+		icona.setIcon(img);
 	
 		contenitore.revalidate();
 		contenitore.repaint();

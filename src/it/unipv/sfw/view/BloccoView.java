@@ -78,10 +78,10 @@ public class BloccoView extends AView {
 	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		//img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-50)/5,java.awt.Image.SCALE_SMOOTH));
+		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-50)/5,java.awt.Image.SCALE_SMOOTH));
 
 		tabellone.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		/*
+
 		for(int i=0;i<b;i++) {
 			blocco.get(i).modificaImg(img);
 			blocco.get(i).revalidate();
@@ -90,10 +90,9 @@ public class BloccoView extends AView {
 			blocco.get(i).revalidate();
 			gruppo.get(i).repaint();
 		}
-		*/
+		
 		tabellone.revalidate();
 		tabellone.repaint();
-	
 	}
 
 	@Override

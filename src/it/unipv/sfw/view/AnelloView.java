@@ -81,10 +81,10 @@ public class AnelloView extends AView {
 	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		//img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width),(int)(dim.height-60)/3,  java.awt.Image.SCALE_SMOOTH)); 
+		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width),(int)(dim.height-60)/3,  java.awt.Image.SCALE_SMOOTH)); 
 		
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		/*
+		
 		for(int i=0;i<n_anelli;i++) {
 			a.get(i).modificaImg(img);
 			a.get(i).revalidate();
@@ -93,7 +93,6 @@ public class AnelloView extends AView {
 			anello.get(i).revalidate();
 			anello.get(i).repaint();
 		}
-		*/
 		
 		contenitore.revalidate();
 		contenitore.repaint();

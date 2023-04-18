@@ -1,8 +1,6 @@
 package it.unipv.sfw.controller;
 
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
+import it.unipv.sfw.eventlisteners.ComponentResizeEndListener;
 import it.unipv.sfw.frame.Frame;
 
 
@@ -46,8 +44,9 @@ public class ControllerManager {
 		currentController = null;
 		
 		// add resize evenet listener
-		f.addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent componentEvent) {
+		f.addComponentListener(new ComponentResizeEndListener(100) {
+			@Override
+			public void onResizedTimedOut() {
 				currentController.onWindowResized(f.getCurrentSize());
 			}
 		});
