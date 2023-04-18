@@ -20,7 +20,8 @@ import it.unipv.sfw.view.buttons.PostoButton;
  */
 public class PostoController extends AController {
 	
-	public PostoController(Dimension dim) {
+	@Override
+	public void initialize(Dimension dim) {
 		PostoView v = new PostoView(50,dim);
 		
 		ActionListener a = new ActionListener() {

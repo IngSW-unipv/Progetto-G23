@@ -1,6 +1,5 @@
 package it.unipv.sfw.controller;
 
-import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -27,22 +26,21 @@ public class ControllerManager {
 	private static ControllerManager instance = null;
 	private Frame f;
 	private AController currentController;
-	private final AController[] controllers;
+	private final ControllerCache[] controllers;
 	
 	private ControllerManager() {
 		// init frame
 		f = new Frame(900, 600);
 	
 		// init controllers
-		Dimension frame_dim = f.getCurrentSize();
-		controllers = new AController[7];
-		controllers[0] = new LoginController(frame_dim);
-		controllers[1] = new RegistrazioneController(frame_dim);
-		controllers[2] = new SectorController(frame_dim);
-		controllers[3] = new AnelloController(frame_dim);
-		controllers[4] = new BloccoController(frame_dim);
-		controllers[5] = new PostoController(frame_dim);
-		controllers[6] = new PartiteController(frame_dim);
+		controllers = new ControllerCache[7];
+		controllers[0] = new ControllerCache(new LoginController());
+		controllers[1] = new ControllerCache(new RegistrazioneController());
+		controllers[2] = new ControllerCache(new SectorController());
+		controllers[3] = new ControllerCache(new AnelloController());
+		controllers[4] = new ControllerCache(new BloccoController());
+		controllers[5] = new ControllerCache(new PostoController());
+		controllers[6] = new ControllerCache(new PartiteController());
 		
 		currentController = null;
 		
@@ -72,9 +70,8 @@ public class ControllerManager {
 	 */
 	public void loadController(int id) {
 		// TODO: check if id is valid
-		currentController = controllers[id];
+		currentController = controllers[id].loadController(f.getCurrentSize());
 		f.loadView(currentController.getView());
-		currentController.onLoad(f.getCurrentSize());
 	}
 	
 }

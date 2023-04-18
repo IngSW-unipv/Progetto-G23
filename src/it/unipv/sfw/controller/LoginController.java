@@ -18,7 +18,8 @@ import it.unipv.sfw.view.LoginView;
  */
 public class LoginController extends AController {
 	
-	public LoginController(Dimension dim) {
+	@Override
+	public void initialize(Dimension dim) {
 		LoginView v = new LoginView(dim);
 		
 		v.getAccediButton().addActionListener(new ActionListener() {

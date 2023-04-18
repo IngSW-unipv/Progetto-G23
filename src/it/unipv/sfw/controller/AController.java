@@ -16,12 +16,19 @@ public abstract class AController {
 	/**
 	 * {@link it.unipv.sfw.view.AView} utilizzata dalle sottoclassi.
 	 */
-	protected AView view;
+	protected AView view = null;
 	/**
 	 * @return Una {@link it.unipv.sfw.view.AView} inizializzata dal controller.
 	 * @see it.unipv.sfw.view.AView
 	 */
 	public AView getView() { return view; }
+	
+	/**
+	 * Funzione chiamata durante l'inizializzazione del controller. 
+	 * Normalmente è chiamata solo una volta durante la vita dell'applicazione.
+	 * @param dim La dimensione corrente del frame.
+	 */
+	public abstract void initialize(Dimension dim);
 	
 	/**
 	 * onLoad viene chiamata da {@link ControllerManager} appena dopo
@@ -36,7 +43,7 @@ public abstract class AController {
 	
 	/**
 	 * Fuzione chiamata quando viene attivato l'evento di window resize.
-	 * Implementazione semplice, per comportamenti diversi bisogna svrascriverla nelle sottoclassi.
+	 * Implementazione semplice, per comportamenti diversi bisogna sovrascriverla nelle sottoclassi.
 	 * @param dim Nuova dimensione della finestra.
 	 */
 	public void onWindowResized(Dimension dim) {

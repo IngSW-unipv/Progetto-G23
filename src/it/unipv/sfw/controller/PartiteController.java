@@ -23,7 +23,8 @@ import it.unipv.sfw.view.buttons.UtenteButton;
  */
 public class PartiteController extends AController {
 	
-	public PartiteController(Dimension dim) {
+	@Override
+	public void initialize(Dimension dim) {
 		Partita[] p = new Partita[6];
 		p[0] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
 		p[1] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);

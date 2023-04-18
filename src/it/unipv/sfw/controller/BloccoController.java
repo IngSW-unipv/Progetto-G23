@@ -18,7 +18,8 @@ import it.unipv.sfw.view.buttons.BloccoButton;
  */
 public class BloccoController extends AController {
 	
-	public BloccoController(Dimension dim) {	
+	@Override
+	public void initialize(Dimension dim) {	
 		view=new BloccoView(2500,dim);
 		
 		ActionListener a = new ActionListener() {

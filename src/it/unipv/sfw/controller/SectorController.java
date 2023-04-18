@@ -19,7 +19,8 @@ import it.unipv.sfw.view.buttons.SectorButton;
  */
 public class SectorController extends AController {
 	
-	public SectorController(Dimension d) {
+	@Override
+	public void initialize(Dimension d) {
 		view = new SectorView(d);
 		
 		ActionListener a = new ActionListener() {
