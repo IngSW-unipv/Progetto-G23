@@ -27,6 +27,7 @@ public class ControllerManager {
 	private Frame f;
 	private AController currentController;
 	private final ControllerCache[] controllers;
+	private final int N_CONTROLLERS = 7;
 	
 	private ControllerManager() {
 		// init frame
@@ -63,13 +64,18 @@ public class ControllerManager {
 	
 	/**
 	 * Funzione utilizzata per caricare un controller e la sua rispettiva view nel {@link Frame}.
+	 * Lancia un'eccezione se l'id del controller non è valido.
 	 * @param id Controller id
 	 * @see AController
 	 * @see it.unipv.sfw.view.AView
 	 * @see Frame
 	 */
 	public void loadController(int id) {
-		// TODO: check if id is valid
+		if (id < 0 || id >= N_CONTROLLERS)
+			throw new RuntimeException(
+					"Invalid controller id \'" + id + "\', the max is \'" + (N_CONTROLLERS - 1) + "\'"
+					);
+		
 		currentController = controllers[id].loadController(f.getCurrentSize());
 		f.loadView(currentController.getView());
 	}
