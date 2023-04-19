@@ -19,9 +19,11 @@ public class Cimelio {
 	}
 	
 	private String tipo, descrizione;
+	private int id;
 	
-	public Cimelio(String descrizione, TipoCimelio tipo) {
+	public Cimelio(String descrizione, TipoCimelio tipo, int id) {
 		this.tipo = "" + tipo;
+		this.id = id;
 		this.descrizione = descrizione;
 	}
 	
@@ -46,6 +48,14 @@ public class Cimelio {
 	 */
 	public void setTipo(TipoCimelio tipo) {
 		this.tipo = "" + tipo;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	/**
