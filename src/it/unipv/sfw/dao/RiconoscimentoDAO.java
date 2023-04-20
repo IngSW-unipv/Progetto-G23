@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 
 import it.unipv.sfw.model.museo.Riconoscimento;
 
-public class RiconoscimentoDAO {
+public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 
 	private String schema;
 	private Connection conn;
@@ -15,6 +15,7 @@ public class RiconoscimentoDAO {
 		this.schema = "Riconoscimenti";  //(id, TipoRiconoscimento, Anno, Descrizione)
 	}
 	
+	@Override
 	public boolean insertRiconoscimento(Riconoscimento riconoscimento) {
 		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
@@ -41,6 +42,7 @@ public class RiconoscimentoDAO {
 		return esito;
 	}
 	
+	@Override
 	public boolean updateDescrizione(Riconoscimento riconoscimento) {
 		
 		conn = DBConnection.startConnection(conn, schema);

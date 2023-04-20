@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import it.unipv.sfw.model.museo.Cimelio;
 
-public class CimelioDAO {
+public class CimelioDAO implements ICimelioDAO {
 
 	private String schema;
 	private Connection conn;
@@ -16,6 +16,7 @@ public class CimelioDAO {
 		this.schema = "CIMELI";  //(id, TipoCimelio, Anno, Descrizione)
 	}
 	
+	@Override
 	public boolean insertCimelio(Cimelio cim) {
 		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
@@ -42,6 +43,7 @@ public class CimelioDAO {
 		return esito;
 	}
 	
+	@Override
 	public boolean updateDescrizione(Cimelio cimelio) {
 		
 		conn = DBConnection.startConnection(conn, schema);

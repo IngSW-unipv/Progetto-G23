@@ -13,10 +13,12 @@ public class Merchandising implements Comparable<Merchandising> {
 
 	private Merch tipoMerch;
 	private double prezzo;
+	private int id;
 
-	public Merchandising(Merch tipo, double prezzo) {
+	public Merchandising(Merch tipo, double prezzo, int id) {
 		tipoMerch = tipo;
 		this.prezzo = prezzo;
+		this.id = id;
 	}
 
 	/**
@@ -52,5 +54,10 @@ public class Merchandising implements Comparable<Merchandising> {
 	@Override
 	public int compareTo(Merchandising o) {
 		return ((tipoMerch).compareTo(o.tipoMerch));
+	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }
