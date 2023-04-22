@@ -11,10 +11,6 @@ public class DBConnection {
 	
 	private static final String PROPERTYDBDRIVER = "DBDRIVER";
 	private static final String PROPERTYDBURL = "DBURL";
-	//private static final String PROPERTYNAME = "db_usn"; 
-	//private static final String PROPERTYPSW = "db_psw"; 
-	//private static String username;
-	//private static String password;
 	private static String dbDriver;
 	private static String dbURL;
 	private static DBConnection conn;
@@ -22,11 +18,8 @@ public class DBConnection {
 	
 	private static void init() {
 		Properties p = new Properties(System.getProperties());
-		try 
-		{
+		try {
 			p.load(new FileInputStream("properties/properties"));
-			//username=p.getProperty(PROPERTYNAME);
-			//password=p.getProperty(PROPERTYPSW);
 			dbDriver =p.getProperty(PROPERTYDBDRIVER);
 			dbURL =p.getProperty(PROPERTYDBURL);
 			
@@ -44,31 +37,23 @@ public class DBConnection {
 		
 		System.out.println(dbURL);
 		
-		if ( isOpen(conn) )
+		if (isOpen(conn))
 			closeConnection(conn);
-		try 
-		{
+		try {
 			dbURL=String.format(dbURL,schema); 
 			System.out.println(dbURL);
 			Class.forName(dbDriver);
 			
 			conn = DriverManager.getConnection(dbURL); //, username, password);// Apertura connessione
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 		return conn;
 	}
 
-	public static boolean isOpen(Connection conn)
-	{
-		if (conn == null) {
-			return false;
-		}
-		else {
-			return true;
-		}
+	public static boolean isOpen(Connection conn) {
+		return !(conn == null);
 	}
 
 	public static Connection closeConnection(Connection conn)
@@ -76,12 +61,11 @@ public class DBConnection {
 		if (!isOpen(conn)) {
 			return null;
 		}
-		try 
-		{
+		
+		try {
 			conn.close();
 			conn = null;
-		} 
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
