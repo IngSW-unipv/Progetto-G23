@@ -2,12 +2,15 @@ package it.unipv.sfw.model.utente;
 
 import java.util.HashMap;
 
+import it.unipv.sfw.dao.ClienteDAO;
+import it.unipv.sfw.exceptions.AccountNotFoundException;
+import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.partita.Posto;
 
 
 /**
  * Classe che rappresenta la sessione corrente.
- * @author Federico Romano, Lorenzo Reale
+ * @author Federico Romano, Lorenzo Reale, Gabriele Invernizzi
  * @see Utente
  * @see Anello
  * @see Settore
@@ -34,6 +37,28 @@ public class Sessione {
 			istance = new Sessione();
 		}
 		return istance;
+	}
+	
+	/**
+	 * Funzione che verifica nel database se l'utente specificato esiste 
+	 * controllandone anche la password.
+	 * @param email Email dell'utente di cui si vuole eseguire il login.
+	 * @param pass Password dell'utente di cui si vuole eseguire il login.
+	 * @throws WrongPasswordExceptio Lanciata nel caso in cui la password sia errata.
+	 * @throws AccountNotFoundException Lanciata nel caso in cui l'account non esista. 
+	 */
+	public void login(String email, char[] pass)
+			throws WrongPasswordException, AccountNotFoundException {
+		Cliente c = new ClienteDAO().selectByEmail(email);
+		
+		String strPass = new String(pass);
+		
+		if (c == null)
+			throw new AccountNotFoundException(email);
+		if (!c.getPassword().equals(strPass))
+			throw new WrongPasswordException(email);
+		
+		this.setCurrentUtente(c);
 	}
 
 	

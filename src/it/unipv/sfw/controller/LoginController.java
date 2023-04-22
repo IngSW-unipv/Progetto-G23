@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import it.unipv.sfw.exceptions.AccountNotFoundException;
+import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.LoginView;
@@ -25,13 +27,17 @@ public class LoginController extends AController {
 		v.getAccediButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Login into session
-				Cliente u = new Cliente(
-						"",
-						"",
-						v.getUsernameField().getText(),
-						v.getPasswordField().getPassword().toString());
-				Sessione.getIstance().setCurrentUtente(u);
+				// Try to login into session
+				try {
+					Sessione.getIstance().login(
+							v.getUsernameField().getText(),
+							v.getPasswordField().getPassword()
+					);
+				} catch (AccountNotFoundException err) {
+					err.printStackTrace();
+				} catch (WrongPasswordException err) {
+					err.printStackTrace();
+				}
 				// Load new page
 				ControllerManager.getInstance().loadController(6);
 			}
