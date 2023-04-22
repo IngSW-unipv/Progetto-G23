@@ -35,13 +35,10 @@ public class DBConnection {
 		if (!isInit)
 			init();
 		
-		System.out.println(dbURL);
-		
 		if (isOpen(conn))
 			closeConnection(conn);
 		try {
 			dbURL=String.format(dbURL,schema); 
-			System.out.println(dbURL);
 			Class.forName(dbDriver);
 			
 			conn = DriverManager.getConnection(dbURL); //, username, password);// Apertura connessione

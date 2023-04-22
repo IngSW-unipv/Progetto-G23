@@ -31,7 +31,7 @@ public class ClienteDAO implements IClienteDAO {
 		try
 		{
 			st1 = conn.createStatement();
-			String query = "SELECT (NOME, COGNOME, EMAIL, PASSWORD) FROM UTENTI WHERE TIPO='CLIENTE'";
+			String query = "SELECT NOME, COGNOME, EMAIL, PASS FROM UTENTI WHERE TIPO='CLIENTE'";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
