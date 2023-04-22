@@ -30,8 +30,12 @@ public class RegistrazioneController extends AController {
 						v.getNome().getText(),
 						v.getCognome().getText(),
 						v.getEmail().getText(),
-						v.getPassword().getPassword().toString());
-				Sessione.getIstance().setCurrentUtente(u);
+						new String(v.getPassword().getPassword()));
+				try {	
+					Sessione.getIstance().register(u);
+				} catch(Exception err) {
+					err.printStackTrace();
+				}
 
 				ControllerManager.getInstance().loadController(6);
 			}

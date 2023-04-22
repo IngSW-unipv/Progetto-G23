@@ -60,6 +60,19 @@ public class Sessione {
 		
 		this.setCurrentUtente(c);
 	}
+	
+	/**
+	 * Funzione che inserisce un nuovo cliente nel database ed esegue il login.
+	 * @param c Cliente da registrare.
+	 * @throws Exception Da specializzare.
+	 */
+	public void register(Cliente c)
+		throws Exception {
+		if(!(new ClienteDAO().insertCliente(c)))
+			throw new Exception("Non è possibile registrare il cliente.");
+		
+		this.setCurrentUtente(c);
+	}
 
 	
 	/**

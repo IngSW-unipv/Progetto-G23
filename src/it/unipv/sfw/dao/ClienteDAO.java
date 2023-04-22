@@ -35,7 +35,7 @@ public class ClienteDAO implements IClienteDAO {
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				Cliente c = new Cliente(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
+				Cliente c = new Cliente(rs1.getString(2), rs1.getString(3), rs1.getString(1), rs1.getString(4));
 				result.add(c);
 			}
 			
@@ -62,7 +62,7 @@ public class ClienteDAO implements IClienteDAO {
 			rs1 = st1.executeQuery();
 			
 			while(rs1.next()) {
-				result = new Cliente(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
+				result = new Cliente(rs1.getString(2), rs1.getString(3), rs1.getString(1), rs1.getString(4));
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
@@ -80,12 +80,12 @@ public class ClienteDAO implements IClienteDAO {
 		
 		try
 		{
-			String query = "INSERT INTO UTENTI VALUES(?,?,?," + Type.CLIENTE + ")";
+			String query = "INSERT INTO UTENTI VALUES(?,?,?,?,'" + Type.CLIENTE + "')";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(1, clienteInput.getNome());
+			st1.setString(3, clienteInput.getNome());
 			st1.setString(2, clienteInput.getCognome());
-			st1.setString(3, clienteInput.getEmail());
+			st1.setString(1, clienteInput.getEmail());
 			st1.setString(4, clienteInput.getPassword());
 			
 			st1.executeUpdate();
