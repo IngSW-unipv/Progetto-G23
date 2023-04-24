@@ -31,7 +31,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			st1.setInt(3, riconoscimento.getAnno());
 			st1.setString(4, riconoscimento.getDescrizione());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			st1.setString(1, riconoscimento.getDescrizione());                  
 			st1.setInt(2, riconoscimento.getId());       
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

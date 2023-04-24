@@ -32,7 +32,7 @@ public boolean insertBigliettiMuseo(Biglietto ticket) {
 			st1.setString(2, "" + ticket.getData());
 			st1.setTime(3, ticket.getOra());
 			
-			st1.executeUpdate(query); 
+			st1.executeUpdate(); 
 			
 		} catch (Exception e) {
 			e.printStackTrace();

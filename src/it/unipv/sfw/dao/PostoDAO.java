@@ -39,7 +39,7 @@ public class PostoDAO implements IPostoDAO {
 			
 			st1.setString(1, "" + dataPartita);
 			
-			rs1 = st1.executeQuery(query);
+			rs1 = st1.executeQuery();
 			
 			rs1.next(); //A ResultSet cursor is initially positioned before the first row
 			numeroposti = rs1.getInt(1);

@@ -31,7 +31,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 			st1.setDouble(1, newPrezzo);                  
 			st1.setInt(2, merch.getId());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 			st1.setDouble(1, newQuantita);                  
 			st1.setInt(2, merch.getId());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,7 +85,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 			st1.setDouble(3, merch.getPrezzo());
 			st1.setInt(4, quantita);
 			
-			st1.executeUpdate(query); 
+			st1.executeUpdate(); 
 			
 		} catch (Exception e) {
 			e.printStackTrace();

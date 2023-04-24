@@ -32,7 +32,7 @@ public class AbbonamentoDAO implements IAbbonamentoDAO {
 			st1.setString(2, "" + nuovoAbbonato.getAbb().getTipoAbb());
 			st1.setString(3, nuovoAbbonato.getEmail());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class AbbonamentoDAO implements IAbbonamentoDAO {
 			st1.setString(1, "" + livello);
 			st1.setString(2, nuovoAbbonato.getEmail());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

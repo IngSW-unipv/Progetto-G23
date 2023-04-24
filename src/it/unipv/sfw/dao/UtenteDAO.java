@@ -71,7 +71,7 @@ public class UtenteDAO implements IUtenteDAO {
 			st1.setString(4, u.getPassword());
 			st1.setString(5, "" + u.getType());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class UtenteDAO implements IUtenteDAO {
 			String query = "SELECT * FROM UTENTI WHERE EMAIL=?";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
-			rs1 = st1.executeQuery(query);
+			rs1 = st1.executeQuery();
 			
 			String tipo = rs1.getString(4);
 			if(tipo.equals("" + Type.ADMIN)) {
@@ -126,7 +126,7 @@ public class UtenteDAO implements IUtenteDAO {
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			st1.setString(2, password);
-			rs1 = st1.executeQuery(query);
+			rs1 = st1.executeQuery();
 			
 			String tipo = rs1.getString(4);
 			if(tipo.equals("" + Type.ADMIN)) {

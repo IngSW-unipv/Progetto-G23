@@ -58,7 +58,7 @@ public class AdminDAO implements IAdminDAO {
 			String query = "SELECT * FROM UTENTI WHERE EMAIL=? AND TIPO='ADMIN'";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
-			rs1 = st1.executeQuery(query);
+			rs1 = st1.executeQuery();
 			
 			while(rs1.next()) {
 				result = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
@@ -87,7 +87,7 @@ public class AdminDAO implements IAdminDAO {
 			st1.setString(3, adminInput.getEmail());
 			st1.setString(4, adminInput.getPassword());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -82,7 +82,7 @@ public class PartitaDAO implements IPartitaDAO {
 			
 			st1.setString(1, "" + dataPartita);
 			
-			rs1 = st1.executeQuery(query);
+			rs1 = st1.executeQuery();
 			
 			
 			rs1.next();
@@ -120,7 +120,7 @@ public class PartitaDAO implements IPartitaDAO {
 			st1.setString(2, newPartita.getOspiti());
 			st1.setInt(3, bigliettiTot);	
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -148,7 +148,7 @@ public class PartitaDAO implements IPartitaDAO {
 			st1.setInt(1, bigliettiTot - pDao.selectCount(newPartita.getCalendarDate()));
 			st1.setString(2, newPartita.getData());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -32,7 +32,7 @@ public class CimelioDAO implements ICimelioDAO {
 			st1.setInt(3, cim.getAnno());
 			st1.setString(4, cim.getDescrizione());
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class CimelioDAO implements ICimelioDAO {
 			st1.setString(1, cimelio.getDescrizione());                  
 			st1.setInt(2, cimelio.getId());       
 			
-			st1.executeUpdate(query);
+			st1.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
