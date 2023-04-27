@@ -5,6 +5,11 @@ import java.sql.PreparedStatement;
 
 import it.unipv.sfw.model.museo.Riconoscimento;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.museo.Riconoscimento}.
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.museo.Riconoscimento
+ */
 public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 
 	private String schema;

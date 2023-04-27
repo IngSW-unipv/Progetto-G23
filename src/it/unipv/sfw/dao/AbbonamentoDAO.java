@@ -6,6 +6,12 @@ import java.sql.PreparedStatement;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.abbonamento.Abbonamento}.
+ * @author Federico Romano
+ * @see TipoAbb
+ * @see it.unipv.sfw.model.abbonamento.Abbonamento
+ */
 public class AbbonamentoDAO implements IAbbonamentoDAO {
 	
 	private String schema;
@@ -42,7 +48,7 @@ public class AbbonamentoDAO implements IAbbonamentoDAO {
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
-    
+       
     @Override
 	public boolean updateAbbonamento(Cliente nuovoAbbonato, TipoAbb livello) {
     	

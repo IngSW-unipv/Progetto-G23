@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import it.unipv.sfw.model.museo.Cimelio;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.museo.Cimelio}.
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.museo.Cimelio
+ */
 public class CimelioDAO implements ICimelioDAO {
 
 	private String schema;

@@ -13,6 +13,11 @@ import java.util.Locale;
 
 import it.unipv.sfw.model.partita.Posto;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.partita.Posto}
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.partita.Posto
+ */
 public class PostoDAO implements IPostoDAO {
 	
 	private String schema;

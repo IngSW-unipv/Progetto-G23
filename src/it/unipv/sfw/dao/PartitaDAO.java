@@ -16,6 +16,11 @@ import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.partita.Partita}.
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.partita.Partita
+ */
 public class PartitaDAO implements IPartitaDAO {
 
 	private String schema;
@@ -63,7 +68,7 @@ public class PartitaDAO implements IPartitaDAO {
 		DBConnection.closeConnection(conn);
 		return result;
 	}
-	
+
 	@Override
 	public Partita selectPartitaByData(Calendar dataPartita) {
 		

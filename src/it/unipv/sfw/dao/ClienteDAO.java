@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.utente.Cliente}
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.utente.Cliente
+ */
 public class ClienteDAO implements IClienteDAO {
 	
 	private String schema;
@@ -18,7 +23,7 @@ public class ClienteDAO implements IClienteDAO {
 		super();
 		this.schema = "UTENTI";
 	}
-	
+
 	@Override
 	public ArrayList<Cliente> selectAll() {
 		

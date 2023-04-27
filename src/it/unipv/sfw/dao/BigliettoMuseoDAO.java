@@ -5,7 +5,11 @@ import java.sql.PreparedStatement;
 
 import it.unipv.sfw.model.biglietti.Biglietto;
 
-
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.biglietto.Biglietto}. 
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.biglietti.Biglietto
+ */
 public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 	
 	private String schema;
@@ -16,8 +20,8 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 		this.schema = "BIGLIETTIMUSEO";  //(email, data, ora)
 	}
 	
-@Override
-public boolean insertBigliettiMuseo(Biglietto ticket) {
+	@Override
+	public boolean insertBigliettiMuseo(Biglietto ticket) {
 		
 		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;

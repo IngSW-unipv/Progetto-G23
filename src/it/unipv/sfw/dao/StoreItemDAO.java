@@ -6,6 +6,11 @@ import java.sql.PreparedStatement;
 import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.model.store.*;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.store.Merchandising}.
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.store.Merchandising
+ */
 public class StoreItemDAO implements IStoreItemDAO {
 
 	private String schema;
