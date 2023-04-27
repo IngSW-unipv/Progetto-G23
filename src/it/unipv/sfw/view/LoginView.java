@@ -50,8 +50,8 @@ public class LoginView extends AView {
 		p = new JLabel("Password");
 		l = new JLabel("LOGIN");
 		icona = new JLabel();
-		stringa = new JLabel("<html>Non hai un account?? &nbsp  &nbsp  &nbsp  </html>");
-		e=new JLabel("Username o Password errati");
+		stringa = new JLabel("<html>Non hai un account? &nbsp  &nbsp  &nbsp  </html>");
+		e=new JLabel("Username o Password errati!");
 		e.setForeground(Color.red);
 		
 		//Inizializzazione JTextField
