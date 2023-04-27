@@ -17,21 +17,17 @@ public class StoreOnline {
 	}
 	
 	/**
-	 * Funzione che permette di aggiungere un merch di una certa quantità passandoli come parametri.
+	 * Funzione che permette di aggiungere un merch passandolo come parametro.
 	 * @param merchItem Item da aggiungere allo store.
-	 * @param quantita Numero di quell'item da aggiungere.
 	 */
-	public void addMerch(Merchandising merchItem, int quantita) {
-		int i;
-		for (i = 0; i < quantita; i++) {
-			archivioMerch.add(merchItem);
-		}
+	public void addMerch(Merchandising merchItem) {
+		archivioMerch.add(merchItem);
 	}
 
 	/**
 	 * Funzione che permette di rimuovere totalmente dallo store 
 	 * il merch passato come parametro
-	 * @param merchItem Item da aggiungere allo store.
+	 * @param merchItem Item da rimuovere dallo store.
 	 */
 	public void removeMerch(Merchandising merchItem) {
 		for (Merchandising merch : archivioMerch) {
@@ -39,20 +35,5 @@ public class StoreOnline {
 				archivioMerch.remove(merchItem);
 			}
 		}
-	}
-
-	/**
-	 * @param merchItem Item da aggiungere allo store.
-	 * @return Il numero di merch uguali a quello passato
-	 * come parametro ancora disponibili.
-	 */
-	public int getDisponibilita(Merchandising merchItem) {
-		int itemCount = 0;
-		for (Merchandising merch : archivioMerch) {
-			if (merch.compareTo(merchItem) == 0) {
-				itemCount++;
-			}
-		}
-		return itemCount;
 	}
 }
