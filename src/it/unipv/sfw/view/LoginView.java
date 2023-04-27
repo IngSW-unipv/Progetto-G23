@@ -1,6 +1,7 @@
 package it.unipv.sfw.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -22,10 +23,10 @@ import javax.swing.JTextField;
  */
 public class LoginView extends AView {
 	
-	private JPanel tutto,testo, bottoni, titolo, b,ba,contenitore,testi,text;
+	private JPanel tutto,testo, bottoni, titolo, b,ba,contenitore,testi,text,errore,campilogin;
 	private JTextField username;
 	private JPasswordField password;
-	private JLabel u, p,l, icona, stringa;
+	private JLabel u, p,l, icona, stringa,e;
 	private JButton login, registrati;
 	private ImageIcon img;
 
@@ -41,6 +42,8 @@ public class LoginView extends AView {
 		testi=new JPanel();
 		text=new JPanel();
 		ba = new JPanel();
+		errore=new JPanel();
+		campilogin=new JPanel();
 		
 		//Inizializzazione JLabel
 		u = new JLabel("Username");
@@ -48,6 +51,8 @@ public class LoginView extends AView {
 		l = new JLabel("LOGIN");
 		icona = new JLabel();
 		stringa = new JLabel("<html>Non hai un account?? &nbsp  &nbsp  &nbsp  </html>");
+		e=new JLabel("Username o Password errati");
+		e.setForeground(Color.red);
 		
 		//Inizializzazione JTextField
 		username=new JTextField();
@@ -100,10 +105,16 @@ public class LoginView extends AView {
 		b.add(registrati,BorderLayout.EAST);
 		
 		bottoni.add(b);
+		errore.add(e);
+		
+		campilogin.setLayout(new GridLayout(3,1));
+		campilogin.add(testo);
+		campilogin.add(errore);
+		errore.setVisible(false);
 		
 		tutto.setLayout(new GridLayout(3, 1));
 		tutto.add(titolo);
-		tutto.add(testo);
+		tutto.add(campilogin);
 		tutto.add(bottoni);
 				
 		contenitore .setLayout(new GridLayout(1,2));
@@ -145,6 +156,12 @@ public class LoginView extends AView {
 		icona.setIcon(img);
 	
 		contenitore.revalidate();
+		contenitore.repaint();
+	}
+	
+	public void upError() {
+		errore.setVisible(true);
+		
 		contenitore.repaint();
 	}
 }

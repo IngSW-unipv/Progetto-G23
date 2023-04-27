@@ -35,8 +35,10 @@ public class LoginController extends AController {
 					);
 				} catch (AccountNotFoundException err) {
 					err.printStackTrace();
+					v.upError();
 				} catch (WrongPasswordException err) {
 					err.printStackTrace();
+					v.upError();
 				}
 				// Load new page
 				ControllerManager.getInstance().loadController(6);
