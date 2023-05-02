@@ -1,7 +1,7 @@
 package it.unipv.sfw.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -13,8 +13,6 @@ import java.util.Locale;
 
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Partita.Squadre;
-import it.unipv.sfw.model.utente.Cliente;
-import it.unipv.sfw.model.utente.Utente.Type;
 
 public class PartitaDAO implements IPartitaDAO {
 
@@ -38,7 +36,7 @@ public class PartitaDAO implements IPartitaDAO {
 		
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY - hh:mm", Locale.ITALY);
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss", Locale.ITALY);
 			st1 = conn.createStatement();
 			String query = "SELECT * FROM PARTITE";
 			rs1 = st1.executeQuery(query);
@@ -75,7 +73,7 @@ public class PartitaDAO implements IPartitaDAO {
 		
 		try
 		{
-			SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY - hh:mm", Locale.ITALY);
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss", Locale.ITALY);
 			
 			String query = "SELECT * FROM PARTITE WHERE DATA=?";
 			st1 = conn.prepareStatement(query);
