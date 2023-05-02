@@ -76,6 +76,16 @@ public class Sessione {
 		
 		this.setCurrentUtente(c);
 	}
+	
+	/**
+	 * Funzione utilizzata per registrare la prenotazione di una partita.
+	 * Le scelte vengono automaticamente resettate.
+	 */
+	public void book() {
+		// TODO: Mancano funzioni in PostiDAO
+		
+		this.resetScelte();
+	}
 
 	
 	/**
