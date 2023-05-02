@@ -38,7 +38,7 @@ public class PartiteController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				int iPartita = ((UtenteButton)e.getSource()).getCode();
 				Partita p_selected = p[iPartita];
-				System.out.println("Selezionata partita numero: " + p_selected.getOspiti() + ".");
+				System.out.println("Selezionata partita contro: " + p_selected.getOspiti() + ".");
 				Sessione.getIstance().resetScelte();
 				ControllerManager.getInstance().loadController(2);
 			}
