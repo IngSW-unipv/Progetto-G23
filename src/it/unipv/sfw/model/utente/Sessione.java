@@ -1,14 +1,17 @@
 package it.unipv.sfw.model.utente;
 
-import it.unipv.sfw.model.partita.Anello;
-import it.unipv.sfw.model.partita.Blocco;
+import java.util.HashMap;
+
+import it.unipv.sfw.dao.ClienteDAO;
+import it.unipv.sfw.exceptions.AccountNotFoundException;
+import it.unipv.sfw.exceptions.WrongPasswordException;
+import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
-import it.unipv.sfw.model.partita.Settore;
 
 
 /**
  * Classe che rappresenta la sessione corrente.
- * @author Federico Romano
+ * @author Federico Romano, Lorenzo Reale, Gabriele Invernizzi
  * @see Utente
  * @see Anello
  * @see Settore
@@ -17,17 +20,15 @@ import it.unipv.sfw.model.partita.Settore;
  */
 public class Sessione {
 	private static Sessione istance = null;
+	private HashMap<String, Integer> scelte;
+	private Partita currentPartita;
 	private Utente currentUtente;
-	private Anello currentAnello;
-	private Settore currentSettore;
-	private Posto currentPosto;
-	private Blocco currentBlocco;
 
 	private Sessione() {
+		
 		currentUtente = null;
-		currentAnello = null;
-		currentSettore = null;
-		currentPosto = null;
+		currentPartita = null;
+		scelte = new HashMap<String, Integer>();
 	}
 	
 	
@@ -40,56 +41,70 @@ public class Sessione {
 		}
 		return istance;
 	}
+	
+	/**
+	 * Funzione che verifica nel database se l'utente specificato esiste 
+	 * controllandone anche la password.
+	 * @param email Email dell'utente di cui si vuole eseguire il login.
+	 * @param pass Password dell'utente di cui si vuole eseguire il login.
+	 * @throws WrongPasswordExceptio Lanciata nel caso in cui la password sia errata.
+	 * @throws AccountNotFoundException Lanciata nel caso in cui l'account non esista. 
+	 */
+	public void login(String email, char[] pass)
+			throws WrongPasswordException, AccountNotFoundException {
+		Cliente c = new ClienteDAO().selectByEmail(email);
+		
+		String strPass = new String(pass);
+		
+		if (c == null)
+			throw new AccountNotFoundException(email);
+		if (!c.getPassword().equals(strPass))
+			throw new WrongPasswordException(email);
+		
+		this.setCurrentUtente(c);
+	}
+	
+	/**
+	 * Funzione che inserisce un nuovo cliente nel database ed esegue il login.
+	 * @param c Cliente da registrare.
+	 * @throws Exception Da specializzare.
+	 */
+	public void register(Cliente c)
+		throws Exception {
+		if(!(new ClienteDAO().insertCliente(c)))
+			throw new Exception("Non è possibile registrare il cliente.");
+		
+		this.setCurrentUtente(c);
+	}
+	
+	/**
+	 * Funzione utilizzata per registrare la prenotazione di una partita.
+	 * Le scelte vengono automaticamente resettate.
+	 */
+	public void book() {
+		// TODO: Mancano funzioni in PostiDAO
+		
+		this.resetScelte();
+	}
 
 	
 	/**
 	 * Funzione che resetta i campi sessione riguardanti 
-	 * {@link Anello}, {@link Posto}, {@link Settore}, {@link Blocco}
+	 * {@link Anello}, {@link Posto}, {@link Settore}, {@link Blocco}, {@link Partita} 
 	 * a null.
 	 */
-	public void resetAcquistoPartita() {
-		this.setCurrentAnello(null);
-		this.setCurrentPosto(null);
-		this.setCurrentSettore(null);
-		this.setCurrentBlocco(null);
+	public void resetScelte() {
+		scelte.clear();
+		currentPartita = null;
 	}
 
-	
 	/**
 	 * @return {@link Utente} della sessione corrente.
 	 */
 	public Utente getCurrentUtente() {
 		return currentUtente;
 	}
-
-	/**
-	 * @return {@link Anello} della sessione corrente.
-	 */
-	public Anello getCurrentAnello() {
-		return currentAnello;
-	}
-
-	/**
-	 * @return {@link Settore} della sessione corrente.
-	 */
-	public Settore getCurrentSettore() {
-		return currentSettore;
-	}
-
-	/**
-	 * @return {@link Posto} della sessione corrente.
-	 */
-	public Posto getCurrentPosto() {
-		return currentPosto;
-	}
-
-	/**
-	 * @return {@link Blocco} della sessione corrente.
-	 */
-	public Blocco getCurrentBlocco() {
-		return currentBlocco;
-	}
-
+	
 	/**
 	 * Funzione che permette di impostare come {@link Utente} corrente 
 	 * quello passato come parametro.
@@ -98,40 +113,81 @@ public class Sessione {
 	public void setCurrentUtente(Utente currentU) {
 		currentUtente = currentU;
 	}
-
+	
 	/**
-	 * Funzione che permette di impostare come {@link Anello} corrente
-	 * quello passato come parametro.
-	 * @param currentA Anello corrente della sessione.
+	 * Funzione che permette di impostare come {@link Partita} corrente 
+	 * quella passato come parametro.
+	 * @param currentP Partita corrente della sessione.
 	 */
-	public void setCurrentAnello(Anello currentA) {
-		currentAnello = currentA;
+	public void setCurrentPartita(Partita currentP) {
+		currentPartita = currentP;
 	}
-
+	
 	/**
-	 * Funzione che permette di impostare come {@link Settore} corrente
-	 * quello passato come parametro.
-	 * @param currentS Settore corrente della sessione.
+	 * Funzione utilizzata per settare il {@link Blocco}.
+	 * @param blocco
 	 */
-	public void setCurrentSettore(Settore currentS) {
-		currentSettore = currentS;
+	public void setBlocco(int blocco) {
+		scelte.put("Blocco", blocco);
 	}
-
+	
 	/**
-	 * Funzione che permette di impostare come {@link Posto} corrente
-	 * quello passato come parametro.
-	 * @param currentP Posto corrente della sessione.
+	 * Funzione utilizzata per settare il {@link Anello}.
+	 * @param anello
 	 */
-	public void setCurrentPosto(Posto currentP) {
-		currentPosto = currentP;
+	public void setAnello(int anello) {
+		scelte.put("Anello", anello);
 	}
-
+	
 	/**
-	 * Funzione che permette di impostare come {@link Blocco} corrente
-	 * quello passato come parametro.
-	 * @param currentB Blocco corrente della sessione.
+	 * Funzione utilizzata per settare il {@link Settore}.
+	 * @param settore
 	 */
-	public void setCurrentBlocco(Blocco currentB) {
-		currentBlocco = currentB;
+	public void setSettore(int settore) {
+		scelte.put("Settore", settore);
 	}
+	
+	/**
+	 * Funzione utilizzata per settare il {@link Posto}.
+	 * @param posto
+	 */
+	public void setPosto(int posto) {
+		scelte.put("Posto", posto);
+	}
+	
+	/**
+	 * @return {@link Blocco} della sessione corrente.
+	 */
+	public int getBlocco() {
+		return scelte.get("Blocco");
+	}
+	
+	/**
+	 * @return {@link Anello} della sessione corrente.
+	 */
+	public int getAnello() {
+		return scelte.get("Anello");
+	}
+	
+	/**
+	 * @return {@link Settore} della sessione corrente.
+	 */
+	public int getSettore() {
+		return scelte.get("Settore");
+	}
+	
+	/**
+	 * @return {@link Posto} della sessione corrente.
+	 */
+	public int getPosto() {
+		return scelte.get("Posto");
+	}
+	
+	/**
+	 * @return {@link Partita} selezionata.
+	 */
+	public Partita getCurrentPartita() {
+		return currentPartita;
+	}
+	
 }

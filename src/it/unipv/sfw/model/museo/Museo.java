@@ -38,16 +38,16 @@ public class Museo {
 	 * Funzione utilizzata per aggiungere un cimelio.
 	 * @param descrizione, tipo
 	 */
-	public void addCimelio(String descrizione, Cimelio.TipoCimelio tipo) {
-		cimeli.add(new Cimelio(descrizione, tipo));
+	public void addCimelio(String descrizione, Cimelio.TipoCimelio tipo, int id) {
+		cimeli.add(new Cimelio(descrizione, tipo, id));
 	}
 	
 	/**
 	 * Funzione utilizzata per aggiungere un riconoscimento.
 	 * @param anno, descrizione, tipo
 	 */
-	public void addRiconoscimento(int anno, String descrizione, Riconoscimento.TipoRiconoscimento tipo) {
-		riconoscimenti.add(new Riconoscimento(anno, descrizione, tipo));
+	public void addRiconoscimento(int anno, String descrizione, Riconoscimento.TipoRiconoscimento tipo, int id) {
+		riconoscimenti.add(new Riconoscimento(anno, descrizione, tipo, id));
 	}
 
 	/**
@@ -149,5 +149,4 @@ public class Museo {
 		else return false;
 		return true;
 	}
-	
 }

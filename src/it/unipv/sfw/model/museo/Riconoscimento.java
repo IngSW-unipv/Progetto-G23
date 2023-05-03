@@ -20,10 +20,11 @@ public class Riconoscimento {
 	}
 	
 	private String tipo, descrizione;
-	private int anno;
+	private int anno, id;
 	
-	public Riconoscimento(int anno, String descrizione, TipoRiconoscimento tipo) {
+	public Riconoscimento(int anno, String descrizione, TipoRiconoscimento tipo, int id) {
 		this.anno = anno;
+		this.id = id;
 		this.descrizione = descrizione;
 		this.tipo = "" + tipo;
 	}
@@ -49,6 +50,14 @@ public class Riconoscimento {
 	 */
 	public void setTipo(TipoRiconoscimento tipo) {
 		this.tipo = "" + tipo;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	/**

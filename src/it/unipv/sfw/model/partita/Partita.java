@@ -60,6 +60,10 @@ public class Partita {
 		return formattedDate.format(dataPartita.getTime());
 	}
 
+	public Calendar getCalendarDate() {
+		return dataPartita;
+	}
+	
 	/**
 	 * Funzione utilizzata per cambiare l'orario della partita.
 	 * @param ora, minuto

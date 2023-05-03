@@ -1,5 +1,6 @@
 package it.unipv.sfw.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -14,28 +15,31 @@ import it.unipv.sfw.view.buttons.PostoButton;
 /**
  * Controller che si occupa della PostoView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.PostoView
  */
-public class PostoController implements IController {
+public class PostoController extends AController {
 	
-	private PostoView v;
-	
-	public PostoController() {
-		v = new PostoView(50);
+	@Override
+	public void initialize(Dimension dim) {
+		PostoView v = new PostoView(50,dim);
 		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int code = ((PostoButton)e.getSource()).getCode();
 				Sessione s = Sessione.getIstance();
-				s.setCurrentPosto(new Posto(code));
+				s.setPosto(code);
 				// temp stampa acquisto
 				System.out.println("Posto selezionato: S" +
-						s.getCurrentSettore().getNSettore() +
-						", B" + s.getCurrentBlocco().getNBlocco() +
-						", A" + s.getCurrentAnello().getNAnello() +
-						", P" + s.getCurrentPosto().getNPosto() + ".");
+						s.getSettore() +
+						", B" + s.getBlocco() +
+						", A" + s.getAnello() +
+						", P" + s.getPosto() + 
+						". Per la partita contro: " 
+						+ s.getCurrentPartita().getOspiti() + ".");
+				// Update database with booking
+				s.book();
 				
 				ControllerManager.getInstance().loadController(6);
 			}
@@ -44,16 +48,7 @@ public class PostoController implements IController {
 		Collection<PostoButton> btns = v.getAllButtons();
 		for (PostoButton b : btns)
 			b.addActionListener(a);
+		
+		view = v;
 	}
-	
-
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-
-	@Override
-	public void onLoad() {}
-
 }

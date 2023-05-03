@@ -9,12 +9,12 @@ import java.util.ArrayList;
  */
 public class Stadio {
 
-	private ArrayList<Settore> settori;
+	private ArrayList<Posto> posti;
 	private boolean libero;
 
 	public Stadio() {
 		libero = true;
-		settori = new ArrayList<Settore>();
+		posti = new ArrayList<Posto>();
 	}
 
 	/**
@@ -33,31 +33,13 @@ public class Stadio {
 	}
 
 	/**
-	 * Funzione utilizzata per aggiungere settori allo stadio.
-	 * @param nSettori Numero settori da aggiungere.
-	 */
-	public void generaSettori(int nSettori) {
-		for (int i = 0; i < nSettori; i++) {
-			Settore s = new Settore(i);
-			settori.add(s);
-		}
-	}
-
-	/**
-	 * Funzione utilizzata per rimuovere un settore.
-	 */
-	public void removeSettore() {
-		settori.remove(settori.size());
-	}
-
-	/**
 	 * Funzione utilizzata per settare lo stadio occupato se non ci sono più settori liberi.
 	 */
 	public void checkLibero() {
 		int lib = 0;
 
-		for (int i = 0; i < settori.size(); i++) {
-			if (settori.get(i).getLibero() == true)
+		for (int i = 0; i < posti.size(); i++) {
+			if (posti.get(i).getLibero() == true)
 				lib++;
 		}
 

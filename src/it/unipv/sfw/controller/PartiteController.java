@@ -1,14 +1,15 @@
 package it.unipv.sfw.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
+import it.unipv.sfw.dao.PartitaDAO;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.PartiteView;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
@@ -17,30 +18,28 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 /**
  * Controller che si occupa della PartiteView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.PartiteView
  */
-public class PartiteController implements IController {
+public class PartiteController extends AController {
 	
-	private PartiteView v;
+	private Partita[] p;
 	
-	public PartiteController() {
-		Partita[] p = new Partita[6];
-		p[0] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[1] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[2] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[3] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[4] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[5] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
+	@Override
+	public void initialize(Dimension dim) {
+		ArrayList<Partita> p_arrlist = new PartitaDAO().selectAll();
 		
-		v = new PartiteView(p);
+		p = new Partita[p_arrlist.size()];
+		
+		PartiteView v = new PartiteView(p_arrlist.toArray(p), dim);
 		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int codePartita = ((UtenteButton)e.getSource()).getCode();
-				System.out.println("Selezionata partita numero: " + codePartita + ".");
-				Sessione.getIstance().resetAcquistoPartita();
+				int iPartita = ((UtenteButton)e.getSource()).getCode();
+				Partita p_selected = p[iPartita];
+				Sessione s = Sessione.getIstance();
+				s.setCurrentPartita(p_selected);
 				ControllerManager.getInstance().loadController(2);
 			}
 		};
@@ -48,18 +47,16 @@ public class PartiteController implements IController {
 		Collection<UtenteButton> btns = v.getButtons();
 		for (UtenteButton b : btns)
 			b.addActionListener(a);
+		
+		view = v;
 	}
 
 	@Override
-	public AView getView() {
-		return v;
-	}
-
-	@Override
-	public void onLoad() {
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
 		Utente u = Sessione.getIstance().getCurrentUtente();
 		System.out.println("Al momento loggato come: " + u.getEmail() + ".");
+		view.onWindowResized(dim);
 	}
-
 }
 

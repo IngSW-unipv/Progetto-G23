@@ -1,5 +1,6 @@
 package it.unipv.sfw.controller;
 
+import it.unipv.sfw.eventlisteners.ComponentResizeEndListener;
 import it.unipv.sfw.frame.Frame;
 
 
@@ -9,7 +10,7 @@ import it.unipv.sfw.frame.Frame;
  * dei controllers e del caricamento della view corrente nel frame.
  * 
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see Frame
  * @see it.unipv.sfw.view.AView
  */
@@ -22,24 +23,33 @@ public class ControllerManager {
 	
 	private static ControllerManager instance = null;
 	private Frame f;
-	private IController currentController;
-	private final IController[] controllers;
+	private AController currentController;
+	private final ControllerCache[] controllers;
+	private final int N_CONTROLLERS = 7;
 	
 	private ControllerManager() {
+		// init frame
+		f = new Frame(900, 600);
+	
 		// init controllers
-		controllers = new IController[7];
-		controllers[0] = new LoginController();
-		controllers[1] = new RegistrazioneController();
-		controllers[2] = new SectorController();
-		controllers[3] = new BloccoController();
-		controllers[4] = new AnelloController();
-		controllers[5] = new PostoController();
-		controllers[6] = new PartiteController();
+		controllers = new ControllerCache[7];
+		controllers[0] = new ControllerCache(new LoginController());
+		controllers[1] = new ControllerCache(new RegistrazioneController());
+		controllers[2] = new ControllerCache(new SectorController());
+		controllers[3] = new ControllerCache(new AnelloController());
+		controllers[4] = new ControllerCache(new BloccoController());
+		controllers[5] = new ControllerCache(new PostoController());
+		controllers[6] = new ControllerCache(new PartiteController());
 		
 		currentController = null;
 		
-		// init frame
-		f = new Frame(900, 600);
+		// add resize evenet listener
+		f.addComponentListener(new ComponentResizeEndListener(100) {
+			@Override
+			public void onResizedTimedOut() {
+				currentController.onWindowResized(f.getCurrentSize());
+			}
+		});
 	}
 	
 	/**
@@ -53,15 +63,20 @@ public class ControllerManager {
 	
 	/**
 	 * Funzione utilizzata per caricare un controller e la sua rispettiva view nel {@link Frame}.
+	 * Lancia un'eccezione se l'id del controller non è valido.
 	 * @param id Controller id
-	 * @see IController
+	 * @see AController
 	 * @see it.unipv.sfw.view.AView
 	 * @see Frame
 	 */
 	public void loadController(int id) {
-		// TODO: check if id is valid
-		currentController = controllers[id];
+		if (id < 0 || id >= N_CONTROLLERS)
+			throw new RuntimeException(
+					"Invalid controller id \'" + id + "\', the max is \'" + (N_CONTROLLERS - 1) + "\'"
+					);
+		
+		currentController = controllers[id].loadController(f.getCurrentSize());
 		f.loadView(currentController.getView());
-		currentController.onLoad();
 	}
+	
 }

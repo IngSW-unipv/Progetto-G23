@@ -1,5 +1,9 @@
 package it.unipv.sfw.model.biglietti;
 
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Classe che rappresenta il biglietto acquistabile dal {@link it.unipv.sfw.model.utente.Cliente}.
  * @author Lorenzo Reale
@@ -8,10 +12,17 @@ package it.unipv.sfw.model.biglietti;
 
 public class Biglietto {
 
+	private String email;
 	private double prezzo;
+	private Calendar data;
+	private Time ora;
 	
-	public Biglietto(double prezzo) {
+	public Biglietto(String email, double prezzo, Calendar data, Time ora) {
+		this.email = email;
 		this.prezzo = prezzo;
+		this.data = new GregorianCalendar();
+		this.data = data;
+		this.ora = ora;
 	}
 	
 	/**
@@ -27,5 +38,29 @@ public class Biglietto {
 	 */
 	public double getPrezzo() {
 		return prezzo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Calendar getData() {
+		return data;
+	}
+
+	public void setData(Calendar data) {
+		this.data = data;
+	}
+
+	public Time getOra() {
+		return ora;
+	}
+
+	public void setOra(Time ora) {
+		this.ora = ora;
 	}
 }

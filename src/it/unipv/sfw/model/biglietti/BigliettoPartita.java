@@ -1,4 +1,5 @@
 package it.unipv.sfw.model.biglietti;
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,8 +13,8 @@ public class BigliettoPartita extends Biglietto{
 	private Calendar dataDisponibilita;
 	private boolean visibilita;
 	
-	public BigliettoPartita(double prezzo, Calendar dataDisponibilita) {
-		super(prezzo);
+	public BigliettoPartita(String email, double prezzo, Calendar data, Time ora, Calendar dataDisponibilita) {
+		super(email, prezzo, data, ora);
 		this.dataDisponibilita = new GregorianCalendar();
 		this.dataDisponibilita = dataDisponibilita;
 		this.visibilita = false;

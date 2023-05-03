@@ -7,132 +7,147 @@ import java.awt.*;
  * Classe che rappresenta la schermata di registrazione
  * dell'utente. 
  *  
- * @author Simone Platano
+ * @author Simone Platano,Jacopo Piccoli
  * @see AView
  */
 public class RegistrazioneView extends AView {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel Total, bottone, testo, titolo, CampoNome, CampoCognome, CampoMail, CampoData, CampoPassword, accedi,
-			vuoto;
-	private JLabel n, c, d, e, pw, r, StringaVuota, icona, spazio, log;
-	private JButton button, buttonLogin;
-	private JTextField nome, cognome, data, email;
+
+	private JPanel tutto,testo, bottoni, titolo, b, ba,contenitore,text,testi;
+	private JTextField ce,cn,cc,cd;//casellaemail,casellanome,casellacognome,caselladata
 	private JPasswordField password;
-	private Image img;
+	private JLabel e, p, r, n, c, d, icona, stringa;
+	private JButton login, registrati;
+	private ImageIcon img;
 
-	public RegistrazioneView() {
-		setLayout(new BorderLayout());
-
-		Total = new JPanel();
-		vuoto = new JPanel();
-		accedi = new JPanel();
-		bottone = new JPanel();
+	public RegistrazioneView(Dimension dim) {
+		
+		//inizializzazione JPanel
+		contenitore=new JPanel();
+		tutto=new JPanel();
 		testo = new JPanel();
+		bottoni = new JPanel();
 		titolo = new JPanel();
-		CampoNome = new JPanel();
-		CampoCognome = new JPanel();
-		CampoMail = new JPanel();
-		CampoData = new JPanel();
-		CampoPassword = new JPanel();
-
-		spazio = new JLabel("                        ");
-		n = new JLabel("                " + "nome:");
-		c = new JLabel("          " + "cognome:");
-		d = new JLabel("data di nascita:");
-		e = new JLabel("                 " + "email:");
-		pw = new JLabel("        " + "password:");
-		r = new JLabel("         REGISTRAZIONE");
+		b = new JPanel();
+		ba = new JPanel();
+		testi=new JPanel();
+		text=new JPanel();
+		
+		//Inizializzazione JLabel
+		e = new JLabel("email");
+		p = new JLabel("Password");
+		r = new JLabel("REGISTRAZIONE");
+		n=new JLabel("Nome");
+		c=new JLabel("Cognome");
+		d=new JLabel("Data di nascita");
 		icona = new JLabel();
-		StringaVuota = new JLabel("");
-		log = new JLabel("Hai già un account?");
-		r.setFont(new java.awt.Font("Arial", 1, 26));
-		r.setHorizontalAlignment(JLabel.CENTER);
+		stringa = new JLabel("<html>Hai già un account?? &nbsp  &nbsp  &nbsp  </html>");
+		
+		//Inizializzazione JTextField
 
-		nome = new JTextField();
-		cognome = new JTextField();
-		email = new JTextField();
-		data = new JTextField();
-
-		button = new JButton("Registrati");
-		buttonLogin = new JButton("Login");
-
+		ce = new JTextField();
+		cn = new JTextField();
+		cc = new JTextField();
+		cd = new JTextField();
+		
+		//Inizializzazione JPasswordField
 		password = new JPasswordField();
+		
+		//Inizializzazione JButton
+		login = new JButton("Login");
+		registrati = new JButton("Registrati");
+		
+		//Inizializzazione ImageIcon
+		img = new ImageIcon(this.getClass().getResource("/icona.jpg"));
+		
+		//Specifiche, Layout e Font
+		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH)); 
+		
+		ce.setColumns(15);
+		cn.setColumns(15);		
+		cc.setColumns(15);		
+		cd.setColumns(15);
+		password.setColumns(15);
 
-		CampoNome.add(n);
-		nome.setColumns(20);
-		CampoNome.add(nome);
+		
+		e.setFont(new java.awt.Font("Arial", 1, 16));
+		p.setFont(new java.awt.Font("Arial", 1, 16));
+		n.setFont(new java.awt.Font("Arial", 1, 16));
+		c.setFont(new java.awt.Font("Arial", 1, 16));
+		d.setFont(new java.awt.Font("Arial", 1, 16));
+		r.setFont(new java.awt.Font("Arial", 1, 24));
 
-		CampoCognome.add(c);
-		cognome.setColumns(20);
-		CampoCognome.add(cognome);
-
-		CampoMail.add(e);
-		email.setColumns(20);
-		CampoMail.add(email);
-
-		CampoPassword.add(pw);
-		password.setColumns(20);
-		CampoPassword.add(password);
-
-		titolo.setLayout(new GridLayout(2, 1));
-		titolo.add(StringaVuota);
+		titolo.setLayout(new GridLayout(1, 1));
 		titolo.add(r);
+		r.setHorizontalAlignment(JLabel.CENTER);
+		
+		testi.setLayout(new GridLayout(5,1));
+		testi.add(n);
+		testi.add(c);
+		testi.add(d);
+		testi.add(e);
+		testi.add(p);
+		
+		text.setLayout(new GridLayout(5,1));
+		text.add(cn);
+		text.add(cc);
+		text.add(cd);
+		text.add(ce);
+		text.add(password);
+		
+		
+		testo.add(testi);
+		testo.add(text);
+		
+		icona.setIcon(img);
+		
+		ba.add(registrati);
 
-		CampoData.add(d);
-		data.setColumns(20);
-		CampoData.add(data);
+		b.setLayout(new BorderLayout());
+		b.add(ba,BorderLayout.NORTH);
+		b.add(stringa,BorderLayout.WEST);
+		b.add(login,BorderLayout.EAST);
 
-		// accedi.setLayout(new GridLayout(3,2));
-		accedi.add(log);
-		accedi.add(buttonLogin);
+		bottoni.add(b);
 
-		testo.setLayout(new GridLayout(5, 1));
-		testo.add(CampoNome);
-		testo.add(CampoCognome);
-		testo.add(CampoData);
-		testo.add(CampoMail);
-		testo.add(CampoPassword);
-
-		bottone.add(spazio);
-		bottone.add(button);
-
-		img = new ImageIcon(this.getClass().getResource("/stadium_icon.png")).getImage();
-		icona.setIcon(new ImageIcon(img));
-
-		Total.setLayout(new GridLayout(4, 1));
-		Total.add(titolo);
-		Total.add(testo);
-		Total.add(bottone);
-		Total.add(accedi);
-
-		this.add(icona, BorderLayout.WEST);
-		this.add(Total, BorderLayout.CENTER);
+		tutto.setLayout(new GridLayout(3, 1));
+		tutto.add(titolo);
+		tutto.add(testo);
+		tutto.add(bottoni);
+		
+		contenitore .setLayout(new GridLayout(1,2));
+		contenitore.add(icona);
+		contenitore.add(tutto);
+		
+		this.add(contenitore);
 
 	}
 
 	public JButton getRegistratiBtn() {
-		return button;
+		return registrati;
 	}
 
 	public JButton getToLoginBtn() {
-		return buttonLogin;
+		return login;
 	}
 
 	public JTextField getNome() {
-		return nome;
+		return cn;
 	}
 
 	public JTextField getCognome() {
-		return cognome;
+		return cc;
 	}
 
 	public JTextField getData() {
-		return data;
+		return cd;
 	}
 
 	public JTextField getEmail() {
-		return email;
+		return ce;
 	}
 
 	public JPasswordField getPassword() {
@@ -143,5 +158,17 @@ public class RegistrazioneView extends AView {
 	public Type getType() {
 		return AView.Type.REGISTRAZIONE;
 	}
-
+	
+	@Override
+	public void onWindowResized(Dimension dim) {
+		
+		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH));
+		icona.setIcon(img);
+		
+		contenitore.revalidate();
+		contenitore.repaint();
+	}
 }

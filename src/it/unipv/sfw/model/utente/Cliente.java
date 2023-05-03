@@ -25,6 +25,14 @@ public class Cliente extends Utente {
 		isGiornalista = false;
 	}
 	
+	
+	/**
+	 * @return Il tipo di abbonamento del cliente.
+	 */
+	public Abbonamento getAbb() {
+		return abb;
+	}
+	
 	/**
 	 * @return La data di nascita del cliente.
 	 */

@@ -1,12 +1,11 @@
 package it.unipv.sfw.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
-import it.unipv.sfw.model.partita.Blocco;
 import it.unipv.sfw.model.utente.Sessione;
-import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.BloccoView;
 import it.unipv.sfw.view.buttons.BloccoButton;
 
@@ -14,37 +13,26 @@ import it.unipv.sfw.view.buttons.BloccoButton;
 /**
  * Controller che si occupa della BloccoView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.BloccoView
  */
-public class BloccoController implements IController {
+public class BloccoController extends AController {
 	
-	private BloccoView v;
-	
-	public BloccoController() {
-		v = new BloccoView(2500);
+	@Override
+	public void initialize(Dimension dim) {	
+		view=new BloccoView(2500,dim);
 		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int code = ((BloccoButton)e.getSource()).getCode();
-				Sessione.getIstance().setCurrentBlocco(new Blocco(code));
-				ControllerManager.getInstance().loadController(4);
+				Sessione.getIstance().setBlocco(code);;
+				ControllerManager.getInstance().loadController(5);
 			}
 		};
 		
-		Collection<BloccoButton> btns = v.getAllBloccoButton();
+		Collection<BloccoButton> btns = ((BloccoView)view).getAllBloccoButton();
 		for (BloccoButton b : btns)
 			b.addActionListener(a);
 	}
-	
-
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-
-	@Override
-	public void onLoad() {}
 }

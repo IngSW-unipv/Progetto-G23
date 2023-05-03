@@ -1,5 +1,6 @@
 package it.unipv.sfw.controller;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,15 +13,14 @@ import it.unipv.sfw.view.RegistrazioneView;
 /**
  * Controller che si occupa della RegistrazioneView.
  * @author Gabriele Invernizzi
- * @see IController
+ * @see AController
  * @see it.unipv.sfw.view.RegistrazioneView
  */
-public class RegistrazioneController implements IController {
-	
-	private RegistrazioneView v;
+public class RegistrazioneController extends AController {
 
-	public RegistrazioneController() {
-		v = new RegistrazioneView();
+	@Override
+	public void initialize(Dimension dim) {
+		RegistrazioneView v = new RegistrazioneView(dim);
 		
 		v.getRegistratiBtn().addActionListener(new ActionListener() {
 			@Override
@@ -30,8 +30,12 @@ public class RegistrazioneController implements IController {
 						v.getNome().getText(),
 						v.getCognome().getText(),
 						v.getEmail().getText(),
-						v.getPassword().getPassword().toString());
-				Sessione.getIstance().setCurrentUtente(u);
+						new String(v.getPassword().getPassword()));
+				try {	
+					Sessione.getIstance().register(u);
+				} catch(Exception err) {
+					err.printStackTrace();
+				}
 
 				ControllerManager.getInstance().loadController(6);
 			}
@@ -43,14 +47,7 @@ public class RegistrazioneController implements IController {
 				ControllerManager.getInstance().loadController(0);
 			}
 		});
+		
+		view = v;
 	}
-
-	@Override
-	public AView getView() {
-		return v;
-	}
-
-	@Override
-	public void onLoad() {}
-
 }
