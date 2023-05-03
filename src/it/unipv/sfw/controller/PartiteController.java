@@ -48,6 +48,13 @@ public class PartiteController extends AController {
 		for (UtenteButton b : btns)
 			b.addActionListener(a);
 		
+		v.getStoreButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(7);
+			}
+		});
+		
 		view = v;
 	}
 

@@ -23,7 +23,8 @@ public abstract class AView extends JPanel {
 		SETTORE,
 		ANELLO,
 		POSTO,
-		BLOCCO
+		BLOCCO, 
+		STORE
 	}
 	
 	/**
