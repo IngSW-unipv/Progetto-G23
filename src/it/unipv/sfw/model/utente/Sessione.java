@@ -5,6 +5,7 @@ import java.util.HashMap;
 import it.unipv.sfw.dao.ClienteDAO;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
+import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 
 
@@ -20,11 +21,13 @@ import it.unipv.sfw.model.partita.Posto;
 public class Sessione {
 	private static Sessione istance = null;
 	private HashMap<String, Integer> scelte;
+	private Partita currentPartita;
 	private Utente currentUtente;
 
 	private Sessione() {
 		
 		currentUtente = null;
+		currentPartita = null;
 		scelte = new HashMap<String, Integer>();
 	}
 	
@@ -73,15 +76,26 @@ public class Sessione {
 		
 		this.setCurrentUtente(c);
 	}
+	
+	/**
+	 * Funzione utilizzata per registrare la prenotazione di una partita.
+	 * Le scelte vengono automaticamente resettate.
+	 */
+	public void book() {
+		// TODO: Mancano funzioni in PostiDAO
+		
+		this.resetScelte();
+	}
 
 	
 	/**
 	 * Funzione che resetta i campi sessione riguardanti 
-	 * {@link Anello}, {@link Posto}, {@link Settore}, {@link Blocco}
+	 * {@link Anello}, {@link Posto}, {@link Settore}, {@link Blocco}, {@link Partita} 
 	 * a null.
 	 */
 	public void resetScelte() {
 		scelte.clear();
+		currentPartita = null;
 	}
 
 	/**
@@ -98,6 +112,15 @@ public class Sessione {
 	 */
 	public void setCurrentUtente(Utente currentU) {
 		currentUtente = currentU;
+	}
+	
+	/**
+	 * Funzione che permette di impostare come {@link Partita} corrente 
+	 * quella passato come parametro.
+	 * @param currentP Partita corrente della sessione.
+	 */
+	public void setCurrentPartita(Partita currentP) {
+		currentPartita = currentP;
 	}
 	
 	/**
@@ -158,6 +181,13 @@ public class Sessione {
 	 */
 	public int getPosto() {
 		return scelte.get("Posto");
+	}
+	
+	/**
+	 * @return {@link Partita} selezionata.
+	 */
+	public Partita getCurrentPartita() {
+		return currentPartita;
 	}
 	
 }

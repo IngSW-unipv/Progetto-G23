@@ -34,11 +34,11 @@ public class LoginController extends AController {
 							v.getPasswordField().getPassword()
 					);
 				} catch (AccountNotFoundException err) {
-					err.printStackTrace();
 					v.upError();
+					return;
 				} catch (WrongPasswordException err) {
-					err.printStackTrace();
 					v.upError();
+					return;
 				}
 				// Load new page
 				ControllerManager.getInstance().loadController(6);

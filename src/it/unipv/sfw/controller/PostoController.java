@@ -29,13 +29,17 @@ public class PostoController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				int code = ((PostoButton)e.getSource()).getCode();
 				Sessione s = Sessione.getIstance();
-				s.setPosto(code);;
+				s.setPosto(code);
 				// temp stampa acquisto
 				System.out.println("Posto selezionato: S" +
 						s.getSettore() +
 						", B" + s.getBlocco() +
 						", A" + s.getAnello() +
-						", P" + s.getPosto() );
+						", P" + s.getPosto() + 
+						". Per la partita contro: " 
+						+ s.getCurrentPartita().getOspiti() + ".");
+				// Update database with booking
+				s.book();
 				
 				ControllerManager.getInstance().loadController(6);
 			}

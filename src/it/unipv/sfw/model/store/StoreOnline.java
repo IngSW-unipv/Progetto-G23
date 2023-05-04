@@ -36,4 +36,8 @@ public class StoreOnline {
 			}
 		}
 	}
+	
+	public List<Merchandising> getMerch() {
+		return archivioMerch;
+	}
 }

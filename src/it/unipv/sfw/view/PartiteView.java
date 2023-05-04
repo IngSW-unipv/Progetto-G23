@@ -146,6 +146,10 @@ public class PartiteView extends AView {
 		return acquista;
 	}
 	
+	public JButton getStoreButton() {
+		return bshop;
+	}
+	
 	@Override
 	public void onWindowResized(Dimension dim) {
 		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));

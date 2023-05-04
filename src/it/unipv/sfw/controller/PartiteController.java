@@ -3,13 +3,13 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
+import it.unipv.sfw.dao.PartitaDAO;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.PartiteView;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
@@ -23,24 +23,23 @@ import it.unipv.sfw.view.buttons.UtenteButton;
  */
 public class PartiteController extends AController {
 	
+	private Partita[] p;
+	
 	@Override
 	public void initialize(Dimension dim) {
-		Partita[] p = new Partita[6];
-		p[0] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[1] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[2] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[3] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[4] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
-		p[5] = new Partita(new GregorianCalendar(2023, 1, 15, 15, 30), Partita.Squadre.Napoli);
+		ArrayList<Partita> p_arrlist = new PartitaDAO().selectAll();
 		
-		PartiteView v = new PartiteView(p, dim);
+		p = new Partita[p_arrlist.size()];
+		
+		PartiteView v = new PartiteView(p_arrlist.toArray(p), dim);
 		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int codePartita = ((UtenteButton)e.getSource()).getCode();
-				System.out.println("Selezionata partita numero: " + codePartita + ".");
-				Sessione.getIstance().resetScelte();
+				int iPartita = ((UtenteButton)e.getSource()).getCode();
+				Partita p_selected = p[iPartita];
+				Sessione s = Sessione.getIstance();
+				s.setCurrentPartita(p_selected);
 				ControllerManager.getInstance().loadController(2);
 			}
 		};
@@ -49,11 +48,19 @@ public class PartiteController extends AController {
 		for (UtenteButton b : btns)
 			b.addActionListener(a);
 		
+		v.getStoreButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(7);
+			}
+		});
+		
 		view = v;
 	}
 
 	@Override
 	public void onLoad(Dimension dim) {
+		this.initialize(dim);
 		Utente u = Sessione.getIstance().getCurrentUtente();
 		System.out.println("Al momento loggato come: " + u.getEmail() + ".");
 		view.onWindowResized(dim);
