@@ -12,6 +12,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -37,7 +40,10 @@ public class PartiteView extends AView {
 	// variabili del top
 	private JPanel top, bottoni;
 	private JLabel icona;
-	private JButton bpart, bmuseo, bshop, butente;
+	private JButton bpart, bmuseo, bshop;
+	private JMenuBar utente;
+	private JMenu menuutente;
+	private JMenuItem esci,pp;
 	private Icon img;
 	private Image img2;
 
@@ -56,8 +62,11 @@ public class PartiteView extends AView {
 		panel.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
 		top = new JPanel();
 		bottoni = new JPanel();
-
 		icona = new JLabel();
+		utente=new JMenuBar(); 
+		menuutente=new JMenu("");
+		esci=new JMenuItem("Esci");
+		pp=new JMenuItem("Profilo Personale");
 
 		bpart = new JButton("PARTITE");
 		bpart.setBackground(Color.WHITE);
@@ -71,8 +80,12 @@ public class PartiteView extends AView {
 
 		img = new ImageIcon(getClass().getResource("/utente.gif"));
 
-		butente = new JButton("", img);
-		butente.setBackground(Color.BLUE);
+		menuutente.setIcon(img);
+		menuutente.setBackground(Color.BLUE);
+		
+		menuutente.add(pp);
+		menuutente.add(esci);
+		utente.add(menuutente);
 
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
@@ -81,8 +94,8 @@ public class PartiteView extends AView {
 		bottoni.add(bshop);
 
 		top.setLayout(new BorderLayout());
-		top.add(butente, BorderLayout.WEST);
 		top.add(bottoni, BorderLayout.CENTER);
+		top.add(utente, BorderLayout.EAST);
 
 		top.setBorder(BorderFactory.createLineBorder(Color.black));
 		top.setBackground(Color.gray);
