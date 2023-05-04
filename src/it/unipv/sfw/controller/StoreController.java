@@ -15,7 +15,7 @@ public class StoreController extends AController {
 	public void initialize(Dimension dim) {
 		StoreOnline s = new StoreOnline();
 		
-		Merchandising m = new Merchandising(Merch.TSHIRT, 100, 0, 10, "Tshirt");
+		Merchandising m = new Merchandising(Merch.TSHIRT, 100, 0, 10, "T-shirt molto molto molto molto molto molto bella.");
 		
 		for (int i = 0; i < 10; i++)
 			s.addMerch(m);
