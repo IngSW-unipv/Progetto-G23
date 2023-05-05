@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -31,13 +30,16 @@ import it.unipv.sfw.view.buttons.AcquistaButton;
  */
 public class StoreView extends AView {
 	
+	private int merch_n;
 	// top
 	private JButton partiteButton, museoButton, utenteButton;
 	// center
+	private JPanel item_list;
 	private AcquistaButton[] buyBtns;
 	
 	public StoreView(StoreOnline store, Dimension dim) {
 		ArrayList<Merchandising> merch = store.getMerch();
+		merch_n = merch.size();
 		
 		// Top panel
 		JPanel topPanel = new JPanel();
@@ -79,8 +81,8 @@ public class StoreView extends AView {
 		centralPanel.add(title, BorderLayout.NORTH);
 		
 		// Item list
-		JPanel item_list = new JPanel();
-		buyBtns = new AcquistaButton[merch.size()];
+		item_list = new JPanel();
+		buyBtns = new AcquistaButton[merch_n];
 		for (int i = 0; i < merch.size(); i++) {
 			Merchandising m = merch.get(i);
 			
@@ -99,7 +101,7 @@ public class StoreView extends AView {
 			
 			JPanel item_data = new JPanel();
 			item_data.setLayout(new GridLayout(3, 1));
-			item_data.setPreferredSize(new Dimension(600, 200));
+			item_data.setPreferredSize(new Dimension(600, 170));
 			item_data.add(item_name);
 			item_data.add(item_desc);
 			item_data.add(item_price);
@@ -123,7 +125,7 @@ public class StoreView extends AView {
 			item_list.add(item_panel);
 		}
 		
-		item_list.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (250*merch.size())));
+		item_list.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*merch_n)));
 		item_list.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		JScrollPane item_scroll_pane = new JScrollPane(item_list);
@@ -137,16 +139,30 @@ public class StoreView extends AView {
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(centralPanel, BorderLayout.CENTER);
 	}
+	
+	@Override
+	public void onWindowResized(Dimension dim) {
+		item_list.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*merch_n)));
+		
+		this.revalidate();
+		this.repaint();
+	}
 
 	@Override
 	public Type getType() {
 		return AView.Type.STORE;
 	}
 	
+	/**
+	 * @return Bottone delle partite.
+	 */
 	public JButton getPartiteBtn() {
 		return partiteButton;
 	}
 	
+	/**
+	 * @return Array dei bottoni "ACQUISTA".
+	 */
 	public AcquistaButton[] getBuyBtns() {
 		return buyBtns;
 	}

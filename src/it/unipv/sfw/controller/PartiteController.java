@@ -17,6 +17,7 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 
 /**
  * Controller che si occupa della PartiteView.
+ * 
  * @author Gabriele Invernizzi
  * @see AController
  * @see it.unipv.sfw.view.PartiteView

@@ -4,11 +4,17 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import it.unipv.sfw.model.store.Merchandising;
-import it.unipv.sfw.model.store.Merchandising.Merch;
 import it.unipv.sfw.model.store.StoreOnline;
 import it.unipv.sfw.view.StoreView;
 
+
+/**
+ * Controller che si occupa della StoreView.
+ * 
+ * @author Gabriele Invernizzi
+ * @see AController
+ * @see it.unipv.sfw.view.StoreView
+ */
 public class StoreController extends AController {
 
 	@Override
