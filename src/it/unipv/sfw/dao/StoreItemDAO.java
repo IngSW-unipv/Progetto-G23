@@ -13,12 +13,12 @@ import it.unipv.sfw.model.store.*;
  */
 public class StoreItemDAO implements IStoreItemDAO {
 
-	private String schema;
+	private final String schema;
 	private Connection conn;
 	
 	public StoreItemDAO() {
 		super();
-		this.schema = "STOREITEMS";  // (id, tipo, prezzo, quantitaRimanente) 
+		this.schema = "STORE_ITEMS";  // (id, tipo, prezzo, quantitaRimanente) 
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class StoreItemDAO implements IStoreItemDAO {
     	
     	try
 		{
-			String query = "UPDATE STOREITEMS SET PREZZO=? WHERE ID=?";
+			String query = "UPDATE " + this.schema + " SET PREZZO=? WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setDouble(1, newPrezzo);                  
@@ -56,7 +56,7 @@ public class StoreItemDAO implements IStoreItemDAO {
     	
     	try
 		{
-			String query = "UPDATE STOREITEMS SET QUANTITA=? WHERE ID=?";
+			String query = "UPDATE " + this.schema + " SET QUANTITA=? WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setDouble(1, newQuantita);                  
@@ -82,7 +82,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 		
 		try
 		{
-			String query = "INSERT INTO STOREITEMS VALUES(?,?,?,?)";
+			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setInt(1, merch.getId());
