@@ -2,9 +2,14 @@ package it.unipv.sfw.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.model.store.*;
+import it.unipv.sfw.model.store.Merchandising.Merch;
+import it.unipv.sfw.model.utente.Cliente;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.store.Merchandising}.
@@ -18,7 +23,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 	
 	public StoreItemDAO() {
 		super();
-		this.schema = "STORE_ITEMS";  // (id, tipo, prezzo, quantitaRimanente) 
+		this.schema = "STORE_ITEMS";  // (id, tipo, prezzo, quantita_rimanente, descrizione) 
 	}
 	
 	@Override
@@ -56,7 +61,7 @@ public class StoreItemDAO implements IStoreItemDAO {
     	
     	try
 		{
-			String query = "UPDATE " + this.schema + " SET QUANTITA=? WHERE ID=?";
+			String query = "UPDATE " + this.schema + " SET QUANTITA_RIMANENTE=? WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setDouble(1, newQuantita);                  
@@ -82,13 +87,13 @@ public class StoreItemDAO implements IStoreItemDAO {
 		
 		try
 		{
-			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?,?)";
+			String query = "INSERT INTO " + this.schema + "(TIPO, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE) VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setInt(1, merch.getId());
-			st1.setString(2, "" + merch.getTipoMerch());
-			st1.setDouble(3, merch.getPrezzo());
-			st1.setInt(4, quantita);
+			st1.setString(1, "" + merch.getTipoMerch());
+			st1.setDouble(2, merch.getPrezzo());
+			st1.setInt(3, quantita);
+			st1.setString(4, merch.getDescrizione());
 			
 			st1.executeUpdate(); 
 			
@@ -99,6 +104,86 @@ public class StoreItemDAO implements IStoreItemDAO {
 		
 		DBConnection.closeConnection(conn);
 		return esito;
+	}
+	
+	@Override
+	public ArrayList<Merchandising> selectAll() {
+		
+		ArrayList<Merchandising> result = new ArrayList<>();
+		
+		conn = DBConnection.startConnection(conn, schema);
+		Statement st1;
+		ResultSet rs1;
+		
+		try
+		{
+			st1 = conn.createStatement();
+			String query = "SELECT * FROM STORE_ITEMS";
+			rs1 = st1.executeQuery(query);
+			
+			while(rs1.next()) {
+				Merch tipo = Merch.valueOf(Merch.class, rs1.getString(2));
+				Merchandising c = new Merchandising(tipo, rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+				result.add(c);
+			}
+			
+		} catch (Exception e){e.printStackTrace();}
+		
+		DBConnection.closeConnection(conn);
+		return result;
+	}
+	
+	@Override
+	public Merchandising selectStillInStock() {
+		
+		Merchandising result = null;
+		
+		conn = DBConnection.startConnection(conn, schema);
+		Statement st1;
+		ResultSet rs1;
+	
+		try
+		{
+			st1 = conn.createStatement();
+			String query = "SELECT * FROM STORE_ITEMS WHERE QUANTITA_RIMANENTE > 0";
+			rs1 = st1.executeQuery(query);
+			
+			while(rs1.next()) {
+				Merch tipo = Merch.valueOf(Merch.class, rs1.getString(2));
+				result = new Merchandising(tipo, rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+			}
+			
+		} catch (Exception e) {e.printStackTrace();}
+		
+		DBConnection.closeConnection(conn); 
+		return result;
+	}
+	
+	@Override
+	public Merchandising selectById(Merchandising merch) {
+		
+		Merchandising result = null;
+		
+		conn = DBConnection.startConnection(conn, schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+	
+		try
+		{
+			String query = "SELECT * FROM UTENTI WHERE ID=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, merch.getId());
+			rs1 = st1.executeQuery();
+			
+			while(rs1.next()) {
+				Merch tipo = Merch.valueOf(Merch.class, rs1.getString(2));
+				result = new Merchandising(tipo, rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+			}
+			
+		} catch (Exception e) {e.printStackTrace();}
+		
+		DBConnection.closeConnection(conn); 
+		return result;
 	}
 	
 }

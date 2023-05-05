@@ -1,5 +1,7 @@
 package it.unipv.sfw.dao;
 
+import java.util.ArrayList;
+
 import it.unipv.sfw.model.store.Merchandising;
 
 /**
@@ -30,5 +32,21 @@ public interface IStoreItemDAO {
 	 * @return True se l'inserimento è avvenuto con successo, altrimenti False.
 	 */
 	boolean insertStoreItem(Merchandising merch, int quantita);
+	
+	/**
+	 * @return Tutti gli articoli registrati nel database.
+	 */
+	ArrayList<Merchandising> selectAll();
+	
+	/**
+	 * @return Tutti gli articoli ancora in stock registrati nel database. 
+	 */
+	Merchandising selectStillInStock();
+	
+	/**
+	 * @param merch Articolo il cui id viene utilizzato come chiave di ricerca.
+	 * @return L'articolo registrato nel database con l'id passato come parametro.
+	 */
+	Merchandising selectById(Merchandising merch);
 
 }
