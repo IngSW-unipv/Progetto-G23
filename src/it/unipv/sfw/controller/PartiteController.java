@@ -54,6 +54,12 @@ public class PartiteController extends AController {
 				ControllerManager.getInstance().loadController(7);
 			}
 		});
+		v.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(8);
+			}
+		});
 		
 		view = v;
 	}

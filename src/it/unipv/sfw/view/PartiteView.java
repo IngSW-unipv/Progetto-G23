@@ -163,6 +163,10 @@ public class PartiteView extends AView {
 		return bshop;
 	}
 	
+	public JMenuItem getProfiloPersonaleButton() {
+		return pp;
+	}
+	
 	@Override
 	public void onWindowResized(Dimension dim) {
 		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));
