@@ -3,6 +3,8 @@ package it.unipv.sfw.model.store;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unipv.sfw.dao.StoreItemDAO;
+
 
 /**
  * Classe che rappresenta lo Store del sito per l'acquisto del {@link Merchandising}.
@@ -13,7 +15,7 @@ public class StoreOnline {
 	private ArrayList<Merchandising> archivioMerch;
 
 	public StoreOnline() {
-		archivioMerch = new ArrayList<Merchandising>();
+		archivioMerch = new StoreItemDAO().selectStillInStock();
 	}
 	
 	/**

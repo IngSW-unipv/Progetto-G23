@@ -122,8 +122,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				Merch tipo = Merch.valueOf(Merch.class, rs1.getString(2));
-				Merchandising c = new Merchandising(tipo, rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
 				result.add(c);
 			}
 			
@@ -134,9 +133,9 @@ public class StoreItemDAO implements IStoreItemDAO {
 	}
 	
 	@Override
-	public Merchandising selectStillInStock() {
+	public ArrayList<Merchandising> selectStillInStock() {
 		
-		Merchandising result = null;
+		ArrayList<Merchandising> result = new ArrayList<>();
 		
 		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
@@ -149,8 +148,8 @@ public class StoreItemDAO implements IStoreItemDAO {
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				Merch tipo = Merch.valueOf(Merch.class, rs1.getString(2));
-				result = new Merchandising(tipo, rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+				result.add(c);
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
@@ -176,8 +175,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 			rs1 = st1.executeQuery();
 			
 			while(rs1.next()) {
-				Merch tipo = Merch.valueOf(Merch.class, rs1.getString(2));
-				result = new Merchandising(tipo, rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+				result = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}

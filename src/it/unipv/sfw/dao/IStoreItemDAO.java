@@ -41,7 +41,7 @@ public interface IStoreItemDAO {
 	/**
 	 * @return Tutti gli articoli ancora in stock registrati nel database. 
 	 */
-	Merchandising selectStillInStock();
+	ArrayList<Merchandising> selectStillInStock();
 	
 	/**
 	 * @param merch Articolo il cui id viene utilizzato come chiave di ricerca.
