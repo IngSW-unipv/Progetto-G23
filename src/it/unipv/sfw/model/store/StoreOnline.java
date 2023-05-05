@@ -10,7 +10,7 @@ import java.util.List;
  * @see Merchandising
  */
 public class StoreOnline {
-	private List<Merchandising> archivioMerch;
+	private ArrayList<Merchandising> archivioMerch;
 
 	public StoreOnline() {
 		archivioMerch = new ArrayList<Merchandising>();
@@ -37,7 +37,7 @@ public class StoreOnline {
 		}
 	}
 	
-	public List<Merchandising> getMerch() {
+	public ArrayList<Merchandising> getMerch() {
 		return archivioMerch;
 	}
 }
