@@ -4,12 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.model.store.*;
-import it.unipv.sfw.model.store.Merchandising.Merch;
-import it.unipv.sfw.model.utente.Cliente;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.store.Merchandising}.
@@ -107,9 +104,9 @@ public class StoreItemDAO implements IStoreItemDAO {
 	}
 	
 	@Override
-	public ArrayList<Merchandising> selectAll() {
+	public HashMap<Merchandising, Integer> selectAll() {
 		
-		ArrayList<Merchandising> result = new ArrayList<>();
+		HashMap<Merchandising, Integer> result = new HashMap<>();
 		
 		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
@@ -122,8 +119,9 @@ public class StoreItemDAO implements IStoreItemDAO {
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
-				result.add(c);
+				int q =  rs1.getInt(4);
+				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), q, rs1.getString(5));
+				result.put(c, q);
 			}
 			
 		} catch (Exception e){e.printStackTrace();}
@@ -133,9 +131,9 @@ public class StoreItemDAO implements IStoreItemDAO {
 	}
 	
 	@Override
-	public ArrayList<Merchandising> selectStillInStock() {
+	public HashMap<Merchandising, Integer> selectStillInStock() {
 		
-		ArrayList<Merchandising> result = new ArrayList<>();
+		HashMap<Merchandising, Integer> result = new HashMap<>();
 		
 		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
@@ -148,8 +146,9 @@ public class StoreItemDAO implements IStoreItemDAO {
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
-				result.add(c);
+				int q =  rs1.getInt(4);
+				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), q, rs1.getString(5));
+				result.put(c, q);
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}

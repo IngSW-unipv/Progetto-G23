@@ -1,6 +1,6 @@
 package it.unipv.sfw.dao;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import it.unipv.sfw.model.store.Merchandising;
 
@@ -36,12 +36,12 @@ public interface IStoreItemDAO {
 	/**
 	 * @return Tutti gli articoli registrati nel database.
 	 */
-	ArrayList<Merchandising> selectAll();
+	HashMap<Merchandising, Integer> selectAll();
 	
 	/**
 	 * @return Tutti gli articoli ancora in stock registrati nel database. 
 	 */
-	ArrayList<Merchandising> selectStillInStock();
+	HashMap<Merchandising, Integer> selectStillInStock();
 	
 	/**
 	 * @param merch Articolo il cui id viene utilizzato come chiave di ricerca.

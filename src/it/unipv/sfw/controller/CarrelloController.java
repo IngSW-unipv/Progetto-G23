@@ -19,7 +19,7 @@ public class CarrelloController extends AController {
 		Sessione s = Sessione.getIstance();
 		carrello = s.getCarrello();
 		
-		CarrelloView v = new CarrelloView(s.getCarrelloList(), dim);
+		CarrelloView v = new CarrelloView(s.getCarrello(), dim);
 		
 		v.getStoreBtn().addActionListener(new ActionListener() {	
 			@Override
@@ -31,10 +31,9 @@ public class CarrelloController extends AController {
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int merch_code = ((StoreButton)e.getSource()).getMerchCode();
-				
-				carrello.remove(new Merchandising(null, 0, merch_code, 0, null));
-				
+				Merchandising m = ((StoreButton)e.getSource()).getMerch();
+				carrello.remove(m);
+			
 				Sessione.getIstance().setCarrello(carrello);
 			}
 		};

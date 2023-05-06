@@ -2,23 +2,25 @@ package it.unipv.sfw.view.buttons;
 
 import javax.swing.JButton;
 
+import it.unipv.sfw.model.store.Merchandising;
+
 /**
  * Bottone personalizzato per i pulsanti presenti nello store e nel carrello.
  * 
  * @author Gabriele Invernizzi
  */
 public class StoreButton extends JButton {
-	private int merchCode;
+	private Merchandising merch;
 	
-	public StoreButton(String label, int merchCode) {
+	public StoreButton(String label, Merchandising merch) {
 		super(label);
-		this.merchCode = merchCode;
+		this.merch = merch;
 	}
 	
 	/**
-	 * @return ID merch.
+	 * @return merch.
 	 */
-	public int getMerchCode() {
-		return merchCode;
+	public Merchandising getMerch() {
+		return merch;
 	}
 }

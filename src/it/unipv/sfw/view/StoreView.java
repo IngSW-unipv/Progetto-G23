@@ -4,21 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 
 import it.unipv.sfw.model.store.Merchandising;
-import it.unipv.sfw.model.store.StoreOnline;
 import it.unipv.sfw.view.buttons.StoreButton;
 import it.unipv.sfw.view.elements.StoreItemPanel;
 
@@ -38,8 +33,7 @@ public class StoreView extends AView {
 	private JPanel item_list;
 	private StoreButton[] buyBtns;
 	
-	public StoreView(StoreOnline store, Dimension dim) {
-		ArrayList<Merchandising> merch = store.getMerch();
+	public StoreView(HashMap<Merchandising, Integer> merch, Dimension dim) {
 		merch_n = merch.size();
 		
 		// Top panel
@@ -84,9 +78,10 @@ public class StoreView extends AView {
 		// Item list
 		item_list = new JPanel();
 		buyBtns = new StoreButton[merch_n];
-		for (int i = 0; i < merch_n; i++) {
-			StoreItemPanel panel = new StoreItemPanel(merch.get(i));
-			buyBtns[i] = panel.getBuyBtn();
+		int i = 0;
+		for (Merchandising m : merch.keySet()) {
+			StoreItemPanel panel = new StoreItemPanel(m, merch.get(m));
+			buyBtns[i++] = panel.getBuyBtn();
 			item_list.add(panel);
 		}
 		

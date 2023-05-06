@@ -25,7 +25,7 @@ public class CartItemPanel extends JPanel {
 
 	private StoreButton btn;
 	
-	public CartItemPanel(Merchandising m) {	
+	public CartItemPanel(Merchandising m, int quantity) {	
 		JLabel item_name = new JLabel(m.getTipoMerch().toString());
 		item_name.setFont(new java.awt.Font("Arial", 1, 18));
 		
@@ -37,7 +37,7 @@ public class CartItemPanel extends JPanel {
 		item_desc.setText(m.getDescrizione());
 		
 		String price_str = "Prezzo: " + String.format("%.2f", m.getPrezzo()) + " € x "
-				+ m.getQuantita() + " = " + String.format("%.2f", m.getPrezzo() * m.getQuantita()) + " €";
+				+ quantity + " = " + String.format("%.2f", m.getPrezzo() * quantity) + " €";
 		JLabel item_price = new JLabel(price_str);
 		item_price.setFont(new java.awt.Font("Arial", 1, 16));
 		
@@ -48,7 +48,7 @@ public class CartItemPanel extends JPanel {
 		item_data.add(item_desc);
 		item_data.add(item_price);
 		
-		btn = new StoreButton("RIMUOVI", m.getId());
+		btn = new StoreButton("RIMUOVI", m);
 		
 		JPanel remPanel = new JPanel();
 		remPanel.setBorder(new EmptyBorder(0, 0, 0, 20));

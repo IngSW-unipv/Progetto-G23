@@ -30,7 +30,7 @@ public class Sessione {
 	private Sessione() {	
 		currentUtente = null;
 		currentPartita = null;
-		carrello = new HashMap<>();
+		carrello = null;
 		scelte = new HashMap<>();
 	}
 	
@@ -98,7 +98,7 @@ public class Sessione {
 	 */
 	public void resetScelte() {
 		scelte.clear();
-		carrello.clear();
+		carrello = null;
 		currentPartita = null;
 	}
 
