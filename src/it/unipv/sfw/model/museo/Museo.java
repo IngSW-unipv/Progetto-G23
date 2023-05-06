@@ -35,6 +35,20 @@ public class Museo {
 	}
 	
 	/**
+	 * @return I cimeli presenti nel museo.
+	 */
+	public ArrayList <Cimelio> getCimeli() {
+		return cimeli;
+	}
+	
+	/**
+	 * @return I riconoscimenti presenti nel museo.
+	 */
+	public ArrayList <Riconoscimento> getRiconoscimenti() {
+		return riconoscimenti;
+	}
+	
+	/**
 	 * Funzione utilizzata per aggiungere un cimelio.
 	 * @param descrizione, tipo
 	 */

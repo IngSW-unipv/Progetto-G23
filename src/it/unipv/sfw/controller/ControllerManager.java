@@ -14,6 +14,7 @@ import it.unipv.sfw.frame.Frame;
  * @see Frame
  * @see it.unipv.sfw.view.AView
  */
+
 public class ControllerManager {
 	
 	public static void main(String[] args) {
@@ -25,7 +26,7 @@ public class ControllerManager {
 	private Frame f;
 	private AController currentController;
 	private final ControllerCache[] controllers;
-	private final int N_CONTROLLERS = 10;
+	private final int N_CONTROLLERS = 11;
 	
 	private ControllerManager() {
 		// init frame
@@ -43,6 +44,7 @@ public class ControllerManager {
 		controllers[7] = new ControllerCache(new StoreController());
 		controllers[8] = new ControllerCache(new ProfiloPersonaleController());
 		controllers[9] = new ControllerCache(new CarrelloController());
+		controllers[10] = new ControllerCache(new MuseoController());
 		
 		currentController = null;
 		

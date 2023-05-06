@@ -125,6 +125,10 @@ public class StoreView extends AView {
 		return partiteButton;
 	}
 	
+	public JButton getMuseoBtn() {
+		return museoButton;
+	}
+	
 	/**
 	 * @return Bottone del carrello.
 	 */

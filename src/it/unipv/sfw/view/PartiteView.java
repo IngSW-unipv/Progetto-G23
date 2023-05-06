@@ -163,6 +163,10 @@ public class PartiteView extends AView {
 		return bshop;
 	}
 	
+	public JButton getMuseoButton() {
+		return bmuseo;
+	}
+	
 	public JMenuItem getProfiloPersonaleButton() {
 		return pp;
 	}

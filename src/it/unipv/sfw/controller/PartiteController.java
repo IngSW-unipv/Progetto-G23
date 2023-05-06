@@ -62,6 +62,13 @@ public class PartiteController extends AController {
 			}
 		});
 		
+		v.getMuseoButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(10);
+			}
+		});
+		
 		view = v;
 	}
 

@@ -42,6 +42,13 @@ public class StoreController extends AController {
 			}
 		});
 		
+		v.getMuseoBtn().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(10);
+			}
+		});
+		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
