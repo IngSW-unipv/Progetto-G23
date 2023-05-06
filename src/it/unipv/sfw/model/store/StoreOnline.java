@@ -13,9 +13,12 @@ import it.unipv.sfw.dao.StoreItemDAO;
  */
 public class StoreOnline {
 	private ArrayList<Merchandising> archivioMerch;
+	private ArrayList<Merchandising> carrello;
 
 	public StoreOnline() {
 		archivioMerch = new StoreItemDAO().selectStillInStock();
+		archivioMerch.sort(null);
+		carrello = new ArrayList<>();
 	}
 	
 	/**
@@ -39,7 +42,25 @@ public class StoreOnline {
 		}
 	}
 	
+	/**
+	 * Funzione che permette di aggiungere un merch al carrello passandolo come parametro.
+	 * @param merchItem Item da aggiungere al carrello.
+	 */
+	public void addMerchToCart(Merchandising merchItem) {
+		carrello.add(merchItem);
+	}
+
+	/**
+	 * @return ArrayList ordinato per id degli items presenti nello store.
+	 */
 	public ArrayList<Merchandising> getMerch() {
 		return archivioMerch;
+	}
+	
+	/**
+	 * @return ArrayList degli items presenti nel carrello.
+	 */
+	public ArrayList<Merchandising> getCart() {
+		return carrello;
 	}
 }

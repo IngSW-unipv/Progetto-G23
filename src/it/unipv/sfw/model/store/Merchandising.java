@@ -58,7 +58,7 @@ public class Merchandising implements Comparable<Merchandising> {
 
 	@Override
 	public int compareTo(Merchandising o) {
-		return ((nome).compareTo(o.nome));
+		return id - o.id;
 	}
 
 	public int getId() {
