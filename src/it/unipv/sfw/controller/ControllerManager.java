@@ -25,7 +25,7 @@ public class ControllerManager {
 	private Frame f;
 	private AController currentController;
 	private final ControllerCache[] controllers;
-	private final int N_CONTROLLERS = 9;
+	private final int N_CONTROLLERS = 10;
 	
 	private ControllerManager() {
 		// init frame
@@ -42,6 +42,7 @@ public class ControllerManager {
 		controllers[6] = new ControllerCache(new PartiteController());
 		controllers[7] = new ControllerCache(new StoreController());
 		controllers[8] = new ControllerCache(new ProfiloPersonaleController());
+		controllers[9] = new ControllerCache(new CarrelloController());
 		
 		currentController = null;
 		

@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.store.StoreOnline;
-import it.unipv.sfw.view.buttons.AcquistaButton;
+import it.unipv.sfw.view.buttons.StoreButton;
 import it.unipv.sfw.view.elements.StoreItemPanel;
 
 
@@ -36,7 +36,7 @@ public class StoreView extends AView {
 	private JButton partiteButton, museoButton, cartButton;
 	// center
 	private JPanel item_list;
-	private AcquistaButton[] buyBtns;
+	private StoreButton[] buyBtns;
 	
 	public StoreView(StoreOnline store, Dimension dim) {
 		ArrayList<Merchandising> merch = store.getMerch();
@@ -83,8 +83,8 @@ public class StoreView extends AView {
 		
 		// Item list
 		item_list = new JPanel();
-		buyBtns = new AcquistaButton[merch_n];
-		for (int i = 0; i < merch.size(); i++) {
+		buyBtns = new StoreButton[merch_n];
+		for (int i = 0; i < merch_n; i++) {
 			StoreItemPanel panel = new StoreItemPanel(merch.get(i));
 			buyBtns[i] = panel.getBuyBtn();
 			item_list.add(panel);
@@ -135,7 +135,7 @@ public class StoreView extends AView {
 	/**
 	 * @return Array dei bottoni "ACQUISTA".
 	 */
-	public AcquistaButton[] getBuyBtns() {
+	public StoreButton[] getBuyBtns() {
 		return buyBtns;
 	}
 }

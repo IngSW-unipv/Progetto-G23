@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import it.unipv.sfw.model.store.StoreOnline;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.StoreView;
-import it.unipv.sfw.view.buttons.AcquistaButton;
+import it.unipv.sfw.view.buttons.StoreButton;
 
 
 /**
@@ -37,20 +37,21 @@ public class StoreController extends AController {
 		v.getCartButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Sessione.getIstance().setCarrello(s.getCart());		
+				Sessione.getIstance().setCarrello(s.getCart());
+				ControllerManager.getInstance().loadController(9);
 			}
 		});
 		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int merch_code = ((AcquistaButton)e.getSource()).getMerchCode();
+				int merch_code = ((StoreButton)e.getSource()).getMerchCode();
 				int merch_index = merch_code - 1;
 				s.addMerchToCart(s.getMerch().get(merch_index));
 			}
 		};
 		
-		for (AcquistaButton b : v.getBuyBtns()) {
+		for (StoreButton b : v.getBuyBtns()) {
 			b.addActionListener(a);
 		}
 		

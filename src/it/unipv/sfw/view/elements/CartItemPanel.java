@@ -16,16 +16,16 @@ import it.unipv.sfw.view.buttons.StoreButton;
 
 
 /**
- * JPanel relativo ad uno store item. 
- * Utilizzato nella StoreView.
+ * JPanel relativo ad uno store item presente nel carrello. 
+ * Utilizzato nella CarrelloView.
  * 
  * @author Gabriele Invernizzi
  */
-public class StoreItemPanel extends JPanel {
+public class CartItemPanel extends JPanel {
 
 	private StoreButton btn;
 	
-	public StoreItemPanel(Merchandising m) {	
+	public CartItemPanel(Merchandising m) {	
 		JLabel item_name = new JLabel(m.getTipoMerch().toString());
 		item_name.setFont(new java.awt.Font("Arial", 1, 18));
 		
@@ -36,7 +36,9 @@ public class StoreItemPanel extends JPanel {
 		item_desc.setOpaque(false);
 		item_desc.setText(m.getDescrizione());
 		
-		JLabel item_price = new JLabel("Prezzo: " + String.format("%.2f", m.getPrezzo()) + " €");
+		String price_str = "Prezzo: " + String.format("%.2f", m.getPrezzo()) + " € x "
+				+ m.getQuantita() + " = " + String.format("%.2f", m.getPrezzo() * m.getQuantita()) + " €";
+		JLabel item_price = new JLabel(price_str);
 		item_price.setFont(new java.awt.Font("Arial", 1, 16));
 		
 		JPanel item_data = new JPanel();
@@ -46,26 +48,22 @@ public class StoreItemPanel extends JPanel {
 		item_data.add(item_desc);
 		item_data.add(item_price);
 		
-		btn = new StoreButton("ACQUISTA", m.getId());
-		JLabel item_quantity = new JLabel("Rimanenti: " + m.getQuantita());
-		item_quantity.setFont(new java.awt.Font("Arial", 1, 11));
-		item_quantity.setBorder(new EmptyBorder(10, 0, 0, 0));
+		btn = new StoreButton("RIMUOVI", m.getId());
 		
-		JPanel buyPanel = new JPanel();
-		buyPanel.setBorder(new EmptyBorder(0, 0, 0, 20));
-		buyPanel.setLayout(new BoxLayout(buyPanel, BoxLayout.Y_AXIS));
-		buyPanel.add(btn);
-		buyPanel.add(item_quantity);
+		JPanel remPanel = new JPanel();
+		remPanel.setBorder(new EmptyBorder(0, 0, 0, 20));
+		remPanel.setLayout(new BoxLayout(remPanel, BoxLayout.Y_AXIS));
+		remPanel.add(btn);
 		
 		this.setBorder(BorderFactory.createLineBorder(Color.black));	
 		this.add(item_data);
-		this.add(buyPanel);
+		this.add(remPanel);
 	}
 	
 	/**
-	 * @return Bottone "ACQUISTA".
+	 * @return Bottone "RIMUOVI".
 	 */
-	public StoreButton getBuyBtn() {
+	public StoreButton getRemBtn() {
 		return btn;
 	}
 }

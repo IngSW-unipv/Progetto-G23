@@ -3,15 +3,15 @@ package it.unipv.sfw.view.buttons;
 import javax.swing.JButton;
 
 /**
- * Bottone personalizzato per i pulsanti "ACQUISTA".
+ * Bottone personalizzato per i pulsanti presenti nello store e nel carrello.
  * 
  * @author Gabriele Invernizzi
  */
-public class AcquistaButton extends JButton {
+public class StoreButton extends JButton {
 	private int merchCode;
 	
-	public AcquistaButton(int merchCode) {
-		super("ACQUISTA");
+	public StoreButton(String label, int merchCode) {
+		super(label);
 		this.merchCode = merchCode;
 	}
 	
