@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.store.StoreOnline;
 import it.unipv.sfw.view.buttons.AcquistaButton;
+import it.unipv.sfw.view.elements.StoreItemPanel;
 
 
 /**
@@ -84,45 +85,9 @@ public class StoreView extends AView {
 		item_list = new JPanel();
 		buyBtns = new AcquistaButton[merch_n];
 		for (int i = 0; i < merch.size(); i++) {
-			Merchandising m = merch.get(i);
-			
-			JLabel item_name = new JLabel(m.getTipoMerch().toString());
-			item_name.setFont(new java.awt.Font("Arial", 1, 18));
-			
-			JTextArea item_desc = new JTextArea(5, 30);
-			item_desc.setEditable(false);
-			item_desc.setLineWrap(true);
-			item_desc.setFont(new java.awt.Font("Arial", 1, 16));
-			item_desc.setOpaque(false);
-			item_desc.setText(m.getDescrizione());
-			
-			JLabel item_price = new JLabel("Prezzo: " + String.format("%.2f", m.getPrezzo()) + " €");
-			item_price.setFont(new java.awt.Font("Arial", 1, 16));
-			
-			JPanel item_data = new JPanel();
-			item_data.setLayout(new GridLayout(3, 1));
-			item_data.setPreferredSize(new Dimension(600, 170));
-			item_data.add(item_name);
-			item_data.add(item_desc);
-			item_data.add(item_price);
-			
-			buyBtns[i] = new AcquistaButton(m.getId());
-			JLabel item_quantity = new JLabel("Rimanenti: " + m.getQuantita());
-			item_quantity.setFont(new java.awt.Font("Arial", 1, 11));
-			item_quantity.setBorder(new EmptyBorder(10, 0, 0, 0));
-			
-			JPanel buyPanel = new JPanel();
-			buyPanel.setBorder(new EmptyBorder(0, 0, 0, 20));
-			buyPanel.setLayout(new BoxLayout(buyPanel, BoxLayout.Y_AXIS));
-			buyPanel.add(buyBtns[i]);
-			buyPanel.add(item_quantity);
-			
-			JPanel item_panel = new JPanel();
-			item_panel.setBorder(BorderFactory.createLineBorder(Color.black));	
-			item_panel.add(item_data);
-			item_panel.add(buyPanel);
-			
-			item_list.add(item_panel);
+			StoreItemPanel panel = new StoreItemPanel(merch.get(i));
+			buyBtns[i] = panel.getBuyBtn();
+			item_list.add(panel);
 		}
 		
 		item_list.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*merch_n)));
