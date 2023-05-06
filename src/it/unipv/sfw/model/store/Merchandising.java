@@ -100,4 +100,8 @@ public class Merchandising implements Comparable<Merchandising> {
 		return descrizione;
 	}
 	
+	@Override
+	public int hashCode() {
+		return id;
+	}	
 }

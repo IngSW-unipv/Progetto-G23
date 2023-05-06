@@ -32,7 +32,7 @@ public class StoreView extends AView {
 	
 	private int merch_n;
 	// top
-	private JButton partiteButton, museoButton, utenteButton;
+	private JButton partiteButton, museoButton, cartButton;
 	// center
 	private JPanel item_list;
 	private AcquistaButton[] buyBtns;
@@ -63,10 +63,10 @@ public class StoreView extends AView {
 		topPanelBtns.add(museoButton);
 		
 		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/utente.gif"));
-		utenteButton = new JButton("", utenteImg);
-		utenteButton.setBackground(Color.BLUE);
+		cartButton = new JButton("", utenteImg);
+		cartButton.setBackground(Color.BLUE);
 		
-		topPanel.add(utenteButton, BorderLayout.WEST);
+		topPanel.add(cartButton, BorderLayout.EAST);
 		topPanel.add(topPanelBtns, BorderLayout.CENTER);
 		
 		// Center panel
@@ -158,6 +158,13 @@ public class StoreView extends AView {
 	 */
 	public JButton getPartiteBtn() {
 		return partiteButton;
+	}
+	
+	/**
+	 * @return Bottone del carrello.
+	 */
+	public JButton getCartButton() {
+		return cartButton;
 	}
 	
 	/**

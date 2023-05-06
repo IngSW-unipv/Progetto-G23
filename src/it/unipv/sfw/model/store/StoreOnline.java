@@ -1,7 +1,7 @@
 package it.unipv.sfw.model.store;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import it.unipv.sfw.dao.StoreItemDAO;
 
@@ -13,12 +13,12 @@ import it.unipv.sfw.dao.StoreItemDAO;
  */
 public class StoreOnline {
 	private ArrayList<Merchandising> archivioMerch;
-	private ArrayList<Merchandising> carrello;
+	private HashMap<Merchandising, Integer> carrello;
 
-	public StoreOnline() {
+	public StoreOnline(HashMap<Merchandising, Integer> carrello) {
 		archivioMerch = new StoreItemDAO().selectStillInStock();
 		archivioMerch.sort(null);
-		carrello = new ArrayList<>();
+		this.carrello = carrello;
 	}
 	
 	/**
@@ -27,6 +27,7 @@ public class StoreOnline {
 	 */
 	public void addMerch(Merchandising merchItem) {
 		archivioMerch.add(merchItem);
+		archivioMerch.sort(null);
 	}
 
 	/**
@@ -47,7 +48,11 @@ public class StoreOnline {
 	 * @param merchItem Item da aggiungere al carrello.
 	 */
 	public void addMerchToCart(Merchandising merchItem) {
-		carrello.add(merchItem);
+		if (carrello.containsKey(merchItem)) {
+			carrello.put(merchItem, carrello.get(merchItem) + 1);
+		} else {
+			carrello.put(merchItem, 1);
+		}
 	}
 
 	/**
@@ -58,9 +63,10 @@ public class StoreOnline {
 	}
 	
 	/**
-	 * @return ArrayList degli items presenti nel carrello.
+	 * @return HashMap degli items presenti nel carrello.
 	 */
-	public ArrayList<Merchandising> getCart() {
+	public HashMap<Merchandising, Integer> getCart() {
 		return carrello;
 	}
+	
 }

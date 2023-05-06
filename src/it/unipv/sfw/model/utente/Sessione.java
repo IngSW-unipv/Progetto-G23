@@ -1,5 +1,6 @@
 package it.unipv.sfw.model.utente;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.unipv.sfw.dao.ClienteDAO;
@@ -22,15 +23,15 @@ import it.unipv.sfw.model.store.Merchandising;
 public class Sessione {
 	private static Sessione istance = null;
 	private HashMap<String, Integer> scelte;
-	private Merchandising[] carrello;
+	private HashMap<Merchandising, Integer> carrello;
 	private Partita currentPartita;
 	private Utente currentUtente;
 
 	private Sessione() {	
 		currentUtente = null;
 		currentPartita = null;
-		carrello = null;
-		scelte = new HashMap<String, Integer>();
+		carrello = new HashMap<>();
+		scelte = new HashMap<>();
 	}
 	
 	
@@ -97,8 +98,8 @@ public class Sessione {
 	 */
 	public void resetScelte() {
 		scelte.clear();
+		carrello.clear();
 		currentPartita = null;
-		carrello = null;
 	}
 
 	/**
@@ -159,9 +160,9 @@ public class Sessione {
 	}
 	
 	/**
-	 * @param carrello Array di store items.
+	 * @param carrello HashMap di store items.
 	 */
-	public void setCarrello(Merchandising[] carrello) {
+	public void setCarrello(HashMap<Merchandising, Integer> carrello) {
 		this.carrello = carrello;
 	}
 	
@@ -201,10 +202,20 @@ public class Sessione {
 	}
 	
 	/**
-	 * @return Array di item nel carrello.
+	 * @return HashMap di item nel carrello.
 	 */
-	public Merchandising[] getCarrello() {
+	public HashMap<Merchandising, Integer> getCarrello() {
 		return carrello;
 	}
 	
+	/**
+	 * @return ArrayList di item nel carrello con quantità uguale alla quantità acquistata.
+	 */
+	public ArrayList<Merchandising> getCarrelloList() {
+		ArrayList<Merchandising> res = new ArrayList<Merchandising>(carrello.keySet());
+		for (Merchandising m : res) {
+			m.setQuantita(carrello.get(m));
+		}
+		return res;
+	}
 }
