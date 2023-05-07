@@ -33,7 +33,10 @@ public class StoreView extends AView {
 	private JPanel item_list;
 	private StoreButton[] buyBtns;
 	
-	public StoreView(HashMap<Merchandising, Integer> merch, Dimension dim) {
+	public StoreView(
+			HashMap<Merchandising, Integer> merch, 
+			HashMap<Merchandising, Integer> carrello, 
+			Dimension dim) {
 		merch_n = merch.size();
 		
 		// Top panel
@@ -80,7 +83,7 @@ public class StoreView extends AView {
 		buyBtns = new StoreButton[merch_n];
 		int i = 0;
 		for (Merchandising m : merch.keySet()) {
-			StoreItemPanel panel = new StoreItemPanel(m, merch.get(m));
+			StoreItemPanel panel = new StoreItemPanel(m, merch.get(m), carrello.getOrDefault(m, 0));
 			buyBtns[i++] = panel.getBuyBtn();
 			item_list.add(panel);
 		}

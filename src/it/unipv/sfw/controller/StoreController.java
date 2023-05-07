@@ -26,7 +26,7 @@ public class StoreController extends AController {
 	public void initialize(Dimension dim) {
 		s = new StoreOnline(Sessione.getIstance().getCarrello());
 		
-		StoreView v = new StoreView(s.getMerch(), dim);
+		StoreView v = new StoreView(s.getMerch(), s.getCart(), dim);
 		
 		v.getPartiteBtn().addActionListener(new ActionListener() {		
 			@Override
@@ -54,7 +54,7 @@ public class StoreController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				StoreButton b = ((StoreButton)e.getSource());
-				s.addMerchToCart(b.getMerch(), b.getMerchQuantity());
+				s.addMerchToCart(b.getMerch(), 1);
 			}
 		};
 		
@@ -63,6 +63,12 @@ public class StoreController extends AController {
 		}
 		
 		view = v;
+	}
+	
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
 	}
 
 }

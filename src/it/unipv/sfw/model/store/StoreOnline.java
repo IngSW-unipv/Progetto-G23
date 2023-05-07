@@ -50,7 +50,7 @@ public class StoreOnline {
 		if (carrello.containsKey(merchItem)) {
 			carrello.put(merchItem, carrello.get(merchItem) + quantity);
 		} else {
-			carrello.put(merchItem, 1);
+			carrello.put(merchItem, quantity);
 		}
 	}
 
