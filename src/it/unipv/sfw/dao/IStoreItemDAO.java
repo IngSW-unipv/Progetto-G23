@@ -1,6 +1,7 @@
 package it.unipv.sfw.dao;
 
-import java.util.ArrayList;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.HashMap;
 
 import it.unipv.sfw.model.store.Merchandising;
 
@@ -34,19 +35,19 @@ public interface IStoreItemDAO {
 	boolean insertStoreItem(Merchandising merch, int quantita);
 	
 	/**
-	 * @return Tutti gli articoli registrati nel database.
+	 * @return Tutti gli articoli registrati nel database con le relative quantità.
 	 */
-	ArrayList<Merchandising> selectAll();
+	HashMap<Merchandising, Integer> selectAll();
 	
 	/**
-	 * @return Tutti gli articoli ancora in stock registrati nel database. 
+	 * @return Tutti gli articoli ancora in stock registrati nel database con le relative quantità. 
 	 */
-	ArrayList<Merchandising> selectStillInStock();
+	HashMap<Merchandising, Integer> selectStillInStock();
 	
 	/**
 	 * @param merch Articolo il cui id viene utilizzato come chiave di ricerca.
-	 * @return L'articolo registrato nel database con l'id passato come parametro.
+	 * @return L'articolo registrato nel database con la relativa quantità con l'id passato come parametro.
 	 */
-	Merchandising selectById(Merchandising merch);
+	SimpleEntry<Merchandising, Integer> selectById(Merchandising merch);
 
 }

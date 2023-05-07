@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.store.StoreOnline;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.StoreView;
@@ -25,7 +26,7 @@ public class StoreController extends AController {
 	public void initialize(Dimension dim) {
 		s = new StoreOnline(Sessione.getIstance().getCarrello());
 		
-		StoreView v = new StoreView(s, dim);
+		StoreView v = new StoreView(s.getMerch(), s.getCart(), dim);
 		
 		v.getPartiteBtn().addActionListener(new ActionListener() {		
 			@Override
@@ -52,9 +53,8 @@ public class StoreController extends AController {
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int merch_code = ((StoreButton)e.getSource()).getMerchCode();
-				int merch_index = merch_code - 1;
-				s.addMerchToCart(s.getMerch().get(merch_index));
+				StoreButton b = ((StoreButton)e.getSource());
+				s.addMerchToCart(b.getMerch(), 1);
 			}
 		};
 		
@@ -63,6 +63,12 @@ public class StoreController extends AController {
 		}
 		
 		view = v;
+	}
+	
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
 	}
 
 }

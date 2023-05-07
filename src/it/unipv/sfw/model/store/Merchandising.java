@@ -15,14 +15,13 @@ public class Merchandising implements Comparable<Merchandising> {
 
 	private String nome;
 	private double prezzo;
-	private int id, quantita;
+	private int id;
 	private String descrizione;
 
-	public Merchandising(String nome, double prezzo, int id, int quantita, String descrizione) {
+	public Merchandising(String nome, double prezzo, int id, String descrizione) {
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.id = id;
-		this.quantita = quantita;
 		this.descrizione = descrizione;
 	}
 
@@ -64,32 +63,6 @@ public class Merchandising implements Comparable<Merchandising> {
 	public int getId() {
 		// TODO Auto-generated method stub
 		return id;
-	}
-	
-	public int getQuantita() {
-		return quantita;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public void setQuantita(int quantita) {
-		this.quantita = quantita;
-	}
-	
-	/**
-	 * Funzione che permette ridurre di un unità la quantità del prodotto.
-	 */
-	public void riduciQuantita() {
-		quantita--;
-	}
-	
-	/**
-	 * Funzione che permette aumentare di un unità la quantità del prodotto.
-	 */
-	public void aumentaQuantita() {
-		quantita++;
 	}
 	
 	public void setDescrizione(String descrizione) {

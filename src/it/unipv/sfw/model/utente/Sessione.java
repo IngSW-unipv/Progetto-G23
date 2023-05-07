@@ -30,7 +30,7 @@ public class Sessione {
 	private Sessione() {	
 		currentUtente = null;
 		currentPartita = null;
-		carrello = new HashMap<>();
+		carrello = null;
 		scelte = new HashMap<>();
 	}
 	
@@ -98,7 +98,7 @@ public class Sessione {
 	 */
 	public void resetScelte() {
 		scelte.clear();
-		carrello.clear();
+		carrello = null;
 		currentPartita = null;
 	}
 
@@ -206,16 +206,5 @@ public class Sessione {
 	 */
 	public HashMap<Merchandising, Integer> getCarrello() {
 		return carrello;
-	}
-	
-	/**
-	 * @return ArrayList di item nel carrello con quantità uguale alla quantità acquistata.
-	 */
-	public ArrayList<Merchandising> getCarrelloList() {
-		ArrayList<Merchandising> res = new ArrayList<Merchandising>(carrello.keySet());
-		for (Merchandising m : res) {
-			m.setQuantita(carrello.get(m));
-		}
-		return res;
 	}
 }

@@ -5,10 +5,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,7 +33,7 @@ public class CarrelloView extends AView {
 	private StoreButton[] remBtns;
 	private JButton acquistaBtn;
 	
-	public CarrelloView(ArrayList<Merchandising> carrello, Dimension dim) {
+	public CarrelloView(HashMap<Merchandising, Integer> carrello, Dimension dim) {
 		merch_n = carrello.size();
 		
 		// Top panel
@@ -89,11 +88,12 @@ public class CarrelloView extends AView {
 		float total_price = 0;
 		item_list = new JPanel();
 		remBtns = new StoreButton[merch_n];
-		for (int i = 0; i < merch_n; i++) {
-			Merchandising m = carrello.get(i);
-			total_price += m.getPrezzo() * m.getQuantita();
-			CartItemPanel panel = new CartItemPanel(m);
-			remBtns[i] = panel.getRemBtn();
+		int i = 0;
+		for (Merchandising m : carrello.keySet()) {
+			int q = carrello.get(m);
+			total_price += m.getPrezzo() * q;
+			CartItemPanel panel = new CartItemPanel(m, q);
+			remBtns[i++] = panel.getRemBtn();
 			item_list.add(panel);
 		}
 		

@@ -25,7 +25,7 @@ public class StoreItemPanel extends JPanel {
 
 	private StoreButton btn;
 	
-	public StoreItemPanel(Merchandising m) {	
+	public StoreItemPanel(Merchandising m, int quantity, int qInCart) {	
 		JLabel item_name = new JLabel(m.getTipoMerch().toString());
 		item_name.setFont(new java.awt.Font("Arial", 1, 18));
 		
@@ -46,14 +46,18 @@ public class StoreItemPanel extends JPanel {
 		item_data.add(item_desc);
 		item_data.add(item_price);
 		
-		btn = new StoreButton("ACQUISTA", m.getId());
-		JLabel item_quantity = new JLabel("Rimanenti: " + m.getQuantita());
+		btn = new StoreButton("ACQUISTA", m, quantity);
+		JLabel item_quantity = new JLabel("Rimanenti: " + quantity);
 		item_quantity.setFont(new java.awt.Font("Arial", 1, 11));
 		item_quantity.setBorder(new EmptyBorder(10, 0, 0, 0));
 		
+		JLabel item_in_cart = new JLabel("Nel carrello: " + qInCart);
+		item_in_cart.setFont(new java.awt.Font("Arial", 1, 11));
+		item_in_cart.setBorder(new EmptyBorder(0, 0, 10, 0));
+		
 		JPanel buyPanel = new JPanel();
-		buyPanel.setBorder(new EmptyBorder(0, 0, 0, 20));
 		buyPanel.setLayout(new BoxLayout(buyPanel, BoxLayout.Y_AXIS));
+		buyPanel.add(item_in_cart);
 		buyPanel.add(btn);
 		buyPanel.add(item_quantity);
 		
