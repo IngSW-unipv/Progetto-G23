@@ -48,7 +48,7 @@ public class CartItemPanel extends JPanel {
 		item_data.add(item_desc);
 		item_data.add(item_price);
 		
-		btn = new StoreButton("RIMUOVI", m);
+		btn = new StoreButton("RIMUOVI", m, quantity);
 		
 		JPanel remPanel = new JPanel();
 		remPanel.setBorder(new EmptyBorder(0, 0, 0, 20));

@@ -53,8 +53,8 @@ public class StoreController extends AController {
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Merchandising m = ((StoreButton)e.getSource()).getMerch();
-				s.addMerchToCart(m, m.getQuantita());
+				StoreButton b = ((StoreButton)e.getSource());
+				s.addMerchToCart(b.getMerch(), b.getMerchQuantity());
 			}
 		};
 		

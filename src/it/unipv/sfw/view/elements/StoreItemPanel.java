@@ -46,7 +46,7 @@ public class StoreItemPanel extends JPanel {
 		item_data.add(item_desc);
 		item_data.add(item_price);
 		
-		btn = new StoreButton("ACQUISTA", m);
+		btn = new StoreButton("ACQUISTA", m, quantity);
 		JLabel item_quantity = new JLabel("Rimanenti: " + quantity);
 		item_quantity.setFont(new java.awt.Font("Arial", 1, 11));
 		item_quantity.setBorder(new EmptyBorder(10, 0, 0, 0));

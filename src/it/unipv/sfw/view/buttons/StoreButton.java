@@ -11,16 +11,25 @@ import it.unipv.sfw.model.store.Merchandising;
  */
 public class StoreButton extends JButton {
 	private Merchandising merch;
+	private int quantity;
 	
-	public StoreButton(String label, Merchandising merch) {
+	public StoreButton(String label, Merchandising merch, int quantity) {
 		super(label);
 		this.merch = merch;
+		this.quantity = quantity;
 	}
 	
 	/**
-	 * @return merch.
+	 * @return Merch.
 	 */
 	public Merchandising getMerch() {
 		return merch;
+	}
+	
+	/**
+	 * @return Merch quantity.
+	 */
+	public int getMerchQuantity() {
+		return quantity;
 	}
 }

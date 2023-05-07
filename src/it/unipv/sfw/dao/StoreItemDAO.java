@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.AbstractMap;
 import java.util.HashMap;
 
 import it.unipv.sfw.model.store.*;
@@ -115,12 +116,12 @@ public class StoreItemDAO implements IStoreItemDAO {
 		try
 		{
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM STORE_ITEMS";
+			String query = "SELECT * FROM " + this.schema;
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
 				int q =  rs1.getInt(4);
-				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), q, rs1.getString(5));
+				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getString(5));
 				result.put(c, q);
 			}
 			
@@ -142,12 +143,12 @@ public class StoreItemDAO implements IStoreItemDAO {
 		try
 		{
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM STORE_ITEMS WHERE QUANTITA_RIMANENTE > 0";
+			String query = "SELECT * FROM " + this.schema + " WHERE QUANTITA_RIMANENTE > 0";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
 				int q =  rs1.getInt(4);
-				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), q, rs1.getString(5));
+				Merchandising c = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getString(5));
 				result.put(c, q);
 			}
 			
@@ -158,9 +159,9 @@ public class StoreItemDAO implements IStoreItemDAO {
 	}
 	
 	@Override
-	public Merchandising selectById(Merchandising merch) {
+	public AbstractMap.SimpleEntry<Merchandising, Integer> selectById(Merchandising merch) {
 		
-		Merchandising result = null;
+		AbstractMap.SimpleEntry<Merchandising, Integer> result = null;
 		
 		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
@@ -168,13 +169,15 @@ public class StoreItemDAO implements IStoreItemDAO {
 	
 		try
 		{
-			String query = "SELECT * FROM UTENTI WHERE ID=?";
+			String query = "SELECT * FROM " + this.schema + " WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, merch.getId());
 			rs1 = st1.executeQuery();
 			
 			while(rs1.next()) {
-				result = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getInt(4), rs1.getString(5));
+				int q = rs1.getInt(4);
+				Merchandising m = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getString(5));
+				result = new AbstractMap.SimpleEntry<>(m, q);
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
