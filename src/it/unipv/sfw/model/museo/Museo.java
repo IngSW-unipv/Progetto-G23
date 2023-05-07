@@ -52,8 +52,8 @@ public class Museo {
 	 * Funzione utilizzata per aggiungere un cimelio.
 	 * @param descrizione, tipo
 	 */
-	public void addCimelio(String descrizione, Cimelio.TipoCimelio tipo, int id) {
-		cimeli.add(new Cimelio(descrizione, tipo, id));
+	public void addCimelio(String descrizione, Cimelio.TipoCimelio tipo, int id, int anno) {
+		cimeli.add(new Cimelio(descrizione, tipo, id, anno));
 	}
 	
 	/**
