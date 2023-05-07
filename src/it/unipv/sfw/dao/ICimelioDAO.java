@@ -3,6 +3,7 @@ package it.unipv.sfw.dao;
 import java.util.ArrayList;
 
 import it.unipv.sfw.model.museo.Cimelio;
+import it.unipv.sfw.model.museo.Riconoscimento;
 
 /**
  * Interfaccia DAO per {@link it.unipv.sfw.model.museo.Cimelio}.
@@ -34,5 +35,10 @@ public interface ICimelioDAO {
 	 * @return Il cimelio passato come parametro che è presente nel database.
 	 */
 	Cimelio selectById(Cimelio item);
+	
+	/*
+	 * @return Un array che contiene tutti i cimeli presenti nel database, ordinati in base all'anno.
+	 */
+	ArrayList<Cimelio> selectAllOrderByData();
 
 }

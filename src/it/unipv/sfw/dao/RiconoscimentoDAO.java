@@ -27,7 +27,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 	
 	public RiconoscimentoDAO() {
 		super();
-		this.schema = "MUSEO_ITEMS";  //(id, TipoRiconoscimento, Anno, Descrizione)
+		this.schema = "MUSEO_ITEMS";  //(id, TipoRiconoscimento, Anno, Descrizione, imgid)
 	}
 	
 	@Override
@@ -38,12 +38,13 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 		
 		try
 		{
-			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?)";
+			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, riconoscimento.getTipo());
 			st1.setInt(2, riconoscimento.getAnno());
 			st1.setString(3, riconoscimento.getDescrizione());
+			st1.setString(4, riconoscimento.getImgid());
 			
 			st1.executeUpdate();
 			
@@ -102,7 +103,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 				if(tipo.equals("" + TipoCimelio.Fotografia) || tipo.equals("" + TipoCimelio.Ricordo)) {} 
 				else {
 					TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
-					Riconoscimento r = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1));
+					Riconoscimento r = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 					result.add(r);
 				}
 			}
@@ -137,12 +138,48 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
 				TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
-				result = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1));
+				result = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
 		DBConnection.closeConnection(conn); 
+		return result;
+	}
+	
+	@Override
+	public ArrayList<Riconoscimento> selectAllOrderByData() {
+		
+		
+		ArrayList<Riconoscimento> result = new ArrayList<>();
+				
+		conn = DBConnection.startConnection(conn, schema);
+		Statement st1;
+		ResultSet rs1;
+				
+		try
+		{
+			st1 = conn.createStatement();
+			String query = "SELECT * FROM " + this.schema + " ORDER BY ANNO";
+			rs1 = st1.executeQuery(query);
+			
+			while(rs1.next()) {
+				String tipo = rs1.getString(2);
+				if(tipo.equals("" + TipoCimelio.Fotografia) || tipo.equals("" + TipoCimelio.Ricordo)) {} 
+				else {
+					TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
+					Riconoscimento r = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
+					result.add(r);
+				}
+			}
+				
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			result = null;
+		}
+				
+		DBConnection.closeConnection(conn);
 		return result;
 	}
 	

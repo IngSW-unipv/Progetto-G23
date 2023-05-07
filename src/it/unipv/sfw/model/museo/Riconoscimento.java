@@ -19,14 +19,15 @@ public class Riconoscimento {
 		Maglia
 	}
 	
-	private String tipo, descrizione;
+	private String tipo, descrizione, imgid;
 	private int anno, id;
 	
-	public Riconoscimento(int anno, String descrizione, TipoRiconoscimento tipo, int id) {
+	public Riconoscimento(int anno, String descrizione, TipoRiconoscimento tipo, int id, String imgid) {
 		this.anno = anno;
 		this.id = id;
 		this.descrizione = descrizione;
 		this.tipo = "" + tipo;
+		this.imgid = imgid;
 	}
 	
 	/**
@@ -80,6 +81,14 @@ public class Riconoscimento {
 	 */
 	public int getAnno() {
 		return anno;
+	}
+
+	public String getImgid() {
+		return imgid;
+	}
+
+	public void setImgid(String imgid) {
+		this.imgid = imgid;
 	}
 	
 }

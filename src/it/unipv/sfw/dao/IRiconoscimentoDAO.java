@@ -35,5 +35,10 @@ public interface IRiconoscimentoDAO {
 	 * @return Il riconoscimento passato come parametro che è presente nel database.
 	 */
 	Riconoscimento selectById(Riconoscimento item);
+	
+	/*
+	 * @return Un array che contiene tutti i riconoscimenti presenti nel database, ordinati in base all'anno.
+	 */
+	ArrayList<Riconoscimento> selectAllOrderByData();
 
 }
