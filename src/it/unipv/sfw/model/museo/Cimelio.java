@@ -21,7 +21,7 @@ public class Cimelio {
 	private String tipo, descrizione;
 	private int id, anno;
 	
-	public Cimelio(String descrizione, TipoCimelio tipo, int id) {
+	public Cimelio(String descrizione, TipoCimelio tipo, int id, int anno) {
 		this.tipo = "" + tipo;
 		this.id = id;
 		this.descrizione = descrizione;
