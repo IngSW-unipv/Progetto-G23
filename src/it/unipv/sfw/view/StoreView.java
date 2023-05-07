@@ -83,7 +83,16 @@ public class StoreView extends AView {
 		buyBtns = new StoreButton[merch_n];
 		int i = 0;
 		for (Merchandising m : merch.keySet()) {
-			StoreItemPanel panel = new StoreItemPanel(m, merch.get(m), carrello.getOrDefault(m, 0));
+			int cart_q = 0;
+			Merchandising cart_m = carrello.keySet()
+					.stream()
+					.filter(int_m -> int_m.getId() == m.getId())
+					.findFirst()
+					.orElse(null);
+			if (cart_m != null)
+				cart_q = carrello.get(cart_m);
+			
+			StoreItemPanel panel = new StoreItemPanel(m, merch.get(m), cart_q);
 			buyBtns[i++] = panel.getBuyBtn();
 			item_list.add(panel);
 		}
