@@ -48,7 +48,7 @@ public class ControllerManager {
 		
 		currentController = null;
 		
-		// add resize evenet listener
+		// add resize event listener
 		f.addComponentListener(new ComponentResizeEndListener(100) {
 			@Override
 			public void onResizedTimedOut() {

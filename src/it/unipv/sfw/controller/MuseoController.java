@@ -18,7 +18,7 @@ public class MuseoController extends AController {
 		Museo museum = new Museo(storia, 15, 30, 18, 30);
 		
 		for(int i=0; i<43; i++) {
-			museum.addRiconoscimento(1980+i, "Scudetto", Riconoscimento.TipoRiconoscimento.Trofeo, i);
+			museum.addRiconoscimento(1980+i, "Coppa Italia\nCoppa vinta nella stagione " + (1980+i) + " che permise di pareggiare il bilancio skrt.", Riconoscimento.TipoRiconoscimento.Coppa, i);
 		}
 		
 		MuseoView mview = new MuseoView(museum, dim);

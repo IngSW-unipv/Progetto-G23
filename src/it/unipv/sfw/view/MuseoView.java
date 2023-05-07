@@ -90,16 +90,15 @@ public class MuseoView extends AView {
 		JPanel bigliettoPanel = new JPanel();
 		acquistaBiglietto = new JButton("ACQUISTA BIGLIETTO");
 		acquistaBiglietto.setBackground(Color.WHITE);
+		bigliettoPanel.setBackground(Color.BLUE);
+		bigliettoPanel.setOpaque(true);
 		bigliettoPanel.add(acquistaBiglietto);
 		centralMiddlePanel.add(bigliettoPanel, BorderLayout.NORTH);
 		
 			//dentro scrollpane che è dentro contenitore a CENTER
 		pezzimuseo = new JPanel();
 		
-		JPanel box_pezzo = new JPanel();	//linea scrollpane
-		box_pezzo.setLayout(new FlowLayout());
-		box_pezzo.setBorder(BorderFactory.createLineBorder(Color.black));
-		
+		/*
 		for(int i=0; i<ncim; i++) {
 			Cimelio c = cimeli.get(i);
 			
@@ -115,7 +114,7 @@ public class MuseoView extends AView {
 			
 			JPanel column_pezzo = new JPanel();
 			column_pezzo.setLayout(new GridLayout(2, 1));
-			column_pezzo.setPreferredSize(new Dimension(100, 30));
+			column_pezzo.setPreferredSize(new Dimension(600, 200));
 			column_pezzo.add(titolo_pezzo);
 			column_pezzo.add(descr_pezzo);
 			
@@ -127,11 +126,11 @@ public class MuseoView extends AView {
 			
 			pezzimuseo.add(box_pezzo);	
 		}
-		/*
+		*/
 		for(int j=0; j<nric; j++) {
 			Riconoscimento r = riconoscimenti.get(j);
 			
-			JLabel titolo_pezzo = new JLabel(r.getTipo() + r.getAnno());
+			JLabel titolo_pezzo = new JLabel(r.getTipo() + " " + r.getAnno());
 			titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
 			
 			JTextArea descr_pezzo = new JTextArea(5, 30); 
@@ -148,22 +147,35 @@ public class MuseoView extends AView {
 			column_pezzo.add(descr_pezzo);
 			
 			ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/coppaitalia.png"));
-			JLabel image = new JLabel(image_pezzo);
+			image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 200, java.awt.Image.SCALE_SMOOTH));
+			JLabel image = new JLabel();
+			image.setLayout(new FlowLayout(FlowLayout.LEFT));
+			image.setIcon(image_pezzo);
 			
-			box_pezzo.add(column_pezzo, FlowLayout.CENTER);
-			box_pezzo.add(image, FlowLayout.LEFT);
+			JPanel box_pezzo = new JPanel();	//linea scrollpane
+			box_pezzo.setBorder(BorderFactory.createLineBorder(Color.black));
 			
+			box_pezzo.add(image);
+			box_pezzo.add(column_pezzo);
+				
 			pezzimuseo.add(box_pezzo);
 		}
-		*/
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (250*ncim)));
+		
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*nric)));
 		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 
 		scrollTrofei.getVerticalScrollBar().setUnitIncrement(20);
 		
 		centralMiddlePanel.add(scrollTrofei, BorderLayout.CENTER);
-		centralMiddlePanel.add(bigliettoPanel, BorderLayout.NORTH);
+		
+		ImageIcon scudettosx = new ImageIcon(getClass().getResource("/scudettointer.png"));
+		scudettosx = new ImageIcon(scudettosx.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
+		JLabel scudetto = new JLabel();
+		scudetto.setBackground(Color.BLUE);
+		scudetto.setOpaque(true);
+		scudetto.setIcon(scudettosx);
+		centralMiddlePanel.add(scudetto, BorderLayout.WEST);
 		
 		centralPanel.add(centralMiddlePanel, BorderLayout.CENTER);
 		
