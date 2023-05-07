@@ -3,7 +3,10 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import it.unipv.sfw.dao.RiconoscimentoDAO;
+import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.view.MuseoView;
@@ -11,15 +14,17 @@ import it.unipv.sfw.view.MuseoView;
 public class MuseoController extends AController {
 
 	String storia = new String("L'inter è una squadra di calcio rappresentante la città di Milano.");
+	Riconoscimento[] ric;
+	Cimelio[] cim;
 	
 	@Override
 	public void initialize(Dimension dim) {
 		
 		Museo museum = new Museo(storia, 15, 30, 18, 30);
 		
-		for(int i=0; i<43; i++) {
-			museum.addRiconoscimento(1980+i, "Coppa Italia\nCoppa vinta nella stagione " + (1980+i) + " che permise di pareggiare il bilancio skrt.", Riconoscimento.TipoRiconoscimento.Coppa, i);
-		}
+		ArrayList<Riconoscimento> ric_arraylist = new RiconoscimentoDAO().selectAllOrderByData();
+		
+		museum.setRiconsocimenti(ric_arraylist);
 		
 		MuseoView mview = new MuseoView(museum, dim);
 		
@@ -35,6 +40,14 @@ public class MuseoController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(7);
 			}
+		});
+		
+		mview.getAcquistaButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(11);
+			}
+			
 		});
 		
 		view = mview;

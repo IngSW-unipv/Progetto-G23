@@ -34,6 +34,14 @@ public class Museo {
 		riconoscimenti = new ArrayList<Riconoscimento>();
 	}
 	
+	public void setRiconsocimenti(ArrayList<Riconoscimento> ric) {
+		this.riconoscimenti = ric;
+	}
+	
+	public void setCimeli(ArrayList<Cimelio> cim) {
+		this.cimeli = cim;
+	}
+	
 	/**
 	 * @return I cimeli presenti nel museo.
 	 */
@@ -52,16 +60,16 @@ public class Museo {
 	 * Funzione utilizzata per aggiungere un cimelio.
 	 * @param descrizione, tipo
 	 */
-	public void addCimelio(String descrizione, Cimelio.TipoCimelio tipo, int id, int anno) {
-		cimeli.add(new Cimelio(descrizione, tipo, id, anno));
+	public void addCimelio(String descrizione, Cimelio.TipoCimelio tipo, int id, int anno, String imgid) {
+		cimeli.add(new Cimelio(descrizione, tipo, id, anno, imgid));
 	}
 	
 	/**
 	 * Funzione utilizzata per aggiungere un riconoscimento.
 	 * @param anno, descrizione, tipo
 	 */
-	public void addRiconoscimento(int anno, String descrizione, Riconoscimento.TipoRiconoscimento tipo, int id) {
-		riconoscimenti.add(new Riconoscimento(anno, descrizione, tipo, id));
+	public void addRiconoscimento(int anno, String descrizione, Riconoscimento.TipoRiconoscimento tipo, int id, String imgid) {
+		riconoscimenti.add(new Riconoscimento(anno, descrizione, tipo, id, imgid));
 	}
 
 	/**

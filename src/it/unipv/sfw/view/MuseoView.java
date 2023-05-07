@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
+import it.unipv.sfw.view.elements.MuseoItemPanel;
 
 /*19 scudetti
  * 8 coppe italia
@@ -98,70 +99,19 @@ public class MuseoView extends AView {
 			//dentro scrollpane che è dentro contenitore a CENTER
 		pezzimuseo = new JPanel();
 		
-		/*
-		for(int i=0; i<ncim; i++) {
-			Cimelio c = cimeli.get(i);
-			
-			JLabel titolo_pezzo = new JLabel(c.getTipo() + c.getAnno());
-			titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
-			
-			JTextArea descr_pezzo = new JTextArea(5, 30); 
-			descr_pezzo.setEditable(false);
-			descr_pezzo.setLineWrap(true);
-			descr_pezzo.setFont(new java.awt.Font("Arial", 1, 16));
-			descr_pezzo.setOpaque(false);
-			descr_pezzo.setText(c.getDescrizione());
-			
-			JPanel column_pezzo = new JPanel();
-			column_pezzo.setLayout(new GridLayout(2, 1));
-			column_pezzo.setPreferredSize(new Dimension(600, 200));
-			column_pezzo.add(titolo_pezzo);
-			column_pezzo.add(descr_pezzo);
-			
-			ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/coppaitalia.png"));
-			JLabel image = new JLabel(image_pezzo);
-			
-			box_pezzo.add(column_pezzo, FlowLayout.CENTER);
-			box_pezzo.add(image, FlowLayout.LEFT);
-			
-			pezzimuseo.add(box_pezzo);	
-		}
-		*/
-		for(int j=0; j<nric; j++) {
-			Riconoscimento r = riconoscimenti.get(j);
-			
-			JLabel titolo_pezzo = new JLabel(r.getTipo() + " " + r.getAnno());
-			titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
-			
-			JTextArea descr_pezzo = new JTextArea(5, 30); 
-			descr_pezzo.setEditable(false);
-			descr_pezzo.setLineWrap(true);
-			descr_pezzo.setFont(new java.awt.Font("Arial", 1, 16));
-			descr_pezzo.setOpaque(false);
-			descr_pezzo.setText(r.getDescrizione());
-			
-			JPanel column_pezzo = new JPanel();
-			column_pezzo.setLayout(new GridLayout(2, 1));
-			column_pezzo.setPreferredSize(new Dimension(600, 200));
-			column_pezzo.add(titolo_pezzo);
-			column_pezzo.add(descr_pezzo);
-			
-			ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/coppaitalia.png"));
-			image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 200, java.awt.Image.SCALE_SMOOTH));
-			JLabel image = new JLabel();
-			image.setLayout(new FlowLayout(FlowLayout.LEFT));
-			image.setIcon(image_pezzo);
-			
-			JPanel box_pezzo = new JPanel();	//linea scrollpane
-			box_pezzo.setBorder(BorderFactory.createLineBorder(Color.black));
-			
-			box_pezzo.add(image);
-			box_pezzo.add(column_pezzo);
-				
-			pezzimuseo.add(box_pezzo);
+		int i = 0;
+		for(Cimelio c : cimeli) {
+			MuseoItemPanel pezzo = new MuseoItemPanel(c);
+			pezzimuseo.add(pezzo);
 		}
 		
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*nric)));
+		int j = 0;
+		for(Riconoscimento r : riconoscimenti) {
+			MuseoItemPanel pezzo = new MuseoItemPanel(r);
+			pezzimuseo.add(pezzo);
+		}
+		
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*nric)));
 		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 
@@ -193,6 +143,10 @@ public class MuseoView extends AView {
 		return storeButton;
 	}
 		
+	public JButton getAcquistaButton() {
+		return acquistaBiglietto;
+	}
+	
 	@Override
 	public Type getType() {
 		return AView.Type.MUSEO;
