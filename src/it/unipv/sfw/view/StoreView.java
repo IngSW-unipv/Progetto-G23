@@ -64,7 +64,7 @@ public class StoreView extends AView {
 		topPanelBtns.add(partiteButton);
 		topPanelBtns.add(museoButton);
 		
-		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/utente.gif"));
+		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/carrello.png"));
 		cartButton = new JButton("", utenteImg);
 		cartButton.setBackground(Color.BLUE);
 		
