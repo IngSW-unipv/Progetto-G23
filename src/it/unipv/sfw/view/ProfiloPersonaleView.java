@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,7 +21,9 @@ public class ProfiloPersonaleView extends AView {
 	private JPanel titolo,dati,valori,campi,bottoni,contenitore;
 	private JLabel t,n,nome,c,cognome,d,datanascita,
 				   e,email,u,tipoutente,b,bigliettiacquistati;
-	private JButton cp, abbonamento;
+	private JButton cp, abbonamento,home;
+	private Icon img;
+	
 	
 	
 	public ProfiloPersonaleView(Dimension dim) {
@@ -31,13 +34,12 @@ public class ProfiloPersonaleView extends AView {
 		valori=new JPanel();
 		bottoni=new JPanel();
 		contenitore=new JPanel();
+		home=new JButton();
 		
 		t=new JLabel("PROFILO PERSONALE");
 		t.setBackground(Color.CYAN);
 		t.setOpaque(true);
-		
 		t.setFont(new java.awt.Font("Arial", 1, 24));
-		
 		
 		n=new JLabel("Nome:");
 		n.setFont(new java.awt.Font("Arial", 1, 16));
@@ -73,12 +75,18 @@ public class ProfiloPersonaleView extends AView {
 		cp=new JButton("Cambia Password");
 		abbonamento=new JButton("Abbonati");
 		
+		img = new ImageIcon(getClass().getResource("/home.png"));
 		
-		titolo.setLayout(new GridLayout(2,1));
-		t.setAlignmentX(CENTER_ALIGNMENT);
+
+		home.setIcon(img);
+		home.setBackground(Color.BLUE);
+		home.setOpaque(true);
+		
+		titolo.setLayout(new BorderLayout());
 		t.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE,10));
+		titolo.add(t,BorderLayout.CENTER);
+		titolo.add(home,BorderLayout.EAST);
 		
-		titolo.add(t);
 		
 		campi.setLayout(new GridLayout(6,1));
 		campi.add(n);
@@ -87,6 +95,9 @@ public class ProfiloPersonaleView extends AView {
 		campi.add(d);
 		campi.add(u);
 		campi.add(b);
+		campi.setBackground(Color.WHITE);
+		campi.setOpaque(true);
+		
 		
 		valori.setLayout(new GridLayout(6,1));
 		valori.add(nome);
@@ -95,10 +106,14 @@ public class ProfiloPersonaleView extends AView {
 		valori.add(datanascita);
 		valori.add(tipoutente);
 		valori.add(bigliettiacquistati);
+		valori.setBackground(Color.WHITE);
+		valori.setOpaque(true);
 		
 		bottoni.setLayout(new FlowLayout());
 		bottoni.add(cp);
 		bottoni.add(abbonamento);
+		bottoni.setBackground(Color.WHITE);
+		bottoni.setOpaque(true);
 		
 		dati.setLayout(new BorderLayout());
 		dati.add(campi,BorderLayout.WEST);
@@ -107,6 +122,9 @@ public class ProfiloPersonaleView extends AView {
 		
 		contenitore.setLayout(new GridLayout(2,1));
 		contenitore.add(dati);
+		contenitore.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
+		contenitore.setBackground(Color.WHITE);
+		contenitore.setOpaque(true);
 		
 		this.setLayout(new BorderLayout());
 		this.add(titolo,BorderLayout.NORTH);		
@@ -121,5 +139,8 @@ public class ProfiloPersonaleView extends AView {
 		return null;
 	}
 	
+	public JButton getHome() {
+		return home;
+	}
 
 }
