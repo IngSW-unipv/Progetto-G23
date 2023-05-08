@@ -55,6 +55,7 @@ public class StoreController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				StoreButton b = ((StoreButton)e.getSource());
 				s.addMerchToCart(b.getMerch(), 1);
+				((StoreView)view).onCartUpdate(s.getCart(), b.getMerch());
 			}
 		};
 		

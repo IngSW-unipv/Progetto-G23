@@ -24,6 +24,7 @@ import it.unipv.sfw.view.buttons.StoreButton;
 public class StoreItemPanel extends JPanel {
 
 	private StoreButton btn;
+	private JLabel item_in_cart;
 	
 	public StoreItemPanel(Merchandising m, int quantity, int qInCart) {	
 		JLabel item_name = new JLabel(m.getTipoMerch().toString());
@@ -51,7 +52,7 @@ public class StoreItemPanel extends JPanel {
 		item_quantity.setFont(new java.awt.Font("Arial", 1, 11));
 		item_quantity.setBorder(new EmptyBorder(10, 0, 0, 0));
 		
-		JLabel item_in_cart = new JLabel("Nel carrello: " + qInCart);
+		item_in_cart = new JLabel("Nel carrello: " + qInCart);
 		item_in_cart.setFont(new java.awt.Font("Arial", 1, 11));
 		item_in_cart.setBorder(new EmptyBorder(0, 0, 10, 0));
 		
@@ -71,5 +72,15 @@ public class StoreItemPanel extends JPanel {
 	 */
 	public StoreButton getBuyBtn() {
 		return btn;
+	}
+	
+	/**
+	 * @param q Nuova quantità
+	 */
+	public void setCartQuantity(int q) {
+		item_in_cart.setText("Nel carrello: " + q);
+		
+		this.revalidate();
+		this.repaint();
 	}
 }

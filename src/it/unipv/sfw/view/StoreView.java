@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -31,7 +35,7 @@ public class StoreView extends AView {
 	private JButton partiteButton, museoButton, cartButton;
 	// center
 	private JPanel item_list;
-	private StoreButton[] buyBtns;
+	private HashMap<Merchandising, StoreItemPanel> itemPanels;
 	
 	public StoreView(
 			HashMap<Merchandising, Integer> merch, 
@@ -80,9 +84,12 @@ public class StoreView extends AView {
 		
 		// Item list
 		item_list = new JPanel();
-		buyBtns = new StoreButton[merch_n];
+		itemPanels = new HashMap<>(merch_n);
 		int i = 0;
-		for (Merchandising m : merch.keySet()) {
+		for (Map.Entry<Merchandising, Integer> e : merch.entrySet()) {
+			Merchandising m = e.getKey();
+			int q = e.getValue();
+			
 			int cart_q = 0;
 			Merchandising cart_m = carrello.keySet()
 					.stream()
@@ -92,8 +99,8 @@ public class StoreView extends AView {
 			if (cart_m != null)
 				cart_q = carrello.get(cart_m);
 			
-			StoreItemPanel panel = new StoreItemPanel(m, merch.get(m), cart_q);
-			buyBtns[i++] = panel.getBuyBtn();
+			StoreItemPanel panel = new StoreItemPanel(m, q, cart_q);
+			itemPanels.put(m, panel);
 			item_list.add(panel);
 		}
 		
@@ -132,6 +139,9 @@ public class StoreView extends AView {
 		return partiteButton;
 	}
 	
+	/**
+	 * @return Bottone del museo.
+	 */
 	public JButton getMuseoBtn() {
 		return museoButton;
 	}
@@ -146,7 +156,33 @@ public class StoreView extends AView {
 	/**
 	 * @return Array dei bottoni "ACQUISTA".
 	 */
-	public StoreButton[] getBuyBtns() {
-		return buyBtns;
+	public Collection<StoreButton> getBuyBtns() {
+		return itemPanels.values()
+				.stream()
+				.map(panel -> panel.getBuyBtn())
+				.collect(Collectors.toList());
+	}
+	
+	/**
+	 * Funzione chiamata nel caso in cui la quantità di un oggetto presente 
+	 * nel carrello sia cambiata.
+	 * @param carrello Carrello corrente
+	 * @param m Item la cui quantità è cambiata
+	 */
+	public void onCartUpdate(
+			HashMap<Merchandising, Integer> carrello,
+			Merchandising m
+			) {
+		int cart_q = 0;
+		Merchandising cart_m = carrello.keySet()
+				.stream()
+				.filter(int_m -> int_m.getId() == m.getId())
+				.findFirst()
+				.orElse(null);
+		if (cart_m != null)
+			cart_q = carrello.get(cart_m);
+		
+		StoreItemPanel p = itemPanels.get(m);
+		p.setCartQuantity(cart_q);
 	}
 }
