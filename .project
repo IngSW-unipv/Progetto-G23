@@ -14,36 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>img/backgroundstore.jpg</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/OneDrive/Immagini/immagini%20museo/backgroundstore.jpg</locationURI>
-		</link>
-		<link>
-			<name>img/coppaitalia.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/OneDrive/Immagini/immagini%20museo/coppaitalia.png</locationURI>
-		</link>
-		<link>
-			<name>img/grafdx.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/OneDrive/Immagini/immagini%20museo/grafdx.png</locationURI>
-		</link>
-		<link>
-			<name>img/scudetto.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/OneDrive/Immagini/immagini%20museo/scudetto.png</locationURI>
-		</link>
-		<link>
-			<name>img/scudettointer.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/OneDrive/Immagini/immagini%20museo/scudettointer.png</locationURI>
-		</link>
-		<link>
-			<name>img/supercoppa.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/OneDrive/Immagini/immagini%20museo/supercoppa.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
