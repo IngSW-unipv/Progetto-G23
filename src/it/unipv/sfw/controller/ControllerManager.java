@@ -1,5 +1,7 @@
 package it.unipv.sfw.controller;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import it.unipv.sfw.eventlisteners.ComponentResizeEndListener;
 import it.unipv.sfw.frame.Frame;
 
@@ -29,6 +31,9 @@ public class ControllerManager {
 	private final int N_CONTROLLERS = 11;
 	
 	private ControllerManager() {
+		// init look and feel
+		FlatLightLaf.setup();
+		
 		// init frame
 		f = new Frame(900, 600);
 	
