@@ -50,9 +50,9 @@ public class UtenteDAO implements IUtenteDAO {
 					Admin a = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
 					result.add(a);
 				} else if(tipo.equals("" + Type.CLIENTE) || tipo.equals("" + Type.GIORNALISTA)) {
-					String str = rs1.getString(5);
+					String str = rs1.getString(6);
 					Calendar cal = Calendar.getInstance();
-					SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY", Locale.ITALY);
+					SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 					cal.setTime(sdf.parse(str));
 					Cliente c = new Cliente (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), cal);
 					result.add(c);
@@ -114,9 +114,9 @@ public class UtenteDAO implements IUtenteDAO {
 			if(tipo.equals("" + Type.ADMIN)) {
 				result = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
 			} else if(tipo.equals("" + Type.CLIENTE) || tipo.equals("" + Type.GIORNALISTA)) {
-				String str = rs1.getString(5);
+				String str = rs1.getString(6);
 				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY", Locale.ITALY);
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 				cal.setTime(sdf.parse(str));
 				result = new Cliente (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), cal);
 			}

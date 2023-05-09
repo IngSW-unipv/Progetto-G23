@@ -43,9 +43,9 @@ public class ClienteDAO implements IClienteDAO {
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				String str = rs1.getString(5);
+				String str = rs1.getString(6);
 				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY", Locale.ITALY);
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 				cal.setTime(sdf.parse(str));
 				Cliente c = new Cliente(rs1.getString(2), rs1.getString(3), rs1.getString(1), rs1.getString(4), cal);
 				result.add(c);
@@ -74,9 +74,9 @@ public class ClienteDAO implements IClienteDAO {
 			rs1 = st1.executeQuery();
 			
 			while(rs1.next()) {
-				String str = rs1.getString(5);
+				String str = rs1.getString(6);
 				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY", Locale.ITALY);
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH);
 				cal.setTime(sdf.parse(str));
 				result = new Cliente(rs1.getString(2), rs1.getString(3), rs1.getString(1), rs1.getString(4), cal);
 			}
@@ -103,7 +103,7 @@ public class ClienteDAO implements IClienteDAO {
 			st1.setString(2, clienteInput.getCognome());
 			st1.setString(1, clienteInput.getEmail());
 			st1.setString(4, clienteInput.getPassword());
-			st1.setString(5, clienteInput.getDataNascita());
+			st1.setString(6, clienteInput.getDataNascita());
 			
 			st1.executeUpdate();
 			
