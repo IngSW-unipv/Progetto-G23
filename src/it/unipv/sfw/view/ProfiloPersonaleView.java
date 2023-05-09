@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import it.unipv.sfw.model.abbonamento.TipoAbb;
+import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente;
 
 public class ProfiloPersonaleView extends AView {
@@ -20,13 +22,14 @@ public class ProfiloPersonaleView extends AView {
 	JPanel Panel;
 	private JPanel titolo,dati,valori,campi,bottoni,contenitore;
 	private JLabel t,n,nome,c,cognome,d,datanascita,
-				   e,email,u,tipoutente,b,bigliettiacquistati;
+				   e,email,cl,tipocliente,b,bigliettiacquistati;
 	private JButton cp, abbonamento,home;
 	private Icon img;
+	private String tc;
 	
 	
 	
-	public ProfiloPersonaleView(Dimension dim) {
+	public ProfiloPersonaleView(Dimension dim,Cliente cliente) {
 		
 		titolo=new JPanel();
 		dati=new JPanel();
@@ -43,17 +46,17 @@ public class ProfiloPersonaleView extends AView {
 		
 		n=new JLabel("Nome:");
 		n.setFont(new java.awt.Font("Arial", 1, 16));
-		nome=new JLabel("0");
+		nome=new JLabel(cliente.getNome());
 		nome.setFont(new java.awt.Font("Arial", 1, 16));
 		
 		c=new JLabel("Cognome:");
 		c.setFont(new java.awt.Font("Arial", 1, 16));
-		cognome=new JLabel("0");
+		cognome=new JLabel(cliente.getCognome());
 		cognome.setFont(new java.awt.Font("Arial", 1, 16));
 		
 		e=new JLabel("Email:");
 		e.setFont(new java.awt.Font("Arial", 1, 16));
-		email=new JLabel("0");
+		email=new JLabel(cliente.getEmail());
 		email.setFont(new java.awt.Font("Arial", 1, 16));
 		
 		d=new JLabel("Data di nascita:");
@@ -61,10 +64,31 @@ public class ProfiloPersonaleView extends AView {
 		datanascita=new JLabel("0");
 		datanascita.setFont(new java.awt.Font("Arial", 1, 16));
 		
-		u=new JLabel("Tipo di Utente:");
-		u.setFont(new java.awt.Font("Arial", 1, 16));
-		tipoutente=new JLabel("0");
-		tipoutente.setFont(new java.awt.Font("Arial", 1, 16));
+		cl=new JLabel("Tipo di Utente:");
+		cl.setFont(new java.awt.Font("Arial", 1, 16));
+		
+		if(cliente.getAbb()==null) {
+			tc="Cliente";
+		}else {
+			if(cliente.getAbb().getTipoAbb()==TipoAbb.TESSERA) {
+				tc="Tesserato";
+			}else {
+				if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV1) {
+					tc="Abbonato di livello 1";
+				}else {
+					if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV2) {
+						tc="Abbonato di livello 2";
+					}else {
+						if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV3) {
+							tc="Abbonato di livello 3";
+						}
+					}
+				}
+			}
+		}
+		
+		tipocliente=new JLabel(tc);
+		tipocliente.setFont(new java.awt.Font("Arial", 1, 16));
 		
 		b=new JLabel("Numero di Biglietti acquistati:");
 		b.setFont(new java.awt.Font("Calibri Corpo", 1, 16));
@@ -93,10 +117,12 @@ public class ProfiloPersonaleView extends AView {
 		campi.add(c);
 		campi.add(e);
 		campi.add(d);
-		campi.add(u);
+		campi.add(cl);
 		campi.add(b);
 		campi.setBackground(Color.WHITE);
 		campi.setOpaque(true);
+		campi.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
+		
 		
 		
 		valori.setLayout(new GridLayout(6,1));
@@ -104,16 +130,19 @@ public class ProfiloPersonaleView extends AView {
 		valori.add(cognome);
 		valori.add(email);
 		valori.add(datanascita);
-		valori.add(tipoutente);
+		valori.add(tipocliente);
 		valori.add(bigliettiacquistati);
 		valori.setBackground(Color.WHITE);
 		valori.setOpaque(true);
+		valori.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
+		
 		
 		bottoni.setLayout(new FlowLayout());
 		bottoni.add(cp);
 		bottoni.add(abbonamento);
 		bottoni.setBackground(Color.WHITE);
 		bottoni.setOpaque(true);
+		
 		
 		dati.setLayout(new BorderLayout());
 		dati.add(campi,BorderLayout.WEST);
