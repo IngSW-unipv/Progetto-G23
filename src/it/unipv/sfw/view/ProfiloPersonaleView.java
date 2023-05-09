@@ -61,7 +61,7 @@ public class ProfiloPersonaleView extends AView {
 		
 		d=new JLabel("Data di nascita:");
 		d.setFont(new java.awt.Font("Arial", 1, 16));
-		datanascita=new JLabel("0");
+		datanascita=new JLabel(cliente.getDataNascita());
 		datanascita.setFont(new java.awt.Font("Arial", 1, 16));
 		
 		cl=new JLabel("Tipo di Utente:");

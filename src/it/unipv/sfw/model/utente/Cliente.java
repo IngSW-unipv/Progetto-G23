@@ -2,6 +2,9 @@ package it.unipv.sfw.model.utente;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
@@ -19,10 +22,11 @@ public class Cliente extends Utente {
 	private Abbonamento abb;
 	private boolean isGiornalista;
 
-	public Cliente(String nome, String cognome, String email, String pass) {
+	public Cliente(String nome, String cognome, String email, String pass, Calendar dataNascita) {
 		super(nome, cognome, email, pass);
 		this.abb = null;
 		isGiornalista = false;
+		this.dataNascita = dataNascita;
 	}
 	
 	
@@ -37,8 +41,8 @@ public class Cliente extends Utente {
 	 * @return La data di nascita del cliente.
 	 */
 	public String getDataNascita() {
-		SimpleDateFormat formattedDate = new SimpleDateFormat("dd / MMM / YYYY");
-		return formattedDate.format(dataNascita);
+		SimpleDateFormat formattedDate = new SimpleDateFormat("YYYY-MM-dd");
+		return formattedDate.format(dataNascita.getTime());
 	}
 
 	/**

@@ -51,7 +51,7 @@ public class MuseoItemPanel extends JPanel {
 		JLabel titolo_pezzo = new JLabel(c.getTipo() + " " + c.getAnno());
 		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
 		
-		JTextArea descr_pezzo = new JTextArea(5, 30); 
+		JTextArea descr_pezzo = new JTextArea(5, 2); 
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
 		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 16));

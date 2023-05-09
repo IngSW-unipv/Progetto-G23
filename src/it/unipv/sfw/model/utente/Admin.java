@@ -1,5 +1,6 @@
 package it.unipv.sfw.model.utente;
 
+import java.util.Calendar;
 
 /**
  * Classe che estende {@link Utente} e rappresenta l'admin. 
@@ -19,8 +20,8 @@ public class Admin extends Utente {
 	 * @param email Email del giornalista.
 	 * @param pass Password del giornalista.
 	 */
-	public void addGiornalista(String nome, String cognome, String email, String pass) {
-		Cliente giornalista = new Cliente(nome, cognome, email, pass);
+	public void addGiornalista(String nome, String cognome, String email, String pass, Calendar nascita) {
+		Cliente giornalista = new Cliente(nome, cognome, email, pass, nascita);
 		giornalista.setTypeToGiornalista();
 	}
 

@@ -1,0 +1,61 @@
+-- Create all the tables for StadiumSystem
+create schema if not exists stadiumsystem;
+
+use stadiumsystem;
+
+create table UTENTI (
+		EMAIL CHAR(255) PRIMARY KEY,
+        NOME CHAR(255),
+        COGNOME CHAR(255),
+        PASS CHAR(255),			-- temp
+        TIPO ENUM('ADMIN', 'CLIENTE'),
+        NASCITA DATE
+);
+create table ABBONAMENTI (
+		EMAIL CHAR(255) PRIMARY KEY,
+        GRADO ENUM('1', '2'),		-- temp
+        FOREIGN KEY (EMAIL) REFERENCES UTENTI(EMAIL)
+);
+
+create table PARTITE (
+		DAT DATETIME PRIMARY KEY,
+        AVVERSARIO CHAR(32),
+        PREZZO float4,
+        BIGLIETTI_RIMANENTI MEDIUMINT
+);
+
+
+create table POSTI (
+		DAT DATETIME,
+        SETTORE SMALLINT,
+        BLOCCO SMALLINT,
+        ANELLO SMALLINT,
+        POSTO SMALLINT,
+        EMAIL CHAR(255),
+        FOREIGN KEY (DAT) REFERENCES PARTITE(DAT),
+        FOREIGN KEY (EMAIL) REFERENCES UTENTI(EMAIL),
+        PRIMARY KEY (DAT, SETTORE, BLOCCO, ANELLO, POSTO)
+);
+
+create table STORE_ITEMS (
+		ID MEDIUMINT AUTO_INCREMENT PRIMARY KEY,
+        NOME CHAR(255),
+        PREZZO float4,
+        QUANTITA_RIMANENTE MEDIUMINT,
+        DESCRIZIONE TEXT
+);
+
+create table MUSEO_ITEMS (
+		ID MEDIUMINT AUTO_INCREMENT PRIMARY KEY,
+        NOME CHAR(255),
+        ANNO SMALLINT,
+        DESCRIZIONE TEXT,
+        NOME_IMG TEXT
+);
+
+create table BIGLIETTI_MUSEO (
+		EMAIL CHAR(255),
+        NUMERO_PERSONE TINYINT,
+        FOREIGN KEY (EMAIL) REFERENCES UTENTI(EMAIL),
+        DAT DATETIME
+);

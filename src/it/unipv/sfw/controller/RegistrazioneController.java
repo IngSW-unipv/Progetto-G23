@@ -3,6 +3,10 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
@@ -25,12 +29,21 @@ public class RegistrazioneController extends AController {
 		v.getRegistratiBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String data = v.getData().getText();
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY", Locale.ITALY);
+				try {
+					cal.setTime(sdf.parse(data));
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 				// Login into session
 				Cliente u = new Cliente(
 						v.getNome().getText(),
 						v.getCognome().getText(),
 						v.getEmail().getText(),
-						new String(v.getPassword().getPassword()));
+						new String(v.getPassword().getPassword()),
+						cal);
 				try {	
 					Sessione.getIstance().register(u);
 				} catch(Exception err) {

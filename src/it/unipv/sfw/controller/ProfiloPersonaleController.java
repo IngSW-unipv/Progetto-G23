@@ -17,7 +17,6 @@ public class ProfiloPersonaleController extends AController{
 	public void initialize(Dimension dim) {
 		try {
 			c=(Cliente)Sessione.getIstance().getCurrentUtente();
-			System.out.println(c.getAbb().getTipoAbb());
 		}catch (Exception e) {
 		      System.out.println("Errore");
 	    }
