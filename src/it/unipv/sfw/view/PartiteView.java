@@ -175,6 +175,10 @@ public class PartiteView extends AView {
 	public void menu(boolean stato) {
 		menuutente.setPopupMenuVisible(stato);
 	}
+	
+	public JMenuItem getExit() {
+		return esci;
+	}
 
 	@Override
 	public Type getType() {

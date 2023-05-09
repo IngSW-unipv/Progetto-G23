@@ -18,8 +18,8 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 /**
  * Controller che si occupa della PartiteView.
  * 
- * @author Gabriele Invernizzi
- * @see AController
+ * @author Gabriele Invernizzi,Jacopo Piccoli
+ * @see AController 
  * @see it.unipv.sfw.view.PartiteView
  */
 public class PartiteController extends AController {
@@ -66,6 +66,14 @@ public class PartiteController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(10);
+			}
+		});
+		
+		v.getExit().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Sessione.getIstance().resetScelte();
+				ControllerManager.getInstance().loadController(0);
 			}
 		});
 		
