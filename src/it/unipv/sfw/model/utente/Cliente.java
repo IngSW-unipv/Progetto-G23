@@ -2,6 +2,9 @@ package it.unipv.sfw.model.utente;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
@@ -39,7 +42,7 @@ public class Cliente extends Utente {
 	 */
 	public String getDataNascita() {
 		SimpleDateFormat formattedDate = new SimpleDateFormat("YYYY-MM-dd");
-		return formattedDate.format(dataNascita);
+		return formattedDate.format(dataNascita.getTime());
 	}
 
 	/**
