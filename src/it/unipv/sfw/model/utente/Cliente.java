@@ -19,10 +19,11 @@ public class Cliente extends Utente {
 	private Abbonamento abb;
 	private boolean isGiornalista;
 
-	public Cliente(String nome, String cognome, String email, String pass) {
+	public Cliente(String nome, String cognome, String email, String pass, Calendar dataNascita) {
 		super(nome, cognome, email, pass);
 		this.abb = null;
 		isGiornalista = false;
+		this.dataNascita = dataNascita;
 	}
 	
 	
