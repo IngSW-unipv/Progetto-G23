@@ -54,8 +54,12 @@ public class StoreController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				StoreButton b = ((StoreButton)e.getSource());
-				s.addMerchToCart(b.getMerch(), 1);
-				((StoreView)view).onCartUpdate(s.getCart(), b.getMerch());
+				Merchandising m = b.getMerch();
+				// Check if the quantity doesn't exceed existing quantity.
+				if (s.getCart().getOrDefault(m, 0) < s.getMerch().get(m)) {
+					s.addMerchToCart(m, 1);
+					((StoreView)view).onCartUpdate(s.getCart(), m);
+				}
 			}
 		};
 		
