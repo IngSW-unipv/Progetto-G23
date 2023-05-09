@@ -55,11 +55,6 @@ public class Merchandising implements Comparable<Merchandising> {
 		return prezzo;
 	}
 
-	@Override
-	public int compareTo(Merchandising o) {
-		return id - o.id;
-	}
-
 	public int getId() {
 		// TODO Auto-generated method stub
 		return id;
@@ -76,5 +71,15 @@ public class Merchandising implements Comparable<Merchandising> {
 	@Override
 	public int hashCode() {
 		return id;
-	}	
+	}
+	
+	@Override
+	public int compareTo(Merchandising o) {
+		return id - o.id;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		return this.id == ((Merchandising)other).getId();
+	}
 }

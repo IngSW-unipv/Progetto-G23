@@ -91,13 +91,8 @@ public class StoreView extends AView {
 			int q = e.getValue();
 			
 			int cart_q = 0;
-			Merchandising cart_m = carrello.keySet()
-					.stream()
-					.filter(int_m -> int_m.getId() == m.getId())
-					.findFirst()
-					.orElse(null);
-			if (cart_m != null)
-				cart_q = carrello.get(cart_m);
+			if (carrello.containsKey(m))
+				cart_q = carrello.get(m);
 			
 			StoreItemPanel panel = new StoreItemPanel(m, q, cart_q);
 			itemPanels.put(m, panel);
@@ -174,13 +169,8 @@ public class StoreView extends AView {
 			Merchandising m
 			) {
 		int cart_q = 0;
-		Merchandising cart_m = carrello.keySet()
-				.stream()
-				.filter(int_m -> int_m.getId() == m.getId())
-				.findFirst()
-				.orElse(null);
-		if (cart_m != null)
-			cart_q = carrello.get(cart_m);
+		if (carrello.containsKey(m))
+			cart_q = carrello.get(m);
 		
 		StoreItemPanel p = itemPanels.get(m);
 		p.setCartQuantity(cart_q);
