@@ -38,7 +38,7 @@ public class Cliente extends Utente {
 	 * @return La data di nascita del cliente.
 	 */
 	public String getDataNascita() {
-		SimpleDateFormat formattedDate = new SimpleDateFormat("YYYY-MMM-dd");
+		SimpleDateFormat formattedDate = new SimpleDateFormat("YYYY-MM-dd");
 		return formattedDate.format(dataNascita);
 	}
 
