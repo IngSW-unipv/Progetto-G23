@@ -57,7 +57,8 @@ public class ControllerManager {
 		f.addComponentListener(new ComponentResizeEndListener(100) {
 			@Override
 			public void onResizedTimedOut() {
-				currentController.onWindowResized(f.getCurrentSize());
+				if (currentController != null)
+					currentController.onWindowResized(f.getCurrentSize());
 			}
 		});
 	}
