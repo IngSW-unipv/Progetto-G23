@@ -17,8 +17,9 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 
 /**
  * Controller che si occupa della PartiteView.
- * @author Gabriele Invernizzi
- * @see AController
+ * 
+ * @author Gabriele Invernizzi,Jacopo Piccoli
+ * @see AController 
  * @see it.unipv.sfw.view.PartiteView
  */
 public class PartiteController extends AController {
@@ -47,6 +48,34 @@ public class PartiteController extends AController {
 		Collection<UtenteButton> btns = v.getButtons();
 		for (UtenteButton b : btns)
 			b.addActionListener(a);
+		
+		v.getStoreButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(7);
+			}
+		});
+		v.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(8);
+			}
+		});
+		
+		v.getMuseoButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(10);
+			}
+		});
+		
+		v.getExit().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Sessione.getIstance().resetScelte();
+				ControllerManager.getInstance().loadController(0);
+			}
+		});
 		
 		view = v;
 	}

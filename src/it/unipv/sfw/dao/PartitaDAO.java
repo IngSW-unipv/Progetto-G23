@@ -14,6 +14,11 @@ import java.util.Locale;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Partita.Squadre;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.partita.Partita}.
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.partita.Partita
+ */
 public class PartitaDAO implements IPartitaDAO {
 
 	private String schema;
@@ -61,7 +66,7 @@ public class PartitaDAO implements IPartitaDAO {
 		DBConnection.closeConnection(conn);
 		return result;
 	}
-	
+
 	@Override
 	public Partita selectPartitaByData(Calendar dataPartita) {
 		

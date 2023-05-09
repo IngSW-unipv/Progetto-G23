@@ -13,25 +13,24 @@ public class Merchandising implements Comparable<Merchandising> {
  * foto 
  * */
 
-	private Merch tipoMerch;
+	private String nome;
 	private double prezzo;
-	private int id, quantita;
+	private int id;
 	private String descrizione;
 
-	public Merchandising(Merch tipo, double prezzo, int id, int quantita, String descrizione) {
-		tipoMerch = tipo;
+	public Merchandising(String nome, double prezzo, int id, String descrizione) {
+		this.nome = nome;
 		this.prezzo = prezzo;
 		this.id = id;
-		this.quantita = quantita;
 		this.descrizione = descrizione;
 	}
 
 	/**
-	 * Funzione che permette di cambiare il tipo del merch a quello passato come parametro.
-	 * @param tipo Tipo del Merch.
+	 * Funzione che permette di cambiare il nome del merch a quello passato come parametro.
+	 * @param nome Nome del Merch.
 	 */
-	public void setTipoMerch(Merch tipo) {
-		tipoMerch = tipo;
+	public void setNomeMerch(String nome) {
+		this.nome = nome;
 	}
 
 	/**
@@ -43,10 +42,10 @@ public class Merchandising implements Comparable<Merchandising> {
 	}
 	
 	/**
-	 * @return Il tipo del merch.
+	 * @return Il nome del merch.
 	 */
-	public Merch getTipoMerch() {
-		return tipoMerch;
+	public String getTipoMerch() {
+		return nome;
 	}
 
 	/**
@@ -58,38 +57,12 @@ public class Merchandising implements Comparable<Merchandising> {
 
 	@Override
 	public int compareTo(Merchandising o) {
-		return ((tipoMerch).compareTo(o.tipoMerch));
+		return id - o.id;
 	}
 
 	public int getId() {
 		// TODO Auto-generated method stub
 		return id;
-	}
-	
-	public int getQuantita() {
-		return quantita;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public void setQuantita(int quantita) {
-		this.quantita = quantita;
-	}
-	
-	/**
-	 * Funzione che permette ridurre di un unità la quantità del prodotto.
-	 */
-	public void riduciQuantita() {
-		quantita--;
-	}
-	
-	/**
-	 * Funzione che permette aumentare di un unità la quantità del prodotto.
-	 */
-	public void aumentaQuantita() {
-		quantita++;
 	}
 	
 	public void setDescrizione(String descrizione) {
@@ -100,4 +73,8 @@ public class Merchandising implements Comparable<Merchandising> {
 		return descrizione;
 	}
 	
+	@Override
+	public int hashCode() {
+		return id;
+	}	
 }

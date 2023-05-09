@@ -1,5 +1,6 @@
 package it.unipv.sfw.model.utente;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.unipv.sfw.dao.ClienteDAO;
@@ -7,6 +8,7 @@ import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
+import it.unipv.sfw.model.store.Merchandising;
 
 
 /**
@@ -21,14 +23,15 @@ import it.unipv.sfw.model.partita.Posto;
 public class Sessione {
 	private static Sessione istance = null;
 	private HashMap<String, Integer> scelte;
+	private HashMap<Merchandising, Integer> carrello;
 	private Partita currentPartita;
 	private Utente currentUtente;
 
-	private Sessione() {
-		
+	private Sessione() {	
 		currentUtente = null;
 		currentPartita = null;
-		scelte = new HashMap<String, Integer>();
+		carrello = null;
+		scelte = new HashMap<>();
 	}
 	
 	
@@ -90,11 +93,12 @@ public class Sessione {
 	
 	/**
 	 * Funzione che resetta i campi sessione riguardanti 
-	 * {@link Anello}, {@link Posto}, {@link Settore}, {@link Blocco}, {@link Partita} 
+	 * {@link Anello}, {@link Posto}, {@link Settore}, {@link Blocco}, {@link Partita}, {@link Merchandising}
 	 * a null.
 	 */
 	public void resetScelte() {
 		scelte.clear();
+		carrello = null;
 		currentPartita = null;
 	}
 
@@ -156,6 +160,13 @@ public class Sessione {
 	}
 	
 	/**
+	 * @param carrello HashMap di store items.
+	 */
+	public void setCarrello(HashMap<Merchandising, Integer> carrello) {
+		this.carrello = carrello;
+	}
+	
+	/**
 	 * @return {@link Blocco} della sessione corrente.
 	 */
 	public int getBlocco() {
@@ -190,4 +201,10 @@ public class Sessione {
 		return currentPartita;
 	}
 	
+	/**
+	 * @return HashMap di item nel carrello.
+	 */
+	public HashMap<Merchandising, Integer> getCarrello() {
+		return carrello;
+	}
 }

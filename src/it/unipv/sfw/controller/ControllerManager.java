@@ -14,6 +14,7 @@ import it.unipv.sfw.frame.Frame;
  * @see Frame
  * @see it.unipv.sfw.view.AView
  */
+
 public class ControllerManager {
 	
 	public static void main(String[] args) {
@@ -25,14 +26,14 @@ public class ControllerManager {
 	private Frame f;
 	private AController currentController;
 	private final ControllerCache[] controllers;
-	private final int N_CONTROLLERS = 7;
+	private final int N_CONTROLLERS = 11;
 	
 	private ControllerManager() {
 		// init frame
 		f = new Frame(900, 600);
 	
 		// init controllers
-		controllers = new ControllerCache[7];
+		controllers = new ControllerCache[N_CONTROLLERS];
 		controllers[0] = new ControllerCache(new LoginController());
 		controllers[1] = new ControllerCache(new RegistrazioneController());
 		controllers[2] = new ControllerCache(new SectorController());
@@ -40,10 +41,14 @@ public class ControllerManager {
 		controllers[4] = new ControllerCache(new BloccoController());
 		controllers[5] = new ControllerCache(new PostoController());
 		controllers[6] = new ControllerCache(new PartiteController());
+		controllers[7] = new ControllerCache(new StoreController());
+		controllers[8] = new ControllerCache(new ProfiloPersonaleController());
+		controllers[9] = new ControllerCache(new CarrelloController());
+		controllers[10] = new ControllerCache(new MuseoController());
 		
 		currentController = null;
 		
-		// add resize evenet listener
+		// add resize event listener
 		f.addComponentListener(new ComponentResizeEndListener(100) {
 			@Override
 			public void onResizedTimedOut() {

@@ -12,7 +12,14 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import it.unipv.sfw.model.partita.Posto;
+import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Utente.Type;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.partita.Posto}
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.partita.Posto
+ */
 public class PostoDAO implements IPostoDAO {
 	
 	private String schema;
@@ -81,6 +88,37 @@ public class PostoDAO implements IPostoDAO {
 		
 		DBConnection.closeConnection(conn);
 		return result;
+	}
+
+
+	@Override
+	public boolean insertPosto(Posto posto, Cliente cliente) {
+		
+		conn = DBConnection.startConnection(conn, schema);
+		PreparedStatement st1;
+		boolean esito = true;
+		
+		try
+		{
+			String query = "INSERT INTO POSTI VALUES(?,?,?,?,?,?)";
+			st1 = conn.prepareStatement(query);
+			
+			st1.setString(1,"" + posto.getData());
+			st1.setInt(2, posto.getNSettore());
+			st1.setInt(3, posto.getNBlocco());
+			st1.setInt(4, posto.getNAnello());
+			st1.setInt(5, posto.getNPosto());
+			st1.setString(6, cliente.getEmail());
+			
+			st1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			esito = false;
+		}
+		
+		DBConnection.closeConnection(conn);
+		return esito;
 	}
 		
 }

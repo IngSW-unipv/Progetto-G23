@@ -12,6 +12,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -32,12 +35,13 @@ import java.util.Collection;
 public class PartiteView extends AView {
 	
 	private int righe;
-
-	JPanel panel;
+	
 	// variabili del top
 	private JPanel top, bottoni;
-	private JLabel icona;
-	private JButton bpart, bmuseo, bshop, butente;
+	private JButton bmuseo, bshop;
+	private JMenuBar utente;
+	private JMenu menuutente;
+	private JMenuItem esci,pp;
 	private Icon img;
 	private Image img2;
 
@@ -52,16 +56,14 @@ public class PartiteView extends AView {
 	public PartiteView(Partita[] par, Dimension dim) {
 
 		righe = par.length;
-		panel = new JPanel();
-		panel.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
 		top = new JPanel();
 		bottoni = new JPanel();
+		utente=new JMenuBar(); 
+		menuutente=new JMenu("");
+		esci=new JMenuItem("Esci");
+		pp=new JMenuItem("Profilo Personale");
 
-		icona = new JLabel();
-
-		bpart = new JButton("PARTITE");
-		bpart.setBackground(Color.WHITE);
-		bpart.setFont(new java.awt.Font("Arial", 1, 18));
+		
 		bmuseo = new JButton("MUSEO");
 		bmuseo.setBackground(Color.WHITE);
 		bmuseo.setFont(new java.awt.Font("Arial", 1, 18));
@@ -71,18 +73,21 @@ public class PartiteView extends AView {
 
 		img = new ImageIcon(getClass().getResource("/utente.gif"));
 
-		butente = new JButton("", img);
-		butente.setBackground(Color.BLUE);
+		menuutente.setIcon(img);
+		menuutente.setBackground(Color.BLUE);
+		
+		menuutente.add(pp);
+		menuutente.add(esci);
+		utente.add(menuutente);
 
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-		bottoni.add(bpart);
 		bottoni.add(bmuseo);
 		bottoni.add(bshop);
 
 		top.setLayout(new BorderLayout());
-		top.add(butente, BorderLayout.WEST);
 		top.add(bottoni, BorderLayout.CENTER);
+		top.add(utente, BorderLayout.EAST);
 
 		top.setBorder(BorderFactory.createLineBorder(Color.black));
 		top.setBackground(Color.gray);
@@ -130,29 +135,49 @@ public class PartiteView extends AView {
 
 		pane = new JScrollPane(p);
 
+		pane.getVerticalScrollBar().setUnitIncrement(10);
+
 		middle.setLayout(new BorderLayout());
 		middle.add(titolo, BorderLayout.NORTH);
 		middle.add(pane, BorderLayout.CENTER);
 
-		panel.setLayout(new BorderLayout());
-		panel.add(top, BorderLayout.NORTH);
-		panel.add(middle, BorderLayout.CENTER);
-
-		this.add(panel,BorderLayout.CENTER);
-
+		this.setLayout(new BorderLayout());
+		this.add(top, BorderLayout.NORTH);
+		this.add(middle, BorderLayout.CENTER);
 	}
 
 	public Collection<UtenteButton> getButtons() {
 		return acquista;
 	}
 	
+	public JButton getStoreButton() {
+		return bshop;
+	}
+	
+	public JButton getMuseoButton() {
+		return bmuseo;
+	}
+	public JMenu getMenuButton() {
+		return menuutente;
+	}
+	
+	public JMenuItem getProfiloPersonaleButton() {
+		return pp;
+	}
+	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));
-		panel.setPreferredSize(new Dimension((int)((dim.width-20)), dim.height - 45));
-		
-		panel.revalidate();
-		panel.repaint();	
+		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));		
+		p.revalidate();
+		p.repaint();	
+	}
+	
+	public void menu(boolean stato) {
+		menuutente.setPopupMenuVisible(stato);
+	}
+	
+	public JMenuItem getExit() {
+		return esci;
 	}
 
 	@Override

@@ -18,13 +18,14 @@ public class Cimelio {
 		Ricordo
 	}
 	
-	private String tipo, descrizione;
+	private String tipo, descrizione, imgid;
 	private int id, anno;
 	
-	public Cimelio(String descrizione, TipoCimelio tipo, int id) {
+	public Cimelio(String descrizione, TipoCimelio tipo, int id, int anno, String imgid) {
 		this.tipo = "" + tipo;
 		this.id = id;
 		this.descrizione = descrizione;
+		this.setImgid(imgid);
 	}
 	
 	/**
@@ -71,6 +72,14 @@ public class Cimelio {
 
 	public void setAnno(int anno) {
 		this.anno = anno;
+	}
+
+	public String getImgid() {
+		return imgid;
+	}
+
+	public void setImgid(String imgid) {
+		this.imgid = imgid;
 	}
 
 }

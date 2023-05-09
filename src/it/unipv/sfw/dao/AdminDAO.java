@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Utente.Type;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.utente.Admin}.
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.utente.Admin
+ */
 public class AdminDAO implements IAdminDAO {
 	private String schema;
 	private Connection conn;

@@ -11,6 +11,11 @@ import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.model.utente.Utente}.
+ * @author Federico Romano
+ * @see it.unipv.sfw.model.utente.Utente
+ */
 public class UtenteDAO implements IUtenteDAO {
 	
 	private String schema;
