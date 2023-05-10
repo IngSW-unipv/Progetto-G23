@@ -9,5 +9,7 @@
 	<classpathentry kind="src" path="img"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar"/>
 	<classpathentry kind="lib" path="lib/flatlaf-3.1.1/flatlaf-3.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/activation-jaf1.1.1/activation-jaf1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/javax.mail-api-1.4.7/javax.mail-api-1.4.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
