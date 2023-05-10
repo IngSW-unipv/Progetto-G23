@@ -82,4 +82,12 @@ public class Merchandising implements Comparable<Merchandising> {
 	public boolean equals(Object other) {
 		return this.id == ((Merchandising)other).getId();
 	}
+	
+	public String toString() { 
+		String str = "";
+		
+		str += id + "      " + nome + "      " + prezzo;	
+		
+		return str;
+	}
 }
