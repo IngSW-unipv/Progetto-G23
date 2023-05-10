@@ -164,4 +164,9 @@ public class LoginView extends AView {
 		
 		contenitore.repaint();
 	}
+	
+	public void onLoad() {
+		username.setText("");
+		password.setText("");
+	}
 }
