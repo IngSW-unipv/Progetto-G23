@@ -2,6 +2,7 @@ package it.unipv.sfw.view.elements;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -27,18 +28,23 @@ public class StoreItemPanel extends JPanel {
 	private JLabel item_in_cart;
 	
 	public StoreItemPanel(Merchandising m, int quantity, int qInCart) {	
+		// Fonts
+		Font mediumFont = new Font("Arial", 1, 16);
+		Font largeFont = new Font("Arial", 1, 18);
+		Font smallFont = new Font("Arial", 1, 11);
+				
 		JLabel item_name = new JLabel(m.getTipoMerch().toString());
-		item_name.setFont(new java.awt.Font("Arial", 1, 18));
+		item_name.setFont(largeFont);
 		
 		JTextArea item_desc = new JTextArea(5, 30);
 		item_desc.setEditable(false);
 		item_desc.setLineWrap(true);
-		item_desc.setFont(new java.awt.Font("Arial", 1, 16));
+		item_desc.setFont(mediumFont);
 		item_desc.setOpaque(false);
 		item_desc.setText(m.getDescrizione());
 		
 		JLabel item_price = new JLabel("Prezzo: " + String.format("%.2f", m.getPrezzo()) + " €");
-		item_price.setFont(new java.awt.Font("Arial", 1, 16));
+		item_price.setFont(mediumFont);
 		
 		JPanel item_data = new JPanel();
 		item_data.setLayout(new GridLayout(3, 1));
@@ -49,11 +55,11 @@ public class StoreItemPanel extends JPanel {
 		
 		btn = new StoreButton("ACQUISTA", m, quantity);
 		JLabel item_quantity = new JLabel("Rimanenti: " + quantity);
-		item_quantity.setFont(new java.awt.Font("Arial", 1, 11));
+		item_quantity.setFont(smallFont);
 		item_quantity.setBorder(new EmptyBorder(10, 0, 0, 0));
 		
 		item_in_cart = new JLabel("Nel carrello: " + qInCart);
-		item_in_cart.setFont(new java.awt.Font("Arial", 1, 11));
+		item_in_cart.setFont(smallFont);
 		item_in_cart.setBorder(new EmptyBorder(0, 0, 10, 0));
 		
 		JPanel buyPanel = new JPanel();

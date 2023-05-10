@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
@@ -34,7 +34,7 @@ public class StoreView extends AView {
 	// top
 	private JButton partiteButton, museoButton, cartButton;
 	// center
-	private JPanel item_list;
+	private JPanel itemList;
 	private HashMap<Merchandising, StoreItemPanel> itemPanels;
 	
 	public StoreView(
@@ -43,11 +43,14 @@ public class StoreView extends AView {
 			Dimension dim) {
 		merch_n = merch.size();
 		
+		// Fonts
+		Font largeFont = new Font("Arial", 1, 18);
+		Font veryLargeFont = new Font("Arial", 1, 24);
+		
 		// Top panel
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
 		topPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		topPanel.setBackground(Color.gray);
 		
 		JPanel topPanelBtns = new JPanel();
 		topPanelBtns.setBackground(Color.BLUE);
@@ -55,11 +58,11 @@ public class StoreView extends AView {
 		
 		partiteButton = new JButton("PARTITE");
 		partiteButton.setBackground(Color.WHITE);
-		partiteButton.setFont(new java.awt.Font("Arial", 1, 18));
+		partiteButton.setFont(largeFont);
 		
 		museoButton = new JButton("MUSEO");
 		museoButton.setBackground(Color.WHITE);
-		museoButton.setFont(new java.awt.Font("Arial", 1, 18));
+		museoButton.setFont(largeFont);
 		
 		topPanelBtns.add(partiteButton);
 		topPanelBtns.add(museoButton);
@@ -76,16 +79,15 @@ public class StoreView extends AView {
 		centralPanel.setLayout(new BorderLayout());
 		
 		JLabel title = new JLabel("Merchandising:");
-		title.setFont(new java.awt.Font("Arial", 1, 24));
+		title.setFont(veryLargeFont);
 		title.setBackground(Color.CYAN);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
 		centralPanel.add(title, BorderLayout.NORTH);
 		
 		// Item list
-		item_list = new JPanel();
+		itemList = new JPanel();
 		itemPanels = new HashMap<>(merch_n);
-		int i = 0;
 		for (Map.Entry<Merchandising, Integer> e : merch.entrySet()) {
 			Merchandising m = e.getKey();
 			int q = e.getValue();
@@ -96,27 +98,28 @@ public class StoreView extends AView {
 			
 			StoreItemPanel panel = new StoreItemPanel(m, q, cart_q);
 			itemPanels.put(m, panel);
-			item_list.add(panel);
+			itemList.add(panel);
 		}
 		
-		item_list.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*merch_n)));
-		item_list.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
+		itemList.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*merch_n)));
+		itemList.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
-		JScrollPane item_scroll_pane = new JScrollPane(item_list);
-		item_scroll_pane.getVerticalScrollBar().setUnitIncrement(20);
+		JScrollPane itemScrollPane = new JScrollPane(itemList);
+		itemScrollPane.getVerticalScrollBar().setUnitIncrement(20);
 		
-		centralPanel.add(item_scroll_pane, BorderLayout.CENTER);
+		centralPanel.add(itemScrollPane, BorderLayout.CENTER);
 		
 		
 		// Main panel
 		this.setLayout(new BorderLayout());
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(centralPanel, BorderLayout.CENTER);
+		this.setBackground(Color.WHITE);
 	}
 	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		item_list.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*merch_n)));
+		itemList.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (220*merch_n)));
 		
 		this.revalidate();
 		this.repaint();
@@ -161,8 +164,8 @@ public class StoreView extends AView {
 	/**
 	 * Funzione chiamata nel caso in cui la quantità di un oggetto presente 
 	 * nel carrello sia cambiata.
-	 * @param carrello Carrello corrente
-	 * @param m Item la cui quantità è cambiata
+	 * @param carrello Carrello corrente.
+	 * @param m Item la cui quantità è cambiata.
 	 */
 	public void onCartUpdate(
 			HashMap<Merchandising, Integer> carrello,

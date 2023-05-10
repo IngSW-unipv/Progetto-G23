@@ -2,6 +2,7 @@ package it.unipv.sfw.view.elements;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -25,21 +26,25 @@ public class CartItemPanel extends JPanel {
 
 	private StoreButton btn;
 	
-	public CartItemPanel(Merchandising m, int quantity) {	
+	public CartItemPanel(Merchandising m, int quantity) {
+		// Fonts
+		Font mediumFont = new Font("Arial", 1, 16);
+		Font largeFont = new Font("Arial", 1, 18);
+		
 		JLabel item_name = new JLabel(m.getTipoMerch().toString());
-		item_name.setFont(new java.awt.Font("Arial", 1, 18));
+		item_name.setFont(largeFont);
 		
 		JTextArea item_desc = new JTextArea(5, 30);
 		item_desc.setEditable(false);
 		item_desc.setLineWrap(true);
-		item_desc.setFont(new java.awt.Font("Arial", 1, 16));
+		item_desc.setFont(mediumFont);
 		item_desc.setOpaque(false);
 		item_desc.setText(m.getDescrizione());
 		
 		String price_str = "Prezzo: " + String.format("%.2f", m.getPrezzo()) + " € x "
 				+ quantity + " = " + String.format("%.2f", m.getPrezzo() * quantity) + " €";
 		JLabel item_price = new JLabel(price_str);
-		item_price.setFont(new java.awt.Font("Arial", 1, 16));
+		item_price.setFont(mediumFont);
 		
 		JPanel item_data = new JPanel();
 		item_data.setLayout(new GridLayout(3, 1));
