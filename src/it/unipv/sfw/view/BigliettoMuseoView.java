@@ -20,26 +20,36 @@ import com.github.lgooddatepicker.components.DateTimePicker;
 
 public class BigliettoMuseoView extends AView {
 
+	JPanel contenitore;
+	JPanel emailError;
 	JButton acquistaButton;
 	JButton backButton;
+	JTextField email_box;
 	
 	public BigliettoMuseoView(Dimension dim) {
 		
 		this.setLayout(new BorderLayout());
 		
-		JPanel contenitore = new JPanel();
-		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 35));
+		contenitore = new JPanel();
+		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		//contenitore.setLayout(new GridLayout(3, 1));
 		
 		JPanel emailPanel = new JPanel();
 		emailPanel.setPreferredSize(new Dimension(400, 75));
-		emailPanel.setLayout(new GridLayout(2, 1));
+		emailPanel.setLayout(new GridLayout(3, 1));
 		JLabel email_label = new JLabel("Inserire email:");
 		email_label.setFont(new java.awt.Font("Arial", 1, 16));
 		email_label.setOpaque(true);
-		JTextField email_box = new JTextField();
+		email_box = new JTextField();
+		emailError = new JPanel();
+		emailError.setLayout(new FlowLayout(FlowLayout.LEFT));
+		JLabel e_error = new JLabel("Formato email inserito non valido!");
+		e_error.setForeground(Color.RED);
+		emailError.add(e_error);
+		emailError.setVisible(false);
 		emailPanel.add(email_label);
 		emailPanel.add(email_box);
+		emailPanel.add(emailError);
 		
 		JPanel visitaPanel = new JPanel();
 		visitaPanel.setPreferredSize(new Dimension(400, 75));
@@ -112,12 +122,22 @@ public class BigliettoMuseoView extends AView {
 		
 	}
 	
+	public void upError() {
+		emailError.setVisible(true);
+		email_box.setText("");
+		contenitore.repaint();
+	}
+	
 	public JButton getAcquistaButton() {
 		return acquistaButton;
 	}
 	
 	public JButton getBackButton() {
 		return backButton;
+	}
+	
+	public String getEnteredEmail() {
+		return email_box.getText();
 	}
 	
 	@Override

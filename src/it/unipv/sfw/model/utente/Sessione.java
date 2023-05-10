@@ -2,9 +2,11 @@ package it.unipv.sfw.model.utente;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import it.unipv.sfw.dao.ClienteDAO;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
+import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
@@ -43,6 +45,12 @@ public class Sessione {
 			istance = new Sessione();
 		}
 		return istance;
+	}
+	
+	public void enterEmail(String email) throws WrongEmailFormatException {
+		if(!email.contains("@gmail.com")) {
+			throw new WrongEmailFormatException(email);
+		}
 	}
 	
 	/**
