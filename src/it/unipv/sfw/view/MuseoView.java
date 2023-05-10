@@ -68,6 +68,7 @@ public class MuseoView extends AView {
 		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/utente.gif"));
 		utenteButton = new JButton("", utenteImg);
 		utenteButton.setBackground(Color.BLUE);
+		utenteButton.setPreferredSize(new Dimension(50,50));
 		
 		topPanel.add(topPanelButtons, BorderLayout.CENTER);
 		topPanel.add(utenteButton, BorderLayout.EAST);
@@ -91,6 +92,8 @@ public class MuseoView extends AView {
 		JPanel bigliettoPanel = new JPanel();
 		acquistaBiglietto = new JButton("ACQUISTA BIGLIETTO");
 		acquistaBiglietto.setBackground(Color.WHITE);
+		acquistaBiglietto.setPreferredSize(new Dimension(200, 30));
+		bigliettoPanel.setPreferredSize(new Dimension(100, 40));
 		bigliettoPanel.setBackground(Color.BLUE);
 		bigliettoPanel.setOpaque(true);
 		bigliettoPanel.add(acquistaBiglietto);
@@ -126,6 +129,14 @@ public class MuseoView extends AView {
 		scudetto.setOpaque(true);
 		scudetto.setIcon(scudettosx);
 		centralMiddlePanel.add(scudetto, BorderLayout.WEST);
+		
+		//
+		JLabel blue_label_dx = new JLabel();
+		blue_label_dx.setBackground(Color.BLUE);
+		blue_label_dx.setOpaque(true);
+		blue_label_dx.setIcon(scudettosx);
+		centralMiddlePanel.add(blue_label_dx, BorderLayout.EAST);
+		//
 		
 		centralPanel.add(centralMiddlePanel, BorderLayout.CENTER);
 		

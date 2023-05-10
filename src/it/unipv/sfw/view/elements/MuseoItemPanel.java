@@ -30,14 +30,13 @@ public class MuseoItemPanel extends JPanel {
 		
 		JPanel column_pezzo = new JPanel();
 		column_pezzo.setLayout(new GridLayout(2, 1));
-		column_pezzo.setPreferredSize(new Dimension(600, 200));
+		column_pezzo.setPreferredSize(new Dimension(450, 200));
 		column_pezzo.add(titolo_pezzo);
 		column_pezzo.add(descr_pezzo);
 		
 		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + r.getImgid() + ".png"));
 		image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 180, java.awt.Image.SCALE_SMOOTH));
 		JLabel image = new JLabel();
-		image.setLayout(new FlowLayout(FlowLayout.LEFT));
 		image.setIcon(image_pezzo);
 		
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -51,7 +50,7 @@ public class MuseoItemPanel extends JPanel {
 		JLabel titolo_pezzo = new JLabel(c.getTipo() + " " + c.getAnno());
 		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
 		
-		JTextArea descr_pezzo = new JTextArea(5, 2); 
+		JTextArea descr_pezzo = new JTextArea(5, 30); 
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
 		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 16));
@@ -60,14 +59,13 @@ public class MuseoItemPanel extends JPanel {
 		
 		JPanel column_pezzo = new JPanel();
 		column_pezzo.setLayout(new GridLayout(2, 1));
-		column_pezzo.setPreferredSize(new Dimension(600, 200));
+		column_pezzo.setPreferredSize(new Dimension(450, 200));
 		column_pezzo.add(titolo_pezzo);
 		column_pezzo.add(descr_pezzo);
 		
 		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + c.getImgid() + ".png"));
-		image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 200, java.awt.Image.SCALE_SMOOTH));
+		image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 180, java.awt.Image.SCALE_SMOOTH));
 		JLabel image = new JLabel();
-		image.setLayout(new FlowLayout(FlowLayout.LEFT));
 		image.setIcon(image_pezzo);
 		
 		this.setBorder(BorderFactory.createLineBorder(Color.black));

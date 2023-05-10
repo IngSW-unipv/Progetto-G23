@@ -17,6 +17,17 @@ public class BigliettoMuseoController extends AController {
 		
 		BigliettoMuseoView bview = new BigliettoMuseoView(dim);
 		
+		
+		bview.getBackButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(10);
+			}
+			
+		});
+			
+		//per pagamento
+		/*
 		bview.getAcquistaButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -24,6 +35,9 @@ public class BigliettoMuseoController extends AController {
 			}
 			
 		});
+		*/
+		
+		view = bview;
 		
 	}
 
