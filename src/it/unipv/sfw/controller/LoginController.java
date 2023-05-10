@@ -54,4 +54,10 @@ public class LoginController extends AController {
 		
 		view = v;
 	}
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		view.onWindowResized(dim);
+		((LoginView)view).onLoad();
+	}
 }
