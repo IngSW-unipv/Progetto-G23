@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/flatlaf-3.1.1/flatlaf-3.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/activation-jaf1.1.1/activation-jaf1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/javax.mail-api-1.4.7/javax.mail-api-1.4.7.jar"/>
+	<classpathentry kind="lib" path="lib/LGoodDatePicker-10.3.1/LGoodDatePicker-10.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
