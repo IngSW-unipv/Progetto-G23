@@ -31,6 +31,33 @@ public class PostoDAO implements IPostoDAO {
 	}
 	
 	@Override
+	public int selectCount(String email) {
+		
+		int numeroBiglietti = 0;
+		
+		conn = DBConnection.startConnection(conn, schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+		
+		try
+		{
+			String query = "SELECT COUNT(*) FROM " + this.schema + " WHERE EMAIL LIKE ?";
+			st1 = conn.prepareStatement(query);
+			
+			st1.setString(1, email);
+			
+			rs1 = st1.executeQuery();
+			
+			rs1.next(); //A ResultSet cursor is initially positioned before the first row
+			numeroBiglietti = rs1.getInt(1);
+			
+		} catch (Exception e){e.printStackTrace();}
+		
+		DBConnection.closeConnection(conn);
+		return numeroBiglietti;
+	}
+	
+	@Override
 	public int selectCount(Calendar dataPartita) {
 		
 		int numeroposti = 0;
@@ -41,7 +68,7 @@ public class PostoDAO implements IPostoDAO {
 		
 		try
 		{
-			String query = "SELECT COUNT(*) FROM POSTI WHERE DATA=?";
+			String query = "SELECT COUNT(*) FROM " + this.schema + " WHERE DATA=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + dataPartita);
@@ -71,7 +98,7 @@ public class PostoDAO implements IPostoDAO {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY - hh:mm", Locale.ITALY);
 			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM POSTI ORDER BY DATA";
+			String query = "SELECT * FROM " + this.schema + " ORDER BY DATA";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -100,7 +127,7 @@ public class PostoDAO implements IPostoDAO {
 		
 		try
 		{
-			String query = "INSERT INTO POSTI VALUES(?,?,?,?,?,?)";
+			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1,"" + posto.getData());

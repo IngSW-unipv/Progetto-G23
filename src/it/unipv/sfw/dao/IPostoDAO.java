@@ -31,5 +31,11 @@ public interface IPostoDAO {
 	 * @return Un array che contiene tutti i posti occupati per ciascuna partita.
 	 */
 	ArrayList<Posto> selectAllOrderBydata();
+	
+	/**
+	 * @param email Email identificativa del cliente di cui si vuole sapere il numero di biglietti acquistati.
+	 * @return Il numero di biglietti acquistati dal cliente identificato dalla mail passata come parametro.
+	 */
+	int selectCount(String email);
 
 }

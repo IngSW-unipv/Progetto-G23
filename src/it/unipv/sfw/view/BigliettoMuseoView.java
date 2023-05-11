@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,16 +17,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.DateTimePicker;
+import com.github.lgooddatepicker.components.TimePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 
 
 public class BigliettoMuseoView extends AView {
 
-	JPanel contenitore;
-	JPanel emailError;
-	JButton acquistaButton;
-	JButton backButton;
-	JTextField email_box;
+	private JPanel contenitore;
+	private JPanel emailError;
+	private JButton acquistaButton;
+	private JButton backButton;
+	private JTextField email_box;
 	
 	public BigliettoMuseoView(Dimension dim) {
 		
@@ -54,10 +59,18 @@ public class BigliettoMuseoView extends AView {
 		JPanel visitaPanel = new JPanel();
 		visitaPanel.setPreferredSize(new Dimension(400, 75));
 		visitaPanel.setLayout(new GridLayout(2, 1));
-		JLabel visita_label = new JLabel("Inserire data e ora di visita:");
+		JLabel visita_label = new JLabel("Selezionare data e ora di visita:");
 		visita_label.setFont(new java.awt.Font("Arial", 1, 16));
 		visita_label.setOpaque(true);
-		DateTimePicker chDate = new DateTimePicker();
+		DatePickerSettings dateSettings = new DatePickerSettings();
+		TimePickerSettings timeSettings = new TimePickerSettings();
+		DateTimePicker chDate = new DateTimePicker(dateSettings, timeSettings);
+		LocalDate today = LocalDate.now();
+		dateSettings.setDateRangeLimits(today.minusDays(0), today.plusDays(70));
+		dateSettings.setAllowKeyboardEditing(false);
+		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, null, null);
+		timeSettings.setAllowKeyboardEditing(false);
+		
 		visitaPanel.add(visita_label);
 		visitaPanel.add(chDate);
 		
