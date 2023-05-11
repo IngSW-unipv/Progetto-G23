@@ -24,10 +24,13 @@ import it.unipv.sfw.view.buttons.StoreButton;
  */
 public class StoreItemPanel extends JPanel {
 
+	private int item_qantity;
 	private StoreButton btn;
 	private JLabel item_in_cart;
 	
-	public StoreItemPanel(Merchandising m, int quantity, int qInCart) {	
+	public StoreItemPanel(Merchandising m, int quantity, int qInCart) {
+		this.item_qantity = quantity;
+		
 		// Fonts
 		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 18);
@@ -53,8 +56,13 @@ public class StoreItemPanel extends JPanel {
 		item_data.add(item_desc);
 		item_data.add(item_price);
 		
-		btn = new StoreButton("ACQUISTA", m, quantity);
-		JLabel item_quantity = new JLabel("Rimanenti: " + quantity);
+		btn = new StoreButton("ACQUISTA", m, item_qantity);
+		if (quantity == qInCart) 
+			btn.setEnabled(false);
+		else 
+			btn.setEnabled(true);
+		
+		JLabel item_quantity = new JLabel("Rimanenti: " + item_qantity);
 		item_quantity.setFont(smallFont);
 		item_quantity.setBorder(new EmptyBorder(10, 0, 0, 0));
 		
@@ -85,6 +93,11 @@ public class StoreItemPanel extends JPanel {
 	 */
 	public void setCartQuantity(int q) {
 		item_in_cart.setText("Nel carrello: " + q);
+		
+		if (item_qantity == q) 
+			btn.setEnabled(false);
+		else 
+			btn.setEnabled(true);
 		
 		this.revalidate();
 		this.repaint();
