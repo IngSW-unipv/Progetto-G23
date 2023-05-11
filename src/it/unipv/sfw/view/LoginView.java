@@ -65,7 +65,7 @@ public class LoginView extends AView {
 		registrati = new JButton("Registrati");
 		
 		//inizializzazione ImageIcon
-		img = new ImageIcon(this.getClass().getResource("/icona.jpg"));
+		img = new ImageIcon(this.getClass().getResource("/stadio.jpg"));
 		
 		//Specifiche, Layout e Font
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));

@@ -68,7 +68,7 @@ public class MuseoView extends AView {
 		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/utente.gif"));
 		utenteButton = new JButton("", utenteImg);
 		utenteButton.setBackground(Color.BLUE);
-		utenteButton.setPreferredSize(new Dimension(50,50));
+		utenteButton.setPreferredSize(new Dimension(40,40));
 		
 		topPanel.add(topPanelButtons, BorderLayout.CENTER);
 		topPanel.add(utenteButton, BorderLayout.EAST);
