@@ -1,7 +1,7 @@
 package it.unipv.sfw.model.utente;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import it.unipv.sfw.dao.ClienteDAO;
@@ -48,7 +48,9 @@ public class Sessione {
 	}
 	
 	public void enterEmail(String email) throws WrongEmailFormatException {
-		if(!email.contains("@gmail.com")) {
+		Predicate<String> isEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE)
+					.asPredicate();
+		if(!isEmail.test(email)) {
 			throw new WrongEmailFormatException(email);
 		}
 	}
@@ -92,9 +94,7 @@ public class Sessione {
 	 * Funzione utilizzata per registrare la prenotazione di una partita.
 	 * Le scelte vengono automaticamente resettate.
 	 */
-	public void book() {
-		// TODO: Mancano funzioni in PostiDAO
-		
+	public void book() {	
 		this.resetScelte();
 	}
 
