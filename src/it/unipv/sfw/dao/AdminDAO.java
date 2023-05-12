@@ -15,27 +15,22 @@ import it.unipv.sfw.model.utente.Utente.Type;
  * @see it.unipv.sfw.model.utente.Admin
  */
 public class AdminDAO implements IAdminDAO {
-	private String schema;
-	private Connection conn;
 	
-	public AdminDAO() {
-		super();
-		this.schema = "UTENTI";
-	}
+	private static final String SCHEMA = "UTENTI";
 	
 	@Override
 	public ArrayList<Admin> selectAll() {
 		
 		ArrayList<Admin> result = new ArrayList<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			st1 = conn.createStatement();
-			String query = "SELECT (NOME, COGNOME, EMAIL, PASSWORD) FROM UTENTI WHERE TIPO='ADMIN'";
+			String query = "SELECT (NOME, COGNOME, EMAIL, PASSWORD) FROM " + SCHEMA + " WHERE TIPO='ADMIN'";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -44,8 +39,7 @@ public class AdminDAO implements IAdminDAO {
 			}
 			
 		} catch (Exception e){e.printStackTrace();}
-		
-		DBConnection.closeConnection(conn);
+
 		return result;
 	}
 	
@@ -54,13 +48,13 @@ public class AdminDAO implements IAdminDAO {
 		
 		Admin result = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 	
-		try
-		{
-			String query = "SELECT * FROM UTENTI WHERE EMAIL=? AND TIPO='ADMIN'";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT * FROM " + SCHEMA + " WHERE EMAIL=? AND TIPO='ADMIN'";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			rs1 = st1.executeQuery();
@@ -70,21 +64,20 @@ public class AdminDAO implements IAdminDAO {
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
-		
-		DBConnection.closeConnection(conn); 
+
 		return result;
 	}
 	
 	@Override
 	public boolean insertAdmin(Admin adminInput) {
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO UTENTI VALUES(?,?,?," + Type.ADMIN + ")";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?," + Type.ADMIN + ")";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, adminInput.getNome());
@@ -98,8 +91,7 @@ public class AdminDAO implements IAdminDAO {
 			e.printStackTrace();
 			esito = false;
 		}
-		
-		DBConnection.closeConnection(conn);
+
 		return esito;
 	}
 }

@@ -22,23 +22,18 @@ import it.unipv.sfw.model.utente.Utente.Type;
  */
 public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 
-	private String schema;
-	private Connection conn;
-	
-	public RiconoscimentoDAO() {
-		super();
-		this.schema = "MUSEO_ITEMS";  //(id, TipoRiconoscimento, Anno, Descrizione, imgid)
-	}
+	private static final String SCHEMA = "MUSEO_ITEMS";
 	
 	@Override
 	public boolean insertRiconoscimento(Riconoscimento riconoscimento) {
-		conn = DBConnection.startConnection(conn, schema);
+		
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?,?)";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, riconoscimento.getTipo());
@@ -53,20 +48,19 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
 	@Override
 	public boolean updateDescrizione(Riconoscimento riconoscimento) {
 		
-		conn = DBConnection.startConnection(conn, schema);
     	PreparedStatement st1;
     	boolean esito = true;
     	
-    	try
-		{
-			String query = "UPDATE " + this.schema + " SET DESCRIZIONE=? WHERE ID=?";
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "UPDATE " + SCHEMA + " SET DESCRIZIONE=? WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, riconoscimento.getDescrizione());                  
@@ -79,7 +73,6 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
@@ -88,14 +81,14 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 		
 		ArrayList<Riconoscimento> result = new ArrayList<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + this.schema;
+			String query = "SELECT * FROM " + SCHEMA;
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -115,7 +108,6 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			result = null;
 		}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
@@ -124,13 +116,13 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 		
 		Riconoscimento result = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 	
-		try
-		{
-			String query = "SELECT * FROM " + this.schema + " WHERE ID=?";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT * FROM " + SCHEMA + " WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, item.getId());
 			rs1 = st1.executeQuery();
@@ -143,24 +135,22 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn); 
 		return result;
 	}
 	
 	@Override
 	public ArrayList<Riconoscimento> selectAllOrderByData() {
 		
-		
 		ArrayList<Riconoscimento> result = new ArrayList<>();
 				
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 				
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + this.schema + " ORDER BY ANNO";
+			String query = "SELECT * FROM " +SCHEMA + " ORDER BY ANNO";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -179,7 +169,6 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			result = null;
 		}
 				
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 	

@@ -21,27 +21,21 @@ import it.unipv.sfw.model.utente.Utente.Type;
  */
 public class UtenteDAO implements IUtenteDAO {
 	
-	private String schema;
-	private Connection conn;
-	
-	public UtenteDAO() {
-		super();
-		this.schema = "UTENTI";
-	}
+	private static final String SCHEMA  = "UTENTI";
 	
 	@Override
 	public ArrayList<Utente> selectAll() {
 		
 		ArrayList<Utente> result = new ArrayList<>();;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM UTENTI";
+			String query = "SELECT * FROM " + SCHEMA;
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -61,20 +55,19 @@ public class UtenteDAO implements IUtenteDAO {
 			
 		} catch (Exception e){e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
 	@Override
 	public boolean insertUtente(Utente u) {
 
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try {
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
 			
-			String query = "INSERT INTO UTENTI VALUES(?,?,?,?,?)";
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, u.getNome());
@@ -90,7 +83,6 @@ public class UtenteDAO implements IUtenteDAO {
 			esito = false;
 		}
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
@@ -99,13 +91,13 @@ public class UtenteDAO implements IUtenteDAO {
 		
 		Utente result = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 	
-		try
-		{
-			String query = "SELECT * FROM UTENTI WHERE EMAIL=?";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT * FROM " + SCHEMA + " WHERE EMAIL=?";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			rs1 = st1.executeQuery();
@@ -123,7 +115,6 @@ public class UtenteDAO implements IUtenteDAO {
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn); 
 		return result;
 	}
 	
@@ -132,13 +123,13 @@ public class UtenteDAO implements IUtenteDAO {
 		
 		Type tipoSelected = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 		
-		try
-		{
-			String query = "SELECT TIPO FROM UTENTI WHERE EMAIL=? AND PASSWORD LIKE ?";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT TIPO FROM " + SCHEMA + " WHERE EMAIL=? AND PASSWORD LIKE ?";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			st1.setString(2, password);
@@ -152,7 +143,6 @@ public class UtenteDAO implements IUtenteDAO {
 			}
 		} catch (Exception e) {e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn); 
 		return tipoSelected;
 	}
 }

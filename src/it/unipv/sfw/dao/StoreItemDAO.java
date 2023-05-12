@@ -16,24 +16,18 @@ import it.unipv.sfw.model.store.*;
  */
 public class StoreItemDAO implements IStoreItemDAO {
 
-	private final String schema;
-	private Connection conn;
-	
-	public StoreItemDAO() {
-		super();
-		this.schema = "STORE_ITEMS";  // (id, tipo, prezzo, quantita_rimanente, descrizione) 
-	}
+	private static final String SCHEMA = "STORE_ITEMS";
 	
 	@Override
 	public boolean updatePrezzoItem(Merchandising merch, double newPrezzo) {
 		
-		conn = DBConnection.startConnection(conn, schema);
     	PreparedStatement st1;
     	boolean esito = true;
     	
-    	try
-		{
-			String query = "UPDATE " + this.schema + " SET PREZZO=? WHERE ID=?";
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "UPDATE " + SCHEMA + " SET PREZZO=? WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setDouble(1, newPrezzo);                  
@@ -46,20 +40,19 @@ public class StoreItemDAO implements IStoreItemDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
 	@Override
 	public boolean updateQuantitaItem(Merchandising merch, int newQuantita) {
 		
-		conn = DBConnection.startConnection(conn, schema);
     	PreparedStatement st1;
     	boolean esito = true;
     	
-    	try
-		{
-			String query = "UPDATE " + this.schema + " SET QUANTITA_RIMANENTE=? WHERE ID=?";
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "UPDATE " + SCHEMA + " SET QUANTITA_RIMANENTE=? WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setDouble(1, newQuantita);                  
@@ -72,20 +65,19 @@ public class StoreItemDAO implements IStoreItemDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
 	@Override
 	public boolean insertStoreItem(Merchandising merch, int quantita) {
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO " + this.schema + "(TIPO, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE) VALUES(?,?,?,?)";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "INSERT INTO " + SCHEMA + "(TIPO, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE) VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + merch.getTipoMerch());
@@ -100,7 +92,6 @@ public class StoreItemDAO implements IStoreItemDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
@@ -109,14 +100,14 @@ public class StoreItemDAO implements IStoreItemDAO {
 		
 		HashMap<Merchandising, Integer> result = new HashMap<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + this.schema;
+			String query = "SELECT * FROM " + SCHEMA;
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -127,7 +118,6 @@ public class StoreItemDAO implements IStoreItemDAO {
 			
 		} catch (Exception e){e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
@@ -136,14 +126,14 @@ public class StoreItemDAO implements IStoreItemDAO {
 		
 		HashMap<Merchandising, Integer> result = new HashMap<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 	
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + this.schema + " WHERE QUANTITA_RIMANENTE > 0";
+			String query = "SELECT * FROM " + SCHEMA + " WHERE QUANTITA_RIMANENTE > 0";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -153,8 +143,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
-		
-		DBConnection.closeConnection(conn); 
+		 
 		return result;
 	}
 	
@@ -163,13 +152,13 @@ public class StoreItemDAO implements IStoreItemDAO {
 		
 		AbstractMap.SimpleEntry<Merchandising, Integer> result = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 	
-		try
-		{
-			String query = "SELECT * FROM " + this.schema + " WHERE ID=?";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT * FROM " + SCHEMA + " WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, merch.getId());
 			rs1 = st1.executeQuery();
@@ -182,7 +171,6 @@ public class StoreItemDAO implements IStoreItemDAO {
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn); 
 		return result;
 	}
 	

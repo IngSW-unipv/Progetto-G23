@@ -12,24 +12,18 @@ import it.unipv.sfw.model.biglietti.Biglietto;
  */
 public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 	
-	private String schema;
-	private Connection conn;
-	
-	public BigliettoMuseoDAO() {
-		super();
-		this.schema = "BIGLIETTIMUSEO";  //(email, data, ora)
-	}
+	private static final String SCHEMA = "BIGLIETTIMUSEO";
 	
 	@Override
 	public boolean insertBigliettiMuseo(Biglietto ticket) {
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO BIGLIETTIMUSEO (EMAIL, DATA, ORA) VALUES(?,?,?)";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "INSERT INTO " + SCHEMA + " (EMAIL, DATA, ORA) VALUES(?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + ticket.getEmail());
@@ -43,7 +37,6 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 

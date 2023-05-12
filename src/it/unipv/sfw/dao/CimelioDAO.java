@@ -22,23 +22,17 @@ import it.unipv.sfw.model.utente.Utente.Type;
  */
 public class CimelioDAO implements ICimelioDAO {
 
-	private String schema;
-	private Connection conn;
-	
-	public CimelioDAO() {
-		super();
-		this.schema = "MUSEO_ITEMS";  //(id, TipoCimelio, Anno, Descrizione, imgid)
-	}
+	private static final String SCHEMA = "MUSEO_ITEMS";
 	
 	@Override
 	public boolean insertCimelio(Cimelio cim) {
-		conn = DBConnection.startConnection(conn, schema);
+	
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?,?)";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, cim.getTipo());
@@ -52,21 +46,19 @@ public class CimelioDAO implements ICimelioDAO {
 			e.printStackTrace();
 			esito = false;
 		} 
-		
-		DBConnection.closeConnection(conn);
+
 		return esito;
 	}
 	
 	@Override
 	public boolean updateDescrizione(Cimelio cimelio) {
 		
-		conn = DBConnection.startConnection(conn, schema);
     	PreparedStatement st1;
     	boolean esito = true;
     	
-    	try
-		{
-			String query = "UPDATE " + this.schema + " SET DESCRIZIONE=? WHERE ID=?";
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			String query = "UPDATE " + SCHEMA + " SET DESCRIZIONE=? WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, cimelio.getDescrizione());                  
@@ -79,7 +71,6 @@ public class CimelioDAO implements ICimelioDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
@@ -88,14 +79,13 @@ public class CimelioDAO implements ICimelioDAO {
 		
 		ArrayList<Cimelio> result = new ArrayList<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + this.schema;
+			String query = "SELECT * FROM " + SCHEMA;
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -105,16 +95,13 @@ public class CimelioDAO implements ICimelioDAO {
 					Cimelio c = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
 					result.add(c);
 				} 
-			}
-			
-			
+			}	
 		} catch (Exception e){
 			
 			e.printStackTrace();
 			result = null;
 		}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
@@ -123,13 +110,12 @@ public class CimelioDAO implements ICimelioDAO {
 		
 		Cimelio result = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 	
-		try
-		{
-			String query = "SELECT * FROM " + this.schema + " WHERE ID=?";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			String query = "SELECT * FROM " + SCHEMA + " WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, item.getId());
 			rs1 = st1.executeQuery();
@@ -142,24 +128,22 @@ public class CimelioDAO implements ICimelioDAO {
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn); 
 		return result;
 	}
 	
 	@Override
 	public ArrayList<Cimelio> selectAllOrderByData() {
 		
-		
 		ArrayList<Cimelio> result = new ArrayList<>();
 				
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 				
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + this.schema + "ORDER BY ANNO";
+			String query = "SELECT * FROM " + SCHEMA + "ORDER BY ANNO";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -175,7 +159,6 @@ public class CimelioDAO implements ICimelioDAO {
 			result = null;
 		}
 				
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 

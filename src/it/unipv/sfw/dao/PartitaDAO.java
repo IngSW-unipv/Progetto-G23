@@ -21,29 +21,23 @@ import it.unipv.sfw.model.partita.Partita.Squadre;
  */
 public class PartitaDAO implements IPartitaDAO {
 
-	private String schema;
-	private Connection conn;
-	final int bigliettiTot = 80000;
-	
-	public PartitaDAO() {
-		super();
-		this.schema = "PARTITE";  //(data, ospite, biglietti rimanenti)
-	}
+	private static final String SCHEMA = "PARTITE";
+	private final int bigliettiTot = 80000;
 	
 	@Override
 	public ArrayList<Partita> selectAll() {
 		
 		ArrayList<Partita> result = new ArrayList<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss", Locale.ITALY);
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM PARTITE";
+			String query = "SELECT * FROM " + SCHEMA;
 			rs1 = st1.executeQuery(query);
 			
 			
@@ -63,7 +57,6 @@ public class PartitaDAO implements IPartitaDAO {
 			
 		} catch (Exception e){e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -72,21 +65,20 @@ public class PartitaDAO implements IPartitaDAO {
 		
 		Partita result = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss", Locale.ITALY);
 			
-			String query = "SELECT * FROM PARTITE WHERE DATA=?";
+			String query = "SELECT * FROM " + SCHEMA + " WHERE DATA=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + dataPartita);
 			
 			rs1 = st1.executeQuery();
-			
 			
 			rs1.next();
 				
@@ -103,20 +95,19 @@ public class PartitaDAO implements IPartitaDAO {
 			
 		} catch (Exception e){e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
 	@Override
 	public boolean insertPartita(Partita newPartita) {
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO PARTITE VALUES(?,?,?)";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, newPartita.getData());
@@ -130,22 +121,21 @@ public class PartitaDAO implements IPartitaDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
 	@Override
 	public boolean updatePartita(Partita newPartita) {
 		
-		conn = DBConnection.startConnection(conn, schema);
     	PreparedStatement st1;
     	boolean esito = true;
     	
     	IPostoDAO pDao = new PostoDAO();
     	
-    	try
-		{
-			String query = "UPDATE PARTITE SET BIGLIETTIRIMANENTI=? WHERE DATA=?";
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "UPDATE " + SCHEMA + " SET BIGLIETTIRIMANENTI=? WHERE DATA=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setInt(1, bigliettiTot - pDao.selectCount(newPartita.getCalendarDate()));
@@ -157,8 +147,7 @@ public class PartitaDAO implements IPartitaDAO {
 			e.printStackTrace();
 			esito = false;
 		} 
-		
-		DBConnection.closeConnection(conn);
+    	
 		return esito;
 	}
 }

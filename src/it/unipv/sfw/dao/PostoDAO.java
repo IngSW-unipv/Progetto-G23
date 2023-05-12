@@ -13,7 +13,6 @@ import java.util.Locale;
 
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.utente.Cliente;
-import it.unipv.sfw.model.utente.Utente.Type;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.partita.Posto}
@@ -22,38 +21,31 @@ import it.unipv.sfw.model.utente.Utente.Type;
  */
 public class PostoDAO implements IPostoDAO {
 	
-	private String schema;
-	private Connection conn;
-	
-	public PostoDAO() {
-		super();
-		this.schema = "POSTI";  //(data, settore, blocco, anello, posto, email)
-	}
+	private static final String SCHEMA = "POSTI";
 	
 	@Override
 	public int selectCount(String email) {
 		
 		int numeroBiglietti = 0;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 		
-		try
-		{
-			String query = "SELECT COUNT(*) FROM " + this.schema + " WHERE EMAIL LIKE ?";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE EMAIL LIKE ?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, email);
 			
 			rs1 = st1.executeQuery();
 			
-			rs1.next(); //A ResultSet cursor is initially positioned before the first row
+			rs1.next(); 		// A ResultSet cursor is initially positioned before the first row
 			numeroBiglietti = rs1.getInt(1);
 			
 		} catch (Exception e){e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return numeroBiglietti;
 	}
 	
@@ -62,13 +54,13 @@ public class PostoDAO implements IPostoDAO {
 		
 		int numeroposti = 0;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 		
-		try
-		{
-			String query = "SELECT COUNT(*) FROM " + this.schema + " WHERE DATA=?";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE DATA=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + dataPartita);
@@ -80,7 +72,6 @@ public class PostoDAO implements IPostoDAO {
 			
 		} catch (Exception e){e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return numeroposti;
 	}
 	
@@ -89,16 +80,16 @@ public class PostoDAO implements IPostoDAO {
 		
 		ArrayList<Posto> result = new ArrayList<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{	
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();	
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY - hh:mm", Locale.ITALY);
 			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + this.schema + " ORDER BY DATA";
+			String query = "SELECT * FROM " + SCHEMA + " ORDER BY DATA";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -113,7 +104,6 @@ public class PostoDAO implements IPostoDAO {
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -121,13 +111,13 @@ public class PostoDAO implements IPostoDAO {
 	@Override
 	public boolean insertPosto(Posto posto, Cliente cliente) {
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO " + this.schema + " VALUES(?,?,?,?,?,?)";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1,"" + posto.getData());
@@ -144,7 +134,6 @@ public class PostoDAO implements IPostoDAO {
 			esito = false;
 		}
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 		

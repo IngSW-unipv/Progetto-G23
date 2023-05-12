@@ -14,24 +14,18 @@ import it.unipv.sfw.model.utente.Cliente;
  */
 public class AbbonamentoDAO implements IAbbonamentoDAO {
 	
-	private String schema;
-	private Connection conn;
-	
-	public AbbonamentoDAO() {
-		super();
-		this.schema = "ABBONAMENTI"; //(email, livello)
-	}
+	private static final String SCHEMA = "ABBONAMENTI";
 	
     @Override
 	public boolean insertAbbonamento(Cliente nuovoAbbonato) {
-    	
-    	conn = DBConnection.startConnection(conn, schema);
+
     	PreparedStatement st1;
     	boolean esito = true;
     	
-    	try
-		{
-			String query = "INSERT INTO ABBONAMENTI VALUES(?,?) WHERE CLIENTE.EMAIL=?";
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+    		Connection conn = db.getConnection();
+    		
+			String query = "INSERT INTO " +  SCHEMA + " VALUES(?,?) WHERE CLIENTE.EMAIL=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, nuovoAbbonato.getEmail());
@@ -45,20 +39,19 @@ public class AbbonamentoDAO implements IAbbonamentoDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
        
     @Override
 	public boolean updateAbbonamento(Cliente nuovoAbbonato, TipoAbb livello) {
     	
-    	conn = DBConnection.startConnection(conn, schema);
     	PreparedStatement st1;
     	boolean esito = true;
     	
-    	try
-		{
-			String query = "UPDATE ABBONAMENTI SET LIVELLO=? WHERE EMAIL=?";
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+    		Connection conn = db.getConnection();
+    		
+			String query = "UPDATE " +  SCHEMA + " SET LIVELLO=? WHERE EMAIL=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + livello);
@@ -70,8 +63,7 @@ public class AbbonamentoDAO implements IAbbonamentoDAO {
 			e.printStackTrace();
 			esito = false;
 		} 
-		
-		DBConnection.closeConnection(conn);
+    	
 		return esito;
 	}
     	

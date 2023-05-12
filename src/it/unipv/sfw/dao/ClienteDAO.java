@@ -19,27 +19,20 @@ import it.unipv.sfw.model.utente.Utente.Type;
  */
 public class ClienteDAO implements IClienteDAO {
 	
-	private String schema;
-	private Connection conn;
-	
-	public ClienteDAO() {
-		super();
-		this.schema = "UTENTI";
-	}
+	private static final String SCHEMA  = "UTENTI";
 
 	@Override
 	public ArrayList<Cliente> selectAll() {
 		
 		ArrayList<Cliente> result = new ArrayList<>();
 		
-		conn = DBConnection.startConnection(conn, schema);
 		Statement st1;
 		ResultSet rs1;
 		
-		try
-		{
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
 			st1 = conn.createStatement();
-			String query = "SELECT NOME, COGNOME, EMAIL, PASS, NASCITA FROM " + this.schema + " WHERE TIPO='CLIENTE'";
+			String query = "SELECT NOME, COGNOME, EMAIL, PASS, NASCITA FROM " + SCHEMA + " WHERE TIPO='CLIENTE'";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -53,7 +46,6 @@ public class ClienteDAO implements IClienteDAO {
 			
 		} catch (Exception e){e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
@@ -62,13 +54,13 @@ public class ClienteDAO implements IClienteDAO {
 		
 		Cliente result = null;
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		ResultSet rs1;
 	
-		try
-		{
-			String query = "SELECT * FROM UTENTI WHERE EMAIL=? AND TIPO='CLIENTE'";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT * FROM " + SCHEMA + " WHERE EMAIL=? AND TIPO='CLIENTE'";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			rs1 = st1.executeQuery();
@@ -83,20 +75,19 @@ public class ClienteDAO implements IClienteDAO {
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
-		DBConnection.closeConnection(conn); 
 		return result;
 	}
 	
 	@Override
 	public boolean insertCliente(Cliente clienteInput) {
 		
-		conn = DBConnection.startConnection(conn, schema);
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		try
-		{
-			String query = "INSERT INTO UTENTI VALUES(?,?,?,?,'" + Type.CLIENTE + "',?)";
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,'" + Type.CLIENTE + "',?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(3, clienteInput.getNome());
@@ -112,7 +103,6 @@ public class ClienteDAO implements IClienteDAO {
 			esito = false;
 		} 
 		
-		DBConnection.closeConnection(conn);
 		return esito;
 	}
 	
