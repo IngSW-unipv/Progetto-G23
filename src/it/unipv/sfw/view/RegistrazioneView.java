@@ -1,153 +1,144 @@
 package it.unipv.sfw.view;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 
-/** 
- * Classe che rappresenta la schermata di registrazione
- * dell'utente. 
- *  
- * @author Simone Platano,Jacopo Piccoli
+/**
+ * Classe che rappresenta la schermata di registrazione dell'utente.
+ * 
+ * @author Simone Platano,Jacopo Piccoli, Gabriele Invernizzi
  * @see AView
  */
 public class RegistrazioneView extends AView {
 
-
-	private JPanel tutto,testo, bottoni, titolo, b, ba,contenitore,text,testi;
-	private JTextField ce,cn,cc,cd;//casellaemail,casellanome,casellacognome,caselladata
+	private JPanel destraPanel, contenitore;
+	private JTextField email, nome, cognome, data;
 	private JPasswordField password;
-	private JLabel e, p, r, n, c, d, icona, stringa;
-	private JButton login, registrati;
-	private ImageIcon img;
+	private JLabel imgLabel;
+	private JButton loginBtn, registratiBtn;
+
+	private final int textFieldsColumns = 15;
 
 	public RegistrazioneView(Dimension dim) {
-		
-		//inizializzazione JPanel
-		contenitore=new JPanel();
-		tutto=new JPanel();
-		testo = new JPanel();
-		bottoni = new JPanel();
-		titolo = new JPanel();
-		b = new JPanel();
-		ba = new JPanel();
-		testi=new JPanel();
-		text=new JPanel();
-		
-		//Inizializzazione JLabel
-		e = new JLabel("email");
-		p = new JLabel("Password");
-		r = new JLabel("REGISTRAZIONE");
-		n=new JLabel("Nome");
-		c=new JLabel("Cognome");
-		d=new JLabel("Data di nascita");
-		icona = new JLabel();
-		stringa = new JLabel("<html>Hai già un account?? &nbsp  &nbsp  &nbsp  </html>");
-		
-		//Inizializzazione JTextField
 
-		ce = new JTextField();
-		cn = new JTextField();
-		cc = new JTextField();
-		cd = new JTextField();
-		
-		//Inizializzazione JPasswordField
+		// Fonts
+		Font mediumFont = new Font("Arial", 1, 16);
+		Font largeFont = new Font("Arial", 1, 24);
+
+		// Inizializzazione bottoni
+		loginBtn = new JButton("Login");
+		registratiBtn = new JButton("Registrati");
+
+		// Inizializzazione immagine di sinistra
+		ImageIcon img = new ImageIcon(this.getClass().getResource("/stadio.jpg"));
+
+		img = new ImageIcon(img.getImage().getScaledInstance((int) (dim.width) / 2, (int) (dim.height - 45) / 2,
+				Image.SCALE_SMOOTH));
+		imgLabel = new JLabel(img);
+		imgLabel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+
+		// Inizializzazione panel contenitore
+		contenitore = new JPanel();
+		contenitore.setPreferredSize(new Dimension(dim.width, ((int) (dim.height - 45))));
+
+		// Panel a destra, delle info
+		destraPanel = new JPanel();
+		destraPanel.setLayout(new GridLayout(3, 1));
+		destraPanel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+
+		JPanel titoloPanel = new JPanel();
+		titoloPanel.setLayout(new GridLayout(1, 1));
+		JLabel regLabel = new JLabel("REGISTRAZIONE");
+		regLabel.setHorizontalAlignment(JLabel.CENTER);
+		regLabel.setFont(largeFont);
+		titoloPanel.add(regLabel);
+
+		JPanel infoPanel = new JPanel();
+		infoPanel.setLayout(new GridLayout(5, 2, 0, 3));
+		int destraPanelInset = dim.width / 12;
+		destraPanel.setBorder(new EmptyBorder(0, destraPanelInset, 0, destraPanelInset));
+
+		JLabel emailLabel = new JLabel("Email");
+		JLabel passwordLabel = new JLabel("Password");
+		JLabel nomeLabel = new JLabel("Nome");
+		JLabel cognomeLabel = new JLabel("Cognome");
+		JLabel dataLabel = new JLabel("Data di nascita");
+		JLabel accountGiaEsistenteLabel = new JLabel("<html>Hai già un account? &nbsp  &nbsp  &nbsp  </html>");
+
+		email = new JTextField();
+		nome = new JTextField();
+		cognome = new JTextField();
+		data = new JTextField();
+		email.setColumns(textFieldsColumns);
+		nome.setColumns(textFieldsColumns);
+		cognome.setColumns(textFieldsColumns);
+		data.setColumns(textFieldsColumns);
+
 		password = new JPasswordField();
+		password.setColumns(textFieldsColumns);
+
+		infoPanel.add(nomeLabel);
+		infoPanel.add(nome);
+		infoPanel.add(cognomeLabel);
+		infoPanel.add(cognome);
+		infoPanel.add(dataLabel);
+		infoPanel.add(data);
+		infoPanel.add(emailLabel);
+		infoPanel.add(email);
+		infoPanel.add(passwordLabel);
+		infoPanel.add(password);
+
+		JPanel bottoniContainerPanel = new JPanel();
 		
-		//Inizializzazione JButton
-		login = new JButton("Login");
-		registrati = new JButton("Registrati");
+		JPanel bottoniPanel = new JPanel();
+		bottoniPanel.setLayout(new BorderLayout());
 		
-		//Inizializzazione ImageIcon
-		img = new ImageIcon(this.getClass().getResource("/icona.jpg"));
+		JPanel regPanel = new JPanel();
+		regPanel.add(registratiBtn);
+
+		bottoniPanel.add(regPanel, BorderLayout.NORTH);
+		bottoniPanel.add(accountGiaEsistenteLabel, BorderLayout.WEST);
+		bottoniPanel.add(loginBtn, BorderLayout.EAST);
 		
-		//Specifiche, Layout e Font
-		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
-		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
-		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH)); 
-		
-		ce.setColumns(15);
-		cn.setColumns(15);		
-		cc.setColumns(15);		
-		cd.setColumns(15);
-		password.setColumns(15);
+		bottoniContainerPanel.add(bottoniPanel);
 
 		
-		e.setFont(new java.awt.Font("Arial", 1, 16));
-		p.setFont(new java.awt.Font("Arial", 1, 16));
-		n.setFont(new java.awt.Font("Arial", 1, 16));
-		c.setFont(new java.awt.Font("Arial", 1, 16));
-		d.setFont(new java.awt.Font("Arial", 1, 16));
-		r.setFont(new java.awt.Font("Arial", 1, 24));
+		destraPanel.add(titoloPanel);
+		destraPanel.add(infoPanel);
+		destraPanel.add(bottoniContainerPanel);
 
-		titolo.setLayout(new GridLayout(1, 1));
-		titolo.add(r);
-		r.setHorizontalAlignment(JLabel.CENTER);
-		
-		testi.setLayout(new GridLayout(5,1));
-		testi.add(n);
-		testi.add(c);
-		testi.add(d);
-		testi.add(e);
-		testi.add(p);
-		
-		text.setLayout(new GridLayout(5,1));
-		text.add(cn);
-		text.add(cc);
-		text.add(cd);
-		text.add(ce);
-		text.add(password);
-		
-		
-		testo.add(testi);
-		testo.add(text);
-		
-		icona.setIcon(img);
-		
-		ba.add(registrati);
+		contenitore.setLayout(new GridLayout(1, 2));
+		contenitore.add(imgLabel);
+		contenitore.add(destraPanel);
 
-		b.setLayout(new BorderLayout());
-		b.add(ba,BorderLayout.NORTH);
-		b.add(stringa,BorderLayout.WEST);
-		b.add(login,BorderLayout.EAST);
-
-		bottoni.add(b);
-
-		tutto.setLayout(new GridLayout(3, 1));
-		tutto.add(titolo);
-		tutto.add(testo);
-		tutto.add(bottoni);
-		
-		contenitore .setLayout(new GridLayout(1,2));
-		contenitore.add(icona);
-		contenitore.add(tutto);
-		
 		this.add(contenitore);
 
 	}
 
 	public JButton getRegistratiBtn() {
-		return registrati;
+		return registratiBtn;
 	}
 
 	public JButton getToLoginBtn() {
-		return login;
+		return loginBtn;
 	}
 
 	public JTextField getNome() {
-		return cn;
+		return nome;
 	}
 
 	public JTextField getCognome() {
-		return cc;
+		return cognome;
 	}
 
 	public JTextField getData() {
-		return cd;
+		return data;
 	}
 
 	public JTextField getEmail() {
-		return ce;
+		return email;
 	}
 
 	public JPasswordField getPassword() {
@@ -158,16 +149,20 @@ public class RegistrazioneView extends AView {
 	public Type getType() {
 		return AView.Type.REGISTRAZIONE;
 	}
-	
+
 	@Override
 	public void onWindowResized(Dimension dim) {
+
+		contenitore.setPreferredSize(new Dimension(dim.width, ((int) (dim.height - 45))));
+		destraPanel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+		int destraPanelInset = dim.width / 12;
+		destraPanel.setBorder(new EmptyBorder(0, destraPanelInset, 0, destraPanelInset));
 		
-		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
-		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
-		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH));
-		icona.setIcon(img);
-		
+		imgLabel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+		ImageIcon img = new ImageIcon(((ImageIcon) imgLabel.getIcon()).getImage()
+				.getScaledInstance((int) (dim.width) / 2, (int) (dim.height - 45) / 2, Image.SCALE_SMOOTH));
+		imgLabel.setIcon(img);
+
 		contenitore.revalidate();
 		contenitore.repaint();
 	}
