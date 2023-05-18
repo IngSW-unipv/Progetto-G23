@@ -31,7 +31,7 @@ public class RegistrazioneController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				String data = v.getData().getText();
 				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY", Locale.ITALY);
+				SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / YYYY", Locale.ITALY);
 				try {
 					cal.setTime(sdf.parse(data));
 				} catch (ParseException e1) {

@@ -84,6 +84,7 @@ public class Sessione {
 	 */
 	public void register(Cliente c)
 		throws Exception {
+		enterEmail(c.getEmail());
 		if(!(new ClienteDAO().insertCliente(c)))
 			throw new Exception("Non è possibile registrare il cliente.");
 		

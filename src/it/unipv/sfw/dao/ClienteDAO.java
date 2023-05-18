@@ -94,7 +94,7 @@ public class ClienteDAO implements IClienteDAO {
 			st1.setString(2, clienteInput.getCognome());
 			st1.setString(1, clienteInput.getEmail());
 			st1.setString(4, clienteInput.getPassword());
-			st1.setString(6, clienteInput.getDataNascita());
+			st1.setString(5, clienteInput.getDataNascita());
 			
 			st1.executeUpdate();
 			
