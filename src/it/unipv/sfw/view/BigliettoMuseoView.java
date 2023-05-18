@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 
 public class BigliettoMuseoView extends AView {
 
+	private JPanel box_contenitore;
 	private JPanel contenitore;
 	private JPanel emailError;
 	private JButton acquistaButton;
@@ -33,7 +35,12 @@ public class BigliettoMuseoView extends AView {
 	
 	public BigliettoMuseoView(Dimension dim) {
 		
+		Font medium_font = new java.awt.Font("Arial", 1, 16);
+		Font button_font = new java.awt.Font("Arial", 2, 13);
+		Font title_font = new java.awt.Font("Arial", 1, 26);
+		
 		this.setLayout(new BorderLayout());
+	
 		
 		contenitore = new JPanel();
 		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
@@ -43,7 +50,7 @@ public class BigliettoMuseoView extends AView {
 		emailPanel.setPreferredSize(new Dimension(400, 75));
 		emailPanel.setLayout(new GridLayout(3, 1));
 		JLabel email_label = new JLabel("Inserire email:");
-		email_label.setFont(new java.awt.Font("Arial", 1, 16));
+		email_label.setFont(medium_font);
 		email_label.setOpaque(true);
 		email_box = new JTextField();
 		emailError = new JPanel();
@@ -60,7 +67,7 @@ public class BigliettoMuseoView extends AView {
 		visitaPanel.setPreferredSize(new Dimension(400, 75));
 		visitaPanel.setLayout(new GridLayout(2, 1));
 		JLabel visita_label = new JLabel("Selezionare data e ora di visita:");
-		visita_label.setFont(new java.awt.Font("Arial", 1, 16));
+		visita_label.setFont(medium_font);
 		visita_label.setOpaque(true);
 		DatePickerSettings dateSettings = new DatePickerSettings();
 		TimePickerSettings timeSettings = new TimePickerSettings();
@@ -77,11 +84,12 @@ public class BigliettoMuseoView extends AView {
 		acquistaButton = new JButton("ACQUISTA BIGLIETTO");
 		acquistaButton.setBackground(Color.WHITE);
 		acquistaButton.setPreferredSize(new Dimension(300,50));
-		acquistaButton.setFont(new java.awt.Font("Arial", 2, 13));
+		acquistaButton.setFont(button_font);
 		
 		contenitore.add(emailPanel);
 		contenitore.add(visitaPanel);
 		contenitore.add(acquistaButton);	
+		
 		
 		this.add(contenitore, BorderLayout.CENTER);
 		
@@ -122,7 +130,7 @@ public class BigliettoMuseoView extends AView {
 		backButton.setBackground(Color.BLUE);
 		
 		JLabel title = new JLabel("  MUSEUM TICKET STORE");
-		title.setFont(new java.awt.Font("Arial", 1, 26));
+		title.setFont(title_font);
 		title.setBackground(Color.BLUE);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));

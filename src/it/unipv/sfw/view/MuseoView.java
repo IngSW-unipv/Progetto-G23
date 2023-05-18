@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -22,6 +24,7 @@ import javax.swing.JTextField;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
+import it.unipv.sfw.view.elements.MenuUtente;
 import it.unipv.sfw.view.elements.MuseoItemPanel;
 
 /*19 scudetti
@@ -35,6 +38,7 @@ import it.unipv.sfw.view.elements.MuseoItemPanel;
 public class MuseoView extends AView {
 	
 	private JButton partiteButton, storeButton, utenteButton;
+	private MenuUtente utente;
 	private JButton acquistaBiglietto;
 	private JPanel pezzimuseo;
 	
@@ -58,13 +62,18 @@ public class MuseoView extends AView {
 		partiteButton.setBackground(Color.WHITE);
 		partiteButton.setFont(new java.awt.Font("Arial", 1, 18));
 		
-		storeButton = new JButton("STORE");
+		storeButton = new JButton("SHOP");
 		storeButton.setBackground(Color.WHITE);
 		storeButton.setFont(new java.awt.Font("Arial", 1, 18));
 		
 		topPanelButtons.add(partiteButton);
 		topPanelButtons.add(storeButton);
 		
+		//
+		
+		 utente = new MenuUtente();
+		
+		/*
 		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/utente.gif"));
 		utenteButton = new JButton("", utenteImg);
 		utenteButton.setBackground(Color.BLUE);
@@ -72,6 +81,13 @@ public class MuseoView extends AView {
 		
 		topPanel.add(topPanelButtons, BorderLayout.CENTER);
 		topPanel.add(utenteButton, BorderLayout.EAST);
+		*/
+		
+		topPanel.add(topPanelButtons, BorderLayout.CENTER);
+		topPanel.add(utente, BorderLayout.EAST);
+		
+		
+		//
 		
 		JPanel centralPanel = new JPanel();
 		centralPanel.setLayout(new BorderLayout());
@@ -102,13 +118,11 @@ public class MuseoView extends AView {
 			//dentro scrollpane che è dentro contenitore a CENTER
 		pezzimuseo = new JPanel();
 		
-		int i = 0;
 		for(Cimelio c : cimeli) {
 			MuseoItemPanel pezzo = new MuseoItemPanel(c);
 			pezzimuseo.add(pezzo);
 		}
 		
-		int j = 0;
 		for(Riconoscimento r : riconoscimenti) {
 			MuseoItemPanel pezzo = new MuseoItemPanel(r);
 			pezzimuseo.add(pezzo);
@@ -146,16 +160,32 @@ public class MuseoView extends AView {
 		this.add(centralPanel, BorderLayout.CENTER);
 	}
 	
-	public JButton getPButton() {
+	public JButton getPartiteButton() {
 		return partiteButton;
 	}
 	
-	public JButton getSButton() {
+	public JButton getStoreButton() {
 		return storeButton;
+	}
+	
+	public JButton getUtenteButton() {
+		return utenteButton;
 	}
 		
 	public JButton getAcquistaButton() {
 		return acquistaBiglietto;
+	}
+	
+	public JMenuItem getProfiloPersonaleButton() {
+		return utente.getProfiloPersonale();
+	}
+	
+	public JMenuItem getExit() {
+		return utente.getExit();
+	}
+	
+	public void menu(boolean stato) {
+		utente.getMenuButton().setPopupMenuVisible(stato);
 	}
 	
 	@Override

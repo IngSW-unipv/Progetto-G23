@@ -9,6 +9,7 @@ import it.unipv.sfw.dao.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
+import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.MuseoView;
 
 public class MuseoController extends AController {
@@ -28,14 +29,14 @@ public class MuseoController extends AController {
 		
 		MuseoView mview = new MuseoView(museum, dim);
 		
-		mview.getPButton().addActionListener(new ActionListener() {		
+		mview.getPartiteButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(6);
 			}
 		});
 		
-		mview.getSButton().addActionListener(new ActionListener() {		
+		mview.getStoreButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(7);
@@ -48,6 +49,21 @@ public class MuseoController extends AController {
 				ControllerManager.getInstance().loadController(11);
 			}
 			
+		});
+		
+		mview.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(8);
+			}
+		});
+		
+		mview.getExit().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Sessione.getIstance().resetScelte();
+				ControllerManager.getInstance().loadController(0);
+			}
 		});
 		
 		view = mview;
