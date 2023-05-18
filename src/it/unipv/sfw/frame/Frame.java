@@ -21,11 +21,11 @@ public class Frame extends JFrame {
 	 */
 	public Frame(int w, int h) {
 		this.currentView = null;
+		this.setSize(w, h);
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		this.setTitle("StadiumSystem");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(w, h);
 		this.setVisible(true);
 	}
 	
