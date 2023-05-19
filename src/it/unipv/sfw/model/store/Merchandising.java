@@ -16,14 +16,12 @@ public class Merchandising implements Comparable<Merchandising> {
 	private String nome;
 	private double prezzo;
 	private int id;
-	//prvate int quantita;
 	private String descrizione;
 
 	public Merchandising(String nome, double prezzo, int id, String descrizione) {
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.id = id;
-		//this.quantita = quantita;
 		this.descrizione = descrizione;
 	}
 
@@ -60,10 +58,6 @@ public class Merchandising implements Comparable<Merchandising> {
 	public String getNome() {
 		return nome;
 	}
-	
-	/*public int getQuantita() {
-		return quantita;
-	}*/
 
 	public int getId() {
 		// TODO Auto-generated method stub
@@ -93,10 +87,10 @@ public class Merchandising implements Comparable<Merchandising> {
 		return this.id == ((Merchandising)other).getId();
 	}
 	
-	public String toString() { 
+	public String toString(int quantita) { 
 		String str = "";
 		
-		str += id + "          " + nome + "        " + prezzo + "\n";	
+		str += id + "          " + nome + "        " + prezzo + "      " + quantita + "\n";	
 		
 		return str;
 	}

@@ -23,10 +23,10 @@ import javax.swing.JTextField;
  */
 public class LoginView extends AView {
 	
-	private JPanel tutto,testo, bottoni, titolo, b,ba,contenitore,testi,text,errore,campilogin;
+	private JPanel tutto, testo, bottoni, titolo, b, ba, contenitore,testi, text, errore, campilogin;
 	private JTextField username;
 	private JPasswordField password;
-	private JLabel u, p,l, icona, stringa,e;
+	private JLabel u, p, l, icona, stringa, e;
 	private JButton login, registrati;
 	private ImageIcon img;
 

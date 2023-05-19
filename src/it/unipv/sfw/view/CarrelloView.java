@@ -83,6 +83,7 @@ public class CarrelloView extends AView {
 		itemPanels = new HashMap<>(merch_n);
 		// Caso in cui il carrello sia vuoto
 		if (merch_n == 0) {
+			acquistaBtn = null;
 			centralPanel.add(emptyCartPanel, BorderLayout.CENTER);
 			
 			// Main panel
