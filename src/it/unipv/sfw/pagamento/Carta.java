@@ -1,4 +1,4 @@
-package it.unipv.sfw.model.store;
+package it.unipv.sfw.pagamento;
 
 public class Carta {
 	
