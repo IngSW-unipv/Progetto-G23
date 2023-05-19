@@ -69,25 +69,10 @@ public class MuseoView extends AView {
 		topPanelButtons.add(partiteButton);
 		topPanelButtons.add(storeButton);
 		
-		//
-		
-		 utente = new MenuUtente();
-		
-		/*
-		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/utente.gif"));
-		utenteButton = new JButton("", utenteImg);
-		utenteButton.setBackground(Color.BLUE);
-		utenteButton.setPreferredSize(new Dimension(40,40));
-		
-		topPanel.add(topPanelButtons, BorderLayout.CENTER);
-		topPanel.add(utenteButton, BorderLayout.EAST);
-		*/
+		utente = new MenuUtente();
 		
 		topPanel.add(topPanelButtons, BorderLayout.CENTER);
 		topPanel.add(utente, BorderLayout.EAST);
-		
-		
-		//
 		
 		JPanel centralPanel = new JPanel();
 		centralPanel.setLayout(new BorderLayout());
@@ -100,11 +85,9 @@ public class MuseoView extends AView {
 		
 		centralPanel.add(title, BorderLayout.NORTH);
 		
-		//centro contenitore in centralPanel al CENTER
 		JPanel centralMiddlePanel = new JPanel();
 		centralMiddlePanel.setLayout(new BorderLayout());
 		
-			//dentro centro contenitore a NORTH
 		JPanel bigliettoPanel = new JPanel();
 		acquistaBiglietto = new JButton("ACQUISTA BIGLIETTO");
 		acquistaBiglietto.setBackground(Color.WHITE);
@@ -115,7 +98,6 @@ public class MuseoView extends AView {
 		bigliettoPanel.add(acquistaBiglietto);
 		centralMiddlePanel.add(bigliettoPanel, BorderLayout.NORTH);
 		
-			//dentro scrollpane che è dentro contenitore a CENTER
 		pezzimuseo = new JPanel();
 		
 		for(Cimelio c : cimeli) {
@@ -144,13 +126,11 @@ public class MuseoView extends AView {
 		scudetto.setIcon(scudettosx);
 		centralMiddlePanel.add(scudetto, BorderLayout.WEST);
 		
-		//
 		JLabel blue_label_dx = new JLabel();
 		blue_label_dx.setBackground(Color.BLUE);
 		blue_label_dx.setOpaque(true);
 		blue_label_dx.setIcon(scudettosx);
 		centralMiddlePanel.add(blue_label_dx, BorderLayout.EAST);
-		//
 		
 		centralPanel.add(centralMiddlePanel, BorderLayout.CENTER);
 		

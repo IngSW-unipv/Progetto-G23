@@ -24,6 +24,7 @@ public class MuseoItemPanel extends JPanel {
 		JTextArea descr_pezzo = new JTextArea(5, 30); 
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
+		descr_pezzo.setWrapStyleWord(true);
 		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 16));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(r.getDescrizione());
