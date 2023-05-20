@@ -3,10 +3,11 @@ package it.unipv.sfw.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -84,11 +85,23 @@ public class LoginView extends AView {
 		logLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		JPanel infoPanel=new JPanel();
-		infoPanel.setLayout(new GridLayout(2, 2, 0, 3));
-		infoPanel.add(userLabel);
-		infoPanel.add(username);
-		infoPanel.add(passLabel);
-		infoPanel.add(password);
+		infoPanel.setLayout(new GridBagLayout());		
+		GridBagConstraints infoConstraints = new GridBagConstraints();
+		infoConstraints.fill = GridBagConstraints.HORIZONTAL;
+		infoConstraints.insets = new Insets(2, 2, 0, 15);
+		
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 0;
+		infoPanel.add(userLabel, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 0;
+		infoPanel.add(username, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 1;
+		infoPanel.add(passLabel, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 1;
+		infoPanel.add(password, infoConstraints);
 		
 		imgLabel.setIcon(img);
 
@@ -163,7 +176,6 @@ public class LoginView extends AView {
 	
 	public void upError() {
 		errorPanel.setVisible(true);
-		
 		contenitore.repaint();
 	}
 	
