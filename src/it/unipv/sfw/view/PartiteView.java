@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.view.buttons.UtenteButton;
+import it.unipv.sfw.view.elements.MenuUtente;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,9 +41,7 @@ public class PartiteView extends AView {
 	private JPanel top, bottoni;
 	private JButton bmuseo, bshop;
 	private JMenuBar utente;
-	private JMenu menuutente;
-	private JMenuItem esci,pp;
-	private Icon img;
+	private MenuUtente u;
 	private Image img2;
 
 	// variabili del middle
@@ -59,9 +58,7 @@ public class PartiteView extends AView {
 		top = new JPanel();
 		bottoni = new JPanel();
 		utente=new JMenuBar(); 
-		menuutente=new JMenu("");
-		esci=new JMenuItem("Esci");
-		pp=new JMenuItem("Profilo Personale");
+		u=new MenuUtente();
 
 		
 		bmuseo = new JButton("MUSEO");
@@ -71,14 +68,7 @@ public class PartiteView extends AView {
 		bshop.setBackground(Color.WHITE);
 		bshop.setFont(new java.awt.Font("Arial", 1, 18));
 
-		img = new ImageIcon(getClass().getResource("/utente.gif"));
-
-		menuutente.setIcon(img);
-		menuutente.setBackground(Color.BLUE);
-		
-		menuutente.add(pp);
-		menuutente.add(esci);
-		utente.add(menuutente);
+		utente.add(u);
 
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
@@ -157,12 +147,10 @@ public class PartiteView extends AView {
 	public JButton getMuseoButton() {
 		return bmuseo;
 	}
-	public JMenu getMenuButton() {
-		return menuutente;
-	}
+	
 	
 	public JMenuItem getProfiloPersonaleButton() {
-		return pp;
+		return  u.getProfiloPersonale();
 	}
 	
 	@Override
@@ -172,12 +160,8 @@ public class PartiteView extends AView {
 		p.repaint();	
 	}
 	
-	public void menu(boolean stato) {
-		menuutente.setPopupMenuVisible(stato);
-	}
-	
 	public JMenuItem getExit() {
-		return esci;
+		return u.getExit();
 	}
 
 	@Override
