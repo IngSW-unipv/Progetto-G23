@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import it.unipv.sfw.dao.ClienteDAO;
+import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
+import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.partita.Partita;
@@ -80,14 +82,21 @@ public class Sessione {
 	/**
 	 * Funzione che inserisce un nuovo cliente nel database ed esegue il login.
 	 * @param c Cliente da registrare.
-	 * @throws Exception Da specializzare.
+	 * @throws AccountAlreadyExistsException.
+	 * @throws EmptyFieldException.
+	 * @throws WrongEmailFormatException.
 	 */
 	public void register(Cliente c)
-		throws Exception {
+		throws AccountAlreadyExistsException, EmptyFieldException, WrongEmailFormatException {
+		// Controlla che non vi siano campi vuoti
+		if (c.nome.isEmpty() || c.cognome.isEmpty() || c.password.isEmpty())
+			throw new EmptyFieldException();
+		// Controlla formato email
 		enterEmail(c.getEmail());
+		// Inserisci in db
 		if(!(new ClienteDAO().insertCliente(c)))
-			throw new Exception("Non è possibile registrare il cliente.");
-		
+			throw new AccountAlreadyExistsException(c.getEmail());
+		// Login
 		this.setCurrentUtente(c);
 	}
 	

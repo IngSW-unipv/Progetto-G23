@@ -20,13 +20,14 @@ public class RegistrazioneView extends AView {
 	private JTextField email, nome, cognome;
 	private DatePicker data;
 	private JPasswordField password;
-	private JLabel imgLabel;
+	private JLabel imgLabel, errorLabel;
 	private JButton loginBtn, registratiBtn;
 	
 
 	public RegistrazioneView(Dimension dim) {
 
 		// Fonts
+		Font smallFont = new Font("Arial", 1, 12);
 		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 24);
 
@@ -50,6 +51,14 @@ public class RegistrazioneView extends AView {
 		destraPanel = new JPanel();
 		destraPanel.setLayout(new GridLayout(3, 1));
 		destraPanel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+		
+		JPanel errorPanel = new JPanel();
+		errorPanel.setLayout(new GridLayout(1, 1));
+		errorLabel = new JLabel("");
+		errorLabel.setForeground(Color.RED);
+		errorLabel.setFont(smallFont);
+		errorLabel.setHorizontalAlignment(JLabel.CENTER);
+		
 
 		JPanel titoloPanel = new JPanel();
 		titoloPanel.setLayout(new GridLayout(1, 1));
@@ -60,14 +69,20 @@ public class RegistrazioneView extends AView {
 
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new GridBagLayout());
+		
 		int destraPanelInset = dim.width / 12;
 		destraPanel.setBorder(new EmptyBorder(0, destraPanelInset, 0, destraPanelInset));
 
 		JLabel emailLabel = new JLabel("Email");
+		emailLabel.setFont(mediumFont);
 		JLabel passwordLabel = new JLabel("Password");
+		passwordLabel.setFont(mediumFont);
 		JLabel nomeLabel = new JLabel("Nome");
+		nomeLabel.setFont(mediumFont);
 		JLabel cognomeLabel = new JLabel("Cognome");
+		cognomeLabel.setFont(mediumFont);
 		JLabel dataLabel = new JLabel("Data di nascita");
+		dataLabel.setFont(mediumFont);
 		JLabel accountGiaEsistenteLabel = new JLabel("<html>Hai già un account? &nbsp  &nbsp  &nbsp  </html>");
 		
 		email = new JTextField();
@@ -83,33 +98,38 @@ public class RegistrazioneView extends AView {
 		
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 0;
+		infoConstraints.gridwidth = 2;
+		infoPanel.add(errorLabel, infoConstraints);
+		infoConstraints.gridwidth = GridBagConstraints.RELATIVE;
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 1;
 		infoPanel.add(nomeLabel, infoConstraints);
 		infoConstraints.gridx = 1;
-		infoConstraints.gridy = 0;
+		infoConstraints.gridy = 1;
 		infoPanel.add(nome, infoConstraints);
 		infoConstraints.gridx = 0;
-		infoConstraints.gridy = 1;
+		infoConstraints.gridy = 2;
 		infoPanel.add(cognomeLabel, infoConstraints);
 		infoConstraints.gridx = 1;
-		infoConstraints.gridy = 1;
+		infoConstraints.gridy = 2;
 		infoPanel.add(cognome, infoConstraints);
 		infoConstraints.gridx = 0;
-		infoConstraints.gridy = 2;
+		infoConstraints.gridy = 3;
 		infoPanel.add(dataLabel, infoConstraints);
 		infoConstraints.gridx = 1;
-		infoConstraints.gridy = 2;
+		infoConstraints.gridy = 3;
 		infoPanel.add(data, infoConstraints);
 		infoConstraints.gridx = 0;
-		infoConstraints.gridy = 3;
+		infoConstraints.gridy = 4;
 		infoPanel.add(emailLabel, infoConstraints);
 		infoConstraints.gridx = 1;
-		infoConstraints.gridy = 3;
+		infoConstraints.gridy = 4;
 		infoPanel.add(email, infoConstraints);
 		infoConstraints.gridx = 0;
-		infoConstraints.gridy = 4;
+		infoConstraints.gridy = 5;
 		infoPanel.add(passwordLabel, infoConstraints);
 		infoConstraints.gridx = 1;
-		infoConstraints.gridy = 4;
+		infoConstraints.gridy = 5;
 		infoPanel.add(password, infoConstraints);
 
 		JPanel bottoniContainerPanel = new JPanel();
@@ -165,6 +185,18 @@ public class RegistrazioneView extends AView {
 
 	public JPasswordField getPassword() {
 		return password;
+	}
+	
+	public void onEmptyField() {
+		errorLabel.setText("Non tutti i campi sono stati riempiti!");
+	}
+	
+	public void onWrongEmailFormat() {
+		errorLabel.setText("Il formato dell'email non è valido!");
+	}
+	
+	public void onAccountAlreadyExisting(String accEmail) {
+		errorLabel.setText("L'account: \"" + accEmail + "\" esiste già.");
 	}
 
 	@Override
