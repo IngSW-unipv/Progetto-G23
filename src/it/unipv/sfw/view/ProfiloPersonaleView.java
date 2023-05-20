@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.Icon;
@@ -19,138 +20,121 @@ import it.unipv.sfw.model.utente.Utente;
 
 public class ProfiloPersonaleView extends AView {
 	
-	JPanel Panel;
-	private JPanel titolo,dati,valori,campi,bottoni,contenitore;
-	private JLabel t,n,nome,c,cognome,d,datanascita,
-				   e,email,cl,tipocliente,b,bigliettiacquistati;
-	private JButton cp, abbonamento,home;
+	private JPanel titolo,dati,bottoni,contenitore;
+	private JButton cambioPassBtn, abbBtn,homeBtn;
 	private Icon img;
-	private String tc;
+	private String tipoClinte;
 	
 	
 	
 	public ProfiloPersonaleView(Dimension dim,Cliente cliente) {
 		
+		Font mediumFont = new Font("Arial", 1, 16);
+		Font largeFont = new Font("Arial", 1, 24);
+		
 		titolo=new JPanel();
 		dati=new JPanel();
-		campi=new JPanel();
-		valori=new JPanel();
 		bottoni=new JPanel();
 		contenitore=new JPanel();
-		home=new JButton();
+		homeBtn=new JButton();
 		
-		t=new JLabel("PROFILO PERSONALE");
-		t.setBackground(Color.CYAN);
-		t.setOpaque(true);
-		t.setFont(new java.awt.Font("Arial", 1, 24));
+		JLabel titoloLabel=new JLabel("PROFILO PERSONALE");
+		titoloLabel.setBackground(Color.CYAN);
+		titoloLabel.setOpaque(true);
+		titoloLabel.setFont(largeFont);
 		
-		n=new JLabel("Nome:");
-		n.setFont(new java.awt.Font("Arial", 1, 16));
-		nome=new JLabel(cliente.getNome());
-		nome.setFont(new java.awt.Font("Arial", 1, 16));
+		JLabel nomeLabel=new JLabel("Nome:");
+		nomeLabel.setFont(mediumFont);
+		JLabel nome=new JLabel(cliente.getNome());
+		nome.setFont(mediumFont);
 		
-		c=new JLabel("Cognome:");
-		c.setFont(new java.awt.Font("Arial", 1, 16));
-		cognome=new JLabel(cliente.getCognome());
-		cognome.setFont(new java.awt.Font("Arial", 1, 16));
+		JLabel cognomeLabel=new JLabel("Cognome:");
+		cognomeLabel.setFont(mediumFont);
+		JLabel cognome=new JLabel(cliente.getCognome());
+		cognome.setFont(mediumFont);
 		
-		e=new JLabel("Email:");
-		e.setFont(new java.awt.Font("Arial", 1, 16));
-		email=new JLabel(cliente.getEmail());
-		email.setFont(new java.awt.Font("Arial", 1, 16));
+		JLabel emailLabel=new JLabel("Email:");
+		emailLabel.setFont(mediumFont);
+		JLabel email=new JLabel(cliente.getEmail());
+		email.setFont(mediumFont);
 		
-		d=new JLabel("Data di nascita:");
-		d.setFont(new java.awt.Font("Arial", 1, 16));
-		datanascita=new JLabel(cliente.getDataNascita());
-		datanascita.setFont(new java.awt.Font("Arial", 1, 16));
+		JLabel dataLabel=new JLabel("Data di nascita:");
+		dataLabel.setFont(mediumFont);
+		JLabel datanascita=new JLabel(cliente.getDataNascita());
+		datanascita.setFont(mediumFont);
 		
-		cl=new JLabel("Tipo di Utente:");
-		cl.setFont(new java.awt.Font("Arial", 1, 16));
+		JLabel clienteLabel=new JLabel("Tipo di Utente:");
+		clienteLabel.setFont(mediumFont);
 		
 		if(cliente.getAbb()==null) {
-			tc="Cliente";
+			tipoClinte="Cliente";
 		}else {
 			if(cliente.getAbb().getTipoAbb()==TipoAbb.TESSERA) {
-				tc="Tesserato";
+				tipoClinte="Tesserato";
 			}else {
 				if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV1) {
-					tc="Abbonato di livello 1";
+					tipoClinte="Abbonato di livello 1";
 				}else {
 					if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV2) {
-						tc="Abbonato di livello 2";
+						tipoClinte="Abbonato di livello 2";
 					}else {
 						if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV3) {
-							tc="Abbonato di livello 3";
+							tipoClinte="Abbonato di livello 3";
 						}
 					}
 				}
 			}
 		}
 		
-		tipocliente=new JLabel(tc);
-		tipocliente.setFont(new java.awt.Font("Arial", 1, 16));
+		JLabel tipocliente=new JLabel(tipoClinte);
+		tipocliente.setFont(mediumFont);
 		
-		b=new JLabel("Numero di Biglietti acquistati:");
-		b.setFont(new java.awt.Font("Calibri Corpo", 1, 16));
-		bigliettiacquistati=new JLabel("0");
-		bigliettiacquistati.setFont(new java.awt.Font("Arial", 1, 16));
+		JLabel bigliettiLabel=new JLabel("Numero di Biglietti acquistati:");
+		bigliettiLabel.setFont(mediumFont);
+		JLabel bigliettiacquistati=new JLabel("0");
+		bigliettiacquistati.setFont(mediumFont);
 		
 		
-		cp=new JButton("Cambia Password");
-		abbonamento=new JButton("Abbonati");
+		cambioPassBtn=new JButton("Cambia Password");
+		abbBtn=new JButton("Abbonati");
 		
 		img = new ImageIcon(getClass().getResource("/home.png"));
-		
-
-		home.setIcon(img);
-		home.setBackground(Color.BLUE);
-		home.setOpaque(true);
+	
+		homeBtn.setIcon(img);
+		homeBtn.setBackground(Color.BLUE);
+		homeBtn.setOpaque(true);
 		
 		titolo.setLayout(new BorderLayout());
-		t.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE,10));
-		titolo.add(t,BorderLayout.CENTER);
-		titolo.add(home,BorderLayout.EAST);
-		
-		
-		campi.setLayout(new GridLayout(6,1));
-		campi.add(n);
-		campi.add(c);
-		campi.add(e);
-		campi.add(d);
-		campi.add(cl);
-		campi.add(b);
-		campi.setBackground(Color.WHITE);
-		campi.setOpaque(true);
-		campi.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
-		
-		
-		
-		valori.setLayout(new GridLayout(6,1));
-		valori.add(nome);
-		valori.add(cognome);
-		valori.add(email);
-		valori.add(datanascita);
-		valori.add(tipocliente);
-		valori.add(bigliettiacquistati);
-		valori.setBackground(Color.WHITE);
-		valori.setOpaque(true);
-		valori.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
+		titoloLabel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE,10));
+		titolo.add(titoloLabel,BorderLayout.CENTER);
+		titolo.add(homeBtn,BorderLayout.EAST);
 		
 		
 		bottoni.setLayout(new FlowLayout());
-		bottoni.add(cp);
-		bottoni.add(abbonamento);
+		bottoni.add(cambioPassBtn);
+		bottoni.add(abbBtn);
 		bottoni.setBackground(Color.WHITE);
 		bottoni.setOpaque(true);
 		
+		dati.setLayout(new GridLayout(6, 2, 0, 3));
+		dati.add(nomeLabel);
+		dati.add(nome);
+		dati.add(cognomeLabel);
+		dati.add(cognome);
+		dati.add(emailLabel);
+		dati.add(email);
+		dati.add(dataLabel);
+		dati.add(datanascita);
+		dati.add(clienteLabel);
+		dati.add(tipocliente);
+		dati.add(bigliettiLabel);
+		dati.add(bigliettiacquistati);
+		dati.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
 		
-		dati.setLayout(new BorderLayout());
-		dati.add(campi,BorderLayout.WEST);
-		dati.add(valori,BorderLayout.CENTER);
-		dati.add(bottoni,BorderLayout.SOUTH);
 		
 		contenitore.setLayout(new GridLayout(2,1));
 		contenitore.add(dati);
+		contenitore.add(bottoni);
 		contenitore.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
 		contenitore.setBackground(Color.WHITE);
 		contenitore.setOpaque(true);
@@ -169,7 +153,7 @@ public class ProfiloPersonaleView extends AView {
 	}
 	
 	public JButton getHome() {
-		return home;
+		return homeBtn;
 	}
 
 }
