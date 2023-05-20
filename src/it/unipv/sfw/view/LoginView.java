@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 
 /**
@@ -23,36 +25,32 @@ import javax.swing.JTextField;
  */
 public class LoginView extends AView {
 	
-	private JPanel tutto, testo, bottoni, titolo, b, ba, contenitore,testi, text, errore, campilogin;
+	private JPanel destraPanel, contenitore,errorPanel;
 	private JTextField username;
 	private JPasswordField password;
-	private JLabel u, p, l, icona, stringa, e;
-	private JButton login, registrati;
+	private JLabel  imgLabel;
+	private JButton loginBtn, registratiBtn;
 	private ImageIcon img;
 
 	public LoginView(Dimension dim) {
 		
+		Font mediumFont = new Font("Arial", 1, 16);
+		Font largeFont = new Font("Arial", 1, 24);
+		
 		//Inizializzazione JPanel
 		contenitore=new JPanel();
-		tutto=new JPanel();
-		testo = new JPanel();
-		bottoni = new JPanel();
-		titolo = new JPanel();
-		b = new JPanel();
-		testi=new JPanel();
-		text=new JPanel();
-		ba = new JPanel();
-		errore=new JPanel();
-		campilogin=new JPanel();
+		destraPanel=new JPanel();
+		errorPanel=new JPanel();
 		
 		//Inizializzazione JLabel
-		u = new JLabel("Username");
-		p = new JLabel("Password");
-		l = new JLabel("LOGIN");
-		icona = new JLabel();
-		stringa = new JLabel("<html>Non hai un account? &nbsp  &nbsp  &nbsp  </html>");
-		e=new JLabel("Username o Password errati!");
-		e.setForeground(Color.red);
+		imgLabel = new JLabel();
+		JLabel userLabel = new JLabel("Username");
+		JLabel passLabel = new JLabel("Password");
+		JLabel logLabel = new JLabel("LOGIN");
+		
+		JLabel accountNuovo = new JLabel("<html>Non hai un account? &nbsp  &nbsp  &nbsp  </html>");
+		JLabel errLabel=new JLabel("Username o Password errati!");
+		errLabel.setForeground(Color.red);
 		
 		//Inizializzazione JTextField
 		username=new JTextField();
@@ -61,65 +59,69 @@ public class LoginView extends AView {
 		password = new JPasswordField();
 		
 		//Inizializzazione JButton
-		login = new JButton("Login");
-		registrati = new JButton("Registrati");
+		loginBtn = new JButton("Login");
+		registratiBtn = new JButton("Registrati");
 		
 		//inizializzazione ImageIcon
 		img = new ImageIcon(this.getClass().getResource("/stadio.jpg"));
 		
 		//Specifiche, Layout e Font
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
-		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		destraPanel.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		imgLabel.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
 		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH)); 
 		
 		username.setColumns(15);
 		password.setColumns(15);
 		
-		u.setFont(new java.awt.Font("Arial", 1, 16));
-		p.setFont(new java.awt.Font("Arial", 1, 16));
-		l.setFont(new java.awt.Font("Arial", 1, 24));
+		userLabel.setFont(mediumFont);
+		passLabel.setFont(mediumFont);
+		logLabel.setFont(largeFont);
+		
+		JPanel titoloPanel=new JPanel();
+		titoloPanel.setLayout(new GridLayout(1, 1));
+		titoloPanel.add(logLabel);
+		logLabel.setHorizontalAlignment(JLabel.CENTER);
+		
+		JPanel infoPanel=new JPanel();
+		infoPanel.setLayout(new GridLayout(2, 2, 0, 3));
+		infoPanel.add(userLabel);
+		infoPanel.add(username);
+		infoPanel.add(passLabel);
+		infoPanel.add(password);
+		
+		imgLabel.setIcon(img);
 
-		titolo.setLayout(new GridLayout(1, 1));
-		titolo.add(l);
-		l.setHorizontalAlignment(JLabel.CENTER);
+		JPanel accPanel=new JPanel();
+		accPanel.add(loginBtn);		
+		
+		JPanel bottoniPanel=new JPanel();
+		bottoniPanel.setLayout(new BorderLayout());
+		bottoniPanel.add(accPanel,BorderLayout.NORTH);
+		bottoniPanel.add(accountNuovo,BorderLayout.WEST);
+		bottoniPanel.add(registratiBtn,BorderLayout.EAST);		
+		
+		JPanel bottoniContainerPanel=new JPanel();
+		bottoniContainerPanel.add(bottoniPanel);
+		
+		errorPanel.add(errLabel);
+				
+		JPanel campiLoginPanel=new JPanel();
+		campiLoginPanel.setLayout(new GridLayout(3,1));
+		campiLoginPanel.add(infoPanel);
+		campiLoginPanel.add(errorPanel);
+		errorPanel.setVisible(false);
+		
+		destraPanel.setBorder(new EmptyBorder(0, dim.width / 12, 0, dim.width / 12));
 
-		testi.setLayout(new GridLayout(2,1));
-		testi.add(u);
-		testi.add(p);
-		
-		text.setLayout(new GridLayout(2,1));
-		text.add(username);
-		text.add(password);
-		
-		testo.add(testi);
-		testo.add(text);
-		
-		icona.setIcon(img);
-
-		ba.add(login);
-		
-		b.setLayout(new BorderLayout());
-		b.add(ba,BorderLayout.NORTH);
-		b.add(stringa,BorderLayout.WEST);
-		b.add(registrati,BorderLayout.EAST);
-		
-		bottoni.add(b);
-		errore.add(e);
-		
-		campilogin.setLayout(new GridLayout(3,1));
-		campilogin.add(testo);
-		campilogin.add(errore);
-		errore.setVisible(false);
-		
-		tutto.setLayout(new GridLayout(3, 1));
-		tutto.add(titolo);
-		tutto.add(campilogin);
-		tutto.add(bottoni);
+		destraPanel.setLayout(new GridLayout(3, 1));
+		destraPanel.add(titoloPanel);
+		destraPanel.add(campiLoginPanel);
+		destraPanel.add(bottoniContainerPanel);
 				
 		contenitore .setLayout(new GridLayout(1,2));
-		contenitore.add(icona);
-		contenitore.add(tutto);
+		contenitore.add(imgLabel);
+		contenitore.add(destraPanel);
 		
 		this.add(contenitore);
 
@@ -131,11 +133,11 @@ public class LoginView extends AView {
 	}
 
 	public JButton getAccediButton() {
-		return login;
+		return loginBtn;
 	}
 
 	public JButton getRegistratiButton() {
-		return registrati;
+		return registratiBtn;
 	}
 
 	public JTextField getUsernameField() {
@@ -150,17 +152,17 @@ public class LoginView extends AView {
 	public void onWindowResized(Dimension dim) {
 		
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		tutto.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
-		icona.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		destraPanel.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
+		imgLabel.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
 		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH));
-		icona.setIcon(img);
+		imgLabel.setIcon(img);
 	
 		contenitore.revalidate();
 		contenitore.repaint();
 	}
 	
 	public void upError() {
-		errore.setVisible(true);
+		errorPanel.setVisible(true);
 		
 		contenitore.repaint();
 	}
