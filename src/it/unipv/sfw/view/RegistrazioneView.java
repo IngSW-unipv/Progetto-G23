@@ -3,7 +3,10 @@ package it.unipv.sfw.view;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import com.github.lgooddatepicker.components.DatePicker;
+
 import java.awt.*;
+import java.time.LocalDate;
 
 /**
  * Classe che rappresenta la schermata di registrazione dell'utente.
@@ -14,12 +17,12 @@ import java.awt.*;
 public class RegistrazioneView extends AView {
 
 	private JPanel destraPanel, contenitore;
-	private JTextField email, nome, cognome, data;
+	private JTextField email, nome, cognome;
+	private DatePicker data;
 	private JPasswordField password;
 	private JLabel imgLabel;
 	private JButton loginBtn, registratiBtn;
-
-	private final int textFieldsColumns = 15;
+	
 
 	public RegistrazioneView(Dimension dim) {
 
@@ -56,7 +59,7 @@ public class RegistrazioneView extends AView {
 		titoloPanel.add(regLabel);
 
 		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new GridLayout(5, 2, 0, 3));
+		infoPanel.setLayout(new GridBagLayout());
 		int destraPanelInset = dim.width / 12;
 		destraPanel.setBorder(new EmptyBorder(0, destraPanelInset, 0, destraPanelInset));
 
@@ -66,29 +69,48 @@ public class RegistrazioneView extends AView {
 		JLabel cognomeLabel = new JLabel("Cognome");
 		JLabel dataLabel = new JLabel("Data di nascita");
 		JLabel accountGiaEsistenteLabel = new JLabel("<html>Hai già un account? &nbsp  &nbsp  &nbsp  </html>");
-
+		
 		email = new JTextField();
 		nome = new JTextField();
 		cognome = new JTextField();
-		data = new JTextField();
-		email.setColumns(textFieldsColumns);
-		nome.setColumns(textFieldsColumns);
-		cognome.setColumns(textFieldsColumns);
-		data.setColumns(textFieldsColumns);
-
+		data = new DatePicker();
 		password = new JPasswordField();
-		password.setColumns(textFieldsColumns);
-
-		infoPanel.add(nomeLabel);
-		infoPanel.add(nome);
-		infoPanel.add(cognomeLabel);
-		infoPanel.add(cognome);
-		infoPanel.add(dataLabel);
-		infoPanel.add(data);
-		infoPanel.add(emailLabel);
-		infoPanel.add(email);
-		infoPanel.add(passwordLabel);
-		infoPanel.add(password);
+		
+		// Creazione della griglia
+		GridBagConstraints infoConstraints = new GridBagConstraints();
+		infoConstraints.fill = GridBagConstraints.HORIZONTAL;
+		infoConstraints.insets = new Insets(5, 2, 0, 15);
+		
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 0;
+		infoPanel.add(nomeLabel, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 0;
+		infoPanel.add(nome, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 1;
+		infoPanel.add(cognomeLabel, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 1;
+		infoPanel.add(cognome, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 2;
+		infoPanel.add(dataLabel, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 2;
+		infoPanel.add(data, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 3;
+		infoPanel.add(emailLabel, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 3;
+		infoPanel.add(email, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 4;
+		infoPanel.add(passwordLabel, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 4;
+		infoPanel.add(password, infoConstraints);
 
 		JPanel bottoniContainerPanel = new JPanel();
 		
@@ -133,8 +155,8 @@ public class RegistrazioneView extends AView {
 		return cognome;
 	}
 
-	public JTextField getData() {
-		return data;
+	public LocalDate getData() {
+		return data.getDate();
 	}
 
 	public JTextField getEmail() {

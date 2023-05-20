@@ -3,14 +3,12 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
-import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.RegistrazioneView;
 
 
@@ -29,14 +27,9 @@ public class RegistrazioneController extends AController {
 		v.getRegistratiBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String data = v.getData().getText();
+				Date date = Date.from(v.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
 				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / YYYY", Locale.ITALY);
-				try {
-					cal.setTime(sdf.parse(data));
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
+				cal.setTime(date);
 				// Login into session
 				Cliente u = new Cliente(
 						v.getNome().getText(),
