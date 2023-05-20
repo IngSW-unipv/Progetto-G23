@@ -40,7 +40,6 @@ public class PartiteView extends AView {
 	// variabili del top
 	private JPanel top, bottoni;
 	private JButton bmuseo, bshop;
-	private JMenuBar utente;
 	private MenuUtente u;
 	private Image img2;
 
@@ -57,7 +56,6 @@ public class PartiteView extends AView {
 		righe = par.length;
 		top = new JPanel();
 		bottoni = new JPanel();
-		utente=new JMenuBar(); 
 		u=new MenuUtente();
 
 		
@@ -68,7 +66,6 @@ public class PartiteView extends AView {
 		bshop.setBackground(Color.WHITE);
 		bshop.setFont(new java.awt.Font("Arial", 1, 18));
 
-		utente.add(u);
 
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
@@ -77,7 +74,7 @@ public class PartiteView extends AView {
 
 		top.setLayout(new BorderLayout());
 		top.add(bottoni, BorderLayout.CENTER);
-		top.add(utente, BorderLayout.EAST);
+		top.add(u, BorderLayout.EAST);
 
 		top.setBorder(BorderFactory.createLineBorder(Color.black));
 		top.setBackground(Color.gray);
