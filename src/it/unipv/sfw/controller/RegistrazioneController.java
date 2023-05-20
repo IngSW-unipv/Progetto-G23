@@ -32,8 +32,10 @@ public class RegistrazioneController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				LocalDate inputDate = v.getData();
-				if (inputDate == null)
+				if (inputDate == null) {
 					((RegistrazioneView)view).onEmptyField();
+					return;
+				}
 				Date date = Date.from(inputDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(date);
@@ -48,10 +50,13 @@ public class RegistrazioneController extends AController {
 					Sessione.getIstance().register(u);
 				} catch(EmptyFieldException err) {
 					((RegistrazioneView)view).onEmptyField();
+					return;
 				} catch(WrongEmailFormatException err) {
 					((RegistrazioneView)view).onWrongEmailFormat();
+					return;
 				} catch(AccountAlreadyExistsException err) {
 					((RegistrazioneView)view).onAccountAlreadyExisting(err.getAccountEmail());
+					return;
 				}
 
 				ControllerManager.getInstance().loadController(6);
