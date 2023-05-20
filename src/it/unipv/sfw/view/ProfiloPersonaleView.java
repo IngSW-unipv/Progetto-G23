@@ -11,6 +11,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -21,7 +24,10 @@ import it.unipv.sfw.model.utente.Utente;
 public class ProfiloPersonaleView extends AView {
 	
 	private JPanel titolo,dati,bottoni,contenitore;
-	private JButton cambioPassBtn, abbBtn,homeBtn;
+	private JButton cambioPassBtn, abbBtn, homeBtn;
+	private JMenuBar i;
+	private JMenu info;
+	private JLabel infoAbb;
 	private Icon img;
 	private String tipoClinte;
 	
@@ -36,7 +42,6 @@ public class ProfiloPersonaleView extends AView {
 		dati=new JPanel();
 		bottoni=new JPanel();
 		contenitore=new JPanel();
-		homeBtn=new JButton();
 		
 		JLabel titoloLabel=new JLabel("PROFILO PERSONALE");
 		titoloLabel.setBackground(Color.CYAN);
@@ -94,12 +99,25 @@ public class ProfiloPersonaleView extends AView {
 		JLabel bigliettiacquistati=new JLabel("0");
 		bigliettiacquistati.setFont(mediumFont);
 		
+		i=new JMenuBar();		
+		info=new JMenu("i");
+		infoAbb=new JLabel("<html> Un abbonato avrà a disposizione tre livelli <br>"
+							+ " di abbonamento che gli daranno diversi vantaggi <br> "
+							+ " nello store e nelle partite.<br>");
+		info.add(infoAbb);
+		i.add(info);
 		
 		cambioPassBtn=new JButton("Cambia Password");
 		abbBtn=new JButton("Abbonati");
+			
+		JPanel abbPanel=new JPanel();
+		abbPanel.setLayout(new BorderLayout());
+		abbPanel.add(abbBtn, BorderLayout.CENTER);
+		abbPanel.add(i, BorderLayout.EAST);
 		
 		img = new ImageIcon(getClass().getResource("/home.png"));
-	
+		
+		homeBtn=new JButton();
 		homeBtn.setIcon(img);
 		homeBtn.setBackground(Color.BLUE);
 		homeBtn.setOpaque(true);
@@ -112,7 +130,7 @@ public class ProfiloPersonaleView extends AView {
 		
 		bottoni.setLayout(new FlowLayout());
 		bottoni.add(cambioPassBtn);
-		bottoni.add(abbBtn);
+		bottoni.add(abbPanel);
 		bottoni.setBackground(Color.WHITE);
 		bottoni.setOpaque(true);
 		
@@ -155,5 +173,13 @@ public class ProfiloPersonaleView extends AView {
 	public JButton getHome() {
 		return homeBtn;
 	}
+	
+	public JMenu getInfo() {
+		return info;
+	}
+	public void setInfoAbb(boolean stato) {
+		info.setPopupMenuVisible(stato);
+	}
+	
 
 }
