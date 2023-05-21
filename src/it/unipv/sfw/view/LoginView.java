@@ -72,8 +72,8 @@ public class LoginView extends AView {
 		imgLabel.setPreferredSize(new Dimension(dim.width/2,((int) (dim.height-45))));
 		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/2,(int)(dim.height-45)/2,  java.awt.Image.SCALE_SMOOTH)); 
 		
-		username.setColumns(15);
-		password.setColumns(15);
+		errorPanel.add(errLabel);
+		errorPanel.setVisible(false);
 		
 		userLabel.setFont(mediumFont);
 		passLabel.setFont(mediumFont);
@@ -90,17 +90,27 @@ public class LoginView extends AView {
 		infoConstraints.fill = GridBagConstraints.HORIZONTAL;
 		infoConstraints.insets = new Insets(2, 2, 0, 15);
 		
+		
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 0;
+		infoConstraints.gridwidth = 2;
+		infoConstraints.weightx = 1.0;
+		infoPanel.add(errorPanel, infoConstraints);
+		infoConstraints.gridwidth = GridBagConstraints.RELATIVE;
+		infoConstraints.weightx = 0.5;
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 1;
 		infoPanel.add(userLabel, infoConstraints);
+		infoConstraints.gridwidth = GridBagConstraints.RELATIVE;
+		infoConstraints.weightx = 0.5;
 		infoConstraints.gridx = 1;
-		infoConstraints.gridy = 0;
+		infoConstraints.gridy = 1;
 		infoPanel.add(username, infoConstraints);
 		infoConstraints.gridx = 0;
-		infoConstraints.gridy = 1;
+		infoConstraints.gridy = 2;
 		infoPanel.add(passLabel, infoConstraints);
 		infoConstraints.gridx = 1;
-		infoConstraints.gridy = 1;
+		infoConstraints.gridy = 2;
 		infoPanel.add(password, infoConstraints);
 		
 		imgLabel.setIcon(img);
@@ -117,19 +127,11 @@ public class LoginView extends AView {
 		JPanel bottoniContainerPanel=new JPanel();
 		bottoniContainerPanel.add(bottoniPanel);
 		
-		errorPanel.add(errLabel);
-				
-		JPanel campiLoginPanel=new JPanel();
-		campiLoginPanel.setLayout(new GridLayout(3,1));
-		campiLoginPanel.add(infoPanel);
-		campiLoginPanel.add(errorPanel);
-		errorPanel.setVisible(false);
-		
 		destraPanel.setBorder(new EmptyBorder(0, dim.width / 12, 0, dim.width / 12));
 
 		destraPanel.setLayout(new GridLayout(3, 1));
 		destraPanel.add(titoloPanel);
-		destraPanel.add(campiLoginPanel);
+		destraPanel.add(infoPanel);
 		destraPanel.add(bottoniContainerPanel);
 				
 		contenitore .setLayout(new GridLayout(1,2));
@@ -137,7 +139,6 @@ public class LoginView extends AView {
 		contenitore.add(destraPanel);
 		
 		this.add(contenitore);
-
 	}
 
 	@Override
