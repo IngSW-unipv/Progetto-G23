@@ -2,16 +2,20 @@ package it.unipv.sfw.controller;
 
 import java.awt.Dimension;
 
-public class PagamentoController extends AController{
+import it.unipv.sfw.view.PagamentoView;
 
-	public PagamentoController() {
-		// TODO Auto-generated constructor stub
-	}
+public class PagamentoController extends AController{
 
 	@Override
 	public void initialize(Dimension dim) {
-		// TODO Auto-generated method stub
 		
+		PagamentoView v = new PagamentoView(dim);
+		view = v;
+	}
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
 	}
 
 }

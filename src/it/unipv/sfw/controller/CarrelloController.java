@@ -27,6 +27,13 @@ public class CarrelloController extends AController {
 			}
 		});
 		
+		v.getAcquistaBtn().addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(12);		
+			}
+		});
+		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
