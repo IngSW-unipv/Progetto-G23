@@ -91,12 +91,7 @@ public class LoginView extends AView {
 		infoConstraints.insets = new Insets(2, 2, 0, 15);
 		
 		
-		infoConstraints.gridx = 0;
-		infoConstraints.gridy = 0;
-		infoConstraints.gridwidth = 2;
-		infoConstraints.weightx = 1.0;
-		infoPanel.add(errorPanel, infoConstraints);
-		infoConstraints.gridwidth = GridBagConstraints.RELATIVE;
+		
 		infoConstraints.weightx = 0.5;
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 1;
@@ -127,11 +122,17 @@ public class LoginView extends AView {
 		JPanel bottoniContainerPanel=new JPanel();
 		bottoniContainerPanel.add(bottoniPanel);
 		
+		JPanel campiLoginPanel=new JPanel();
+		campiLoginPanel.setLayout(new GridLayout(3,1));
+		campiLoginPanel.add(infoPanel);
+		campiLoginPanel.add(errorPanel);
+		errorPanel.setVisible(false);
+		
 		destraPanel.setBorder(new EmptyBorder(0, dim.width / 12, 0, dim.width / 12));
 
 		destraPanel.setLayout(new GridLayout(3, 1));
 		destraPanel.add(titoloPanel);
-		destraPanel.add(infoPanel);
+		destraPanel.add(campiLoginPanel);
 		destraPanel.add(bottoniContainerPanel);
 				
 		contenitore .setLayout(new GridLayout(1,2));
