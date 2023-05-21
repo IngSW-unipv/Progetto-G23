@@ -28,7 +28,7 @@ public class ControllerManager {
 	private Frame f;
 	private AController currentController;
 	private final ControllerCache[] controllers;
-	private final int N_CONTROLLERS = 12;
+	private final int N_CONTROLLERS = 13;
 	
 	private ControllerManager() {
 		// init look and feel
@@ -51,6 +51,7 @@ public class ControllerManager {
 		controllers[9] = new ControllerCache(new CarrelloController());
 		controllers[10] = new ControllerCache(new MuseoController());
 		controllers[11] = new ControllerCache(new BigliettoMuseoController());
+		controllers[12] = new ControllerCache(new PagamentoController());
 		
 		currentController = null;
 		
