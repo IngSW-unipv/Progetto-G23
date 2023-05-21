@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,20 +14,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
-import it.unipv.sfw.model.utente.Utente;
+import it.unipv.sfw.view.buttons.UtenteButton;
 
 public class ProfiloPersonaleView extends AView {
 	
 	private JPanel titolo,dati,bottoni,contenitore;
 	private JButton cambioPassBtn, homeBtn;
+	private ArrayList <UtenteButton> acquista;
 	private JMenuBar i,abb;
 	private JMenu abbBtn,info;
 	private JLabel infoAbb;
@@ -115,18 +114,48 @@ public class ProfiloPersonaleView extends AView {
 		
 		abb=new JMenuBar();
 		abbBtn=new JMenu("Abbonati");
-		
+		Dimension d =new Dimension(400,100);
         //Create the "cards".
         JPanel abb1 = new JPanel();
-        abb1.setPreferredSize(new Dimension(442,100));        
+        abb1.setPreferredSize(d);
+        abb1.setLayout(new BorderLayout());
+        
         JPanel abb2 = new JPanel();
-        abb2.setPreferredSize(new Dimension(442,100));
+        abb2.setPreferredSize(d);
+        abb2.setLayout(new BorderLayout());
+        
         JPanel abb3 = new JPanel();
-        abb3.setPreferredSize(new Dimension(440,100));
-
-        tabbedPane.addTab("Abbonamento Livello 1", abb1);
-        tabbedPane.addTab("Abbonamento Livello 2", abb2);
-        tabbedPane.addTab("Abbonamento Livello 3", abb3);
+        abb3.setPreferredSize(d);
+        abb3.setLayout(new BorderLayout());
+        
+        acquista=new ArrayList<UtenteButton>();
+        
+        acquista.add(new UtenteButton("Acquista",0));
+        acquista.add(new UtenteButton("Acquista",1));
+        acquista.add(new UtenteButton("Acquista",2));
+        
+        JLabel abb1Label=new JLabel("<html>Il primo livello include tutti i biglietti per le partite giocate in casa,<br> "
+        		+ "darà ai clienti una visibilità anticipata per la prenotazione dei biglietti,<br> "
+        		+ "e inoltre permetterà loro di prenotare un massimo di quattro biglietti.</html>");
+        
+        JLabel abb2Label=new JLabel("<html>Il secondo livello oltre ai vantaggi descritti per il primo livello, "
+        		+ "include un supplemento di due biglietti prenotabili e permetterà loro di prenotare i biglietti "
+        		+ "in un settore riservato solo agli abbonati di livello due e tre.</html>");
+        
+        JLabel abb3Label=new JLabel("<html>Il livello tre oltre ai vantaggi descritti per il primo e secondo livello, "
+        		+ "non limita i biglietti da loro prenotabili per le partite e include uno sconto sugli acquisti effettuabili "
+        		+ "sullo store e per l’acquisto di biglietti per il museo.<html>");
+        
+        abb1.add(abb1Label,BorderLayout.CENTER);
+        abb1.add(acquista.get(0),BorderLayout.SOUTH);
+        abb2.add(abb2Label,BorderLayout.CENTER);
+        abb2.add(acquista.get(1),BorderLayout.SOUTH);
+        abb3.add(abb3Label,BorderLayout.CENTER);
+        abb3.add(acquista.get(2),BorderLayout.SOUTH);
+        
+        tabbedPane.addTab("Abbonamento Liv. 1", abb1);
+        tabbedPane.addTab("Abbonamento Liv. 2", abb2);
+        tabbedPane.addTab("Abbonamento Liv. 3", abb3);
 		
 		abbBtn.add(tabbedPane);
 		abb.add(abbBtn);
