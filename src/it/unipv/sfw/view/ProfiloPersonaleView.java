@@ -15,6 +15,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import it.unipv.sfw.model.abbonamento.TipoAbb;
@@ -24,10 +26,11 @@ import it.unipv.sfw.model.utente.Utente;
 public class ProfiloPersonaleView extends AView {
 	
 	private JPanel titolo,dati,bottoni,contenitore;
-	private JButton cambioPassBtn, abbBtn, homeBtn;
-	private JMenuBar i;
-	private JMenu info;
+	private JButton cambioPassBtn, homeBtn;
+	private JMenuBar i,abb;
+	private JMenu abbBtn,info;
 	private JLabel infoAbb;
+	private JTabbedPane tabbedPane;
 	private Icon img;
 	private String tipoClinte;
 	
@@ -42,6 +45,7 @@ public class ProfiloPersonaleView extends AView {
 		dati=new JPanel();
 		bottoni=new JPanel();
 		contenitore=new JPanel();
+		tabbedPane = new JTabbedPane();
 		
 		JLabel titoloLabel=new JLabel("PROFILO PERSONALE");
 		titoloLabel.setBackground(Color.CYAN);
@@ -108,11 +112,28 @@ public class ProfiloPersonaleView extends AView {
 		i.add(info);
 		
 		cambioPassBtn=new JButton("Cambia Password");
-		abbBtn=new JButton("Abbonati");
+		
+		abb=new JMenuBar();
+		abbBtn=new JMenu("Abbonati");
+		
+        //Create the "cards".
+        JPanel abb1 = new JPanel();
+        abb1.setPreferredSize(new Dimension(442,100));        
+        JPanel abb2 = new JPanel();
+        abb2.setPreferredSize(new Dimension(442,100));
+        JPanel abb3 = new JPanel();
+        abb3.setPreferredSize(new Dimension(440,100));
+
+        tabbedPane.addTab("Abbonamento Livello 1", abb1);
+        tabbedPane.addTab("Abbonamento Livello 2", abb2);
+        tabbedPane.addTab("Abbonamento Livello 3", abb3);
+		
+		abbBtn.add(tabbedPane);
+		abb.add(abbBtn);
 			
 		JPanel abbPanel=new JPanel();
 		abbPanel.setLayout(new BorderLayout());
-		abbPanel.add(abbBtn, BorderLayout.CENTER);
+		abbPanel.add(abb, BorderLayout.CENTER);
 		abbPanel.add(i, BorderLayout.EAST);
 		
 		img = new ImageIcon(getClass().getResource("/home.png"));
@@ -133,7 +154,8 @@ public class ProfiloPersonaleView extends AView {
 		bottoni.add(abbPanel);
 		bottoni.setBackground(Color.WHITE);
 		bottoni.setOpaque(true);
-		
+
+		dati.setPreferredSize(new Dimension(500,300));
 		dati.setLayout(new GridLayout(6, 2, 0, 3));
 		dati.add(nomeLabel);
 		dati.add(nome);
@@ -147,13 +169,12 @@ public class ProfiloPersonaleView extends AView {
 		dati.add(tipocliente);
 		dati.add(bigliettiLabel);
 		dati.add(bigliettiacquistati);
-		dati.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
-		
+		dati.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
 		
 		contenitore.setLayout(new GridLayout(2,1));
 		contenitore.add(dati);
 		contenitore.add(bottoni);
-		contenitore.setBorder(javax.swing.BorderFactory.createLineBorder(Color.WHITE,10));
+		contenitore.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
 		contenitore.setBackground(Color.WHITE);
 		contenitore.setOpaque(true);
 		
@@ -173,7 +194,7 @@ public class ProfiloPersonaleView extends AView {
 	public JButton getHome() {
 		return homeBtn;
 	}
-	
+
 	public JMenu getInfo() {
 		return info;
 	}
