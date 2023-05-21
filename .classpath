@@ -11,6 +11,6 @@
 	<classpathentry kind="lib" path="lib/flatlaf-3.1.1/flatlaf-3.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/activation-jaf1.1.1/activation-jaf1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/LGoodDatePicker-10.3.1/LGoodDatePicker-10.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lreal/eclipse-workspace/StadiumSystem/lib/javax.mail-1.6.2/javax.mail.jar"/>
+	<classpathentry kind="lib" path="lib/javax.mail-1.6.2/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
