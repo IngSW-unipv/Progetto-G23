@@ -1,8 +1,14 @@
 package it.unipv.sfw.frame;
 
+import java.awt.AWTKeyStroke;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 import it.unipv.sfw.view.AView;
 
@@ -26,6 +32,14 @@ public class Frame extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setTitle("StadiumSystem");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		// Add enter as a focus traversal forward key
+		Set<AWTKeyStroke> forwardKeys = getFocusTraversalKeys(
+			    KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS);
+		Set<AWTKeyStroke> newForwardKeys = new HashSet<AWTKeyStroke>(forwardKeys);
+			newForwardKeys.add(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
+		setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, newForwardKeys);
+		
 		this.setVisible(true);
 	}
 	
