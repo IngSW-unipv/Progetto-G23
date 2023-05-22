@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -28,9 +29,10 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 public class ProfiloPersonaleView extends AView {
 	
 	private JPanel titolo,dati,bottoni,contenitore;
+	private JLabel errorLabel;
 	private JButton cambioPassBtn, homeBtn;
 	private ArrayList <UtenteButton> acquista;
-	private JTextField vecchiaPass,nuovaPass,confermaPass;
+	private JPasswordField vecchiaPass,nuovaPass,confermaPass;
 	private JMenuBar i,abb;
 	private JMenu abbBtn,info;
 	private JTabbedPane tabbedPane;
@@ -210,10 +212,11 @@ public class ProfiloPersonaleView extends AView {
 		JLabel vecchiaPassword=new JLabel("Vecchia Password*:");
 		JLabel nuovaPassword=new JLabel ("Nuova Password*:");
 		JLabel confermaPassword=new JLabel("Conferma nuova password*:");
+		errorLabel=new JLabel("");
 		
-		vecchiaPass=new JTextField();
-		nuovaPass=new JTextField();
-		confermaPass=new JTextField();
+		vecchiaPass=new JPasswordField();
+		nuovaPass=new JPasswordField();
+		confermaPass=new JPasswordField();
 		
 		cambiaPassword.setFont(largeFont);
 		vecchiaPassword.setFont(mediumFont);
@@ -282,6 +285,41 @@ public class ProfiloPersonaleView extends AView {
 	
 	public void setInfoAbb(boolean stato) {
 		info.setPopupMenuVisible(stato);
+	}
+	public JButton getCambiaPassword(){
+		return cambioPassBtn;
+	}
+	
+	public JPasswordField getVecchiaPassword() {
+		return vecchiaPass;
+	}
+
+	public JPasswordField getNuovaPassword() {
+		return nuovaPass;
+	}
+	
+	public JPasswordField getConfermaNuovaPassword() {
+		return confermaPass;
+	}
+	
+	public void onEmptyField() {
+		errorLabel.setText("Non tutti i campi sono stati riempiti!");
+		System.out.println("Non tutti i campi sono stati riempiti!");
+	}
+		
+	public void onPasswordtAlreadyused() {
+		errorLabel.setText("La nuova password deve differire da quella vecchia");
+		System.out.println("La nuova password deve differire da quella vecchia");
+	}
+	
+	public void onConfirmPassword() {
+		errorLabel.setText("La nuova password e la conferma sono diverse");
+		System.out.println("La nuova password e la conferma sono diverse");
+	}
+	
+	public void ErroreVecchiaPassword() {
+		errorLabel.setText("Password vecchia Errata");
+		System.out.println("Password vecchia Errata");
 	}
 	
 	public void onWindowResized(Dimension dim) {

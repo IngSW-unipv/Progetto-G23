@@ -66,6 +66,26 @@ public class ProfiloPersonaleController extends AController{
 			}
 		});
 		
+		v.getCambiaPassword().addActionListener(new ActionListener() {	
+			
+					
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String pass=c.CommutaPassword(v.getVecchiaPassword().getPassword());
+				if(v.getVecchiaPassword().getPassword().length!=0&&v.getNuovaPassword().getPassword().length!=0&&v.getConfermaNuovaPassword().getPassword().length!=0) {
+					if(c.getPassword().equals(pass)){
+						String p1=c.CommutaPassword(v.getNuovaPassword().getPassword());
+						String p2=c.CommutaPassword(v.getConfermaNuovaPassword().getPassword());
+						if(p1.equals(p2)) {
+							pass=c.CommutaPassword(v.getNuovaPassword().getPassword());
+							c.changePassword(pass);
+						}else{v.onConfirmPassword();}
+					}else{v.ErroreVecchiaPassword();}
+				}else {v.onEmptyField();}			
+				
+			}
+		});
+		
 		view=v;
 		
 	}
