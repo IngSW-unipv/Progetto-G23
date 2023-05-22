@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
@@ -16,6 +19,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
@@ -26,9 +30,9 @@ public class ProfiloPersonaleView extends AView {
 	private JPanel titolo,dati,bottoni,contenitore;
 	private JButton cambioPassBtn, homeBtn;
 	private ArrayList <UtenteButton> acquista;
+	private JTextField vecchiaPass,nuovaPass,confermaPass;
 	private JMenuBar i,abb;
 	private JMenu abbBtn,info;
-	private JLabel infoAbb;
 	private JTabbedPane tabbedPane;
 	private Icon img;
 	private String tipoClinte;
@@ -104,9 +108,9 @@ public class ProfiloPersonaleView extends AView {
 		
 		i=new JMenuBar();		
 		info=new JMenu("i");
-		infoAbb=new JLabel("<html> Un abbonato avrà a disposizione tre livelli <br>"
+		JLabel infoAbb=new JLabel("<html> Un abbonato avrà a disposizione tre livelli <br>"
 							+ " di abbonamento che gli daranno diversi vantaggi <br> "
-							+ " nello store e nelle partite.<br>");
+							+ " nello store, nelle partite e nel museo.<br>");
 		info.add(infoAbb);
 		i.add(info);
 		
@@ -114,7 +118,7 @@ public class ProfiloPersonaleView extends AView {
 		
 		abb=new JMenuBar();
 		abbBtn=new JMenu("Abbonati");
-		Dimension d =new Dimension(400,100);
+		Dimension d =new Dimension(395,100);
         //Create the "cards".
         JPanel abb1 = new JPanel();
         abb1.setPreferredSize(d);
@@ -177,14 +181,11 @@ public class ProfiloPersonaleView extends AView {
 		titolo.add(titoloLabel,BorderLayout.CENTER);
 		titolo.add(homeBtn,BorderLayout.EAST);
 		
-		
 		bottoni.setLayout(new FlowLayout());
 		bottoni.add(cambioPassBtn);
 		bottoni.add(abbPanel);
-		bottoni.setBackground(Color.WHITE);
 		bottoni.setOpaque(true);
 
-		dati.setPreferredSize(new Dimension(500,300));
 		dati.setLayout(new GridLayout(6, 2, 0, 3));
 		dati.add(nomeLabel);
 		dati.add(nome);
@@ -198,13 +199,64 @@ public class ProfiloPersonaleView extends AView {
 		dati.add(tipocliente);
 		dati.add(bigliettiLabel);
 		dati.add(bigliettiacquistati);
-		dati.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
+		dati.setPreferredSize(new Dimension(dim.width/2,200));
+		dati.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,dim.width/5));
 		
-		contenitore.setLayout(new GridLayout(2,1));
-		contenitore.add(dati);
-		contenitore.add(bottoni);
+		JPanel cambiaPass=new JPanel();
+		JPanel titoloCambiaPass=new JPanel();
+		JPanel valoriCambioPass=new JPanel();
+		
+		JLabel cambiaPassword=new JLabel("Cambia Password");
+		JLabel vecchiaPassword=new JLabel("Vecchia Password*:");
+		JLabel nuovaPassword=new JLabel ("Nuova Password*:");
+		JLabel confermaPassword=new JLabel("Conferma nuova password*:");
+		
+		vecchiaPass=new JTextField();
+		nuovaPass=new JTextField();
+		confermaPass=new JTextField();
+		
+		cambiaPassword.setFont(largeFont);
+		vecchiaPassword.setFont(mediumFont);
+		nuovaPassword.setFont(mediumFont);
+		confermaPassword.setFont(mediumFont);
+		
+		cambiaPass.setSize(d.width/3,dim.height/3);
+		cambiaPass.setLayout(new GridBagLayout());
+		
+		GridBagConstraints infoConstraints = new GridBagConstraints();
+
+		infoConstraints.fill = GridBagConstraints.HORIZONTAL;
+		infoConstraints.gridwidth = 2;
+		infoConstraints.insets = new Insets(7, 1, 5, 15);
+		
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 0;
+		cambiaPass.add(cambiaPassword, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 1;
+		cambiaPass.add(vecchiaPassword, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 2;
+		cambiaPass.add(vecchiaPass, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 3;
+		cambiaPass.add(nuovaPassword, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 4;
+		cambiaPass.add(nuovaPass, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 5;
+		cambiaPass.add(confermaPassword, infoConstraints);
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 6;
+		cambiaPass.add(confermaPass, infoConstraints);	
+		
+		contenitore.setLayout(new BorderLayout());
+		contenitore.add(dati,BorderLayout.NORTH);
+		contenitore.add(cambiaPass,BorderLayout.WEST);
+		contenitore.add(bottoni,BorderLayout.SOUTH);
 		contenitore.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
-		contenitore.setBackground(Color.WHITE);
+		
 		contenitore.setOpaque(true);
 		
 		this.setLayout(new BorderLayout());
@@ -227,9 +279,18 @@ public class ProfiloPersonaleView extends AView {
 	public JMenu getInfo() {
 		return info;
 	}
+	
 	public void setInfoAbb(boolean stato) {
 		info.setPopupMenuVisible(stato);
 	}
+	
+	public void onWindowResized(Dimension dim) {
+		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height))));
+	
+		contenitore.revalidate();
+		contenitore.repaint();
+	}
+	
 	
 
 }
