@@ -2,9 +2,6 @@ package it.unipv.sfw.model.utente;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;

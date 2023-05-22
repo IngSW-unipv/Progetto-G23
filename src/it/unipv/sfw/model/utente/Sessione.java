@@ -49,14 +49,6 @@ public class Sessione {
 		return istance;
 	}
 	
-	public void enterEmail(String email) throws WrongEmailFormatException {
-		Predicate<String> isEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE)
-					.asPredicate();
-		if(!isEmail.test(email)) {
-			throw new WrongEmailFormatException(email);
-		}
-	}
-	
 	/**
 	 * Funzione che verifica nel database se l'utente specificato esiste 
 	 * controllandone anche la password.
@@ -88,11 +80,8 @@ public class Sessione {
 	 */
 	public void register(Cliente c)
 		throws AccountAlreadyExistsException, EmptyFieldException, WrongEmailFormatException {
-		// Controlla che non vi siano campi vuoti
-		if (c.nome.isEmpty() || c.cognome.isEmpty() || c.password.isEmpty())
-			throw new EmptyFieldException();
-		// Controlla formato email
-		enterEmail(c.getEmail());
+		// Controlla che il cliente sia valido
+		c.checkValidity();
 		// Inserisci in db
 		if(!(new ClienteDAO().insertCliente(c)))
 			throw new AccountAlreadyExistsException(c.getEmail());

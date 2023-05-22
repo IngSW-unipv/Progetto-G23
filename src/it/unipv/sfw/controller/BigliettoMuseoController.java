@@ -33,7 +33,7 @@ public class BigliettoMuseoController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Sessione.getIstance().enterEmail(bview.getEnteredEmail());
+					Utente.checkEmail(bview.getEnteredEmail());
 				} catch (WrongEmailFormatException err) {
 					bview.upError();
 					return;

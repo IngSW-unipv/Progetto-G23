@@ -1,5 +1,10 @@
 package it.unipv.sfw.model.utente;
 
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+
+import it.unipv.sfw.exceptions.EmptyFieldException;
+import it.unipv.sfw.exceptions.WrongEmailFormatException;
 
 /**
  * Classe astratta che rappresenta un generico
@@ -85,6 +90,29 @@ public abstract class Utente {
 	 */
 	public String getCognome() {
 		return cognome;
+	}
+	
+	
+	public void checkValidity() throws WrongEmailFormatException, EmptyFieldException {
+		// Controlla che non vi siano campi vuoti
+		if (nome.isEmpty() || cognome.isEmpty() || password.isEmpty())
+			throw new EmptyFieldException();
+		// Controlla formato email
+		checkEmail(email);
+	}
+	
+	
+	/**
+	 * Controlla che l'email passata sia valida.
+	 * @param email
+	 * @throws WrongEmailFormatException
+	 */
+	public static void checkEmail(String email) throws WrongEmailFormatException {
+		Predicate<String> isEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE)
+					.asPredicate();
+		if(!isEmail.test(email)) {
+			throw new WrongEmailFormatException(email);
+		}
 	}
 
 }
