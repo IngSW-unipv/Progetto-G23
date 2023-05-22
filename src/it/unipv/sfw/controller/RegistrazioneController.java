@@ -3,6 +3,8 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -28,38 +30,24 @@ public class RegistrazioneController extends AController {
 	public void initialize(Dimension dim) {
 		RegistrazioneView v = new RegistrazioneView(dim);
 		
+		v.getPassword().setFocusTraversalKeysEnabled(false);
+		v.getPassword().addKeyListener(new KeyListener() {		
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+					registrati();
+			}
+			
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			@Override
+			public void keyReleased(KeyEvent e) {}
+		});
+		
 		v.getRegistratiBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LocalDate inputDate = v.getData();
-				if (inputDate == null) {
-					((RegistrazioneView)view).onEmptyField();
-					return;
-				}
-				Date date = Date.from(inputDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(date);
-				// Login into session
-				Cliente u = new Cliente(
-						v.getNome().getText(),
-						v.getCognome().getText(),
-						v.getEmail().getText(),
-						new String(v.getPassword().getPassword()),
-						cal);
-				try {	
-					Sessione.getIstance().register(u);
-				} catch(EmptyFieldException err) {
-					((RegistrazioneView)view).onEmptyField();
-					return;
-				} catch(WrongEmailFormatException err) {
-					((RegistrazioneView)view).onWrongEmailFormat();
-					return;
-				} catch(AccountAlreadyExistsException err) {
-					((RegistrazioneView)view).onAccountAlreadyExisting(err.getAccountEmail());
-					return;
-				}
-
-				ControllerManager.getInstance().loadController(6);
+				registrati();
 			}
 		});
 		
@@ -71,6 +59,40 @@ public class RegistrazioneController extends AController {
 		});
 		
 		view = v;
+	}
+	
+	private void registrati() {
+		RegistrazioneView v = (RegistrazioneView)view;
+		
+		LocalDate inputDate = v.getData();
+		if (inputDate == null) {
+			v.onEmptyField();
+			return;
+		}
+		Date date = Date.from(inputDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		// Login into session
+		Cliente u = new Cliente(
+				v.getNome().getText(),
+				v.getCognome().getText(),
+				v.getEmail().getText(),
+				new String(v.getPassword().getPassword()),
+				cal);
+		try {	
+			Sessione.getIstance().register(u);
+		} catch(EmptyFieldException err) {
+			v.onEmptyField();
+			return;
+		} catch(WrongEmailFormatException err) {
+			v.onWrongEmailFormat();
+			return;
+		} catch(AccountAlreadyExistsException err) {
+			v.onAccountAlreadyExisting(err.getAccountEmail());
+			return;
+		}
+
+		ControllerManager.getInstance().loadController(6);
 	}
 	
 	@Override
