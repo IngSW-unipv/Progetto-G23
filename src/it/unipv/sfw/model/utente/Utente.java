@@ -92,10 +92,16 @@ public abstract class Utente {
 		return cognome;
 	}
 	
-	
+	/**
+	 * Controlla che il cliente sia valido, altrimenti lancia un'eccezione.
+	 * @throws WrongEmailFormatException
+	 * @throws EmptyFieldException
+	 */
 	public void checkValidity() throws WrongEmailFormatException, EmptyFieldException {
+		final Predicate<String> isBlack = s -> s.chars().allMatch(c -> Character.isWhitespace(c));
+	
 		// Controlla che non vi siano campi vuoti
-		if (nome.isEmpty() || cognome.isEmpty() || password.isEmpty())
+		if (isBlack.test(nome) || isBlack.test(cognome) || isBlack.test(password))
 			throw new EmptyFieldException();
 		// Controlla formato email
 		checkEmail(email);
@@ -108,8 +114,9 @@ public abstract class Utente {
 	 * @throws WrongEmailFormatException
 	 */
 	public static void checkEmail(String email) throws WrongEmailFormatException {
-		Predicate<String> isEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE)
+		final Predicate<String> isEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE)
 					.asPredicate();
+		
 		if(!isEmail.test(email)) {
 			throw new WrongEmailFormatException(email);
 		}

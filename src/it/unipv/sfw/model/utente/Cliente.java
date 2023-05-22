@@ -2,7 +2,10 @@ package it.unipv.sfw.model.utente;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.function.Predicate;
 
+import it.unipv.sfw.exceptions.EmptyFieldException;
+import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 
@@ -133,5 +136,17 @@ public class Cliente extends Utente {
 	@Override
 	public Type getType() {
 		return isGiornalista ? Utente.Type.GIORNALISTA : Utente.Type.CLIENTE;
+	}
+	
+	/**
+	 * Controlla che il cliente sia valido, altrimenti lancia un'eccezione.
+	 * @throws WrongEmailFormatException
+	 * @throws EmptyFieldException
+	 */
+	@Override
+	public void checkValidity() throws WrongEmailFormatException, EmptyFieldException {
+		if (dataNascita == null)
+			throw new EmptyFieldException();
+		super.checkValidity();
 	}
 }

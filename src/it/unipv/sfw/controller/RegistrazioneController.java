@@ -64,14 +64,14 @@ public class RegistrazioneController extends AController {
 	private void registrati() {
 		RegistrazioneView v = (RegistrazioneView)view;
 		
+		Calendar cal = null;
 		LocalDate inputDate = v.getData();
-		if (inputDate == null) {
-			v.onEmptyField();
-			return;
+		if (inputDate != null) {
+			Date date = Date.from(inputDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			cal = Calendar.getInstance();
+			cal.setTime(date);
 		}
-		Date date = Date.from(inputDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
+		
 		// Login into session
 		Cliente u = new Cliente(
 				v.getNome().getText(),
