@@ -80,10 +80,12 @@ public class CarrelloView extends AView {
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
 		centralPanel.add(title, BorderLayout.NORTH);
 		
+		acquistaBtn = new JButton("ACQUISTA");
+		acquistaBtn.setFont(largeFont);
+		
 		itemPanels = new HashMap<>(merch_n);
 		// Caso in cui il carrello sia vuoto
 		if (merch_n == 0) {
-			acquistaBtn = null;
 			centralPanel.add(emptyCartPanel, BorderLayout.CENTER);
 			
 			// Main panel
@@ -105,8 +107,6 @@ public class CarrelloView extends AView {
 		}
 		
 		// Buy panel
-		acquistaBtn = new JButton("ACQUISTA");
-		acquistaBtn.setFont(largeFont);
 		JLabel priceTot = new JLabel("TOTALE: " + String.format("%.2f", total_price) + " €");
 		priceTot.setFont(largeFont);
 		
