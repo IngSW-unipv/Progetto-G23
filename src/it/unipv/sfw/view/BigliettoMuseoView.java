@@ -14,6 +14,8 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -33,6 +35,8 @@ public class BigliettoMuseoView extends AView {
 	private JButton backButton;
 	private JTextField email_box;
 	private DateTimePicker chDate;
+	private JMenuBar i;
+	private JMenu info;
 	
 	
 	public BigliettoMuseoView(Dimension dim) {
@@ -80,8 +84,17 @@ public class BigliettoMuseoView extends AView {
 		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, LocalTime.of(14, 0), LocalTime.of(18, 0));
 		timeSettings.setAllowKeyboardEditing(false);
 		
+		i=new JMenuBar();		
+		info=new JMenu("i");
+		JLabel infoOrario=new JLabel("<html> La visita al museo ha una durata di <br>"
+							+ " un'ora e prevede la visione dei trofei e dei cimeli <br> "
+							+ " facenti parte dell'intera storia del club.<br>");
+		info.add(infoOrario);
+		i.add(info);
+		
 		visitaPanel.add(visita_label);
 		visitaPanel.add(chDate);
+		//visitaPanel.add(i, -1);
 		
 		acquistaButton = new JButton("ACQUISTA BIGLIETTO");
 		acquistaButton.setBackground(Color.WHITE);
