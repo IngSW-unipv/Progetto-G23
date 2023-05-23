@@ -32,6 +32,8 @@ public class BigliettoMuseoView extends AView {
 	private JButton acquistaButton;
 	private JButton backButton;
 	private JTextField email_box;
+	private DateTimePicker chDate;
+	
 	
 	public BigliettoMuseoView(Dimension dim) {
 		
@@ -71,11 +73,11 @@ public class BigliettoMuseoView extends AView {
 		visita_label.setOpaque(true);
 		DatePickerSettings dateSettings = new DatePickerSettings();
 		TimePickerSettings timeSettings = new TimePickerSettings();
-		DateTimePicker chDate = new DateTimePicker(dateSettings, timeSettings);
+		chDate = new DateTimePicker(dateSettings, timeSettings);
 		LocalDate today = LocalDate.now();
 		dateSettings.setDateRangeLimits(today.minusDays(0), today.plusDays(70));
 		dateSettings.setAllowKeyboardEditing(false);
-		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, null, null);
+		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, LocalTime.of(14, 0), LocalTime.of(18, 0));
 		timeSettings.setAllowKeyboardEditing(false);
 		
 		visitaPanel.add(visita_label);
@@ -164,6 +166,12 @@ public class BigliettoMuseoView extends AView {
 	@Override
 	public Type getType() {
 		return Type.BIGLIETTOMUSEO;
+	}
+	
+	public void onLoad() {
+		email_box.setText("");
+		chDate.setDateTimeStrict(null);
+		chDate.setDateTimeStrict(null);
 	}
 
 }

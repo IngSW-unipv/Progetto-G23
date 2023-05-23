@@ -10,6 +10,7 @@ import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.BigliettoMuseoView;
+import it.unipv.sfw.view.LoginView;
 
 public class BigliettoMuseoController extends AController {
 	
@@ -43,9 +44,13 @@ public class BigliettoMuseoController extends AController {
 			}
 		});
 			
-		
-		view = bview;
-		
+		view = bview;	
+	}
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		view.onWindowResized(dim);
+		((BigliettoMuseoView)view).onLoad();
 	}
 
 }
