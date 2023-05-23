@@ -1,4 +1,4 @@
-package it.unipv.sfw.dao;
+package it.unipv.sfw.dao.mysql;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -11,6 +11,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import it.unipv.sfw.dao.DBConnection;
+import it.unipv.sfw.dao.IPartitaDAO;
+import it.unipv.sfw.dao.IPostoDAO;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Partita.Squadre;
 

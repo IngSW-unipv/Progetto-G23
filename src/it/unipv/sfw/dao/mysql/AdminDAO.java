@@ -1,4 +1,4 @@
-package it.unipv.sfw.dao;
+package it.unipv.sfw.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import it.unipv.sfw.dao.DBConnection;
+import it.unipv.sfw.dao.IAdminDAO;
 import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.model.utente.Utente.Type;

@@ -1,5 +1,6 @@
 package it.unipv.sfw.dao;
 
+import it.unipv.sfw.dao.mysql.AbbonamentoDAO;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
 

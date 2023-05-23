@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-import it.unipv.sfw.dao.ClienteDAO;
+import it.unipv.sfw.dao.DAOFactory;
+import it.unipv.sfw.dao.mysql.ClienteDAO;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.EmptyFieldException;
@@ -59,7 +60,7 @@ public class Sessione {
 	 */
 	public void login(String email, char[] pass)
 			throws WrongPasswordException, AccountNotFoundException {
-		Cliente c = new ClienteDAO().selectByEmail(email);
+		Cliente c = DAOFactory.createIClienteDAO().selectByEmail(email);
 		
 		String strPass = new String(pass);
 		

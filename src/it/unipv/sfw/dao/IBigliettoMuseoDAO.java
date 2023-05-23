@@ -1,5 +1,6 @@
 package it.unipv.sfw.dao;
 
+import it.unipv.sfw.dao.mysql.BigliettoMuseoDAO;
 import it.unipv.sfw.model.biglietti.Biglietto;
 
 /**

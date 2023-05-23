@@ -3,6 +3,7 @@ package it.unipv.sfw.dao;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import it.unipv.sfw.dao.mysql.PartitaDAO;
 import it.unipv.sfw.model.partita.Partita;
 
 /**

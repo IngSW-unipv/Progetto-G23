@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import it.unipv.sfw.dao.RiconoscimentoDAO;
+import it.unipv.sfw.dao.mysql.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;

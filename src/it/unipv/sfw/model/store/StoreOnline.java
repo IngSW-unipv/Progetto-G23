@@ -2,7 +2,7 @@ package it.unipv.sfw.model.store;
 
 import java.util.HashMap;
 
-import it.unipv.sfw.dao.StoreItemDAO;
+import it.unipv.sfw.dao.mysql.StoreItemDAO;
 
 
 /**

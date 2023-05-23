@@ -2,6 +2,7 @@ package it.unipv.sfw.dao;
 
 import java.util.ArrayList;
 
+import it.unipv.sfw.dao.mysql.ClienteDAO;
 import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Cliente;
 

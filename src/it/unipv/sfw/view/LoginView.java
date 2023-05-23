@@ -91,7 +91,6 @@ public class LoginView extends AView {
 		infoConstraints.insets = new Insets(2, 2, 0, 15);
 		
 		
-		
 		infoConstraints.weightx = 0.5;
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 1;

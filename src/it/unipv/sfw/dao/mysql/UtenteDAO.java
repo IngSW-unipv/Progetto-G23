@@ -1,4 +1,4 @@
-package it.unipv.sfw.dao;
+package it.unipv.sfw.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import it.unipv.sfw.dao.DBConnection;
+import it.unipv.sfw.dao.IUtenteDAO;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Cliente;

@@ -1,8 +1,10 @@
-package it.unipv.sfw.dao;
+package it.unipv.sfw.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import it.unipv.sfw.dao.DBConnection;
+import it.unipv.sfw.dao.IBigliettoMuseoDAO;
 import it.unipv.sfw.model.biglietti.Biglietto;
 
 /**

@@ -2,6 +2,7 @@ package it.unipv.sfw.controller;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
+import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.eventlisteners.ComponentResizeEndListener;
 import it.unipv.sfw.frame.Frame;
 
@@ -31,6 +32,9 @@ public class ControllerManager {
 	private final int N_CONTROLLERS = 13;
 	
 	private ControllerManager() {
+		// init DAOFactory
+		DAOFactory.createInstance(DAOFactory.DBType.MYSQL);
+		
 		// init look and feel
 		FlatLightLaf.setup();
 		

@@ -3,6 +3,7 @@ package it.unipv.sfw.dao;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 
+import it.unipv.sfw.dao.mysql.StoreItemDAO;
 import it.unipv.sfw.model.store.Merchandising;
 
 /**

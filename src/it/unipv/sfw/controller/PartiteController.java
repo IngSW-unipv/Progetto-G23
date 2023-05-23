@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import it.unipv.sfw.dao.PartitaDAO;
+import it.unipv.sfw.dao.mysql.PartitaDAO;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;

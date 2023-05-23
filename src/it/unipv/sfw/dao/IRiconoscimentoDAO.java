@@ -2,6 +2,7 @@ package it.unipv.sfw.dao;
 
 import java.util.ArrayList;
 
+import it.unipv.sfw.dao.mysql.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
 
