@@ -75,7 +75,7 @@ public class BigliettoMuseoView extends AView {
 		LocalDate today = LocalDate.now();
 		dateSettings.setDateRangeLimits(today.minusDays(0), today.plusDays(70));
 		dateSettings.setAllowKeyboardEditing(false);
-		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, null, null);
+		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, LocalTime.of(14, 0), LocalTime.of(18, 0));
 		timeSettings.setAllowKeyboardEditing(false);
 		
 		visitaPanel.add(visita_label);
