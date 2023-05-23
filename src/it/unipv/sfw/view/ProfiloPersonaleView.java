@@ -22,8 +22,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import it.unipv.sfw.exceptions.OldPasswordReused;
+import it.unipv.sfw.exceptions.PasswordPrecedenteErrata;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
 public class ProfiloPersonaleView extends AView {
@@ -112,7 +115,7 @@ public class ProfiloPersonaleView extends AView {
 		info=new JMenu("i");
 		JLabel infoAbb=new JLabel("<html> Un abbonato avrà a disposizione tre livelli <br>"
 							+ " di abbonamento che gli daranno diversi vantaggi <br> "
-							+ " nello store, nelle partite e nel museo.<br>");
+							+ " nello store, nelle partite e nel museo.</html>");
 		info.add(infoAbb);
 		i.add(info);
 		
@@ -252,7 +255,8 @@ public class ProfiloPersonaleView extends AView {
 		cambiaPass.add(confermaPassword, infoConstraints);
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 6;
-		cambiaPass.add(confermaPass, infoConstraints);	
+		cambiaPass.add(confermaPass, infoConstraints);
+		cambiaPass.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
 		
 		contenitore.setLayout(new BorderLayout());
 		contenitore.add(dati,BorderLayout.NORTH);
@@ -304,22 +308,18 @@ public class ProfiloPersonaleView extends AView {
 	
 	public void onEmptyField() {
 		errorLabel.setText("Non tutti i campi sono stati riempiti!");
-		System.out.println("Non tutti i campi sono stati riempiti!");
 	}
 		
-	public void onPasswordtAlreadyused() {
-		errorLabel.setText("La nuova password deve differire da quella vecchia");
-		System.out.println("La nuova password deve differire da quella vecchia");
+	public void oldPasswordReused() {
+		errorLabel.setText("La nuova password e quella precedente sono uguali");
 	}
 	
 	public void onConfirmPassword() {
 		errorLabel.setText("La nuova password e la conferma sono diverse");
-		System.out.println("La nuova password e la conferma sono diverse");
 	}
 	
 	public void ErroreVecchiaPassword() {
-		errorLabel.setText("Password vecchia Errata");
-		System.out.println("Password vecchia Errata");
+		errorLabel.setText("Password precedente errata");
 	}
 	
 	public void onWindowResized(Dimension dim) {
@@ -330,5 +330,4 @@ public class ProfiloPersonaleView extends AView {
 	}
 	
 	
-
 }

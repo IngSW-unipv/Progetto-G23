@@ -92,17 +92,7 @@ public abstract class Utente {
 	public String getCognome() {
 		return cognome;
 	}
-
-	/**
-	 * 
-	 * @param password
-	 * @return la password commutata in stringa
-	 */
-	 public String CommutaPassword(char[] password) {
-		 s=new String(password);
-		 return s;
-	 }
-	 
+	
 	/**
 	 * Controlla che il cliente sia valido, altrimenti lancia un'eccezione.
 	 * @throws WrongEmailFormatException

@@ -130,7 +130,7 @@ public class UtenteDAO implements IUtenteDAO {
     	try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "UPDATE " + SCHEMA + " SET PASSWORD=? WHERE EMAIL=?";
+			String query = "UPDATE " + SCHEMA + " SET PASS=? WHERE EMAIL=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, newPassword);
