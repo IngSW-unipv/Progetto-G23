@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.sfw.model.utente.Admin;
+import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
 /**
@@ -66,6 +67,31 @@ public class AdminDAO implements IAdminDAO {
 		} catch (Exception e) {e.printStackTrace();}
 
 		return result;
+	}
+	
+	@Override
+	public boolean updatePassword(String newPassword, Admin account) {
+		
+    	PreparedStatement st1;
+    	boolean esito = true;
+    	
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "UPDATE " + SCHEMA + " SET PASSWORD=? WHERE EMAIL=?";
+			st1 = conn.prepareStatement(query);
+			
+			st1.setString(1, newPassword);
+			st1.setString(2, account.getEmail());
+			
+			st1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			esito = false;
+		} 
+    	
+		return esito;
 	}
 	
 	@Override

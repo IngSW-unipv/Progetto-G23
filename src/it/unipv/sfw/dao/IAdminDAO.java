@@ -30,4 +30,11 @@ public interface IAdminDAO {
 	 */
 	boolean insertAdmin(Admin adminInput);
 
+	/**
+	 * @param newPassword Nuova password per l'utente.
+	 * @param account Admin di cui cambiare la passord.
+	 * @return True se il cambiamento è avvenuto con successo, altrimenti False.
+	 */
+	boolean updatePassword(String newPassword, Admin account);
+
 }

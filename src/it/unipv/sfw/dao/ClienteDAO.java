@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
@@ -76,6 +77,31 @@ public class ClienteDAO implements IClienteDAO {
 		} catch (Exception e) {e.printStackTrace();}
 		
 		return result;
+	}
+	
+	@Override
+	public boolean updatePassword(String newPassword, Cliente account) {
+		
+    	PreparedStatement st1;
+    	boolean esito = true;
+    	
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "UPDATE " + SCHEMA + " SET PASSWORD=? WHERE EMAIL=?";
+			st1 = conn.prepareStatement(query);
+			
+			st1.setString(1, newPassword);
+			st1.setString(2, account.getEmail());
+			
+			st1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			esito = false;
+		} 
+    	
+		return esito;
 	}
 	
 	@Override

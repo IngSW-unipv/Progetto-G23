@@ -2,6 +2,7 @@ package it.unipv.sfw.dao;
 
 import java.util.ArrayList;
 
+import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Cliente;
 
 /**
@@ -28,5 +29,12 @@ public interface IClienteDAO {
 	 * @return True se l'inserimento è avvenuto con successo, altrimenti False.
 	 */
 	boolean insertCliente(Cliente clienteInput);
+
+	/**
+	 * @param newPassword Nuova password per l'utente.
+	 * @param account Cliente di cui cambiare la passord.
+	 * @return True se il cambiamento è avvenuto con successo, altrimenti False.
+	 */
+	boolean updatePassword(String newPassword, Cliente account);
 
 }

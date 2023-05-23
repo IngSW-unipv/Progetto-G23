@@ -37,4 +37,11 @@ public interface IUtenteDAO {
 	 */
 	Type selectByEmailAndPassword(String email, String password);
 
+	/**
+	 * @param newPassword Nuova password per l'utente.
+	 * @param account Utente di cui cambiare la passord.
+	 * @return True se il cambiamento è avvenuto con successo, altrimenti False.
+	 */
+	boolean updatePassword(String newPassword, Utente account);
+
 }
