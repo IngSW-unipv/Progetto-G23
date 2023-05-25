@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.dao.mysql.PartitaDAO;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
@@ -28,7 +29,8 @@ public class PartiteController extends AController {
 	
 	@Override
 	public void initialize(Dimension dim) {
-		ArrayList<Partita> p_arrlist = new PartitaDAO().selectAll();
+		
+		ArrayList<Partita> p_arrlist = DAOFactory.createIPartitaDAO().selectAll();
 		
 		p = new Partita[p_arrlist.size()];
 		

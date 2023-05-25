@@ -87,7 +87,7 @@ public class Sessione {
 		// Controlla che il cliente sia valido
 		c.checkValidity();
 		// Inserisci in db
-		if(!(new ClienteDAO().insertCliente(c)))
+		if(!(DAOFactory.createIClienteDAO().insertCliente(c)))
 			throw new AccountAlreadyExistsException(c.getEmail());
 		// Login
 		this.setCurrentUtente(c);
@@ -110,7 +110,7 @@ public class Sessione {
 				throw new OldPasswordReused("La nuova password e quella precedente sono uguali");
 			}
 			
-			new UtenteDAO().updatePassword(nuovaPAssword, u);
+			DAOFactory.createIUtenteDAO().updatePassword(nuovaPAssword, u);
 			Sessione.getIstance().getCurrentUtente().changePassword(nuovaPAssword);
 			
 			

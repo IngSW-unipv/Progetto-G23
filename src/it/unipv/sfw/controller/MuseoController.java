@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.dao.mysql.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
@@ -23,7 +24,7 @@ public class MuseoController extends AController {
 		
 		Museo museum = new Museo(storia, 15, 30, 18, 30);
 		
-		ArrayList<Riconoscimento> ric_arraylist = new RiconoscimentoDAO().selectAllOrderByData();
+		ArrayList<Riconoscimento> ric_arraylist = DAOFactory.createIRiconoscimentoDAO().selectAllOrderByData();
 		
 		museum.setRiconsocimenti(ric_arraylist);
 		
