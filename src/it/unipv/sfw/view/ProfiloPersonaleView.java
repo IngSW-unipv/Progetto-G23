@@ -20,13 +20,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 
-import it.unipv.sfw.exceptions.OldPasswordReused;
-import it.unipv.sfw.exceptions.PasswordPrecedenteErrata;
-import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
-import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
 public class ProfiloPersonaleView extends AView {
@@ -83,23 +78,14 @@ public class ProfiloPersonaleView extends AView {
 		JLabel clienteLabel=new JLabel("Tipo di Utente:");
 		clienteLabel.setFont(mediumFont);
 		
-		if(cliente.getAbb()==null) {
+		if(cliente.getAbb() == null) {
 			tipoClinte="Cliente";
-		}else {
-			if(cliente.getAbb().getTipoAbb()==TipoAbb.TESSERA) {
-				tipoClinte="Tesserato";
-			}else {
-				if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV1) {
-					tipoClinte="Abbonato di livello 1";
-				}else {
-					if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV2) {
-						tipoClinte="Abbonato di livello 2";
-					}else {
-						if(cliente.getAbb().getTipoAbb()==TipoAbb.LIV3) {
-							tipoClinte="Abbonato di livello 3";
-						}
-					}
-				}
+		} else {
+			switch (cliente.getAbb().getTipoAbb()) {
+			case TESSERA: tipoClinte="Tesserato"; break;
+			case LIV1: tipoClinte = "Abbonato di livello 1"; break;
+			case LIV2: tipoClinte = "Abbonato di livello 2"; break;
+			case LIV3: tipoClinte = "Abbonato di livello 3"; break;
 			}
 		}
 		
