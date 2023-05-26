@@ -2,7 +2,7 @@ package it.unipv.sfw.model.store;
 
 import java.util.HashMap;
 
-import it.unipv.sfw.dao.mysql.StoreItemDAO;
+import it.unipv.sfw.dao.DAOFactory;
 
 
 /**
@@ -18,7 +18,7 @@ public class StoreOnline {
 	 * @param carrello Carrello se ne esiste già uno, se viene passato null ne viene creato uno.
 	 */
 	public StoreOnline(HashMap<Merchandising, Integer> carrello) {
-		archivioMerch = new StoreItemDAO().selectStillInStock();
+		archivioMerch = DAOFactory.createIStoreItemDAO().selectStillInStock();
 		if (carrello == null)
 			this.carrello = new HashMap<>();
 		else 
