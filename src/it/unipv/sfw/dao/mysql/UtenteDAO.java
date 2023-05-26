@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import it.unipv.sfw.dao.DBConnection;
 import it.unipv.sfw.dao.IUtenteDAO;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Admin;

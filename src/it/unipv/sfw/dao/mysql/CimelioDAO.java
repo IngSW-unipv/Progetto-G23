@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.sfw.dao.DBConnection;
 import it.unipv.sfw.dao.ICimelioDAO;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;

@@ -11,7 +11,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import it.unipv.sfw.dao.DBConnection;
 import it.unipv.sfw.dao.IPartitaDAO;
 import it.unipv.sfw.dao.IPostoDAO;
 import it.unipv.sfw.model.partita.Partita;

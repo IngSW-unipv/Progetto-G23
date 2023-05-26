@@ -1,4 +1,4 @@
-package it.unipv.sfw.dao;
+package it.unipv.sfw.dao.mysql;
 
 import java.io.FileInputStream;
 import java.sql.Connection;

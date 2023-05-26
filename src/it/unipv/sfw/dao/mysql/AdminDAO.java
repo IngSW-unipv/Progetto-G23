@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.sfw.dao.DBConnection;
 import it.unipv.sfw.dao.IAdminDAO;
 import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Utente;

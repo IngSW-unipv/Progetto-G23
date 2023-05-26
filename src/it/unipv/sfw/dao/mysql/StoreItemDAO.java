@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.HashMap;
 
-import it.unipv.sfw.dao.DBConnection;
 import it.unipv.sfw.dao.IStoreItemDAO;
 import it.unipv.sfw.model.store.*;
 
