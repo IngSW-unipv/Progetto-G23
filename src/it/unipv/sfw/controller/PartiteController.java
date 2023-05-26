@@ -85,9 +85,6 @@ public class PartiteController extends AController {
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
-		Utente u = Sessione.getIstance().getCurrentUtente();
-		System.out.println("Al momento loggato come: " + u.getEmail() + ".");
-		view.onWindowResized(dim);
 	}
 }
 
