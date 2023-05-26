@@ -183,5 +183,6 @@ public class LoginView extends AView {
 	public void onLoad() {
 		username.setText("");
 		password.setText("");
+		errorPanel.setVisible(false);
 	}
 }
