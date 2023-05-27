@@ -33,7 +33,7 @@ public class CarrelloView extends AView {
 	private JButton storeBtn;
 	// center
 	private JPanel centralPanel, itemList, emptyCartPanel;
-	JScrollPane itemScrollPanel;
+	private JScrollPane itemScrollPanel;
 	private HashMap<Merchandising, CartItemPanel> itemPanels;
 	private JButton acquistaBtn;
 	

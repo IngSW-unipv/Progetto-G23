@@ -8,12 +8,14 @@ import java.awt.Font;
 import java.awt.GridBagLayoutInfo;
 import java.awt.GridLayout;
 import java.awt.geom.Dimension2D;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,100 +30,120 @@ import it.unipv.sfw.view.elements.CartItemPanel;
 
 public class PagamentoView extends AView{
 	
+	private final int ANNO = 2023;
+	
 	private Carta carta;
+	private JPanel infoPanel;
 	private JButton carrelloBtn, okBtn;
-	private JTextField scadenzaTxt, nomeTxt, cognomeTxt, nCartaTxt, cvvTxt;
-	private JCheckBox salvaCb;
-	private JOptionPane meseOp, annoOp;
-	private JPanel centerPanel, centralPanel, infoPanel;
+	
 	
 	public PagamentoView(Dimension dim) {
 		// Fonts
+		Font shortFont = new Font("Arial", 1, 14);
 		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 18);
 		Font veryLargeFont = new Font("Arial", 1, 24);
 		
 		// Top panel
 		JPanel topPanel = new JPanel();
-		topPanel.setLayout(new BorderLayout());
-		topPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		
 		JPanel topPanelLbl = new JPanel();
-		topPanelLbl.setBackground(Color.BLUE);
-		topPanelLbl.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		
 		JLabel utente = new JLabel("Utente loggato:   " + Sessione.getIstance().getCurrentUtente().getNome() + " " + Sessione.getIstance().getCurrentUtente().getCognome());
 		utente.setFont(veryLargeFont);
 		utente.setBackground(Color.BLUE);
 		utente.setOpaque(true);
 		
-		topPanelLbl.add(utente);
+		topPanel.setLayout(new BorderLayout());
+		topPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		topPanelLbl.setBackground(Color.BLUE);
+		topPanelLbl.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		
+		topPanelLbl.add(utente);
 		topPanel.add(topPanelLbl, BorderLayout.CENTER);
 				
 		// Center panel
-		centralPanel = new JPanel();
+		JPanel centralPanel = new JPanel();
+		JPanel selectScadenza = new JPanel();
+		JPanel centerPanelBtns = new JPanel();
+		infoPanel = new JPanel();
+		
 		centralPanel.setLayout(new BorderLayout());
+		selectScadenza.setLayout(new GridLayout(1, 2));
 		
 		JLabel title = new JLabel("Pagamento:");
 		title.setFont(veryLargeFont);
 		title.setBackground(Color.CYAN);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
-				
-				// Info panel
-				infoPanel = new JPanel();
-				
-				JLabel nome = new JLabel("Nome:");
-				nome.setFont(largeFont);
-				JLabel cognome = new JLabel("Cognome:");
-				cognome.setFont(largeFont);
-				JLabel numero = new JLabel("Numero:");
-				numero.setFont(largeFont);
-				JLabel scadenza = new JLabel("Scadenza:");
-				scadenza.setFont(largeFont);
-				JLabel cvv = new JLabel("CVV:");
-				cvv.setFont(largeFont);
-				
-				
-				nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
-				cognomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
-				nCartaTxt = new JTextField();
-				scadenzaTxt = new JTextField();
-				cvvTxt = new JTextField();
-				
-				infoPanel.setLayout(new GridLayout(5, 2, dim.width/12, 0));
-				infoPanel.add(nome);
-				infoPanel.add(nomeTxt);
-				infoPanel.add(cognome);
-				infoPanel.add(cognomeTxt);
-				infoPanel.add(numero);
-				infoPanel.add(nCartaTxt);
-				infoPanel.add(scadenza);
-				infoPanel.add(scadenzaTxt);
-				infoPanel.add(cvv);
-				infoPanel.add(cvvTxt);
+		JLabel nome = new JLabel("Nome:");
+		nome.setFont(largeFont);
+		JLabel cognome = new JLabel("Cognome:");
+		cognome.setFont(largeFont);
+		JLabel numero = new JLabel("Numero:");
+		numero.setFont(largeFont);
+		JLabel scadenza = new JLabel("Scadenza (mm/aaaa):");
+		scadenza.setFont(largeFont);
+		JLabel cvv = new JLabel("CVV:");
+		cvv.setFont(largeFont);
+		
+		Integer[] monthToChoose = new Integer[31];
+		Integer[] yearToChoose = new Integer[11];
+		
+		for(int i=0; i<31; i++) {
+			monthToChoose[i] = i+1;
+		}
+		for(int i=0; i<2; i++) {
+			for(int i2=0; i2<5; i2++){
+				if (i==0) yearToChoose[i2] = ANNO - (5 - i2);
+				else yearToChoose[10 - i2] = ANNO + (5 - i2);
+			}
+		}
+		yearToChoose[5] = ANNO;
+		
+		JTextField nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
+		JTextField cognomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
+		JTextField nCartaTxt = new JTextField();
+		JTextField cvvTxt = new JTextField();
+		JComboBox <Integer> meseOp = new JComboBox<>(monthToChoose);
+		JComboBox <Integer> annoOp = new JComboBox<>(yearToChoose);
+		JCheckBox salvaCb = new JCheckBox("Salva metodo di pagamento");
+		carrelloBtn = new JButton("Carrello");
+		okBtn = new JButton("Conferma");
+		
+		meseOp.setSelectedIndex(0);
+		annoOp.setSelectedIndex(5);
+		salvaCb.setFont(shortFont);
 
-				infoPanel.setBorder(new EmptyBorder(dim.height/5, dim.width/12, dim.height/5,  dim.width/12));
-				
-				centralPanel.setLayout(new BorderLayout());
-				centralPanel.add(title, BorderLayout.NORTH);
-				centralPanel.add(infoPanel, BorderLayout.CENTER);
-
-				JPanel centerPanelBtns = new JPanel();
-				centerPanelBtns.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-				
-				carrelloBtn = new JButton("Carrello");
-				carrelloBtn.setBackground(Color.WHITE);
-				carrelloBtn.setFont(mediumFont);
-				okBtn = new JButton("Conferma");
-				okBtn.setBackground(Color.WHITE);
-				okBtn.setFont(mediumFont);
-				
-				centerPanelBtns.add(carrelloBtn);
-				centerPanelBtns.add(okBtn);
-				
-				centralPanel.add(centerPanelBtns, BorderLayout.SOUTH);
+		selectScadenza.add(meseOp);
+		selectScadenza.add(annoOp);
+		
+		carrelloBtn.setBackground(Color.WHITE);
+		carrelloBtn.setFont(mediumFont);
+		okBtn.setBackground(Color.WHITE);
+		okBtn.setFont(mediumFont);
+		
+		infoPanel.setLayout(new GridLayout(6, 2, dim.width/192, 1));
+		infoPanel.add(nome);
+		infoPanel.add(nomeTxt);
+		infoPanel.add(cognome);
+		infoPanel.add(cognomeTxt);
+		infoPanel.add(numero);
+		infoPanel.add(nCartaTxt);
+		infoPanel.add(scadenza);
+		infoPanel.add(selectScadenza);
+		infoPanel.add(cvv);
+		infoPanel.add(cvvTxt);
+		infoPanel.add(salvaCb);
+		infoPanel.setBorder(new EmptyBorder(dim.height/6, dim.width/7, dim.height/6,  dim.width/7));
+		
+		centerPanelBtns.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
+		centerPanelBtns.add(carrelloBtn);
+		centerPanelBtns.add(okBtn);
+		
+		centralPanel.setLayout(new BorderLayout());
+		centralPanel.add(title, BorderLayout.NORTH);
+		centralPanel.add(infoPanel, BorderLayout.CENTER);
+		centralPanel.add(centerPanelBtns, BorderLayout.SOUTH);
 				
 		// Main panel
 		this.setLayout(new BorderLayout());
@@ -133,10 +155,18 @@ public class PagamentoView extends AView{
 	@Override
 	public void onWindowResized(Dimension dim) {
 
-		infoPanel.setBorder(new EmptyBorder(dim.height/5, 0, dim.height/5,  0));
+		infoPanel.setBorder(new EmptyBorder(dim.height/6, dim.width/7, dim.height/6,  dim.width/7));
 	
 		infoPanel.revalidate();
 		infoPanel.repaint();
+	}
+	
+	public JButton getCarrelloBtn() {
+		return carrelloBtn;
+	}
+	
+	public JButton getokBtn() {
+		return okBtn;
 	}
 	
 	@Override
