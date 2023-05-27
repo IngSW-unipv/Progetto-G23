@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -263,6 +264,10 @@ public class ProfiloPersonaleView extends AView {
 	public Type getType() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Collection<UtenteButton> getButtons() {
+		return acquista;
 	}
 	
 	public JButton getHome() {

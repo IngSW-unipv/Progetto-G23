@@ -5,14 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Collection;
 
 import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.exceptions.OldPasswordReused;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrata;
+import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.ProfiloPersonaleView;
+import it.unipv.sfw.view.buttons.UtenteButton;
 
 public class ProfiloPersonaleController extends AController{
 	
@@ -27,6 +30,19 @@ public class ProfiloPersonaleController extends AController{
 	    }
 		
 		ProfiloPersonaleView v = new ProfiloPersonaleView(dim,c);
+		
+		
+		
+		ActionListener a = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		};
+		
+		Collection<UtenteButton> btns = v.getButtons();
+		for (UtenteButton b : btns)
+			b.addActionListener(a);
 		
 		v.getHome().addActionListener(new ActionListener() {		
 			@Override
