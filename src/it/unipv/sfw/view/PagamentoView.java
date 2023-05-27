@@ -86,10 +86,10 @@ public class PagamentoView extends AView{
 		JLabel cvv = new JLabel("CVV:");
 		cvv.setFont(largeFont);
 		
-		Integer[] monthToChoose = new Integer[31];
+		Integer[] monthToChoose = new Integer[12];
 		Integer[] yearToChoose = new Integer[11];
 		
-		for(int i=0; i<31; i++) {
+		for(int i=0; i<12; i++) {
 			monthToChoose[i] = i+1;
 		}
 		for(int i=0; i<2; i++) {
@@ -165,7 +165,7 @@ public class PagamentoView extends AView{
 		return carrelloBtn;
 	}
 	
-	public JButton getokBtn() {
+	public JButton getOkBtn() {
 		return okBtn;
 	}
 	

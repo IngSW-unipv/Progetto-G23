@@ -241,4 +241,14 @@ public class Sessione {
 	public HashMap<Merchandising, Integer> getCarrello() {
 		return carrello;
 	}
+	
+	/**
+	 * Funzione che resetta il carrello 
+	 * {@link CarrelloController}
+	 * a null.
+	 */
+	public void resetCarrello() {
+		carrello.clear();
+		carrello = null;
+	}
 }
