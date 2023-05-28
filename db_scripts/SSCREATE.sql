@@ -1,5 +1,5 @@
 -- Create all the tables for StadiumSystem
-create schema if not exists stadiumsystem;
+create schema if not exists stadiumsystem charset utf16;
 
 use stadiumsystem;
 
@@ -11,6 +11,7 @@ create table UTENTI (
         TIPO ENUM('ADMIN', 'CLIENTE'),
         NASCITA DATE
 );
+
 create table ABBONAMENTI (
 		EMAIL CHAR(255) PRIMARY KEY,
         GRADO ENUM('1', '2'),		-- temp
@@ -23,7 +24,6 @@ create table PARTITE (
         PREZZO float4,
         BIGLIETTI_RIMANENTI MEDIUMINT
 );
-
 
 create table POSTI (
 		DAT DATETIME,
@@ -43,6 +43,15 @@ create table STORE_ITEMS (
         PREZZO float4,
         QUANTITA_RIMANENTE MEDIUMINT,
         DESCRIZIONE TEXT
+);
+
+create table ACQUISTI_STORE (
+		ITEM MEDIUMINT,
+        BUYER CHAR(255),
+        QUANTITA MEDIUMINT,
+        FOREIGN KEY (ITEM) REFERENCES STORE_ITEMS(ID),
+        FOREIGN KEY (BUYER) REFERENCES UTENTI(EMAIL),
+        PRIMARY KEY (ITEM, BUYER)
 );
 
 create table MUSEO_ITEMS (

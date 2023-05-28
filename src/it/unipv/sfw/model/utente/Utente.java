@@ -99,10 +99,12 @@ public abstract class Utente {
 	 * @throws EmptyFieldException
 	 */
 	public void checkValidity() throws WrongEmailFormatException, EmptyFieldException {
-		final Predicate<String> isBlack = s -> s.chars().allMatch(c -> Character.isWhitespace(c));
+		final Predicate<String> isValid = s -> {
+			return s.chars().allMatch(c -> Character.isWhitespace(c)) && s.length() < 256;
+		};
 	
 		// Controlla che non vi siano campi vuoti
-		if (isBlack.test(nome) || isBlack.test(cognome) || isBlack.test(password))
+		if (isValid.test(nome) || isValid.test(cognome) || isValid.test(password))
 			throw new EmptyFieldException();
 		// Controlla formato email
 		checkEmail(email);
@@ -118,7 +120,7 @@ public abstract class Utente {
 		final Predicate<String> isEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE)
 					.asPredicate();
 		
-		if(!isEmail.test(email)) {
+		if((!isEmail.test(email)) && email.length() > 255) {
 			throw new WrongEmailFormatException(email);
 		}
 	}
