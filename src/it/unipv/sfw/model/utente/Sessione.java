@@ -34,10 +34,12 @@ public class Sessione {
 	private HashMap<Merchandising, Integer> carrello;
 	private Partita currentPartita;
 	private Utente currentUtente;
+	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita
 
 	private Sessione() {	
 		currentUtente = null;
 		currentPartita = null;
+		currentPagamento = 0;
 		carrello = null;
 		scelte = new HashMap<>();
 	}
@@ -134,6 +136,7 @@ public class Sessione {
 		scelte.clear();
 		carrello = null;
 		currentPartita = null;
+		currentPagamento = 0;
 	}
 
 	/**
@@ -150,6 +153,22 @@ public class Sessione {
 	 */
 	public void setCurrentUtente(Utente currentU) {
 		currentUtente = currentU;
+	}
+	
+	/**
+	 * @return {@link Pagamento} della sessione corrente.
+	 */
+	public int getCurrentPagamento() {
+		return currentPagamento;
+	}
+	
+	/**
+	 * Funzione che permette di impostare come {@link Pagamento} corrente 
+	 * quello passato come parametro.
+	 * @param currentPagamento Pagamento corrente della sessione.
+	 */
+	public void setCurrentPagamento(int currentPagamento) {
+		this.currentPagamento = currentPagamento;
 	}
 	
 	/**

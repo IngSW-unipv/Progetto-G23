@@ -40,8 +40,8 @@ public class PostoController extends AController {
 						+ s.getCurrentPartita().getOspiti() + ".");
 				// Update database with booking
 				s.book();
-				
-				ControllerManager.getInstance().loadController(6);
+
+				ControllerManager.getInstance().loadController(12);
 			}
 		};
 		
@@ -50,5 +50,11 @@ public class PostoController extends AController {
 			b.addActionListener(a);
 		
 		view = v;
+	}
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
+		Sessione.getIstance().setCurrentPagamento(3);
 	}
 }

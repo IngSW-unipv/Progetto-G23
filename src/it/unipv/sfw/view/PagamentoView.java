@@ -34,7 +34,7 @@ public class PagamentoView extends AView{
 	
 	private Carta carta;
 	private JPanel infoPanel;
-	private JButton carrelloBtn, okBtn;
+	private JButton backBtn, okBtn;
 	
 	
 	public PagamentoView(Dimension dim) {
@@ -107,8 +107,10 @@ public class PagamentoView extends AView{
 		JComboBox <Integer> meseOp = new JComboBox<>(monthToChoose);
 		JComboBox <Integer> annoOp = new JComboBox<>(yearToChoose);
 		JCheckBox salvaCb = new JCheckBox("Salva metodo di pagamento");
-		carrelloBtn = new JButton("Carrello");
 		okBtn = new JButton("Conferma");
+		if(Sessione.getIstance().getCurrentPagamento() == 1) backBtn = new JButton("Carrello");
+		else if (Sessione.getIstance().getCurrentPagamento() == 2) backBtn = new JButton("Museo");
+		else backBtn = new JButton("Home");
 		
 		meseOp.setSelectedIndex(0);
 		annoOp.setSelectedIndex(5);
@@ -117,8 +119,9 @@ public class PagamentoView extends AView{
 		selectScadenza.add(meseOp);
 		selectScadenza.add(annoOp);
 		
-		carrelloBtn.setBackground(Color.WHITE);
-		carrelloBtn.setFont(mediumFont);
+		
+		backBtn.setBackground(Color.WHITE);
+		backBtn.setFont(mediumFont);
 		okBtn.setBackground(Color.WHITE);
 		okBtn.setFont(mediumFont);
 		
@@ -137,7 +140,7 @@ public class PagamentoView extends AView{
 		infoPanel.setBorder(new EmptyBorder(dim.height/6, dim.width/7, dim.height/6,  dim.width/7));
 		
 		centerPanelBtns.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-		centerPanelBtns.add(carrelloBtn);
+		centerPanelBtns.add(backBtn);
 		centerPanelBtns.add(okBtn);
 		
 		centralPanel.setLayout(new BorderLayout());
@@ -161,8 +164,8 @@ public class PagamentoView extends AView{
 		infoPanel.repaint();
 	}
 	
-	public JButton getCarrelloBtn() {
-		return carrelloBtn;
+	public JButton getBackBtn() {
+		return backBtn;
 	}
 	
 	public JButton getOkBtn() {

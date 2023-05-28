@@ -56,6 +56,7 @@ public class CarrelloController extends AController {
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
+		Sessione.getIstance().setCurrentPagamento(1);
 	}
 
 }

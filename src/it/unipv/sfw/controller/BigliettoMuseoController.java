@@ -40,7 +40,7 @@ public class BigliettoMuseoController extends AController {
 					return;
 				}
 				// Load new page
-				ControllerManager.getInstance().loadController(10);
+				ControllerManager.getInstance().loadController(12);
 			}
 		});
 			
@@ -51,6 +51,7 @@ public class BigliettoMuseoController extends AController {
 	public void onLoad(Dimension dim) {
 		view.onWindowResized(dim);
 		((BigliettoMuseoView)view).onLoad();
+		Sessione.getIstance().setCurrentPagamento(2);
 	}
 
 }
