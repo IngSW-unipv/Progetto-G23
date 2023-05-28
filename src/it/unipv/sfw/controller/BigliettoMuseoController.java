@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import it.unipv.sfw.exceptions.AccountNotFoundException;
+import it.unipv.sfw.exceptions.EmptyDateException;
+import it.unipv.sfw.exceptions.EmptyTimeException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.utente.Sessione;
@@ -35,10 +37,22 @@ public class BigliettoMuseoController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Utente.checkEmail(bview.getEnteredEmail());
-				} catch (WrongEmailFormatException err) {
-					bview.upError();
+					bview.checkEnteredDate();
+					bview.checkEnteredTime();
+				}
+				catch (WrongEmailFormatException err) {
+					bview.upEmailError();
 					return;
 				}
+				catch (EmptyDateException err) {
+					bview.upDateError();
+					return;
+				}
+				catch (EmptyTimeException err) {
+					bview.upTimeError();
+					return;
+				}
+
 				// Load new page
 				ControllerManager.getInstance().loadController(12);
 			}

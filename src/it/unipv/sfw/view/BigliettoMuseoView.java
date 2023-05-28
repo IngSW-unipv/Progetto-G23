@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -25,12 +28,17 @@ import com.github.lgooddatepicker.components.DateTimePicker;
 import com.github.lgooddatepicker.components.TimePickerSettings;
 import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 
+import it.unipv.sfw.exceptions.EmptyDateException;
+import it.unipv.sfw.exceptions.EmptyTimeException;
+
 
 public class BigliettoMuseoView extends AView {
 
 	private JPanel box_contenitore;
 	private JPanel contenitore;
 	private JPanel emailError;
+	private JPanel dataError;
+	private JLabel d_error;
 	private JButton acquistaButton;
 	private JButton backButton;
 	private JTextField email_box;
@@ -69,12 +77,18 @@ public class BigliettoMuseoView extends AView {
 		emailPanel.add(email_box);
 		emailPanel.add(emailError);
 		
+		
+		
+		//
 		JPanel visitaPanel = new JPanel();
 		visitaPanel.setPreferredSize(new Dimension(400, 75));
-		visitaPanel.setLayout(new GridLayout(2, 1));
+		visitaPanel.setLayout(new GridLayout(3, 1));
+		//
+		
 		JLabel visita_label = new JLabel("Selezionare data e ora di visita:");
 		visita_label.setFont(medium_font);
 		visita_label.setOpaque(true);
+		
 		DatePickerSettings dateSettings = new DatePickerSettings();
 		TimePickerSettings timeSettings = new TimePickerSettings();
 		chDate = new DateTimePicker(dateSettings, timeSettings);
@@ -84,6 +98,14 @@ public class BigliettoMuseoView extends AView {
 		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, LocalTime.of(14, 0), LocalTime.of(18, 0));
 		timeSettings.setAllowKeyboardEditing(false);
 		
+		dataError = new JPanel();
+		dataError.setLayout(new FlowLayout(FlowLayout.LEFT));
+		d_error = new JLabel();
+		d_error.setForeground(Color.RED);
+		dataError.add(d_error);
+		dataError.setVisible(false);
+		
+		
 		i=new JMenuBar();		
 		info=new JMenu("i");
 		JLabel infoOrario=new JLabel("<html> La visita al museo ha una durata di <br>"
@@ -92,9 +114,34 @@ public class BigliettoMuseoView extends AView {
 		info.add(infoOrario);
 		i.add(info);
 		
+		//
 		visitaPanel.add(visita_label);
 		visitaPanel.add(chDate);
+		visitaPanel.add(dataError);
 		//visitaPanel.add(i, -1);
+		//
+		
+		/*
+		JPanel visitaPanel=new JPanel();
+		visitaPanel.setLayout(new GridBagLayout());		
+		GridBagConstraints infoConstraints = new GridBagConstraints();
+		infoConstraints.fill = GridBagConstraints.HORIZONTAL;
+		infoConstraints.insets = new Insets(2, 0, 0, 15);
+		
+		
+		infoConstraints.weightx = 0.5;
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 1;
+		visitaPanel.add(visita_label, infoConstraints);
+		infoConstraints.gridwidth = GridBagConstraints.RELATIVE;
+		infoConstraints.weightx = 0.5;
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 2;
+		visitaPanel.add(chDate, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 2;
+		visitaPanel.add(i, infoConstraints);
+		*/	
 		
 		acquistaButton = new JButton("ACQUISTA BIGLIETTO");
 		acquistaButton.setBackground(Color.WHITE);
@@ -158,9 +205,29 @@ public class BigliettoMuseoView extends AView {
 		
 	}
 	
-	public void upError() {
+	public void upEmailError() {
 		emailError.setVisible(true);
+		dataError.setVisible(false);
 		email_box.setText("");
+		chDate.setDateTimeStrict(null);
+		contenitore.repaint();
+	}
+	
+	public void upDateError() {
+		d_error.setText("Data non inserita!");
+		dataError.setVisible(true);
+		emailError.setVisible(false);
+		email_box.setText("");
+		chDate.setDateTimeStrict(null);
+		contenitore.repaint();
+	}
+	
+	public void upTimeError() {
+		d_error.setText("Ora non inserita!");
+		dataError.setVisible(true);
+		emailError.setVisible(false);
+		email_box.setText("");
+		chDate.setDateTimeStrict(null);
 		contenitore.repaint();
 	}
 	
@@ -176,6 +243,18 @@ public class BigliettoMuseoView extends AView {
 		return email_box.getText();
 	}
 	
+	public void checkEnteredDate() throws EmptyDateException {
+		if (chDate.getDatePicker().getDateStringOrEmptyString().equals("")) {
+			throw new EmptyDateException(chDate.getDatePicker());
+		}
+	}
+	
+	public void checkEnteredTime() throws EmptyTimeException {
+		if (chDate.getTimePicker().getTimeStringOrEmptyString().equals("")) {
+			throw new EmptyTimeException(chDate.getTimePicker());
+		}
+	}
+	
 	@Override
 	public Type getType() {
 		return Type.BIGLIETTOMUSEO;
@@ -183,7 +262,6 @@ public class BigliettoMuseoView extends AView {
 	
 	public void onLoad() {
 		email_box.setText("");
-		chDate.setDateTimeStrict(null);
 		chDate.setDateTimeStrict(null);
 	}
 
