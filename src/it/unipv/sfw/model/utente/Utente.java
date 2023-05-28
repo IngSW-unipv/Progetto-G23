@@ -120,7 +120,7 @@ public abstract class Utente {
 		final Predicate<String> isEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE)
 					.asPredicate();
 		
-		if((!isEmail.test(email)) && email.length() > 255) {
+		if((!isEmail.test(email)) || email.length() > 255) {
 			throw new WrongEmailFormatException(email);
 		}
 	}
