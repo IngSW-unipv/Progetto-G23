@@ -263,6 +263,8 @@ public class BigliettoMuseoView extends AView {
 	public void onLoad() {
 		email_box.setText("");
 		chDate.setDateTimeStrict(null);
+		dataError.setVisible(false);
+		emailError.setVisible(false);
 	}
 
 }
