@@ -29,7 +29,7 @@ public class ControllerManager {
 	private Frame f;
 	private AController currentController;
 	private final ControllerCache[] controllers;
-	private final int N_CONTROLLERS = 14;
+	private final int N_CONTROLLERS = 15;
 	
 	private ControllerManager() {
 		// init DAOFactory
@@ -57,6 +57,7 @@ public class ControllerManager {
 		controllers[11] = new ControllerCache(new BigliettoMuseoController());
 		controllers[12] = new ControllerCache(new PagamentoController());
 		controllers[13] = new ControllerCache(new AdminStoreController());
+		controllers[14] = new ControllerCache(new PartiteAdminController());
 		
 		currentController = null;
 		
