@@ -34,8 +34,7 @@ public class AcquistiStoreDAO implements IAcquistiStoreDAO {
 				
 			st1 = conn.createStatement();
 			String query = "SELECT ITEM, BUYER, QUANTITA, NOME, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE "
-					+ "FROM (" + SCHEMA + "JOIN STORE_ITEMS)"
-					+ "WHERE ID=ITEM";
+					+ "FROM " + SCHEMA + " a JOIN STORE_ITEMS b on a.ITEM=b.ID";
 			
 			rs1 = st1.executeQuery(query);
 				
