@@ -1,6 +1,7 @@
 package it.unipv.sfw.dao;
 
 import it.unipv.sfw.dao.mysql.AbbonamentoDAO;
+import it.unipv.sfw.dao.mysql.AcquistiStoreDAO;
 import it.unipv.sfw.dao.mysql.AdminDAO;
 import it.unipv.sfw.dao.mysql.BigliettoMuseoDAO;
 import it.unipv.sfw.dao.mysql.CimelioDAO;
@@ -164,5 +165,15 @@ public class DAOFactory {
 		throw new RuntimeException("Instanza DAOFactory non inizializzata.");
 	}
 	
-	
+	/**
+	 * Metodo che crea il DAO realitivo agli acquisti store.
+	 * @throws Lancia una RuntimeException nel caso in cui l'istanza di DAOFactory non sia stata inizializzata.
+	 * @return Un'istanza di AcquistiStoreDAO.
+	 */
+	public static IAcquistiStoreDAO createIAcquistiStoreDAO() {
+		switch (instance.dbType) {
+			case MYSQL: return new AcquistiStoreDAO();
+		}
+		throw new RuntimeException("Instanza DAOFactory non inizializzata.");
+	}
 }
