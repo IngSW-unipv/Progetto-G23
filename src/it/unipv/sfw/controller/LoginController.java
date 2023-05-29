@@ -73,8 +73,9 @@ public class LoginController extends AController {
 			v.upError();
 			return;
 		}
-		// Load new page
 		ControllerManager.getInstance().loadController(6);
+		
+		
 	}
 	
 	@Override

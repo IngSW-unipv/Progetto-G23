@@ -26,7 +26,8 @@ public abstract class AView extends JPanel {
 		BLOCCO, 
 		STORE,
 		MUSEO,
-		BIGLIETTOMUSEO
+		BIGLIETTOMUSEO,
+		PARTITEAMMINISTRATORE
 	}
 	
 	/**

@@ -116,19 +116,7 @@ public class ProfiloPersonaleController extends AController{
 				}
 					
 				
-				/*String pass=Sessione.getIstance().CommutaPassword(v.getVecchiaPassword().getPassword());
-				if(v.getVecchiaPassword().getPassword().length!=0&&v.getNuovaPassword().getPassword().length!=0&&v.getConfermaNuovaPassword().getPassword().length!=0) {
-					if(c.getPassword().equals(pass)){
-						String p1=Sessione.getIstance().CommutaPassword(v.getNuovaPassword().getPassword());
-						String p2=Sessione.getIstance().CommutaPassword(v.getConfermaNuovaPassword().getPassword());
-						if(p1.equals(p2)) {
-							pass=Sessione.getIstance().CommutaPassword(v.getNuovaPassword().getPassword());
-							
-							c.changePassword(pass);
-						}else{v.onConfirmPassword();}
-					}else{v.ErroreVecchiaPassword();}
-				}else {v.onEmptyField();}			
-				*/
+				
 			}
 		});
 		
