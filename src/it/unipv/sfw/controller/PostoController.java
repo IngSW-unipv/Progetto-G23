@@ -52,9 +52,4 @@ public class PostoController extends AController {
 		view = v;
 	}
 	
-	@Override
-	public void onLoad(Dimension dim) {
-		this.initialize(dim);
-		Sessione.getIstance().setCurrentPagamento(3);
-	}
 }
