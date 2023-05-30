@@ -51,4 +51,10 @@ public interface IStoreItemDAO {
 	 */
 	SimpleEntry<Merchandising, Integer> selectById(Merchandising merch);
 
+	/**
+	 * @param id Id dell'articolo utilizzato come chiave di ricerca.
+	 * @return L'articolo registrato nel database con l'id passato come parametro.
+	 */
+	Merchandising selectById(int id);
+
 }

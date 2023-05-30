@@ -4,10 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Locale;
 
+import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.dao.IAcquistiStoreDAO;
+import it.unipv.sfw.dao.IClienteDAO;
+import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
+import it.unipv.sfw.model.utente.Cliente;
 
 //(item id, email, quantita)
 // -------  -----
@@ -22,26 +32,38 @@ public class AcquistiStoreDAO implements IAcquistiStoreDAO {
 	private static final String SCHEMA = "ACQUISTI_STORE";
 		
 	@Override
-	public HashMap<Merchandising, Integer> selectAllWithPrice() {
+	public ArrayList<AcquistoStore> selectAllWithPrice() {
 			
-		HashMap<Merchandising, Integer> result = new HashMap<>(); //chiave: item, valore: quantita acquistata
+		ArrayList<AcquistoStore> result= new ArrayList<>();
 			
 		Statement st1;
 		ResultSet rs1;
 			
 		try (DBConnection db = new DBConnection(SCHEMA)) {
-			Connection conn = db.getConnection();
-				
+			Connection conn = db.getConnection();	
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 			st1 = conn.createStatement();
-			String query = "SELECT ITEM, BUYER, QUANTITA, NOME, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE "
-					+ "FROM " + SCHEMA + " a JOIN STORE_ITEMS b on a.ITEM=b.ID";
+			String query = "SELECT ITEM, BUYER, QUANTITA, b.NOME, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE,"
+					+ " c.NOME, COGNOME, PASS, NASCITA "
+					+ "FROM " + SCHEMA + " a JOIN STORE_ITEMS b on a.ITEM=b.ID JOIN UTENTI a on c.BUYER=c.EMAIL";
 			
 			rs1 = st1.executeQuery(query);
 				
 			while(rs1.next()) {
-				int q =  rs1.getInt(3);
-				Merchandising c = new Merchandising(rs1.getString(4), rs1.getDouble(5), rs1.getInt(1), rs1.getString(7));
-				result.put(c, q);
+				
+				Merchandising m = new Merchandising(rs1.getString(4), rs1.getDouble(5), rs1.getInt(1), rs1.getString(7));
+				
+				String dateInString = rs1.getString(11);
+				Date date = (Date) sdf.parse(dateInString);
+				Calendar data = Calendar.getInstance();
+				data = new GregorianCalendar();
+				data.setTime(date);
+				Cliente c = new Cliente(rs1.getString(8), rs1.getString(9), rs1.getString(2), rs1.getString(10), data);
+				
+				AcquistoStore a = new AcquistoStore(m, c, rs1.getInt(3));
+				
+				result.add(a);
 			}
 			
 		} catch (Exception e){e.printStackTrace();}
@@ -50,7 +72,7 @@ public class AcquistiStoreDAO implements IAcquistiStoreDAO {
 	}
 		
 	@Override
-	public boolean insertAcquisto(Merchandising item, String email, int quantita) {
+	public boolean insertAcquisto(AcquistoStore acquisto) {
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -61,9 +83,9 @@ public class AcquistiStoreDAO implements IAcquistiStoreDAO {
 			String query = "INSERT INTO " + SCHEMA + "(ITEM, BUYER, QUANTITA) VALUES(?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setInt(1, item.getId());
-			st1.setString(2, email);
-			st1.setInt(3, quantita);
+			st1.setInt(1, acquisto.getItem().getId());
+			st1.setString(2, acquisto.getBuyer().getEmail());
+			st1.setInt(3, acquisto.getQuantita());
 			
 			st1.executeUpdate(); 
 			

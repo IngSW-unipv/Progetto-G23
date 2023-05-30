@@ -28,7 +28,7 @@ public class UtenteDAO implements IUtenteDAO {
 	@Override
 	public ArrayList<Utente> selectAll() {
 		
-		ArrayList<Utente> result = new ArrayList<>();;
+		ArrayList<Utente> result = new ArrayList<>();
 		
 		Statement st1;
 		ResultSet rs1;

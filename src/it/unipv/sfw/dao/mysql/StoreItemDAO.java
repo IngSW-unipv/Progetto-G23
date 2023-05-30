@@ -175,4 +175,28 @@ public class StoreItemDAO implements IStoreItemDAO {
 		return result;
 	}
 	
+	@Override
+	public Merchandising selectById(int id) {
+		
+		Merchandising result = null;
+		
+		PreparedStatement st1;
+		ResultSet rs1;
+	
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT * FROM " + SCHEMA + " WHERE ID=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, id);
+			rs1 = st1.executeQuery();
+			
+			rs1.next();
+			result = new Merchandising(rs1.getString(2), rs1.getDouble(3), rs1.getInt(1), rs1.getString(5));
+	
+		} catch (Exception e) {e.printStackTrace();}
+		
+		return result;
+	}
+	
 }

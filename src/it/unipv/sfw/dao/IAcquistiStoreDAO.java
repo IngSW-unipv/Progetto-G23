@@ -1,8 +1,10 @@
 package it.unipv.sfw.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.unipv.sfw.dao.mysql.StoreItemDAO;
+import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 
 /**
@@ -16,7 +18,7 @@ public interface IAcquistiStoreDAO {
 	/**
 	 * @return Un array che contiene tutti gli acquisti registrati nel database.
 	 */
-	HashMap<Merchandising, Integer> selectAllWithPrice();
+	ArrayList<AcquistoStore> selectAllWithPrice();
 
 	/**
 	 * @param item Item acquistato da inserire nel database.
@@ -24,6 +26,6 @@ public interface IAcquistiStoreDAO {
 	 * @param quantita Numero di item dello stesso tipo acquistati.
 	 * @return True se l'inserimento è avvenuto con successo, altrimenti False.
 	 */
-	boolean insertAcquisto(Merchandising item, String email, int quantita);
+	boolean insertAcquisto(AcquistoStore acquisto);
 
 }
