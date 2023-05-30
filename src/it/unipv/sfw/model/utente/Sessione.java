@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import it.unipv.sfw.dao.DAOFactory;
+import it.unipv.sfw.dao.IUtenteDAO;
 import it.unipv.sfw.dao.mysql.ClienteDAO;
 import it.unipv.sfw.dao.mysql.UtenteDAO;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
@@ -65,7 +66,7 @@ public class Sessione {
 	 */
 	public void login(String email, char[] pass)
 			throws WrongPasswordException, AccountNotFoundException {
-		Cliente c = DAOFactory.createIClienteDAO().selectByEmail(email);
+		Utente c = DAOFactory.createIUtenteDAO().selectByEmail(email);
 		
 		String strPass = new String(pass);
 		
