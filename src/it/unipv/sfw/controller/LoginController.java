@@ -9,8 +9,10 @@ import java.awt.event.KeyListener;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.model.utente.Utente.Type;
 import it.unipv.sfw.view.LoginView;
 
+import it.unipv.sfw.model.utente.Admin;
 
 
 /**
@@ -73,7 +75,13 @@ public class LoginController extends AController {
 			v.upError();
 			return;
 		}
-		ControllerManager.getInstance().loadController(6);
+		
+		if(Sessione.getIstance().getCurrentUtente().getType() == Type.ADMIN) {
+			ControllerManager.getInstance().loadController(14);
+		}else {
+			ControllerManager.getInstance().loadController(6);
+		}
+		
 		
 		
 	}
