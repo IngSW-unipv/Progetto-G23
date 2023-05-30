@@ -35,7 +35,7 @@ public class Sessione {
 	private HashMap<Merchandising, Integer> carrello;
 	private Partita currentPartita;
 	private Utente currentUtente;
-	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita
+	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
 
 	private Sessione() {	
 		currentUtente = null;
@@ -137,7 +137,6 @@ public class Sessione {
 		scelte.clear();
 		carrello = null;
 		currentPartita = null;
-		currentPagamento = 0;
 	}
 
 	/**

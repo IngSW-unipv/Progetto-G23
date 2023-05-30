@@ -110,7 +110,8 @@ public class PagamentoView extends AView{
 		okBtn = new JButton("Conferma");
 		if(Sessione.getIstance().getCurrentPagamento() == 1) backBtn = new JButton("Carrello");
 		else if (Sessione.getIstance().getCurrentPagamento() == 2) backBtn = new JButton("Museo");
-		else backBtn = new JButton("Home");
+		else if (Sessione.getIstance().getCurrentPagamento() == 3) backBtn = new JButton("Home");
+		else backBtn = new JButton("Profilo personale");
 		
 		meseOp.setSelectedIndex(0);
 		annoOp.setSelectedIndex(5);

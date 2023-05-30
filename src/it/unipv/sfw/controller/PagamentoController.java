@@ -21,7 +21,8 @@ public class PagamentoController extends AController{
 			public void actionPerformed(ActionEvent e) {
 				if(Sessione.getIstance().getCurrentPagamento() == 1)ControllerManager.getInstance().loadController(9);
 				else if (Sessione.getIstance().getCurrentPagamento() == 2) ControllerManager.getInstance().loadController(11);
-				else ControllerManager.getInstance().loadController(6);
+				else if (Sessione.getIstance().getCurrentPagamento() == 3) ControllerManager.getInstance().loadController(6);
+				else ControllerManager.getInstance().loadController(8);
 			}
 		});
 		

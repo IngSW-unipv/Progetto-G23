@@ -31,18 +31,18 @@ public class ProfiloPersonaleController extends AController{
 		
 		ProfiloPersonaleView v = new ProfiloPersonaleView(dim,c);
 		
-		
-		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				ControllerManager.getInstance().loadController(12);
 			}
 		};
 		
 		Collection<UtenteButton> btns = v.getButtons();
-		for (UtenteButton b : btns)
+		for (UtenteButton b : btns){
 			b.addActionListener(a);
+		}
+			
 		
 		v.getHome().addActionListener(new ActionListener() {		
 			@Override
@@ -50,6 +50,7 @@ public class ProfiloPersonaleController extends AController{
 				ControllerManager.getInstance().loadController(6);
 			}
 		});
+		
 		
 		v.getInfo().addMouseListener(new MouseListener() {
 			
@@ -122,6 +123,12 @@ public class ProfiloPersonaleController extends AController{
 		
 		view=v;
 		
+	}
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
+		Sessione.getIstance().setCurrentPagamento(4);
 	}
 
 }
