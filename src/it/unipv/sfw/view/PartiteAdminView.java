@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -20,7 +21,7 @@ import javax.swing.JScrollPane;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.view.AView.Type;
 import it.unipv.sfw.view.buttons.UtenteButton;
-import it.unipv.sfw.view.elements.JInfoMenu;
+import it.unipv.sfw.view.elements.InfoMenu;
 import it.unipv.sfw.view.elements.MenuUtente;
 
 public class PartiteAdminView extends AView {
@@ -37,7 +38,7 @@ private int righe;
 	private JLabel titolo;
 	private ArrayList<JLabel> partite;
 	private ArrayList<JMenuBar> i;
-	private ArrayList<JInfoMenu>info;
+	private ArrayList<InfoMenu>info;
 	ArrayList<JLabel>infoPartita;
 	private ArrayList<JPanel> tabellone;
 	private JScrollPane pane;
@@ -80,7 +81,7 @@ private int righe;
 
 		partite = new ArrayList<JLabel>();
 		i=new ArrayList<JMenuBar>();
-		info=new ArrayList<JInfoMenu>();
+		info=new ArrayList<InfoMenu>();
 		tabellone = new ArrayList<JPanel>();
 		infoPartita=new ArrayList<JLabel>();
 
@@ -91,7 +92,7 @@ private int righe;
 			partite.add(new JLabel("<html> " + par[j].getOspiti() + "<br><br>" + par[j].getData()
 					+ "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <br><b<br><br></html>"));
 			i.add(new JMenuBar());
-			info.add(new JInfoMenu("informazioni",j));
+			info.add(new InfoMenu("informazioni",j));
 			infoPartita.add(new JLabel(""));
 			
 			info.get(j).add(infoPartita.get(j));
@@ -125,7 +126,13 @@ private int righe;
 		this.add(middle, BorderLayout.CENTER);
 	}
 
-
+	public Collection<InfoMenu> getInfo() {
+		return info;
+	}
+	
+	public void setInfoPartita(boolean stato,int code) {
+		info.get(code).setPopupMenuVisible(stato);
+	}
 	@Override
 	public Type getType() {
 		return AView.Type.PARTITE;
