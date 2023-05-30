@@ -1,6 +1,8 @@
 package it.unipv.sfw.controller;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.Collection;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.partita.Partita;
+import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.PartiteAdminView;
 import it.unipv.sfw.view.buttons.UtenteButton;
 import it.unipv.sfw.view.elements.InfoMenu;
@@ -25,8 +28,20 @@ public class PartiteAdminController extends AController{
 		
 		view=v;
 		
+		v.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//ControllerManager.getInstance().loadController(8);
+			}
+		});
 		
-	
+		v.getExit().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Sessione.getIstance().resetScelte();
+				ControllerManager.getInstance().loadController(0);
+			}
+		});
 		
 		MouseListener a=new MouseListener() {
 					

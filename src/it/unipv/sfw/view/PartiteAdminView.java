@@ -133,9 +133,33 @@ private int righe;
 	public void setInfoPartita(boolean stato,int code) {
 		info.get(code).setPopupMenuVisible(stato);
 	}
+	public JButton getStoreButton() {
+		return bshop;
+	}
+	
+	public JButton getMuseoButton() {
+		return bmuseo;
+	}
+	
+	
+	public JMenuItem getProfiloPersonaleButton() {
+		return  u.getProfiloPersonale();
+	}
+	
+	@Override
+	public void onWindowResized(Dimension dim) {
+		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));		
+		p.revalidate();
+		p.repaint();	
+	}
+	
+	public JMenuItem getExit() {
+		return u.getExit();
+	}
 	@Override
 	public Type getType() {
 		return AView.Type.PARTITE;
 	}
+	
 
 }
