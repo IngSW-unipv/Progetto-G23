@@ -47,7 +47,7 @@ public class AdminMuseoController extends AController{
 		mview.getInserisciButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(11);
+				ControllerManager.getInstance().loadController(16);
 			}
 			
 		});
