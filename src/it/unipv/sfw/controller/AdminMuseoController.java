@@ -6,14 +6,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import it.unipv.sfw.dao.DAOFactory;
-import it.unipv.sfw.dao.mysql.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.view.AdminMuseoView;
 import it.unipv.sfw.view.MuseoView;
 
-public class MuseoController extends AController {
+public class AdminMuseoController extends AController{
 
 	String storia = new String("L'inter è una squadra di calcio rappresentante la città di Milano.");
 	Riconoscimento[] ric;
@@ -28,23 +28,23 @@ public class MuseoController extends AController {
 		
 		museum.setRiconsocimenti(ric_arraylist);
 		
-		MuseoView mview = new MuseoView(museum, dim);
+		AdminMuseoView mview = new AdminMuseoView(museum, dim);
 		
 		mview.getPartiteButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(6);
+				ControllerManager.getInstance().loadController(14);
 			}
 		});
 		
 		mview.getStoreButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(7);
+				ControllerManager.getInstance().loadController(13);
 			}
 		});
 		
-		mview.getAcquistaButton().addActionListener(new ActionListener() {
+		mview.getInserisciButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(11);
