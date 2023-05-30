@@ -29,7 +29,7 @@ public class PagamentoController extends AController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(6);
-				Sessione.getIstance().resetCarrello();
+				if(Sessione.getIstance().getCurrentPagamento() == 1) Sessione.getIstance().resetCarrello();
 			}
 		});
 		
