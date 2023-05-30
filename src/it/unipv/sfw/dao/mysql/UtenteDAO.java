@@ -103,8 +103,8 @@ public class UtenteDAO implements IUtenteDAO {
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			rs1 = st1.executeQuery();
-			
-			String tipo = rs1.getString(4);
+			rs1.next();
+			String tipo = rs1.getString(5);
 			if(tipo.equals("" + Type.ADMIN)) {
 				result = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
 			} else if(tipo.equals("" + Type.CLIENTE) || tipo.equals("" + Type.GIORNALISTA)) {
@@ -156,12 +156,12 @@ public class UtenteDAO implements IUtenteDAO {
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "SELECT TIPO FROM " + SCHEMA + " WHERE EMAIL=? AND PASSWORD LIKE ?";
+			String query = "SELECT TIPO FROM " + SCHEMA + " WHERE EMAIL=? AND PASS LIKE ?";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			st1.setString(2, password);
 			rs1 = st1.executeQuery();
-			
+			System.out.println();
 			String tipo = rs1.getString(4);
 			if(tipo.equals("" + Type.ADMIN)) {
 				tipoSelected = Type.ADMIN;
