@@ -63,7 +63,7 @@ public class AdminMuseoView extends AView {
 		JPanel centralPanel = new JPanel();
 		centralPanel.setLayout(new BorderLayout());
 		
-		JLabel title = new JLabel("Museo:");
+		JLabel title = new JLabel("Controllo Museo:");
 		title.setFont(new java.awt.Font("Arial", 1, 24));
 		title.setBackground(Color.CYAN);
 		title.setOpaque(true);
@@ -75,11 +75,12 @@ public class AdminMuseoView extends AView {
 		centralMiddlePanel.setLayout(new BorderLayout());
 		
 		JPanel bigliettoPanel = new JPanel();
-		inserisciButton = new JButton("INSERISCI TROFEO");
+		inserisciButton = new JButton("INSERISCI TROFEO O CIMELIO");
 		inserisciButton.setBackground(Color.WHITE);
 		inserisciButton.setPreferredSize(new Dimension(200, 30));
 		bigliettoPanel.setPreferredSize(new Dimension(100, 40));
-		bigliettoPanel.setBackground(Color.BLUE);
+		bigliettoPanel.setBackground(Color.YELLOW);
+		bigliettoPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		bigliettoPanel.setOpaque(true);
 		bigliettoPanel.add(inserisciButton);
 		centralMiddlePanel.add(bigliettoPanel, BorderLayout.NORTH);
@@ -101,22 +102,7 @@ public class AdminMuseoView extends AView {
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 
 		scrollTrofei.getVerticalScrollBar().setUnitIncrement(20);
-		
 		centralMiddlePanel.add(scrollTrofei, BorderLayout.CENTER);
-		
-		ImageIcon scudettosx = new ImageIcon(getClass().getResource("/scudettointer.png"));
-		scudettosx = new ImageIcon(scudettosx.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
-		JLabel scudetto = new JLabel();
-		scudetto.setBackground(Color.BLUE);
-		scudetto.setOpaque(true);
-		scudetto.setIcon(scudettosx);
-		centralMiddlePanel.add(scudetto, BorderLayout.WEST);
-		
-		JLabel blue_label_dx = new JLabel();
-		blue_label_dx.setBackground(Color.BLUE);
-		blue_label_dx.setOpaque(true);
-		blue_label_dx.setIcon(scudettosx);
-		centralMiddlePanel.add(blue_label_dx, BorderLayout.EAST);
 		
 		centralPanel.add(centralMiddlePanel, BorderLayout.CENTER);
 		
