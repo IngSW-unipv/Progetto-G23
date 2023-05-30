@@ -5,11 +5,12 @@ public class Carta {
 	private String nome, cognome, paese, dataScadenza;
 	private int nCartaCredito, CVV;
 	
+	
+	
 	public Carta(String nome, String cognome, String paese, int nCartaCredito, String dataScadenza, int CVV) {
 		this.cognome = cognome;
 		this.CVV = CVV;
 		this.nome = nome;
-		this.paese = paese;
 		this.dataScadenza = dataScadenza;
 		this.nCartaCredito = nCartaCredito;
 	}
@@ -32,10 +33,6 @@ public class Carta {
 	
 	public String getNome() {
 		return nome;
-	}
-	
-	public String getPaese() {
-		return paese;
 	}
 	
 	public void setCognome(String cognome) {
