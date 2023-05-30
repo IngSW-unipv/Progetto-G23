@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,6 +20,7 @@ import javax.swing.JScrollPane;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.view.AView.Type;
 import it.unipv.sfw.view.buttons.UtenteButton;
+import it.unipv.sfw.view.elements.JInfoMenu;
 import it.unipv.sfw.view.elements.MenuUtente;
 
 public class PartiteAdminView extends AView {
@@ -34,7 +36,9 @@ private int righe;
 	private JPanel middle, p;
 	private JLabel titolo;
 	private ArrayList<JLabel> partite;
-	private ArrayList<UtenteButton> info;
+	private ArrayList<JMenuBar> i;
+	private ArrayList<JInfoMenu>info;
+	ArrayList<JLabel>infoPartita;
 	private ArrayList<JPanel> tabellone;
 	private JScrollPane pane;
 
@@ -75,22 +79,29 @@ private int righe;
 		titolo.setOpaque(true);
 
 		partite = new ArrayList<JLabel>();
-		info = new ArrayList<UtenteButton>();
+		i=new ArrayList<JMenuBar>();
+		info=new ArrayList<JInfoMenu>();
 		tabellone = new ArrayList<JPanel>();
+		infoPartita=new ArrayList<JLabel>();
 
 		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
 
 		img2 = new ImageIcon(this.getClass().getResource("/stemma.jpg")).getImage();
-		for (int i = 0; i < righe; i++) {
-			partite.add(new JLabel("<html> " + par[i].getOspiti() + "<br><br>" + par[i].getData()
+		for (int j = 0; j < righe; j++) {
+			partite.add(new JLabel("<html> " + par[j].getOspiti() + "<br><br>" + par[j].getData()
 					+ "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <br><b<br><br></html>"));
-			info.add(new UtenteButton("Informazioni", i));
+			i.add(new JMenuBar());
+			info.add(new JInfoMenu("informazioni",j));
+			infoPartita.add(new JLabel(""));
+			
+			info.get(j).add(infoPartita.get(j));
+			i.get(j).add(info.get(j));
 			tabellone.add(new JPanel());
-			tabellone.get(i).add(partite.get(i));
-			tabellone.get(i).add(info.get(i));
-			partite.get(i).setIcon(new ImageIcon(img2));
-			tabellone.get(i).setBorder(BorderFactory.createLineBorder(Color.black));
-			partite.get(i).setFont(new java.awt.Font("Arial", 1, 18));
+			tabellone.get(j).add(partite.get(j));
+			tabellone.get(j).add(i.get(j)); 
+			partite.get(j).setIcon(new ImageIcon(img2));
+			tabellone.get(j).setBorder(BorderFactory.createLineBorder(Color.black));
+			partite.get(j).setFont(new java.awt.Font("Arial", 1, 18));
 		}
 
 		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150*righe)));
