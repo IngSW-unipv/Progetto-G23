@@ -1,5 +1,9 @@
 package it.unipv.sfw.model.museo;
 
+import java.util.ArrayList;
+
+import it.unipv.sfw.model.museo.Cimelio.TipoCimelio;
+
 /**
  * Classe che rappresenta il cimelio visibile dal {@link it.unipv.sfw.model.utente.Cliente} nel {@link Museo}.
  * @author Lorenzo Reale
@@ -80,6 +84,10 @@ public class Cimelio {
 
 	public void setImgid(String imgid) {
 		this.imgid = imgid;
+	}
+	
+	public static TipoCimelio[] getTipoCimelio() {
+		return Cimelio.TipoCimelio.values();
 	}
 
 }

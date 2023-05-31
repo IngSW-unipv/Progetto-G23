@@ -41,7 +41,7 @@ public class AdminMuseoView extends AView {
 		topPanel.setBackground(Color.gray);
 		
 		JPanel topPanelButtons = new JPanel();
-		topPanelButtons.setBackground(Color.BLUE);
+		topPanelButtons.setBackground(new Color(138, 102, 66));
 		topPanelButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		
 		partiteButton = new JButton("PARTITE");
@@ -65,7 +65,7 @@ public class AdminMuseoView extends AView {
 		
 		JLabel title = new JLabel("Controllo Museo:");
 		title.setFont(new java.awt.Font("Arial", 1, 24));
-		title.setBackground(Color.CYAN);
+		title.setBackground(new Color(138, 102, 66));
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
 		

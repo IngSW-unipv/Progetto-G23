@@ -1,5 +1,7 @@
 package it.unipv.sfw.model.museo;
 
+import it.unipv.sfw.model.museo.Cimelio.TipoCimelio;
+
 /**
  * Classe che rappresenta il riconoscimento visibile dal {@link it.unipv.sfw.model.utente.Cliente} nel {@link Museo}.
  * @author Lorenzo Reale
@@ -89,6 +91,10 @@ public class Riconoscimento {
 
 	public void setImgid(String imgid) {
 		this.imgid = imgid;
+	}
+	
+	public static TipoRiconoscimento[] getTipoCimelio() {
+		return Riconoscimento.TipoRiconoscimento.values();
 	}
 	
 }

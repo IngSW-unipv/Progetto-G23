@@ -19,12 +19,21 @@ import javax.swing.JTextField;
 
 import it.unipv.sfw.dao.mysql.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
+import it.unipv.sfw.model.museo.Cimelio.TipoCimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
+import it.unipv.sfw.model.museo.Riconoscimento.TipoRiconoscimento;
 
 public class AdminAddOggettoView extends AView {
 
 	private JPanel centralContainer;
-	private JComboBox selectNewObjectType;
+	private JPanel selectPanel;
+	private JComboBox<String> selectNewObjectType;
+	private JPanel sottoTipoPanel;
+	TipoCimelio[] sottoTipiCimelio = Cimelio.getTipoCimelio();
+	TipoRiconoscimento[] sottoTipiRiconoscimento = Riconoscimento.getTipoCimelio();
+	private JComboBox<String> selectObjectSubType;
+	private boolean cSubTypeShown = false;
+	private boolean rSubTypeShown = false;
 	private JTextArea descrizioneField;
 	private JButton aggiungiButton, backButton;
 	
@@ -38,19 +47,21 @@ public class AdminAddOggettoView extends AView {
 		JLabel blue_label_up = new JLabel();
 		blue_label_up.setLayout(new BorderLayout());
 		blue_label_up.setPreferredSize(new Dimension(100,100));
-		blue_label_up.setBackground(Color.BLUE);
+		blue_label_up.setBackground(Color.YELLOW);
 		blue_label_up.setOpaque(true);
 		blue_label_up.setHorizontalAlignment(JLabel.CENTER);
 		
 		ImageIcon backpage = new ImageIcon(getClass().getResource("/backpage1.png"));
 		backpage = new ImageIcon(backpage.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
 		backButton = new JButton("", backpage);
-		backButton.setBackground(Color.BLUE);
+		backButton.setBackground(Color.YELLOW);
+		backButton.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 		
 		JLabel title = new JLabel("  PAGINA DI INSERIMENTO:");
 		title.setPreferredSize(new Dimension(200, 50));
 		title.setFont(title_font);
-		title.setBackground(Color.BLUE);
+		title.setBackground(Color.YELLOW);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -63,19 +74,44 @@ public class AdminAddOggettoView extends AView {
 		centralContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		// 1
+		selectPanel = new JPanel();
+		selectPanel.setLayout(new GridLayout(1, 2, 50, 0));
+		
+		
+		// 1.1
 		JPanel tipoPanel = new JPanel();
 		tipoPanel.setPreferredSize(new Dimension(400, 75));
 		tipoPanel.setLayout(new GridLayout(2, 1)); 
 		
-		JLabel tipo_label = new JLabel("Selezionare il tipo di oggetto da aggiungere:");
+		JLabel tipo_label = new JLabel("Selezionare categoria oggetto:");
 		tipo_label.setFont(medium_font);
 		tipo_label.setOpaque(true);
 		
-		String[] tipiSelezionabili = {"Cimelio", "Riconsocimento"};
+		String[] tipiSelezionabili = {Cimelio.class.getSimpleName(), Riconoscimento.class.getSimpleName()};
 		selectNewObjectType = new JComboBox(tipiSelezionabili);
+		selectNewObjectType.setSelectedIndex(-1); //initial no selection 
 		
 		tipoPanel.add(tipo_label);
 		tipoPanel.add(selectNewObjectType);
+		
+		// 1.2
+		sottoTipoPanel = new JPanel();
+		sottoTipoPanel.setPreferredSize(new Dimension(400, 75));
+		sottoTipoPanel.setLayout(new GridLayout(2, 1)); 
+		
+		JLabel sotto_tipo_label = new JLabel("Selezionare tipo oggetto:");
+		sotto_tipo_label.setFont(medium_font);
+		sotto_tipo_label.setOpaque(true);
+		
+		selectObjectSubType = new JComboBox();
+		
+		sottoTipoPanel.add(sotto_tipo_label);
+		sottoTipoPanel.add(selectObjectSubType);
+		
+		
+		selectPanel.add(tipoPanel);
+		selectPanel.add(sottoTipoPanel);
+		
 		
 		// 2
 		JPanel descrizionePanel = new JPanel();
@@ -100,7 +136,7 @@ public class AdminAddOggettoView extends AView {
 		descrizionePanel.add(testo, BorderLayout.CENTER);
 		
 		
-		centralContainer.add(tipoPanel);
+		centralContainer.add(selectPanel);
 		centralContainer.add(descrizionePanel);
 
 		
@@ -109,8 +145,60 @@ public class AdminAddOggettoView extends AView {
 		
 	}
 	
+	public void showCimelioSubType() {
+		if (!iscSubTypeShown()) {
+			if (isrSubTypeShown()) {
+				selectObjectSubType.removeAllItems();
+				setrSubTypeShown(false);
+			}
+			for(int i=0; i<sottoTipiCimelio.length; i++) {
+				selectObjectSubType.addItem(sottoTipiCimelio[i].toString());
+			}
+			setcSubTypeShown(true);
+			selectObjectSubType.repaint();
+		}
+	}
+	
+	public boolean iscSubTypeShown() {
+		return cSubTypeShown;
+	}
+
+	public void setcSubTypeShown(boolean state) {
+		this.cSubTypeShown = state;
+	}
+	
+	public void showRiconoscimentoSubType() {
+		if (!isrSubTypeShown()) {
+			if (iscSubTypeShown()) {
+				selectObjectSubType.removeAllItems();
+				setcSubTypeShown(false);
+			}
+			for(int i=0; i<sottoTipiRiconoscimento.length; i++) {
+				selectObjectSubType.addItem(sottoTipiRiconoscimento[i].toString());
+			}
+			setrSubTypeShown(true);
+			selectObjectSubType.repaint();
+		}
+	}
+	
+	public boolean isrSubTypeShown() {
+		return rSubTypeShown;
+	}
+
+	public void setrSubTypeShown(boolean state) {
+		this.rSubTypeShown = state;
+	}
+	
 	public JButton getBackButton() {
 		return backButton;
+	}
+	
+	public JButton getAggiungiButton() {
+		return aggiungiButton;
+	}
+	
+	public JComboBox<String> getObjectType() {
+		return selectNewObjectType;
 	}
 	
 	@Override
@@ -118,5 +206,5 @@ public class AdminAddOggettoView extends AView {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }
