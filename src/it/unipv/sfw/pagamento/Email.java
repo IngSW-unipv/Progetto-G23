@@ -1,5 +1,6 @@
 package it.unipv.sfw.pagamento;
 
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -15,23 +16,44 @@ import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
 
 public class Email {
-	private final String MITTENTE = "StadiumSystem@gmail.com";
-	
-	private String destinatario;
-	private Properties props;
+	private static Properties props;
 	private Session session;
+	private static boolean isInit = false;
 	
 	public Email() {
-		destinatario = Sessione.getIstance().getCurrentUtente().getEmail();
+		if (!isInit)
+			init();
+		openConnection();
+	}
+	
+	private static void init() {
 		props = new Properties();
-	    props.put("mail.smtp.host", "smtp.example.com");
-	    session = Session.getDefaultInstance(props, null);
+		try {
+			props.load(new FileInputStream("properties/mail_properties"));
+			isInit = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void openConnection() {
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "465");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		
+		session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication(props.getProperty("MITTENTE"), props.getProperty("PASSWORD"));
+			}
+		});
 	}
 	
 	public void emailStore() throws MessagingException{
 		String messaggio = "";
-		messaggio += "ID          NOME        PREZZO      QUANTITÀ\n";
-		messaggio += "--------------------------------------------\n";
+		messaggio += "ID" + spaziatura("ID") + "NOME" + spaziatura("NOME") + "PREZZO" + "          " + "QUANTITÀ\n";
+		messaggio += "------------------------------------------------------------------------------------------\n";
 		HashMap<Merchandising, Integer> carrello =  Sessione.getIstance().getCarrello();
 		
 		for(Map.Entry<Merchandising, Integer> entry: carrello.entrySet()) {
@@ -41,21 +63,21 @@ public class Email {
 			messaggio += entry.getValue() + "\n";
 		}
 		
-	    Message msg = new MimeMessage(session);
-	 
-	    InternetAddress addressFrom = new InternetAddress(MITTENTE);
-	    msg.setFrom(addressFrom);
-	    InternetAddress addressTo = new InternetAddress(destinatario); 
-	  
-	    msg.setSubject("Pagamento store StadiumSystem");
-	    msg.setContent(messaggio, "text/plain");
-	  
-	    Transport.send(msg);
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Sessione.getIstance().getCurrentUtente().getEmail()));
+			message.setSubject("Pagamento store StadiumSystem");
+			message.setContent(messaggio, "text/plain"); Transport.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public String spaziatura(String stringa) {
 		String spazi = "";
-		for(int i=0; i<(12-stringa.length()); i++) {
+		for(int i=0; i<(21 - stringa.length()); i++) {
 			spazi += " ";
 		}
 		return spazi;

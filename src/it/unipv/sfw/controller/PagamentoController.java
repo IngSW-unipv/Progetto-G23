@@ -4,9 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.mail.MessagingException;
 import javax.swing.JButton;
 
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
 
 public class PagamentoController extends AController{
@@ -29,8 +31,14 @@ public class PagamentoController extends AController{
 		v.getOkBtn().addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(6);
+				Email a = new Email();
+				try {
+					a.emailStore();
+				} catch (MessagingException e1) {
+					e1.printStackTrace();
+				}
 				if(Sessione.getIstance().getCurrentPagamento() == 1) Sessione.getIstance().resetCarrello();
+				ControllerManager.getInstance().loadController(6);
 			}
 		});
 		
