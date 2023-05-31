@@ -6,11 +6,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.image.ImageFilter;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -35,6 +37,9 @@ public class AdminAddOggettoView extends AView {
 	private boolean cSubTypeShown = false;
 	private boolean rSubTypeShown = false;
 	private JTextArea descrizioneField;
+	private JFileChooser ImageSelectorPanel;
+	private JButton addImageButton;
+	private JTextField imgPath; 
 	private JButton aggiungiButton, backButton;
 	
 	public AdminAddOggettoView() {
@@ -112,8 +117,13 @@ public class AdminAddOggettoView extends AView {
 		selectPanel.add(tipoPanel);
 		selectPanel.add(sottoTipoPanel);
 		
+		//2
+		JPanel containerDescription = new JPanel();
+		containerDescription.setLayout(new GridLayout(1, 2, 50, 0));
 		
-		// 2
+		
+		
+		// 2.1
 		JPanel descrizionePanel = new JPanel();
 		descrizionePanel.setPreferredSize(new Dimension(400, 100));
 		descrizionePanel.setLayout(new BorderLayout());
@@ -136,14 +146,59 @@ public class AdminAddOggettoView extends AView {
 		descrizionePanel.add(testo, BorderLayout.CENTER);
 		
 		
+		//2.2
+		JPanel selectImagePanel = new JPanel();
+		selectImagePanel.setLayout(new BorderLayout());
+		//selectImagePanel.setLayout(new GridLayout(3, 1));
+		
+		JLabel image_label = new JLabel("Premere per selezionare immagine:");
+		image_label.setFont(medium_font);
+		image_label.setOpaque(true);
+		
+		JPanel imagePanel = new JPanel();
+		imagePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		addImageButton = new JButton("SELEZIONA IMMAGINE");
+		addImageButton.setBackground(Color.WHITE);
+		addImageButton.setPreferredSize(new Dimension(200, 50));
+		imagePanel.add(addImageButton);
+		
+		JPanel pathPanel = new JPanel();
+		pathPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		imgPath = new JTextField();
+		imgPath.setBackground(Color.white);
+		imgPath.setBorder(BorderFactory.createLineBorder(Color.lightGray));
+		imgPath.setPreferredSize(new Dimension(250, 25));
+		imgPath.setVisible(true);
+		imgPath.setEditable(false);
+		pathPanel.add(imgPath);
+		
+		selectImagePanel.add(image_label, BorderLayout.NORTH);
+		selectImagePanel.add(imagePanel, BorderLayout.CENTER);
+		selectImagePanel.add(pathPanel, BorderLayout.SOUTH);
+		
+		
+		
+		containerDescription.add(descrizionePanel);
+		containerDescription.add(selectImagePanel);
+		
+		
 		centralContainer.add(selectPanel);
-		centralContainer.add(descrizionePanel);
+		centralContainer.add(containerDescription);
 
 		
 		this.add(blue_label_up, BorderLayout.NORTH);
 		this.add(centralContainer, BorderLayout.CENTER);
 		
 	}
+	
+	public void showImageSelector() {
+		
+		
+		Object saved = ImageSelectorPanel.showSaveDialog(null);
+		
+		
+	}
+	
 	
 	public void showCimelioSubType() {
 		if (!iscSubTypeShown()) {
@@ -195,6 +250,18 @@ public class AdminAddOggettoView extends AView {
 	
 	public JButton getAggiungiButton() {
 		return aggiungiButton;
+	}
+	
+	public JButton getAddImageButton() {
+		return addImageButton;
+	}
+	
+	public String getImagePath() {
+		return imgPath.getText();
+	}
+	
+	public void setImagePath(String path) {
+		imgPath.setText(path);
 	}
 	
 	public JComboBox<String> getObjectType() {
