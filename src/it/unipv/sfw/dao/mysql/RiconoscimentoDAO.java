@@ -94,8 +94,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
-				if(tipo.equals("" + TipoCimelio.Fotografia) || tipo.equals("" + TipoCimelio.Ricordo)) {} 
-				else {
+				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {
 					TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
 					Riconoscimento r = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 					result.add(r);
@@ -128,11 +127,10 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			st1.setInt(1, item.getId());
 			rs1 = st1.executeQuery();
 			
-			while(rs1.next()) {
-				String tipo = rs1.getString(2);
-				TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
-				result = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
-			}
+			rs1.next();
+			String tipo = rs1.getString(2);
+			TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
+			result = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
@@ -156,8 +154,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
-				if(tipo.equals("" + TipoCimelio.Fotografia) || tipo.equals("" + TipoCimelio.Ricordo)) {} 
-				else {
+				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {
 					TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
 					Riconoscimento r = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 					result.add(r);

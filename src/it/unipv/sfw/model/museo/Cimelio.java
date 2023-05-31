@@ -17,9 +17,9 @@ public class Cimelio {
 	 */
 	public enum TipoCimelio{
 		Fotografia,
-		Statua,
-		DocumentazioneDiEpisodi,
-		Ricordo
+		Pallone,
+		Scarpe,
+		Maglia
 	}
 	
 	private String tipo, descrizione, imgid;

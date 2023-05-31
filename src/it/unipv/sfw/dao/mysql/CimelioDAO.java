@@ -90,8 +90,9 @@ public class CimelioDAO implements ICimelioDAO {
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				String tipo = rs1.getString(4);
-				if(tipo.equals("" + TipoCimelio.Fotografia) || tipo.equals("" + TipoCimelio.Ricordo)) {
+				String tipo = rs1.getString(2);
+				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {}
+				else {
 					TipoCimelio tipoc = TipoCimelio.valueOf(TipoCimelio.class, tipo);
 					Cimelio c = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
 					result.add(c);
@@ -115,17 +116,18 @@ public class CimelioDAO implements ICimelioDAO {
 		ResultSet rs1;
 	
 		try (DBConnection db = new DBConnection(SCHEMA)) {
+			
 			Connection conn = db.getConnection();
 			String query = "SELECT * FROM " + SCHEMA + " WHERE ID=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, item.getId());
 			rs1 = st1.executeQuery();
 			
-			while(rs1.next()) {
-				String tipo = rs1.getString(2);
-				TipoCimelio tipoc = TipoCimelio.valueOf(TipoCimelio.class, tipo);
-				result = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
-			}
+			rs1.next();
+			String tipo = rs1.getString(2);
+			TipoCimelio tipoc = TipoCimelio.valueOf(TipoCimelio.class, tipo);
+			result = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
+
 			
 		} catch (Exception e) {e.printStackTrace();}
 		
@@ -149,9 +151,12 @@ public class CimelioDAO implements ICimelioDAO {
 			
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
-				TipoCimelio tipoc = TipoCimelio.valueOf(TipoCimelio.class, tipo);
-				Cimelio c = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
-				result.add(c);
+				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {}
+				else {
+					TipoCimelio tipoc = TipoCimelio.valueOf(TipoCimelio.class, tipo);
+					Cimelio c = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
+					result.add(c);
+				}
 			}
 				
 		} catch (Exception e) {

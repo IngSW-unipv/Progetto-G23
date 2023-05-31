@@ -14,11 +14,8 @@ public class Riconoscimento {
 	 * Enumerazione che descrive il tipo del riconoscimento.
 	 */
 	public enum TipoRiconoscimento{
-		Coppa,
-		Trofeo,
-		Pallone,
-		Scarpe,
-		Maglia
+		Coppa, //tornei
+		Trofeo //campionato
 	}
 	
 	private String tipo, descrizione, imgid;
