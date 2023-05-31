@@ -94,7 +94,9 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
-				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {
+				if(tipo.equals("" + TipoCimelio.Fotografia)  || tipo.equals("" + TipoCimelio.Maglia)
+						|| tipo.equals("" + TipoCimelio.Pallone) || tipo.equals("" + TipoCimelio.Scarpe)) {}
+				else {
 					TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
 					Riconoscimento r = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 					result.add(r);
@@ -154,7 +156,9 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
-				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {
+				if(tipo.equals("" + TipoCimelio.Fotografia)  || tipo.equals("" + TipoCimelio.Maglia)
+						|| tipo.equals("" + TipoCimelio.Pallone) || tipo.equals("" + TipoCimelio.Scarpe)) {}
+				else {
 					TipoRiconoscimento tipor = TipoRiconoscimento.valueOf(TipoRiconoscimento.class, tipo);
 					Riconoscimento r = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 					result.add(r);

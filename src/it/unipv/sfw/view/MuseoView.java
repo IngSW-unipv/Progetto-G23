@@ -27,14 +27,7 @@ import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.view.elements.MenuUtente;
 import it.unipv.sfw.view.elements.MuseoItemPanel;
 
-/*19 scudetti
- * 8 coppe italia
- * 7 supercoppe italiane
- * 3 champions
- * 3 coppe uefa/europa league
- * 2 coppe intercontinentali
- * 1 coppa del mondo per club
-*/ 
+
 public class MuseoView extends AView {
 	
 	private JButton partiteButton, storeButton, utenteButton;

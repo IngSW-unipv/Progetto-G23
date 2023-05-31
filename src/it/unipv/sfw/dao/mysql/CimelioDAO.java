@@ -91,8 +91,8 @@ public class CimelioDAO implements ICimelioDAO {
 			
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
-				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {}
-				else {
+				if(tipo.equals("" + TipoCimelio.Fotografia)  || tipo.equals("" + TipoCimelio.Maglia)
+						|| tipo.equals("" + TipoCimelio.Pallone) || tipo.equals("" + TipoCimelio.Scarpe)) {
 					TipoCimelio tipoc = TipoCimelio.valueOf(TipoCimelio.class, tipo);
 					Cimelio c = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
 					result.add(c);
@@ -151,8 +151,8 @@ public class CimelioDAO implements ICimelioDAO {
 			
 			while(rs1.next()) {
 				String tipo = rs1.getString(2);
-				if(tipo.equals("" + TipoRiconoscimento.Coppa)  || tipo.equals("" + TipoRiconoscimento.Trofeo)) {}
-				else {
+				if(tipo.equals("" + TipoCimelio.Fotografia)  || tipo.equals("" + TipoCimelio.Maglia)
+						|| tipo.equals("" + TipoCimelio.Pallone) || tipo.equals("" + TipoCimelio.Scarpe)) {
 					TipoCimelio tipoc = TipoCimelio.valueOf(TipoCimelio.class, tipo);
 					Cimelio c = new Cimelio (rs1.getString(4), tipoc, rs1.getInt(1), rs1.getInt(3), rs1.getString(5));
 					result.add(c);

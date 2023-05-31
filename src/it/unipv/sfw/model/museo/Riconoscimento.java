@@ -14,8 +14,13 @@ public class Riconoscimento {
 	 * Enumerazione che descrive il tipo del riconoscimento.
 	 */
 	public enum TipoRiconoscimento{
-		Coppa, //tornei
-		Trofeo //campionato
+		SerieA, //19
+		Coppa_Italia, //8
+		Supercoppa_Italiana, //7
+		Champions_League, //3
+		Europa_League, //3
+		Coppa_Intercontinentale, //2
+		Coppa_Del_Mondo_Per_Club //1
 	}
 	
 	private String tipo, descrizione, imgid;
