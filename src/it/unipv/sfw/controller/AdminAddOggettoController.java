@@ -46,13 +46,16 @@ public class AdminAddOggettoController extends AController{
 				JFileChooser fileChooser = new JFileChooser();
 	            fileChooser.addChoosableFileFilter(new ImageFilter());
 	            fileChooser.setAcceptAllFileFilterUsed(false);
+	            
+	            File sourceimage = new File("C:\\Users\\feder\\OneDrive\\Immagini");
+	            fileChooser.setCurrentDirectory(sourceimage);
 
 	            int option = fileChooser.showOpenDialog(null);
 	            if(option == JFileChooser.APPROVE_OPTION){
 	               File file = fileChooser.getSelectedFile();
 	               mview.setImagePath(file.getName());
 	            }else{
-	            	mview.setImagePath("Open command canceled");
+	            	mview.setImagePath("Nessuna immagine selezionata");
 	            }
 			}
 			

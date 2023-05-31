@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.image.ImageFilter;
+import java.time.Year;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,8 +18,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import it.unipv.sfw.dao.mysql.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
@@ -40,6 +45,7 @@ public class AdminAddOggettoView extends AView {
 	private JFileChooser ImageSelectorPanel;
 	private JButton addImageButton;
 	private JTextField imgPath; 
+	private JSpinner anno;
 	private JButton aggiungiButton, backButton;
 	
 	public AdminAddOggettoView() {
@@ -117,10 +123,10 @@ public class AdminAddOggettoView extends AView {
 		selectPanel.add(tipoPanel);
 		selectPanel.add(sottoTipoPanel);
 		
-		//2
+		
+		// 2
 		JPanel containerDescription = new JPanel();
 		containerDescription.setLayout(new GridLayout(1, 2, 50, 0));
-		
 		
 		
 		// 2.1
@@ -177,28 +183,48 @@ public class AdminAddOggettoView extends AView {
 		selectImagePanel.add(pathPanel, BorderLayout.SOUTH);
 		
 		
-		
 		containerDescription.add(descrizionePanel);
 		containerDescription.add(selectImagePanel);
+		
+		// 3
+		JPanel annoContenitore = new JPanel();
+		annoContenitore.setLayout(new GridLayout(1, 2, 200, 0));
+		
+		//3.1
+		JPanel annoPanel = new JPanel();
+		annoPanel.setLayout(new GridLayout(2,1));
+		
+		JLabel anno_label = new JLabel("Inserire anno:");
+		anno_label.setFont(medium_font);
+		anno_label.setOpaque(true);
+		
+		int current = Year.now().getValue();
+		int min = current-5;
+		int max = current;
+		int step = 1;
+		anno = new JSpinner(new SpinnerNumberModel(current, min, max, step));
+		anno.setPreferredSize(new Dimension(50, 10));
+		
+		annoPanel.add(anno_label);
+		annoPanel.add(anno);
+		
+		//3.2
+		aggiungiButton = new JButton("AGGIUNGI AL MUSEO");
+		aggiungiButton.setBackground(Color.WHITE);
+		aggiungiButton.setPreferredSize(new Dimension(200, 50));
+		
+		annoContenitore.add(annoPanel);
+		annoContenitore.add(aggiungiButton);
 		
 		
 		centralContainer.add(selectPanel);
 		centralContainer.add(containerDescription);
-
+		centralContainer.add(annoContenitore);
 		
 		this.add(blue_label_up, BorderLayout.NORTH);
 		this.add(centralContainer, BorderLayout.CENTER);
 		
 	}
-	
-	public void showImageSelector() {
-		
-		
-		Object saved = ImageSelectorPanel.showSaveDialog(null);
-		
-		
-	}
-	
 	
 	public void showCimelioSubType() {
 		if (!iscSubTypeShown()) {
