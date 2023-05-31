@@ -44,9 +44,9 @@ public class AcquistiStoreDAO implements IAcquistiStoreDAO {
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 			st1 = conn.createStatement();
-			String query = "SELECT ITEM, BUYER, QUANTITA, b.NOME, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE,"
-					+ " c.NOME, COGNOME, PASS, NASCITA "
-					+ "FROM " + SCHEMA + " a JOIN STORE_ITEMS b on a.ITEM=b.ID JOIN UTENTI a on c.BUYER=c.EMAIL";
+			String query = "SELECT ITEM, BUYER, QUANTITA, B.NOME, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE,"
+					+ " C.NOME, COGNOME, PASS, NASCITA "
+					+ "FROM " + SCHEMA + " A JOIN STORE_ITEMS B on A.ITEM=B.ID JOIN UTENTI C on A.BUYER=C.EMAIL";
 			
 			rs1 = st1.executeQuery(query);
 				

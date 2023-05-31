@@ -50,6 +50,13 @@ public class AdminPartiteController extends AController{
 			}
 		});
 		
+		v.getStoreButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(13);
+			}
+		});
+		
 		MouseListener a=new MouseListener() {
 					
 			@Override

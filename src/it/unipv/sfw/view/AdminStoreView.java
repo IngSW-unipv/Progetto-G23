@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.view.buttons.StoreButton;
+import it.unipv.sfw.view.elements.AdminStoreAcquistoPanel;
+import it.unipv.sfw.view.elements.AdminStoreItemPanel;
 import it.unipv.sfw.view.elements.StoreItemPanel;
 
 
@@ -32,19 +36,21 @@ public class AdminStoreView extends AView {
 	
 	private int merch_n, acquisti_n;
 	// top
-	private JButton partiteButton, museoButton, cartButton;
+	private JButton partiteButton, museoButton, cartButton, aggiungiItem;
 	// center
 	private JPanel itemList;
-	private HashMap<Merchandising, StoreItemPanel> itemPanels, acquistiPanels;
+	private HashMap<Merchandising, AdminStoreItemPanel> itemPanels;
+	private ArrayList<AdminStoreAcquistoPanel> acquistiPanels;
 	
 	public AdminStoreView(
 			HashMap<Merchandising, Integer> merch,
-			HashMap<Merchandising, Integer> acquisti,
+			ArrayList<AcquistoStore> acquisti,
 			Dimension dim) {
 		merch_n = merch.size();
 		acquisti_n = acquisti.size();
 		
 		// Fonts
+		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 18);
 		Font veryLargeFont = new Font("Arial", 1, 24);
 		
@@ -94,16 +100,25 @@ public class AdminStoreView extends AView {
 		JLabel itemListLabel = new JLabel("STORE");
 		itemListLabel.setFont(largeFont);
 		itemList.add(itemListLabel);
-		itemPanels = new HashMap<>(merch_n);
-		for (Map.Entry<Merchandising, Integer> e : merch.entrySet()) {
-			Merchandising m = e.getKey();
-			int q = e.getValue();
-			
-			int cart_q = 0;
-			
-			StoreItemPanel panel = new StoreItemPanel(m, q, cart_q);
-			itemPanels.put(m, panel);
-			itemList.add(panel);
+		aggiungiItem = new JButton("AGGIUNGI ITEM");
+		aggiungiItem.setFont(mediumFont);
+		itemList.add(aggiungiItem);
+		
+		if (merch_n > 0) {
+			itemPanels = new HashMap<>(merch_n);
+			for (Map.Entry<Merchandising, Integer> e : merch.entrySet()) {
+				Merchandising m = e.getKey();
+				int q = e.getValue();
+				
+				AdminStoreItemPanel panel = new AdminStoreItemPanel(m, q);
+				itemPanels.put(m, panel);
+				itemList.add(panel);
+			}
+			itemList.setPreferredSize(new Dimension((int)((dim.width-20)*0.8 * 0.5), (220*merch_n)));
+		} else {
+			JLabel noItemsLabel = new JLabel("Non sono presenti items nello store.");
+			noItemsLabel.setFont(largeFont);
+			itemList.add(noItemsLabel);
 		}
 		
 		itemList.setPreferredSize(new Dimension((int)((dim.width-20)*0.8 * 0.5), (220*merch_n)));
@@ -119,19 +134,25 @@ public class AdminStoreView extends AView {
 		JLabel acquistiListLabel = new JLabel("ACQUISTATI");
 		acquistiListLabel.setFont(largeFont);
 		acquistiList.add(acquistiListLabel);
-		acquistiPanels = new HashMap<>(merch_n);
-		for (Map.Entry<Merchandising, Integer> e : merch.entrySet()) {
-			Merchandising m = e.getKey();
-			int q = e.getValue();
-
-			int cart_q = 0;
-
-			StoreItemPanel panel = new StoreItemPanel(m, q, cart_q);
-			acquistiPanels.put(m, panel);
-			acquistiList.add(panel);
+		if (acquisti_n > 0) {
+			double tot_ricavi = 0.0;
+			acquistiPanels = new ArrayList<>(acquisti_n);
+			for (AcquistoStore a : acquisti) {
+				AdminStoreAcquistoPanel panel = new AdminStoreAcquistoPanel(a);
+				acquistiPanels.add(panel);
+				acquistiList.add(panel);
+				tot_ricavi += a.getItem().getPrezzo() * a.getQuantita();
+			}
+			JLabel ricaviLabel = new JLabel("Ricavi totali = " + String.format("%.2f", tot_ricavi) + " €");
+			ricaviLabel.setFont(mediumFont);
+			acquistiList.add(ricaviLabel);
+		} else {
+			JLabel noItemsLabel = new JLabel("Non è stato acquistato ancora niente.");
+			noItemsLabel.setFont(largeFont);
+			acquistiList.add(noItemsLabel);
 		}
 
-		acquistiList.setPreferredSize(new Dimension((int) ((dim.width - 20) * 0.8 * 0.5), (220 * merch_n)));
+		acquistiList.setPreferredSize(new Dimension((int) ((dim.width - 20) * 0.8 * 0.5), (220 * acquisti_n)));
 		acquistiList.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 
 		JScrollPane acquistiScrollPane = new JScrollPane(acquistiList);
@@ -184,12 +205,19 @@ public class AdminStoreView extends AView {
 	}
 	
 	/**
+	 * @return Bottone per aggiungere items.
+	 */
+	public JButton getAggiungiItemButton() {
+		return aggiungiItem;
+	}
+	
+	/**
 	 * @return Array dei bottoni "ACQUISTA".
 	 */
 	public Collection<StoreButton> getBuyBtns() {
 		return itemPanels.values()
 				.stream()
-				.map(panel -> panel.getBuyBtn())
+				.map(panel -> panel.getModifyBtn())
 				.collect(Collectors.toList());
 	}
 	

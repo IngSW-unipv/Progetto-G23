@@ -8,7 +8,7 @@ import it.unipv.sfw.model.utente.Cliente;
  * @author Federico Romano
  * @see it.unipv.sfw.model.utente.Cliente
  */
-public class AcquistoStore implements Comparable<AcquistoStore> {
+public class AcquistoStore {
 	
 	private Merchandising item;
 	private Cliente buyer;
@@ -47,17 +47,7 @@ public class AcquistoStore implements Comparable<AcquistoStore> {
 	@Override
 	public boolean equals(Object other) {
 		return (item.getId() == ((AcquistoStore)other).getItem().getId() && 
-				buyer.getEmail() == ((AcquistoStore)other).getBuyer().getEmail());
+				buyer.getEmail().equals(((AcquistoStore)other).getBuyer().getEmail()));
 	}
-
-	@Override
-	public int compareTo(AcquistoStore o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	
-	
 	
 }

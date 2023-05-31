@@ -1,13 +1,10 @@
 use stadiumsystem;
 
 insert into utenti
-values ('test1@example.com', 'john', 'doe', 'pass', 'CLIENTE','2000-01-30');
-
-insert into utenti
-values ('a', 'a', 'a', 'a', 'CLIENTE','2001-04-26');
-
-insert into utenti
-values ('test2@example.com', 'johnny', 'doey', 'admin', 'ADMIN','2002-10-02');
+values 
+	('test1@example.com', 'john', 'doe', 'pass', 'CLIENTE','2000-01-30'),
+	('a', 'a', 'a', 'a', 'CLIENTE','2001-04-26'),
+	('b', 'b', 'b', 'b', 'ADMIN','2002-10-02');
 
 
 insert into partite
@@ -28,6 +25,10 @@ values
     ('T-shirt verde 4', 1, 25, "Maglietta di cotone molto comoda e confortevole."),
     ('T-shirt verde 5', 8, 25, "Maglietta di cotone molto comoda e confortevole.");
 
+insert into acquisti_store(item, buyer, quantita)
+values
+	(1, 'a', 13);
+    
 insert into museo_items(nome, anno, descrizione, nome_img)
 values
 	('Coppa', 2022, "Coppa vinta dall'inter che prevede la partecipazione di 20 squadre di Serie A, 20 di Serie B, 29 di Serie C e 29 di Serie D", "coppaitalia"),

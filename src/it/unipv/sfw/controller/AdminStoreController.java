@@ -1,9 +1,10 @@
 package it.unipv.sfw.controller;
 
 import java.awt.Dimension;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import it.unipv.sfw.dao.DAOFactory;
+import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.store.StoreOnline;
 import it.unipv.sfw.view.AdminStoreView;
@@ -24,7 +25,7 @@ public class AdminStoreController extends AController {
 	public void initialize(Dimension dim) {
 		s = new StoreOnline(null);
 		
-		HashMap<Merchandising, Integer> acquisti = DAOFactory.createIAcquistiStoreDAO()
+		ArrayList<AcquistoStore> acquisti = DAOFactory.createIAcquistiStoreDAO()
 				.selectAllWithPrice();
 		
 		AdminStoreView v = new AdminStoreView(s.getMerch(), acquisti, dim);
