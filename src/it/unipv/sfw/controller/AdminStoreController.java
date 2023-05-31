@@ -1,6 +1,8 @@
 package it.unipv.sfw.controller;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import it.unipv.sfw.dao.DAOFactory;
@@ -29,6 +31,13 @@ public class AdminStoreController extends AController {
 				.selectAllWithPrice();
 		
 		AdminStoreView v = new AdminStoreView(s.getMerch(), acquisti, dim);
+		
+		v.getAggiungiItemButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(17);
+			}
+		});
 		
 		view = v;
 	}
