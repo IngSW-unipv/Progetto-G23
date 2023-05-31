@@ -24,7 +24,7 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 import it.unipv.sfw.view.elements.InfoMenu;
 import it.unipv.sfw.view.elements.MenuUtente;
 
-public class PartiteAdminView extends AView {
+public class AdminPartiteView extends AView {
 private int righe;
 	
 	// variabili del top
@@ -43,7 +43,7 @@ private int righe;
 	private ArrayList<JPanel> tabellone;
 	private JScrollPane pane;
 
-	public PartiteAdminView(Partita[] par, Dimension dim) {
+	public AdminPartiteView(Partita[] par, Dimension dim) {
 
 		righe = par.length;
 		top = new JPanel();

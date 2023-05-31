@@ -11,11 +11,11 @@ import java.util.Collection;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
-import it.unipv.sfw.view.PartiteAdminView;
+import it.unipv.sfw.view.AdminPartiteView;
 import it.unipv.sfw.view.buttons.UtenteButton;
 import it.unipv.sfw.view.elements.InfoMenu;
 
-public class PartiteAdminController extends AController{
+public class AdminPartiteController extends AController{
 	
 	private Partita[] p;
 	
@@ -24,7 +24,7 @@ public class PartiteAdminController extends AController{
 		ArrayList<Partita> p_arrlist = DAOFactory.createIPartitaDAO().selectAll();
 		
 		p = new Partita[p_arrlist.size()];
-		PartiteAdminView v = new PartiteAdminView(p_arrlist.toArray(p), dim);
+		AdminPartiteView v = new AdminPartiteView(p_arrlist.toArray(p), dim);
 		
 		view=v;
 		
@@ -40,6 +40,13 @@ public class PartiteAdminController extends AController{
 			public void actionPerformed(ActionEvent e) {
 				Sessione.getIstance().resetScelte();
 				ControllerManager.getInstance().loadController(0);
+			}
+		});
+		
+		v.getMuseoButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(15);
 			}
 		});
 		

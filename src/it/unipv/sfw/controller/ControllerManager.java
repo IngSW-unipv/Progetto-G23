@@ -57,7 +57,7 @@ public class ControllerManager {
 		controllers[11] = new ControllerCache(new BigliettoMuseoController());
 		controllers[12] = new ControllerCache(new PagamentoController());
 		controllers[13] = new ControllerCache(new AdminStoreController());
-		controllers[14] = new ControllerCache(new PartiteAdminController());
+		controllers[14] = new ControllerCache(new AdminPartiteController());
 		controllers[15] = new ControllerCache(new AdminMuseoController());
 		controllers[16] = new ControllerCache(new AdminAddOggettoController());
 		

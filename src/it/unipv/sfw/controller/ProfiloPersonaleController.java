@@ -94,8 +94,8 @@ public class ProfiloPersonaleController extends AController{
 				
 				if(v.getVecchiaPassword().getPassword().length==0&&v.getNuovaPassword().getPassword().length==0&&v.getConfermaNuovaPassword().getPassword().length==0) {
 					v.onEmptyField();
-					return 
-;				}
+					return ;
+				}
 				
 				if(!(new String(v.getNuovaPassword().getPassword()) 
 						.equals(new String(v.getConfermaNuovaPassword().getPassword())))){
@@ -115,9 +115,6 @@ public class ProfiloPersonaleController extends AController{
 					return;
 					
 				}
-					
-				
-				
 			}
 		});
 		
