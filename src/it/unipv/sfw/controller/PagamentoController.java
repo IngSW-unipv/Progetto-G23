@@ -32,8 +32,13 @@ public class PagamentoController extends AController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Email a = new Email();
+				String messaggio = "";
+				if(Sessione.getIstance().getCurrentPagamento() == 1) messaggio = a.messaggioStore();
+				//else if (Sessione.getIstance().getCurrentPagamento() == 2) messaggio = a.messaggioMuseo();
+				//else if (Sessione.getIstance().getCurrentPagamento() == 3) messaggio = a.messaggioPartita();
+				//else messaggio = a.messaggioAbb();
 				try {
-					a.sendEmail(a.messaggioStore());
+					a.sendEmail(messaggio);
 				} catch (MessagingException e1) {
 					e1.printStackTrace();
 				}
