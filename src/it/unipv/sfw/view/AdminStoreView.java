@@ -214,7 +214,7 @@ public class AdminStoreView extends AView {
 	/**
 	 * @return Array dei bottoni "ACQUISTA".
 	 */
-	public Collection<StoreButton> getBuyBtns() {
+	public Collection<StoreButton> getModifyBtns() {
 		return itemPanels.values()
 				.stream()
 				.map(panel -> panel.getModifyBtn())

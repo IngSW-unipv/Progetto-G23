@@ -1,6 +1,7 @@
 package it.unipv.sfw.model.utente;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -11,13 +12,14 @@ import it.unipv.sfw.dao.mysql.UtenteDAO;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.EmptyFieldException;
-import it.unipv.sfw.exceptions.OldPasswordReused;
-import it.unipv.sfw.exceptions.PasswordPrecedenteErrata;
+import it.unipv.sfw.exceptions.OldPasswordReusedException;
+import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.Merchandising;
+import it.unipv.sfw.utilities.Pair;
 
 
 /**
@@ -33,11 +35,13 @@ public class Sessione {
 	private static Sessione istance = null;
 	private HashMap<String, Integer> scelte;
 	private HashMap<Merchandising, Integer> carrello;
+	private Pair<Merchandising, Integer> merchAdmin;
 	private Partita currentPartita;
 	private Utente currentUtente;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
 
 	private Sessione() {	
+		merchAdmin = null;
 		currentUtente = null;
 		currentPartita = null;
 		currentPagamento = 0;
@@ -100,17 +104,17 @@ public class Sessione {
 	 * 
 	 * @param password
 	 * @return la password commutata in stringa
-	 * @throws OldPasswordReused 
-	 * @throws PasswordPrecedenteErrata 
+	 * @throws OldPasswordReusedException 
+	 * @throws PasswordPrecedenteErrataException 
 	 */
-	 public void commutaPassword(Utente u,String vecchiaPassword,String nuovaPAssword) throws OldPasswordReused, PasswordPrecedenteErrata {
+	 public void commutaPassword(Utente u,String vecchiaPassword,String nuovaPAssword) throws OldPasswordReusedException, PasswordPrecedenteErrataException {
 		 	
 		 	if(!(u.getPassword().equals(vecchiaPassword))) {
-		 		throw new PasswordPrecedenteErrata("Password precedente errata");	 		
+		 		throw new PasswordPrecedenteErrataException("Password precedente errata");	 		
 		 	}
 		 	
 			if(vecchiaPassword.equals(nuovaPAssword)) {
-				throw new OldPasswordReused("La nuova password e quella precedente sono uguali");
+				throw new OldPasswordReusedException("La nuova password e quella precedente sono uguali");
 			}
 			
 			DAOFactory.createIUtenteDAO().updatePassword(nuovaPAssword, u);
@@ -269,5 +273,13 @@ public class Sessione {
 	public void resetCarrello() {
 		carrello.clear();
 		carrello = null;
+	}
+	
+	public void setMerchAdmin(Pair<Merchandising, Integer> m) {
+		merchAdmin = m;
+	}
+	
+	public Pair<Merchandising, Integer> getMerchAdmin() {
+		return merchAdmin;
 	}
 }

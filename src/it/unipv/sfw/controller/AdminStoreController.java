@@ -9,7 +9,10 @@ import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.store.StoreOnline;
+import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.utilities.Pair;
 import it.unipv.sfw.view.AdminStoreView;
+import it.unipv.sfw.view.buttons.StoreButton;
 
 
 /**
@@ -38,6 +41,21 @@ public class AdminStoreController extends AController {
 				ControllerManager.getInstance().loadController(17);
 			}
 		});
+		
+		ActionListener a = new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				StoreButton b = ((StoreButton)e.getSource());
+				
+				Sessione.getIstance().setMerchAdmin(
+						new Pair<Merchandising, Integer>(b.getMerch(), b.getMerchQuantity())
+				);
+				ControllerManager.getInstance().loadController(17);
+			}
+		};
+		
+		for(StoreButton b : v.getModifyBtns())
+			b.addActionListener(a);
 		
 		view = v;
 	}

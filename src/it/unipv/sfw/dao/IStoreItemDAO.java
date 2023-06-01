@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.unipv.sfw.dao.mysql.StoreItemDAO;
 import it.unipv.sfw.model.store.Merchandising;
+import it.unipv.sfw.utilities.Pair;
 
 /**
  * Interfaccia DAO per {@link it.unipv.sfw.model.store.Merchandising}.
@@ -27,6 +28,18 @@ public interface IStoreItemDAO {
 	 * @return True se l'aggiornamento è avvenuto con successo, altrimenti False.
 	 */
 	boolean updateQuantitaItem(Merchandising merch, int newQuantita);
+	
+	/**
+	 * @param merch Merch da aggiornare.
+	 * @return True se l'aggiornamento è avvenuto con successo, altrimenti False.
+	 */
+	boolean updateItem(Pair<Merchandising, Integer> merch);
+	
+	/**
+	 * @param merch Merch da eliminare.
+	 * @return True se l'eliminazione è avvenuta con successo, altrimenti False.
+	 */
+	boolean deleteItem(Merchandising m);
 
 	/**
 	 * @param merch Merch da inserire nel database.

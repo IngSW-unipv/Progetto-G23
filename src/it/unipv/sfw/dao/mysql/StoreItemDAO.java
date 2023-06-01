@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import it.unipv.sfw.dao.IStoreItemDAO;
 import it.unipv.sfw.model.store.*;
+import it.unipv.sfw.utilities.Pair;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.store.Merchandising}.
@@ -18,6 +19,33 @@ import it.unipv.sfw.model.store.*;
 public class StoreItemDAO implements IStoreItemDAO {
 
 	private static final String SCHEMA = "STORE_ITEMS";
+	
+	@Override
+	public boolean updateItem(Pair<Merchandising, Integer> merch) {
+		PreparedStatement st1;
+    	boolean esito = true;
+    	
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "UPDATE " + SCHEMA + " SET NOME=?, SET DESCRIZIONE=?, SET QUANTITA_RIMANENTE=?, SET PREZZO=? WHERE ID=?";
+			st1 = conn.prepareStatement(query);
+
+			st1.setString(1, merch.getKey().getNome());                  
+			st1.setString(2, merch.getKey().getDescrizione());
+			st1.setInt(3, merch.getVal());
+			st1.setDouble(4, merch.getKey().getPrezzo());
+			st1.setInt(5, merch.getKey().getId());
+			
+			st1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			esito = false;
+		} 
+		
+		return esito;
+	}
 	
 	@Override
 	public boolean updatePrezzoItem(Merchandising merch, double newPrezzo) {
@@ -78,10 +106,10 @@ public class StoreItemDAO implements IStoreItemDAO {
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "INSERT INTO " + SCHEMA + "(TIPO, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE) VALUES(?,?,?,?)";
+			String query = "INSERT INTO " + SCHEMA + "(NOME, PREZZO, QUANTITA_RIMANENTE, DESCRIZIONE) VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(1, "" + merch.getTipoMerch());
+			st1.setString(1, merch.getNome());
 			st1.setDouble(2, merch.getPrezzo());
 			st1.setInt(3, quantita);
 			st1.setString(4, merch.getDescrizione());
@@ -197,6 +225,29 @@ public class StoreItemDAO implements IStoreItemDAO {
 		} catch (Exception e) {e.printStackTrace();}
 		
 		return result;
+	}
+
+	@Override
+	public boolean deleteItem(Merchandising m) {
+		PreparedStatement st1;
+    	boolean esito = true;
+    	
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "DELETE FROM " + SCHEMA + " WHERE ID=?";
+			st1 = conn.prepareStatement(query);
+			           
+			st1.setInt(1, m.getId());
+			
+			st1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			esito = false;
+		} 
+		
+		return esito;
 	}
 	
 }
