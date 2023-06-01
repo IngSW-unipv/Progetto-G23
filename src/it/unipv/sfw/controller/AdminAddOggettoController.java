@@ -48,8 +48,10 @@ public class AdminAddOggettoController extends AController{
 	            fileChooser.addChoosableFileFilter(new ImageFilter());
 	            fileChooser.setAcceptAllFileFilterUsed(false);
 	            
-	            File sourceimage = new File("C:\\Users\\feder\\OneDrive\\Immagini");
-	            fileChooser.setCurrentDirectory(sourceimage);
+	            File currentDirFile = new File(".");
+	            String helper = currentDirFile.getAbsolutePath();
+	            
+	            fileChooser.setCurrentDirectory(new File(helper+"\\img"));
 
 	            int option = fileChooser.showOpenDialog(null);
 	            if(option == JFileChooser.APPROVE_OPTION){

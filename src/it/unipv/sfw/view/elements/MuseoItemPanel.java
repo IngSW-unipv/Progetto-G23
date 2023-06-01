@@ -25,13 +25,14 @@ public class MuseoItemPanel extends JPanel {
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
 		descr_pezzo.setWrapStyleWord(true);
-		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 16));
+		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 14));
+		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(r.getDescrizione());
 		
 		JPanel column_pezzo = new JPanel();
 		column_pezzo.setLayout(new GridLayout(2, 1));
-		column_pezzo.setPreferredSize(new Dimension(450, 200));
+		column_pezzo.setPreferredSize(new Dimension(500, 200));
 		column_pezzo.add(titolo_pezzo);
 		column_pezzo.add(descr_pezzo);
 		
@@ -54,13 +55,14 @@ public class MuseoItemPanel extends JPanel {
 		JTextArea descr_pezzo = new JTextArea(5, 30); 
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
-		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 16));
+		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 14));
+		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(c.getDescrizione());
 		
 		JPanel column_pezzo = new JPanel();
 		column_pezzo.setLayout(new GridLayout(2, 1));
-		column_pezzo.setPreferredSize(new Dimension(450, 200));
+		column_pezzo.setPreferredSize(new Dimension(500, 200));
 		column_pezzo.add(titolo_pezzo);
 		column_pezzo.add(descr_pezzo);
 		
