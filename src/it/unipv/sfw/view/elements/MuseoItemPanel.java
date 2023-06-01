@@ -7,16 +7,20 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
+import it.unipv.sfw.view.buttons.PezzoMuseoButton;
 
 public class MuseoItemPanel extends JPanel {
 
-	public MuseoItemPanel(Riconoscimento r) {
+	private PezzoMuseoButton rimuoviButton;
+	
+	public MuseoItemPanel(Riconoscimento r, boolean isAdmin) {
 		
 		JLabel titolo_pezzo = new JLabel(r.getTipo() + " " + r.getAnno());
 		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
@@ -33,7 +37,21 @@ public class MuseoItemPanel extends JPanel {
 		JPanel column_pezzo = new JPanel();
 		column_pezzo.setLayout(new GridLayout(2, 1));
 		column_pezzo.setPreferredSize(new Dimension(500, 200));
-		column_pezzo.add(titolo_pezzo);
+		
+		if (isAdmin) {	
+			JPanel firstRawPanel = new JPanel();
+			
+			rimuoviButton = new PezzoMuseoButton("RIMUOVI", r);
+			rimuoviButton.setBackground(Color.WHITE);
+			rimuoviButton.setPreferredSize(new Dimension(100, 25));
+			
+			firstRawPanel.setLayout(new GridLayout(1, 2));
+			firstRawPanel.add(titolo_pezzo);
+			firstRawPanel.add(rimuoviButton);
+			column_pezzo.add(firstRawPanel);
+		} else {
+			column_pezzo.add(titolo_pezzo);
+		}
 		column_pezzo.add(descr_pezzo);
 		
 		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + r.getImgid() + ".png"));
@@ -47,8 +65,8 @@ public class MuseoItemPanel extends JPanel {
 		this.add(column_pezzo);
 	}
 	
-	public MuseoItemPanel(Cimelio c) {
-		
+	public MuseoItemPanel(Cimelio c, boolean isAdmin) {
+
 		JLabel titolo_pezzo = new JLabel(c.getTipo() + " " + c.getAnno());
 		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 13));
 		
@@ -63,7 +81,21 @@ public class MuseoItemPanel extends JPanel {
 		JPanel column_pezzo = new JPanel();
 		column_pezzo.setLayout(new GridLayout(2, 1));
 		column_pezzo.setPreferredSize(new Dimension(500, 200));
-		column_pezzo.add(titolo_pezzo);
+		
+		if (isAdmin) {	
+			JPanel firstRawPanel = new JPanel();
+			
+			rimuoviButton = new PezzoMuseoButton("RIMUOVI", c);
+			rimuoviButton.setBackground(Color.WHITE);
+			rimuoviButton.setPreferredSize(new Dimension(100, 25));
+			
+			firstRawPanel.setLayout(new GridLayout(1, 2));
+			firstRawPanel.add(titolo_pezzo);
+			firstRawPanel.add(rimuoviButton);
+			column_pezzo.add(firstRawPanel);
+		} else {
+			column_pezzo.add(titolo_pezzo);
+		}
 		column_pezzo.add(descr_pezzo);
 		
 		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + c.getImgid() + ".png"));
@@ -75,6 +107,10 @@ public class MuseoItemPanel extends JPanel {
 		
 		this.add(image);
 		this.add(column_pezzo);
+	}
+	
+	public PezzoMuseoButton getRimuoviButton() {
+		return rimuoviButton;
 	}
 	
 }

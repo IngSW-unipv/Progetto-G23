@@ -94,12 +94,12 @@ public class MuseoView extends AView {
 		pezzimuseo = new JPanel();
 		
 		for(Cimelio c : cimeli) {
-			MuseoItemPanel pezzo = new MuseoItemPanel(c);
+			MuseoItemPanel pezzo = new MuseoItemPanel(c, false);
 			pezzimuseo.add(pezzo);
 		}
 		
 		for(Riconoscimento r : riconoscimenti) {
-			MuseoItemPanel pezzo = new MuseoItemPanel(r);
+			MuseoItemPanel pezzo = new MuseoItemPanel(r, false);
 			pezzimuseo.add(pezzo);
 		}
 		
