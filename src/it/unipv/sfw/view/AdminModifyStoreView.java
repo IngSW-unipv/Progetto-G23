@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -24,6 +25,7 @@ public class AdminModifyStoreView extends AView {
 	private JLabel errorLabel;
 	private JTextField nome, prezzo, quantita;
 	private JTextArea descr;
+	private JButton confirmBtn, backBtn, deleteBtn;
 
 	public AdminModifyStoreView() {
 		init();
@@ -39,8 +41,8 @@ public class AdminModifyStoreView extends AView {
 		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 24);
 				
-		JPanel container = new JPanel();
-		container.setLayout(new GridBagLayout());
+		JPanel fieldsPanel = new JPanel();
+		fieldsPanel.setLayout(new GridBagLayout());
 		
 		// Titolo
 		JPanel titlePanel = new JPanel();		
@@ -75,49 +77,69 @@ public class AdminModifyStoreView extends AView {
 		descr.setLineWrap(true);
 		descr.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		
+		confirmBtn = new JButton("CONFERMA");
+		confirmBtn.setFont(mediumFont);
+		deleteBtn = new JButton("ELIMINA");
+		deleteBtn.setFont(mediumFont);
+		backBtn = new JButton("ANNULLA");
+		backBtn.setFont(mediumFont);
+		
 		GridBagConstraints gridConstraints = new GridBagConstraints();
 		gridConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridConstraints.insets = new Insets(5, 2, 0, 15);
 		
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 0;
-		gridConstraints.gridwidth = 4;
+		gridConstraints.gridwidth = 5;
 		gridConstraints.weightx = 1.0;
-		container.add(errorLabel, gridConstraints);
+		fieldsPanel.add(errorLabel, gridConstraints);
 		gridConstraints.gridwidth = 1;
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 1;
 		gridConstraints.weightx = 0.5;
-		container.add(nomeLabel, gridConstraints);
-		gridConstraints.gridx = 3;
+		fieldsPanel.add(nomeLabel, gridConstraints);
+		gridConstraints.gridx = 4;
 		gridConstraints.gridy = 1;
-		container.add(nome, gridConstraints);
+		fieldsPanel.add(nome, gridConstraints);
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 2;
-		container.add(prezzoLabel, gridConstraints);
-		gridConstraints.gridx = 3;
+		fieldsPanel.add(prezzoLabel, gridConstraints);
+		gridConstraints.gridx = 4;
 		gridConstraints.gridy = 2;
-		container.add(prezzo, gridConstraints);
+		fieldsPanel.add(prezzo, gridConstraints);
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 3;
-		container.add(quantitaLabel, gridConstraints);
-		gridConstraints.gridx = 3;
+		fieldsPanel.add(quantitaLabel, gridConstraints);
+		gridConstraints.gridx = 4;
 		gridConstraints.gridy = 3;
-		container.add(quantita, gridConstraints);
+		fieldsPanel.add(quantita, gridConstraints);
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 4;
-		container.add(descrLabel, gridConstraints);
+		fieldsPanel.add(descrLabel, gridConstraints);
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 5;
 		gridConstraints.gridheight = 3;
-		gridConstraints.gridwidth = 4;
-		container.add(descr, gridConstraints);
+		gridConstraints.gridwidth = 5;
+		fieldsPanel.add(descr, gridConstraints);
+		gridConstraints.gridx = 0;
+		gridConstraints.gridy = 8;
+		gridConstraints.gridheight = 1;
+		gridConstraints.gridwidth = 1;
+		gridConstraints.ipady = 5;
+		fieldsPanel.add(backBtn, gridConstraints);
+		gridConstraints.gridx = 4;
+		fieldsPanel.add(confirmBtn, gridConstraints);
+		if (false) {
+			gridConstraints.gridx = 2;
+			fieldsPanel.add(deleteBtn, gridConstraints);
+		}
+		
+		JPanel container = new JPanel();
+		container.add(fieldsPanel);
 		
 		this.setLayout(new BorderLayout());
-		JPanel a = new JPanel();
-		a.add(container);
 		this.add(titlePanel, BorderLayout.NORTH);
-		this.add(a, BorderLayout.CENTER);
+		this.add(container, BorderLayout.CENTER);
 	}
 	
 	/**
@@ -139,6 +161,34 @@ public class AdminModifyStoreView extends AView {
 	}
 	
 	
+	public JTextField getNome() {
+		return nome;
+	}
+
+	public JTextField getPrezzo() {
+		return prezzo;
+	}
+
+	public JTextField getQuantita() {
+		return quantita;
+	}
+
+	public JTextArea getDescr() {
+		return descr;
+	}
+
+	public JButton getConfirmBtn() {
+		return confirmBtn;
+	}
+
+	public JButton getBackBtn() {
+		return backBtn;
+	}
+
+	public JButton getDeleteBtn() {
+		return deleteBtn;
+	}
+
 	@Override
 	public Type getType() {
 		// TODO Auto-generated method stub
