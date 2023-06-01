@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.dao.IRiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Cimelio.TipoCimelio;
@@ -114,7 +115,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 	}
 	
 	@Override
-	public Riconoscimento selectById(Riconoscimento item) {
+	public Riconoscimento selectById(int id) {
 		
 		Riconoscimento result = null;
 		
@@ -126,7 +127,7 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			
 			String query = "SELECT * FROM " + SCHEMA + " WHERE ID=?";
 			st1 = conn.prepareStatement(query);
-			st1.setInt(1, item.getId());
+			st1.setInt(1, id);
 			rs1 = st1.executeQuery();
 			
 			rs1.next();
@@ -135,6 +136,32 @@ public class RiconoscimentoDAO implements IRiconoscimentoDAO {
 			result = new Riconoscimento (rs1.getInt(3), rs1.getString(4), tipor, rs1.getInt(1), rs1.getString(5));
 			
 		} catch (Exception e) {e.printStackTrace();}
+		
+		return result;
+	}
+	
+	@Override
+	public boolean deleteById(int id) {
+		
+		boolean result = true;
+		
+		PreparedStatement st1;
+		ResultSet rs1;
+		
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "DELETE FROM " + SCHEMA + " WHERE ID=?";
+			
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, id);
+			
+			st1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
 		
 		return result;
 	}

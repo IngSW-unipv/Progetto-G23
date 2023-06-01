@@ -108,7 +108,7 @@ public class CimelioDAO implements ICimelioDAO {
 	}
 	
 	@Override
-	public Cimelio selectById(Cimelio item) {
+	public Cimelio selectById(int id) {
 		
 		Cimelio result = null;
 		
@@ -120,7 +120,7 @@ public class CimelioDAO implements ICimelioDAO {
 			Connection conn = db.getConnection();
 			String query = "SELECT * FROM " + SCHEMA + " WHERE ID=?";
 			st1 = conn.prepareStatement(query);
-			st1.setInt(1, item.getId());
+			st1.setInt(1, id);
 			rs1 = st1.executeQuery();
 			
 			rs1.next();
@@ -130,6 +130,32 @@ public class CimelioDAO implements ICimelioDAO {
 
 			
 		} catch (Exception e) {e.printStackTrace();}
+		
+		return result;
+	}
+	
+	@Override
+	public boolean deleteById(int id) {
+		
+		boolean result = true;
+		
+		PreparedStatement st1;
+		ResultSet rs1;
+		
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			String query = "DELETE FROM " + SCHEMA + " WHERE ID=?";
+			
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, id);
+			
+			st1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
 		
 		return result;
 	}

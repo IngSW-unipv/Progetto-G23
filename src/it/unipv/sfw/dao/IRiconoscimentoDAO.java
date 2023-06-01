@@ -32,14 +32,20 @@ public interface IRiconoscimentoDAO {
 	ArrayList<Riconoscimento> selectAll();
 	
 	/**
-	 * @param item Riconoscimento attraverso il cui id è possibile prelevarlo dal database.
+	 * @param id Id del Riconoscimento attraverso cui è possibile prelevarlo dal database.
 	 * @return Il riconoscimento passato come parametro che è presente nel database.
 	 */
-	Riconoscimento selectById(Riconoscimento item);
+	Riconoscimento selectById(int id);
 	
-	/*
+	/**
 	 * @return Un array che contiene tutti i riconoscimenti presenti nel database, ordinati in base all'anno.
 	 */
 	ArrayList<Riconoscimento> selectAllOrderByData();
+
+	/**
+	 * @param id Id identificativo dell'oggetto da eliminare.
+	 * @return True se l'eliminazione è avvenuta con successo, altrimenti False.
+	 */
+	boolean deleteById(int id);
 
 }

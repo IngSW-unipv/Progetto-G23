@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
@@ -12,6 +14,7 @@ import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AdminMuseoView;
 import it.unipv.sfw.view.MuseoView;
+import it.unipv.sfw.view.buttons.PezzoMuseoButton;
 
 public class AdminMuseoController extends AController{
 
@@ -51,6 +54,21 @@ public class AdminMuseoController extends AController{
 			}
 			
 		});
+		
+		for(PezzoMuseoButton button : mview.getRimuoviButtons()) {
+			button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//delete
+					if (DAOFactory.createIRiconoscimentoDAO().deleteById(button.getId())) {
+						mview.repaint();
+					}
+					else {
+						System.out.println("QUALCOSA E' ANDATO STORTO CON DELETE");
+					}
+				}
+			});
+		}
 		
 		mview.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
 			@Override

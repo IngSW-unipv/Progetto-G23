@@ -32,14 +32,21 @@ public interface ICimelioDAO {
 	ArrayList<Cimelio> selectAll();
 	
 	/**
-	 * @param item Cimelio attraverso il cui id è possibile prelevarlo dal database.
+	 * @param id Id del Cimelio attraverso cui è possibile prelevarlo dal database.
 	 * @return Il cimelio passato come parametro che è presente nel database.
 	 */
-	Cimelio selectById(Cimelio item);
+	Cimelio selectById(int id);
 	
 	/*
 	 * @return Un array che contiene tutti i cimeli presenti nel database, ordinati in base all'anno.
 	 */
 	ArrayList<Cimelio> selectAllOrderByData();
+
+	
+	/**
+	 * @param id Id identificativo dell'oggetto da eliminare.
+	 * @return True se l'eliminazione è avvenuta con successo, altrimenti False.
+	 */
+	boolean deleteById(int id);
 
 }

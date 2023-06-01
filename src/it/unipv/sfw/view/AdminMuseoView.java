@@ -7,7 +7,6 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -17,7 +16,7 @@ import javax.swing.JScrollPane;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
-import it.unipv.sfw.view.AView.Type;
+import it.unipv.sfw.view.buttons.PezzoMuseoButton;
 import it.unipv.sfw.view.elements.MenuUtente;
 import it.unipv.sfw.view.elements.MuseoItemPanel;
 
@@ -27,6 +26,8 @@ public class AdminMuseoView extends AView {
 	private MenuUtente utente;
 	private JButton inserisciButton;
 	private JPanel pezzimuseo;
+	private ArrayList<MuseoItemPanel> pezzo = new ArrayList<>();
+	private ArrayList<PezzoMuseoButton> buttons = new ArrayList<>();
 	
 	public AdminMuseoView(Museo museum, Dimension dim) {
 	
@@ -87,14 +88,19 @@ public class AdminMuseoView extends AView {
 		
 		pezzimuseo = new JPanel();
 		
+		int i=0;
 		for(Cimelio c : cimeli) {
-			MuseoItemPanel pezzo = new MuseoItemPanel(c);
-			pezzimuseo.add(pezzo);
+			pezzo.add(new MuseoItemPanel(c, true));
+			pezzimuseo.add(pezzo.get(i));
+			buttons.add(pezzo.get(i).getRimuoviButton());
+			i++;
 		}
 		
 		for(Riconoscimento r : riconoscimenti) {
-			MuseoItemPanel pezzo = new MuseoItemPanel(r);
-			pezzimuseo.add(pezzo);
+			pezzo.add(new MuseoItemPanel(r, true));
+			pezzimuseo.add(pezzo.get(i));
+			buttons.add(pezzo.get(i).getRimuoviButton());
+			i++;
 		}
 		
 		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*nric)));
@@ -110,6 +116,10 @@ public class AdminMuseoView extends AView {
 		this.setLayout(new BorderLayout());
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(centralPanel, BorderLayout.CENTER);
+	}
+	
+	public ArrayList<PezzoMuseoButton> getRimuoviButtons() {
+		return buttons;
 	}
 	
 	public JButton getPartiteButton() {
