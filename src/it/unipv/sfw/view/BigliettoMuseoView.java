@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Year;
 import java.util.Date;
@@ -286,6 +287,10 @@ public class BigliettoMuseoView extends AView {
 		if (chDate.getTimePicker().getTimeStringOrEmptyString().equals("")) {
 			throw new EmptyTimeException(chDate.getTimePicker());
 		}
+	}
+	
+	public LocalDateTime getEnteredDateAndTime() {
+		return chDate.getDateTimeStrict();
 	}
 	
 	public LocalDate getEnteredData() {

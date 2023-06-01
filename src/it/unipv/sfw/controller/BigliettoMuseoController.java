@@ -3,9 +3,10 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.Time;
+import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.Date;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
@@ -49,19 +50,26 @@ public class BigliettoMuseoController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Date date = Date.valueOf(bview.getEnteredData());
-					Calendar calendarDate = Calendar.getInstance();
-					calendarDate.setTime(date);
+					
 					
 					Utente.checkEmail(bview.getEnteredEmail());
 					bview.checkEnteredDate();
 					bview.checkEnteredTime();
+					
+					Date date = Date.from(bview.getEnteredDateAndTime().atZone(ZoneId.systemDefault()).toInstant());
+					Calendar calendarDate = Calendar.getInstance();
+					calendarDate.setTime(date);
+					calendarDate.set(Calendar.HOUR, bview.getEnteredTime().getHour());
+					calendarDate.set(Calendar.MINUTE, bview.getEnteredTime().getMinute());
+					
 					DAOFactory.createIBigliettoMuseoDAO().insertBigliettiMuseo(
 							new Biglietto(
-								bview.getEnteredEmail(),
+								Sessione.getIstance().getCurrentUtente().getEmail(),
 								bview.getPrice(),
 								calendarDate,
-								Time.valueOf(bview.getEnteredTime())));
+								Time.valueOf(bview.getEnteredTime())),
+							(int) bview.getTotalPeople().getSelectedItem(),
+							bview.getEnteredEmail());
 				}
 				catch (WrongEmailFormatException err) {
 					bview.upEmailError();

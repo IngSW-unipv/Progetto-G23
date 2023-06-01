@@ -13,8 +13,10 @@ public interface IBigliettoMuseoDAO {
 	
 	/**
 	 * @param ticket Biglietto da inserire nel databse.
+	 * @param numeroPersone Numero di biglietti acquistati dalla stessa persona.
+	 * @param emailConferma Email a cui vengono mandati i biglietti acquistati.
 	 * @return True se l'inserimento è avvenuto con successo, altrimenti False.
 	 */
-	boolean insertBigliettiMuseo(Biglietto ticket);
+	boolean insertBigliettiMuseo(Biglietto ticket, int numeroPersone, String emailConferma);
 
 }

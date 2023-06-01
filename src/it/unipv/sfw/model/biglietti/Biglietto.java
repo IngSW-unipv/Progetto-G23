@@ -1,7 +1,11 @@
 package it.unipv.sfw.model.biglietti;
 
+
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -50,6 +54,19 @@ public class Biglietto {
 
 	public Calendar getData() {
 		return data;
+	}
+	
+	public Date getDataSQL() {
+		Date date = data.getTime();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		String date1 = format1.format(date); 
+		Date inActiveDate = null;
+		try {
+		    inActiveDate = (Date) format1.parse(date1);
+		} catch (ParseException e1) {
+		    e1.printStackTrace();
+		}
+		return inActiveDate;
 	}
 
 	public void setData(Calendar data) {

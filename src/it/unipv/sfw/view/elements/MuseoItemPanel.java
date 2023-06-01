@@ -25,7 +25,7 @@ public class MuseoItemPanel extends JPanel {
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
 		descr_pezzo.setWrapStyleWord(true);
-		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 14));
+		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 15));
 		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(r.getDescrizione());
@@ -50,12 +50,12 @@ public class MuseoItemPanel extends JPanel {
 	public MuseoItemPanel(Cimelio c) {
 		
 		JLabel titolo_pezzo = new JLabel(c.getTipo() + " " + c.getAnno());
-		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
+		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 13));
 		
 		JTextArea descr_pezzo = new JTextArea(5, 30); 
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
-		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 14));
+		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 15));
 		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(c.getDescrizione());
