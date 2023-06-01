@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
+import it.unipv.sfw.utilities.ImageFilter;
 import it.unipv.sfw.view.AdminAddOggettoView;
 import it.unipv.sfw.view.AdminMuseoView;
 
