@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 import java.util.Collection;
 
 import it.unipv.sfw.exceptions.EmptyFieldException;
-import it.unipv.sfw.exceptions.OldPasswordReused;
-import it.unipv.sfw.exceptions.PasswordPrecedenteErrata;
+import it.unipv.sfw.exceptions.OldPasswordReusedException;
+import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
@@ -106,11 +106,11 @@ public class ProfiloPersonaleController extends AController{
 				
 				try {
 					Sessione.getIstance().commutaPassword(c,new String(v.getVecchiaPassword().getPassword()),new String(v.getNuovaPassword().getPassword()));
-				} catch(PasswordPrecedenteErrata err) {
+				} catch(PasswordPrecedenteErrataException err) {
 					v.ErroreVecchiaPassword();
 					return;
 					
-				} catch(OldPasswordReused err) {
+				} catch(OldPasswordReusedException err) {
 					v.oldPasswordReused();
 					return;
 					

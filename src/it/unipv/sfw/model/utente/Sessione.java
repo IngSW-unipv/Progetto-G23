@@ -12,8 +12,8 @@ import it.unipv.sfw.dao.mysql.UtenteDAO;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.EmptyFieldException;
-import it.unipv.sfw.exceptions.OldPasswordReused;
-import it.unipv.sfw.exceptions.PasswordPrecedenteErrata;
+import it.unipv.sfw.exceptions.OldPasswordReusedException;
+import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.partita.Partita;
@@ -104,17 +104,17 @@ public class Sessione {
 	 * 
 	 * @param password
 	 * @return la password commutata in stringa
-	 * @throws OldPasswordReused 
-	 * @throws PasswordPrecedenteErrata 
+	 * @throws OldPasswordReusedException 
+	 * @throws PasswordPrecedenteErrataException 
 	 */
-	 public void commutaPassword(Utente u,String vecchiaPassword,String nuovaPAssword) throws OldPasswordReused, PasswordPrecedenteErrata {
+	 public void commutaPassword(Utente u,String vecchiaPassword,String nuovaPAssword) throws OldPasswordReusedException, PasswordPrecedenteErrataException {
 		 	
 		 	if(!(u.getPassword().equals(vecchiaPassword))) {
-		 		throw new PasswordPrecedenteErrata("Password precedente errata");	 		
+		 		throw new PasswordPrecedenteErrataException("Password precedente errata");	 		
 		 	}
 		 	
 			if(vecchiaPassword.equals(nuovaPAssword)) {
-				throw new OldPasswordReused("La nuova password e quella precedente sono uguali");
+				throw new OldPasswordReusedException("La nuova password e quella precedente sono uguali");
 			}
 			
 			DAOFactory.createIUtenteDAO().updatePassword(nuovaPAssword, u);
