@@ -33,7 +33,7 @@ public class PagamentoController extends AController{
 			public void actionPerformed(ActionEvent e) {
 				Email a = new Email();
 				try {
-					a.emailStore();
+					a.sendEmail(a.messaggioStore());
 				} catch (MessagingException e1) {
 					e1.printStackTrace();
 				}
