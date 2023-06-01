@@ -1,6 +1,7 @@
 package it.unipv.sfw.model.utente;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,7 @@ import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.Merchandising;
+import it.unipv.sfw.utilities.Pair;
 
 
 /**
@@ -33,11 +35,13 @@ public class Sessione {
 	private static Sessione istance = null;
 	private HashMap<String, Integer> scelte;
 	private HashMap<Merchandising, Integer> carrello;
+	private Pair<Merchandising, Integer> merchAdmin;
 	private Partita currentPartita;
 	private Utente currentUtente;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
 
 	private Sessione() {	
+		merchAdmin = null;
 		currentUtente = null;
 		currentPartita = null;
 		currentPagamento = 0;
@@ -269,5 +273,13 @@ public class Sessione {
 	public void resetCarrello() {
 		carrello.clear();
 		carrello = null;
+	}
+	
+	public void setMerchAdmin(Pair<Merchandising, Integer> m) {
+		merchAdmin = m;
+	}
+	
+	public Pair<Merchandising, Integer> getMerchAdmin() {
+		return merchAdmin;
 	}
 }

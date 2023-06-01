@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import com.formdev.flatlaf.ui.FlatTextAreaUI;
 
 import it.unipv.sfw.model.store.Merchandising;
+import it.unipv.sfw.utilities.Pair;
 
 public class AdminModifyStoreView extends AView {
 	
@@ -27,15 +28,7 @@ public class AdminModifyStoreView extends AView {
 	private JTextArea descr;
 	private JButton confirmBtn, backBtn, deleteBtn;
 
-	public AdminModifyStoreView() {
-		init();
-	}
-	
-	public AdminModifyStoreView(Map.Entry<Merchandising, Integer> item) {
-		
-	}
-	
-	private void init() {
+	public AdminModifyStoreView(Pair<Merchandising, Integer> item) {
 		// Fonts
 		Font smallFont = new Font("Arial", 1, 12);
 		Font mediumFont = new Font("Arial", 1, 16);
@@ -129,7 +122,7 @@ public class AdminModifyStoreView extends AView {
 		fieldsPanel.add(backBtn, gridConstraints);
 		gridConstraints.gridx = 4;
 		fieldsPanel.add(confirmBtn, gridConstraints);
-		if (false) {
+		if (item != null) {
 			gridConstraints.gridx = 2;
 			fieldsPanel.add(deleteBtn, gridConstraints);
 		}
@@ -148,18 +141,6 @@ public class AdminModifyStoreView extends AView {
 	public void onInvalidFormat() {
 		errorLabel.setText("Il formato dei campi è errato.");
 	}
-	
-	/**
-	 *  Funzione onLoad chiamata a caricamento della view.
-	 */
-	public void onLoad() {
-		errorLabel.setText("");
-		nome.setText("");
-		prezzo.setText("");
-		quantita.setText("");
-		descr.setText("");
-	}
-	
 	
 	public JTextField getNome() {
 		return nome;
