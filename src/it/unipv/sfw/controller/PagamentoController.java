@@ -36,11 +36,12 @@ public class PagamentoController extends AController{
 				Email a = new Email();
 				String messaggio = "";
 				if(Sessione.getIstance().getCurrentPagamento() == 1) messaggio = a.messaggioStore();
-				//else if (Sessione.getIstance().getCurrentPagamento() == 2) messaggio = a.messaggioMuseo();
+				else if (Sessione.getIstance().getCurrentPagamento() == 2) messaggio = a.messaggioMuseo();
 				//else if (Sessione.getIstance().getCurrentPagamento() == 3) messaggio = a.messaggioPartita();
 				//else messaggio = a.messaggioAbb();
 				try {
-					a.sendEmail(messaggio);
+					if (Sessione.getIstance().getCurrentPagamento() == 2) a.sendEmail(messaggio, Sessione.getIstance().getCurrentBiglietto().getEmail());
+					else a.sendEmail(messaggio);
 				} catch (MessagingException e1) {
 					e1.printStackTrace();
 				}
