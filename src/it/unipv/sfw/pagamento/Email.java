@@ -12,6 +12,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import it.unipv.sfw.controller.ControllerManager;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
 
@@ -50,34 +51,17 @@ public class Email {
 		});
 	}
 	
-	/*public void emailStore() throws MessagingException{
+	public String messaggioPartita() {
 		String messaggio = "";
-		messaggio += "ID" + spaziatura("ID") + "NOME" + spaziatura("NOME") + "PREZZO" + "          " + "QUANTITÀ\n";
-		messaggio += "------------------------------------------------------------------------------------------\n";
-		HashMap<Merchandising, Integer> carrello =  Sessione.getIstance().getCarrello();
 		
-		for(Map.Entry<Merchandising, Integer> entry: carrello.entrySet()) {
-			messaggio += entry.getKey().getId()+ spaziatura(Integer.toString(entry.getKey().getId()));
-			messaggio += entry.getKey().getNome()+ spaziatura(entry.getKey().getNome());
-			messaggio += entry.getKey().getPrezzo()+ spaziatura(Double.toString(entry.getKey().getPrezzo()));
-			messaggio += entry.getValue() + "\n";
-		}
+		messaggio += "Il pagamento per la partita " + Sessione.getIstance().getCurrentPartita().getCasa() + "-" + Sessione.getIstance().getCurrentPartita().getOspiti() + " è avvenuto nel modo corretto.";
 		
-		try {
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Sessione.getIstance().getCurrentUtente().getEmail()));
-			message.setSubject("Pagamento store StadiumSystem");
-			message.setContent(messaggio, "text/plain"); Transport.send(message);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		
+		return messaggio;
 	}
-	*/
 	
 	public String messaggioStore() {
 		String messaggio = "";
+		
 		messaggio += "ID" + spaziatura("ID") + "NOME" + spaziatura("NOME") + "PREZZO" + "          " + "QUANTITÀ\n";
 		messaggio += "------------------------------------------------------------------------------------------\n";
 		HashMap<Merchandising, Integer> carrello =  Sessione.getIstance().getCarrello();
@@ -97,7 +81,11 @@ public class Email {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Sessione.getIstance().getCurrentUtente().getEmail()));
-			message.setSubject("Pagamento store StadiumSystem");
+
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lreale348@gmail.com"));
+			if(Sessione.getIstance().getCurrentPagamento() == 1) message.setSubject("Pagamento store StadiumSystem");
+			else if (Sessione.getIstance().getCurrentPagamento() == 2) message.setSubject("Pagamento biglietto museo StadiumSystem");
+			else if (Sessione.getIstance().getCurrentPagamento() == 3) message.setSubject("Pagamento biglietto partita StadiumSystem");
 			message.setContent(messaggio, "text/plain"); Transport.send(message);
 		} catch (MessagingException e) {
 			e.printStackTrace();
