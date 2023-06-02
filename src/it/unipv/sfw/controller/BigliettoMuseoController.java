@@ -95,7 +95,7 @@ public class BigliettoMuseoController extends AController {
 	@Override
 	public void onLoad(Dimension dim) {
 		view.onWindowResized(dim);
-		((BigliettoMuseoView)view).onLoad();
+		view.onLoad();
 		Sessione.getIstance().setCurrentPagamento(2);
 	}
 

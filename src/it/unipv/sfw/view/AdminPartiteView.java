@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import it.unipv.sfw.model.partita.Partita;
-import it.unipv.sfw.view.AView.Type;
 import it.unipv.sfw.view.buttons.UtenteButton;
 import it.unipv.sfw.view.elements.InfoMenu;
 import it.unipv.sfw.view.elements.MenuUtente;
@@ -156,10 +155,4 @@ private int righe;
 	public JMenuItem getExit() {
 		return u.getExit();
 	}
-	@Override
-	public Type getType() {
-		return AView.Type.PARTITE;
-	}
-	
-
 }

@@ -38,6 +38,7 @@ public abstract class AController {
 	 * @see ControllerManager
 	 */
 	public void onLoad(Dimension dim) {
+		view.onLoad();
 		this.onWindowResized(dim);
 	}
 	

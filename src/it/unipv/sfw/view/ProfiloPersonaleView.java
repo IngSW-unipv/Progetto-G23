@@ -260,12 +260,6 @@ public class ProfiloPersonaleView extends AView {
 		
 	}
 	
-	@Override
-	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public Collection<UtenteButton> getButtons() {
 		return acquista;
 	}
@@ -313,12 +307,11 @@ public class ProfiloPersonaleView extends AView {
 		errorLabel.setText("Password precedente errata");
 	}
 	
+	@Override
 	public void onWindowResized(Dimension dim) {
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height))));
 	
 		contenitore.revalidate();
 		contenitore.repaint();
 	}
-	
-	
 }

@@ -131,12 +131,7 @@ public class CarrelloView extends AView {
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(centralPanel, BorderLayout.CENTER);
 	}
-
-	@Override
-	public Type getType() {
-		return null;
-	}
-
+	
 	/**
 	 * @return Bottone dello store.
 	 */

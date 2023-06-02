@@ -124,11 +124,6 @@ public class StoreView extends AView {
 		this.revalidate();
 		this.repaint();
 	}
-
-	@Override
-	public Type getType() {
-		return AView.Type.STORE;
-	}
 	
 	/**
 	 * @return Bottone delle partite.

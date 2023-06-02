@@ -97,10 +97,4 @@ public class AnelloView extends AView {
 		contenitore.revalidate();
 		contenitore.repaint();
 	}
-
-	@Override
-	public Type getType() {
-		return AView.Type.ANELLO;
-	}
-
 }

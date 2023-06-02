@@ -179,10 +179,4 @@ public class SectorView extends AView {
 		settori.revalidate();
 		settori.repaint();		
 	}
-
-	@Override
-	public Type getType() {
-		return AView.Type.SETTORE;
-	}
-
 }

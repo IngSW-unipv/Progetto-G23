@@ -76,19 +76,10 @@ public class LoginController extends AController {
 			return;
 		}
 		
-		if(Sessione.getIstance().getCurrentUtente().getType() == Type.ADMIN) {
+		if (Sessione.getIstance().getCurrentUtente().getType() == Type.ADMIN) {
 			ControllerManager.getInstance().loadController(14);
-		}else {
+		} else {
 			ControllerManager.getInstance().loadController(6);
 		}
-		
-		
-		
-	}
-	
-	@Override
-	public void onLoad(Dimension dim) {
-		view.onWindowResized(dim);
-		((LoginView)view).onLoad();
 	}
 }

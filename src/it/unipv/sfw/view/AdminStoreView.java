@@ -178,11 +178,6 @@ public class AdminStoreView extends AView {
 		this.repaint();
 	}
 
-	@Override
-	public Type getType() {
-		return AView.Type.STORE;
-	}
-	
 	/**
 	 * @return Bottone delle partite.
 	 */

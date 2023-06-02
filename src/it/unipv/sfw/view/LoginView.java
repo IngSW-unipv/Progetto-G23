@@ -141,11 +141,6 @@ public class LoginView extends AView {
 		this.add(contenitore);
 	}
 
-	@Override
-	public Type getType() {
-		return AView.Type.LOGIN;
-	}
-
 	public JButton getAccediButton() {
 		return loginBtn;
 	}
@@ -180,6 +175,7 @@ public class LoginView extends AView {
 		contenitore.repaint();
 	}
 	
+	@Override
 	public void onLoad() {
 		username.setText("");
 		password.setText("");
