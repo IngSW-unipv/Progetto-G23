@@ -23,14 +23,14 @@ public class CarrelloController extends AController {
 		v.getStoreBtn().addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(7);		
+				ControllerManager.getInstance().loadController(Type.STORE);		
 			}
 		});
 		
 		v.getAcquistaBtn().addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(12);		
+				ControllerManager.getInstance().loadController(Type.PAGAMENTO);		
 			}
 		});
 		
@@ -57,6 +57,11 @@ public class CarrelloController extends AController {
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
 		Sessione.getIstance().setCurrentPagamento(1);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.CARRELLO;
 	}
 
 }

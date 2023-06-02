@@ -94,9 +94,4 @@ public class BloccoView extends AView {
 		tabellone.revalidate();
 		tabellone.repaint();
 	}
-
-	@Override
-	public Type getType() {
-		return AView.Type.BLOCCO;
-	}
 }

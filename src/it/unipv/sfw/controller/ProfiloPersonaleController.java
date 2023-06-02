@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
@@ -24,8 +25,8 @@ public class ProfiloPersonaleController extends AController{
 	@Override
 	public void initialize(Dimension dim) {
 		try {
-			c=(Cliente)Sessione.getIstance().getCurrentUtente();
-		}catch (Exception e) {
+			c = (Cliente)Sessione.getIstance().getCurrentUtente();
+		} catch (Exception e) {
 		      System.out.println("Errore");
 	    }
 		
@@ -34,7 +35,7 @@ public class ProfiloPersonaleController extends AController{
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(12);
+				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
 			}
 		};
 		
@@ -47,73 +48,55 @@ public class ProfiloPersonaleController extends AController{
 		v.getHome().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(6);
+				ControllerManager.getInstance().loadController(Type.PARTITE);
 			}
 		});
 		
 		
-		v.getInfo().addMouseListener(new MouseListener() {
-			
+		v.getInfo().addMouseListener(new MouseListener() {		
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+			public void mouseReleased(MouseEvent e) {}		
 			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+			public void mousePressed(MouseEvent e) {}	
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				v.setInfoAbb(false);
-				
+				v.setInfoAbb(false);	
 			}
-			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				v.setInfoAbb(true);
-				
-			}
-			
+				v.setInfoAbb(true);	
+			}		
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseClicked(MouseEvent e) {}
 		});
 		
-		v.getCambiaPassword().addActionListener(new ActionListener() {	
-			
-					
+		v.getCambiaPassword().addActionListener(new ActionListener() {			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if(v.getVecchiaPassword().getPassword().length==0&&v.getNuovaPassword().getPassword().length==0&&v.getConfermaNuovaPassword().getPassword().length==0) {
+			public void actionPerformed(ActionEvent e) {			
+				if (v.getVecchiaPassword().getPassword().length == 0 && 
+					v.getNuovaPassword().getPassword().length == 0 &&
+					v.getConfermaNuovaPassword().getPassword().length == 0) 
+				{
 					v.onEmptyField();
 					return ;
 				}
 				
-				if(!(new String(v.getNuovaPassword().getPassword()) 
+				if (!(new String(v.getNuovaPassword().getPassword()) 
 						.equals(new String(v.getConfermaNuovaPassword().getPassword())))){
 					v.onConfirmPassword();
 					return;
 				}
-				
-				
+						
 				try {
-					Sessione.getIstance().commutaPassword(c,new String(v.getVecchiaPassword().getPassword()),new String(v.getNuovaPassword().getPassword()));
+					Sessione.getIstance().commutaPassword(
+								c,
+								new String(v.getVecchiaPassword().getPassword()),
+								new String(v.getNuovaPassword().getPassword())
+							);
 				} catch(PasswordPrecedenteErrataException err) {
-					v.ErroreVecchiaPassword();
-					return;
-					
+					v.ErroreVecchiaPassword();			
 				} catch(OldPasswordReusedException err) {
 					v.oldPasswordReused();
-					return;
-					
 				}
 			}
 		});
@@ -126,6 +109,11 @@ public class ProfiloPersonaleController extends AController{
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
 		Sessione.getIstance().setCurrentPagamento(4);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.PROFILO;
 	}
 
 }

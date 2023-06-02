@@ -293,11 +293,4 @@ public class AdminAddOggettoView extends AView {
 	public JComboBox<String> getObjectType() {
 		return selectNewObjectType;
 	}
-	
-	@Override
-	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

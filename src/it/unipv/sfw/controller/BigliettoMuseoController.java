@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.EmptyDateException;
@@ -33,7 +34,7 @@ public class BigliettoMuseoController extends AController {
 		bview.getBackButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(10);
+				ControllerManager.getInstance().loadController(Type.MUSEO);
 			}
 			
 		});
@@ -85,7 +86,7 @@ public class BigliettoMuseoController extends AController {
 				}
 
 				// Load new page
-				ControllerManager.getInstance().loadController(12);
+				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
 			}
 		});
 			
@@ -95,8 +96,13 @@ public class BigliettoMuseoController extends AController {
 	@Override
 	public void onLoad(Dimension dim) {
 		view.onWindowResized(dim);
-		((BigliettoMuseoView)view).onLoad();
+		view.onLoad();
 		Sessione.getIstance().setCurrentPagamento(2);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.BIGLIETTO_MUSEO;
 	}
 
 }

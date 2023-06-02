@@ -169,11 +169,4 @@ public class AdminModifyStoreView extends AView {
 	public JButton getDeleteBtn() {
 		return deleteBtn;
 	}
-
-	@Override
-	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -5,15 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AdminMuseoView;
-import it.unipv.sfw.view.MuseoView;
 import it.unipv.sfw.view.buttons.PezzoMuseoButton;
 
 public class AdminMuseoController extends AController{
@@ -34,21 +31,21 @@ public class AdminMuseoController extends AController{
 		mview.getPartiteButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(14);
+				ControllerManager.getInstance().loadController(Type.APARTITE);
 			}
 		});
 		
 		mview.getStoreButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(13);
+				ControllerManager.getInstance().loadController(Type.ASTORE);
 			}
 		});
 		
 		mview.getInserisciButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(16);
+				ControllerManager.getInstance().loadController(Type.AADDOGGETTO);
 			}
 			
 		});
@@ -71,7 +68,7 @@ public class AdminMuseoController extends AController{
 		mview.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(8);
+				ControllerManager.getInstance().loadController(Type.PROFILO);
 			}
 		});
 		
@@ -79,12 +76,17 @@ public class AdminMuseoController extends AController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Sessione.getIstance().resetScelte();
-				ControllerManager.getInstance().loadController(0);
+				ControllerManager.getInstance().loadController(Type.LOGIN);
 			}
 		});
 		
 		view = mview;
 		
+	}
+
+	@Override
+	public Type getType() {
+		return Type.AMUSEO;
 	}
 
 }

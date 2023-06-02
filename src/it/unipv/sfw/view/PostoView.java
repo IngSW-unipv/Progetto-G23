@@ -99,10 +99,4 @@ public class PostoView extends AView {
 		blocco.revalidate();
 		blocco.repaint();
 	}
-
-	@Override
-	public Type getType() {
-		return AView.Type.POSTO;
-	}
-
 }

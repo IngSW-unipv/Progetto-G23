@@ -161,10 +161,4 @@ public class AdminMuseoView extends AView {
 	public void menu(boolean stato) {
 		utente.getMenuButton().setPopupMenuVisible(stato);
 	}
-	
-	@Override
-	public Type getType() {
-		return AView.Type.MUSEO;
-	}
-
 }

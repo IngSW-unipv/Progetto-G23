@@ -39,21 +39,21 @@ public class AdminPartiteController extends AController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Sessione.getIstance().resetScelte();
-				ControllerManager.getInstance().loadController(0);
+				ControllerManager.getInstance().loadController(Type.LOGIN);
 			}
 		});
 		
 		v.getMuseoButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(15);
+				ControllerManager.getInstance().loadController(Type.AMUSEO);
 			}
 		});
 		
 		v.getStoreButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(13);
+				ControllerManager.getInstance().loadController(Type.ASTORE);
 			}
 		});
 		
@@ -100,6 +100,10 @@ public class AdminPartiteController extends AController{
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
+	}
+	@Override
+	public Type getType() {
+		return Type.APARTITE;
 	}
 
 	

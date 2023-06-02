@@ -23,7 +23,7 @@ public class AdminAddOggettoController extends AController{
 		mview.getBackButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(15);
+				ControllerManager.getInstance().loadController(AController.Type.AMUSEO);
 			}
 			
 		});
@@ -66,6 +66,11 @@ public class AdminAddOggettoController extends AController{
 		
 		view = mview;
 		
+	}
+
+	@Override
+	public Type getType() {
+		return AController.Type.AADDOGGETTO;
 	}
 
 }

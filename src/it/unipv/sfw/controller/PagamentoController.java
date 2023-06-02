@@ -21,10 +21,12 @@ public class PagamentoController extends AController{
 		v.getBackBtn().addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(Sessione.getIstance().getCurrentPagamento() == 1)ControllerManager.getInstance().loadController(9);
-				else if (Sessione.getIstance().getCurrentPagamento() == 2) ControllerManager.getInstance().loadController(11);
-				else if (Sessione.getIstance().getCurrentPagamento() == 3) ControllerManager.getInstance().loadController(6);
-				else ControllerManager.getInstance().loadController(8);
+				switch (Sessione.getIstance().getCurrentPagamento()) {
+				case 1: ControllerManager.getInstance().loadController(Type.CARRELLO); break;
+				case 2: ControllerManager.getInstance().loadController(Type.BIGLIETTO_MUSEO); break;
+				case 3: ControllerManager.getInstance().loadController(Type.PARTITE); break;
+				default: ControllerManager.getInstance().loadController(Type.PROFILO);
+				}
 			}
 		});
 		
@@ -43,7 +45,7 @@ public class PagamentoController extends AController{
 					e1.printStackTrace();
 				}
 				if(Sessione.getIstance().getCurrentPagamento() == 1) Sessione.getIstance().resetCarrello();
-				ControllerManager.getInstance().loadController(6);
+				ControllerManager.getInstance().loadController(Type.PARTITE);
 			}
 		});
 		
@@ -53,6 +55,11 @@ public class PagamentoController extends AController{
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.PAGAMENTO;
 	}
 
 }

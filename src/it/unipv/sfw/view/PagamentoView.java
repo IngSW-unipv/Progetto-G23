@@ -172,10 +172,4 @@ public class PagamentoView extends AView{
 	public JButton getOkBtn() {
 		return okBtn;
 	}
-	
-	@Override
-	public Type getType() {
-		return null;
-	}
-
 }

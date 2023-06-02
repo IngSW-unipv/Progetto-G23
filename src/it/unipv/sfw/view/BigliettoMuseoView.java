@@ -321,12 +321,8 @@ public class BigliettoMuseoView extends AView {
 	public double getHeadPrice() {
 		return headPrice;
 	}
-
-	@Override
-	public Type getType() {
-		return Type.BIGLIETTOMUSEO;
-	}
 	
+	@Override
 	public void onLoad() {
 		email_box.setText("");
 		chDate.setDateTimeStrict(null);

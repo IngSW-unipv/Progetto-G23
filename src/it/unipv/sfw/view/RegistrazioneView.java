@@ -200,11 +200,6 @@ public class RegistrazioneView extends AView {
 	}
 
 	@Override
-	public Type getType() {
-		return AView.Type.REGISTRAZIONE;
-	}
-
-	@Override
 	public void onWindowResized(Dimension dim) {
 
 		contenitore.setPreferredSize(new Dimension(dim.width, ((int) (dim.height - 45))));

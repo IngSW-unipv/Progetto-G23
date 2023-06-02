@@ -14,6 +14,15 @@ import it.unipv.sfw.view.AView;
  */
 public abstract class AController {
 	/**
+	 * Enumerazione che rappresenta ogni tipo di controller.
+	 */
+	public enum Type {
+		REGISTRAZIONE, LOGIN, PARTITE, SETTORE, BLOCCO, ANELLO, POSTO,
+		STORE, CARRELLO, MUSEO, BIGLIETTO_MUSEO, PAGAMENTO, PROFILO, 
+		APARTITE, AADDOGGETTO, AMODIFYSTORE, AMUSEO, ASTORE
+	}
+	
+	/**
 	 * {@link it.unipv.sfw.view.AView} utilizzata dalle sottoclassi.
 	 */
 	protected AView view = null;
@@ -24,6 +33,11 @@ public abstract class AController {
 	public AView getView() { return view; }
 	
 	/**
+	 * @return Il tipo del controller.
+	 */
+	public abstract Type getType();
+	
+	/**
 	 * Funzione chiamata durante l'inizializzazione del controller. 
 	 * Normalmente è chiamata solo una volta durante la vita dell'applicazione.
 	 * @param dim La dimensione corrente del frame.
@@ -32,12 +46,12 @@ public abstract class AController {
 	
 	/**
 	 * onLoad viene chiamata da {@link ControllerManager} appena dopo
-	 * aver caricato l'istanza di {@link AController}. 
-	 * Implementata vuota, per comportamenti diversi bisogna sovrascriverla nelle sottoclassi.
+	 * aver caricato l'istanza di {@link AController}.
 	 * @param dim Dimensione corrente della finestra.
 	 * @see ControllerManager
 	 */
 	public void onLoad(Dimension dim) {
+		view.onLoad();
 		this.onWindowResized(dim);
 	}
 	

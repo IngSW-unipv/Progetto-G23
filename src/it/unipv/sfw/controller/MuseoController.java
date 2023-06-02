@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.dao.mysql.RiconoscimentoDAO;
 import it.unipv.sfw.model.museo.Cimelio;
@@ -33,21 +34,21 @@ public class MuseoController extends AController {
 		mview.getPartiteButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(6);
+				ControllerManager.getInstance().loadController(Type.PARTITE);
 			}
 		});
 		
 		mview.getStoreButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(7);
+				ControllerManager.getInstance().loadController(Type.STORE);
 			}
 		});
 		
 		mview.getAcquistaButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(11);
+				ControllerManager.getInstance().loadController(Type.BIGLIETTO_MUSEO);
 			}
 			
 		});
@@ -55,7 +56,7 @@ public class MuseoController extends AController {
 		mview.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(8);
+				ControllerManager.getInstance().loadController(Type.PROFILO);
 			}
 		});
 		
@@ -63,12 +64,17 @@ public class MuseoController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Sessione.getIstance().resetScelte();
-				ControllerManager.getInstance().loadController(0);
+				ControllerManager.getInstance().loadController(Type.LOGIN);
 			}
 		});
 		
 		view = mview;
 		
+	}
+
+	@Override
+	public Type getType() {
+		return Type.MUSEO;
 	}
 
 }

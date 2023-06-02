@@ -156,10 +156,4 @@ public class PartiteView extends AView {
 	public JMenuItem getExit() {
 		return u.getExit();
 	}
-
-	@Override
-	public Type getType() {
-		return AView.Type.PARTITE;
-	}
-
 }
