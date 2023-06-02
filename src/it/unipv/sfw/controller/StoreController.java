@@ -32,7 +32,7 @@ public class StoreController extends AController {
 		v.getPartiteBtn().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(Type.STORE);
+				ControllerManager.getInstance().loadController(Type.PARTITE);
 			}
 		});
 		
