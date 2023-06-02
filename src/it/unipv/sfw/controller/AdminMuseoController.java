@@ -19,8 +19,6 @@ import it.unipv.sfw.view.buttons.PezzoMuseoButton;
 public class AdminMuseoController extends AController{
 
 	String storia = new String("L'inter è una squadra di calcio rappresentante la città di Milano.");
-	Riconoscimento[] ric;
-	Cimelio[] cim;
 	
 	@Override
 	public void initialize(Dimension dim) {
@@ -61,7 +59,7 @@ public class AdminMuseoController extends AController{
 				public void actionPerformed(ActionEvent e) {
 					//delete
 					if (DAOFactory.createIRiconoscimentoDAO().deleteById(button.getId())) {
-						mview.repaint();
+						mview.removeMuseoItemPanel(button.getId());
 					}
 					else {
 						System.out.println("QUALCOSA E' ANDATO STORTO CON DELETE");

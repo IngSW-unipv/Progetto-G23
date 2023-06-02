@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -26,15 +27,21 @@ public class AdminMuseoView extends AView {
 	private MenuUtente utente;
 	private JButton inserisciButton;
 	private JPanel pezzimuseo;
-	private ArrayList<MuseoItemPanel> pezzo = new ArrayList<>();
+	private HashMap<Integer, MuseoItemPanel> pezzo = new HashMap<>();
 	private ArrayList<PezzoMuseoButton> buttons = new ArrayList<>();
+	private int i = 0;
+	private int npezzi;
+	private Dimension dim;
 	
 	public AdminMuseoView(Museo museum, Dimension dim) {
+		
+		this.dim = dim;
 	
 		ArrayList<Cimelio> cimeli = museum.getCimeli();
 		int ncim = cimeli.size();
 		ArrayList<Riconoscimento> riconoscimenti = museum.getRiconoscimenti();
 		int nric = riconoscimenti.size();
+		npezzi = nric + ncim;
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
@@ -88,22 +95,19 @@ public class AdminMuseoView extends AView {
 		
 		pezzimuseo = new JPanel();
 		
-		int i=0;
 		for(Cimelio c : cimeli) {
-			pezzo.add(new MuseoItemPanel(c, true));
-			pezzimuseo.add(pezzo.get(i));
-			buttons.add(pezzo.get(i).getRimuoviButton());
-			i++;
+			pezzo.put(c.getId(), new MuseoItemPanel(c, true));
+			pezzimuseo.add(pezzo.get(c.getId()));
+			buttons.add(pezzo.get(c.getId()).getRimuoviButton());
 		}
 		
 		for(Riconoscimento r : riconoscimenti) {
-			pezzo.add(new MuseoItemPanel(r, true));
-			pezzimuseo.add(pezzo.get(i));
-			buttons.add(pezzo.get(i).getRimuoviButton());
-			i++;
+			pezzo.put(r.getId(), new MuseoItemPanel(r, true));
+			pezzimuseo.add(pezzo.get(r.getId()));
+			buttons.add(pezzo.get(r.getId()).getRimuoviButton());
 		}
 		
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*nric)));
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi))));
 		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 
@@ -120,6 +124,14 @@ public class AdminMuseoView extends AView {
 	
 	public ArrayList<PezzoMuseoButton> getRimuoviButtons() {
 		return buttons;
+	}
+	
+	public void removeMuseoItemPanel(int i) {
+		pezzimuseo.remove(pezzo.remove(i));
+		npezzi--;
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi))));
+		pezzimuseo.revalidate();
+		pezzimuseo.repaint();
 	}
 	
 	public JButton getPartiteButton() {

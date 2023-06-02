@@ -8,6 +8,7 @@ import it.unipv.sfw.model.museo.Riconoscimento;
 public class PezzoMuseoButton extends JButton {
 	
 	private int id;
+	private int nPanel;
 
 	public PezzoMuseoButton(String string, Riconoscimento r) {
 		super(string);
@@ -22,5 +23,4 @@ public class PezzoMuseoButton extends JButton {
 	public int getId() {
 		return id;
 	}
-	
 }
