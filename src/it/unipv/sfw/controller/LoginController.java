@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.model.utente.Utente.Type;
 import it.unipv.sfw.view.LoginView;
 
@@ -51,7 +52,7 @@ public class LoginController extends AController {
 		v.getRegistratiButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(1);
+				ControllerManager.getInstance().loadController(Type.REGISTRAZIONE);
 			}
 		});
 		
@@ -76,10 +77,16 @@ public class LoginController extends AController {
 			return;
 		}
 		
-		if (Sessione.getIstance().getCurrentUtente().getType() == Type.ADMIN) {
-			ControllerManager.getInstance().loadController(14);
+		if (Sessione.getIstance().getCurrentUtente().getType() == Utente.Type.ADMIN) {
+			ControllerManager.getInstance().loadController(Type.APARTITE);
 		} else {
-			ControllerManager.getInstance().loadController(6);
+			ControllerManager.getInstance().loadController(Type.PARTITE);
 		}
+	}
+
+
+	@Override
+	public Type getType() {
+		return Type.LOGIN;
 	}
 }

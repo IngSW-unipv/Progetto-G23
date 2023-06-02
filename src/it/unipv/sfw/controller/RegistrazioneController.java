@@ -10,6 +10,7 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
 import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
@@ -54,7 +55,7 @@ public class RegistrazioneController extends AController {
 		v.getToLoginBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(0);
+				ControllerManager.getInstance().loadController(Type.LOGIN);
 			}
 		});
 		
@@ -92,11 +93,16 @@ public class RegistrazioneController extends AController {
 			return;
 		}
 
-		ControllerManager.getInstance().loadController(6);
+		ControllerManager.getInstance().loadController(Type.PARTITE);
 	}
 	
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.REGISTRAZIONE;
 	}
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AView;
@@ -41,7 +42,7 @@ public class PostoController extends AController {
 				// Update database with booking
 				s.book();
 
-				ControllerManager.getInstance().loadController(12);
+				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
 			}
 		};
 		
@@ -50,6 +51,11 @@ public class PostoController extends AController {
 			b.addActionListener(a);
 		
 		view = v;
+	}
+
+	@Override
+	public Type getType() {
+		return Type.POSTO;
 	}
 	
 }

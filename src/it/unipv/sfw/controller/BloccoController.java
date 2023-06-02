@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.BloccoView;
 import it.unipv.sfw.view.buttons.BloccoButton;
@@ -27,12 +28,17 @@ public class BloccoController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				int code = ((BloccoButton)e.getSource()).getCode();
 				Sessione.getIstance().setBlocco(code);;
-				ControllerManager.getInstance().loadController(5);
+				ControllerManager.getInstance().loadController(Type.POSTO);
 			}
 		};
 		
 		Collection<BloccoButton> btns = ((BloccoView)view).getAllBloccoButton();
 		for (BloccoButton b : btns)
 			b.addActionListener(a);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.BLOCCO;
 	}
 }

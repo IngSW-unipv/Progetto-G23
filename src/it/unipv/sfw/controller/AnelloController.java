@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AnelloView;
 import it.unipv.sfw.view.buttons.AnelloButton;
@@ -27,7 +28,7 @@ public class AnelloController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				int code = ((AnelloButton) e.getSource()).getCode();
 				Sessione.getIstance().setAnello(code);
-				ControllerManager.getInstance().loadController(4);
+				ControllerManager.getInstance().loadController(Type.BLOCCO);
 			}
 		};
 
@@ -35,5 +36,10 @@ public class AnelloController extends AController {
 		for (AnelloButton b : btns)
 			b.addActionListener(a);
 
+	}
+
+	@Override
+	public Type getType() {
+		return Type.ANELLO;
 	}
 }

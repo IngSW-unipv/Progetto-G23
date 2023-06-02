@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
@@ -38,7 +39,7 @@ public class AdminStoreController extends AController {
 		v.getAggiungiItemButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(17);
+				ControllerManager.getInstance().loadController(Type.AMODIFYSTORE);
 			}
 		});
 		
@@ -50,7 +51,7 @@ public class AdminStoreController extends AController {
 				Sessione.getIstance().setMerchAdmin(
 						new Pair<Merchandising, Integer>(b.getMerch(), b.getMerchQuantity())
 				);
-				ControllerManager.getInstance().loadController(17);
+				ControllerManager.getInstance().loadController(Type.AMODIFYSTORE);
 			}
 		};
 		
@@ -64,6 +65,12 @@ public class AdminStoreController extends AController {
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
+	}
+
+
+	@Override
+	public Type getType() {
+		return Type.ASTORE;
 	}
 
 }

@@ -23,7 +23,7 @@ public class AdminModifyStoreController extends AController {
 		v.getBackBtn().addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(13);
+				ControllerManager.getInstance().loadController(AController.Type.ASTORE);
 			}
 		});
 		
@@ -32,7 +32,7 @@ public class AdminModifyStoreController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				DAOFactory.createIStoreItemDAO().deleteItem(merchToBeUpdated.getKey());
 				Sessione.getIstance().setMerchAdmin(null);
-				ControllerManager.getInstance().loadController(13);
+				ControllerManager.getInstance().loadController(AController.Type.ASTORE);
 			}
 		});
 		
@@ -73,7 +73,7 @@ public class AdminModifyStoreController extends AController {
 					Sessione.getIstance().setMerchAdmin(null);
 				}
 				
-				ControllerManager.getInstance().loadController(13);
+				ControllerManager.getInstance().loadController(AController.Type.ASTORE);
 			}
 		});
 		
@@ -84,5 +84,10 @@ public class AdminModifyStoreController extends AController {
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
+	}
+
+	@Override
+	public Type getType() {
+		return AController.Type.AMODIFYSTORE;
 	}
 }

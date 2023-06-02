@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
@@ -34,7 +35,7 @@ public class ProfiloPersonaleController extends AController{
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(12);
+				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
 			}
 		};
 		
@@ -47,7 +48,7 @@ public class ProfiloPersonaleController extends AController{
 		v.getHome().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(6);
+				ControllerManager.getInstance().loadController(Type.PARTITE);
 			}
 		});
 		
@@ -108,6 +109,11 @@ public class ProfiloPersonaleController extends AController{
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
 		Sessione.getIstance().setCurrentPagamento(4);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.PROFILO;
 	}
 
 }

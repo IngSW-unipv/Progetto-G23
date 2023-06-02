@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.dao.mysql.PartitaDAO;
 import it.unipv.sfw.model.partita.Partita;
@@ -43,7 +44,7 @@ public class PartiteController extends AController {
 				Partita p_selected = p[iPartita];
 				Sessione s = Sessione.getIstance();
 				s.setCurrentPartita(p_selected);
-				ControllerManager.getInstance().loadController(2);
+				ControllerManager.getInstance().loadController(Type.SETTORE);
 			}
 		};
 		
@@ -54,20 +55,20 @@ public class PartiteController extends AController {
 		v.getStoreButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(7);
+				ControllerManager.getInstance().loadController(Type.STORE);
 			}
 		});
 		v.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(8);
+				ControllerManager.getInstance().loadController(Type.PROFILO);
 			}
 		});
 		
 		v.getMuseoButton().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(10);
+				ControllerManager.getInstance().loadController(Type.MUSEO);
 			}
 		});
 		
@@ -75,7 +76,7 @@ public class PartiteController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Sessione.getIstance().resetScelte();
-				ControllerManager.getInstance().loadController(0);
+				ControllerManager.getInstance().loadController(Type.LOGIN);
 			}
 		});
 		
@@ -86,6 +87,11 @@ public class PartiteController extends AController {
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
 		Sessione.getIstance().setCurrentPagamento(3);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.PARTITE;
 	}
 }
 
