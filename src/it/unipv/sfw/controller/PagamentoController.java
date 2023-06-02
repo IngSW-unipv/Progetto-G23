@@ -37,7 +37,7 @@ public class PagamentoController extends AController{
 				if(Sessione.getIstance().getCurrentPagamento() == 1) messaggio = a.messaggioStore();
 				else if (Sessione.getIstance().getCurrentPagamento() == 2) messaggio = a.messaggioMuseo();
 				else if (Sessione.getIstance().getCurrentPagamento() == 3) messaggio = a.messaggioPartita();
-				//else messaggio = a.messaggioAbb();
+				else messaggio = a.messaggioAbbonamento();
 				try {
 					if (Sessione.getIstance().getCurrentPagamento() == 2) a.sendEmail(messaggio, Sessione.getIstance().getCurrentBiglietto().getEmail());
 					else a.sendEmail(messaggio);
