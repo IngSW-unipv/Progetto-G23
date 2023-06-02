@@ -36,6 +36,20 @@ public class AdminStoreController extends AController {
 		
 		AdminStoreView v = new AdminStoreView(s.getMerch(), acquisti, dim);
 		
+		v.getPartiteBtn().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(Type.APARTITE);
+			}
+		});
+		
+		v.getMuseoBtn().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(Type.AMUSEO);
+			}
+		});
+		
 		v.getAggiungiItemButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

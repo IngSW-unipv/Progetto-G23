@@ -36,7 +36,7 @@ public class AdminStoreView extends AView {
 	
 	private int merch_n, acquisti_n;
 	// top
-	private JButton partiteButton, museoButton, cartButton, aggiungiItem;
+	private JButton partiteButton, museoButton, aggiungiItem;
 	// center
 	private JPanel itemList;
 	private HashMap<Merchandising, AdminStoreItemPanel> itemPanels;
@@ -74,11 +74,6 @@ public class AdminStoreView extends AView {
 		topPanelBtns.add(partiteButton);
 		topPanelBtns.add(museoButton);
 		
-		ImageIcon utenteImg = new ImageIcon(getClass().getResource("/carrello.png"));
-		cartButton = new JButton("", utenteImg);
-		cartButton.setBackground(Color.BLUE);
-		
-		topPanel.add(cartButton, BorderLayout.EAST);
 		topPanel.add(topPanelBtns, BorderLayout.CENTER);
 		
 		// Center panel
@@ -93,7 +88,7 @@ public class AdminStoreView extends AView {
 		centralPanel.add(title, BorderLayout.NORTH);
 		
 		JPanel centralGrid = new JPanel();
-		centralGrid.setLayout(new GridLayout(1, 2, 10, 0));
+		centralGrid.setLayout(new GridLayout(1, 2));
 		
 		// Item list
 		itemList = new JPanel();
@@ -190,13 +185,6 @@ public class AdminStoreView extends AView {
 	 */
 	public JButton getMuseoBtn() {
 		return museoButton;
-	}
-	
-	/**
-	 * @return Bottone del carrello.
-	 */
-	public JButton getCartButton() {
-		return cartButton;
 	}
 	
 	/**

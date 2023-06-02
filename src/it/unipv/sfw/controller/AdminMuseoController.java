@@ -88,7 +88,7 @@ public class AdminMuseoController extends AController{
 
 	@Override
 	public Type getType() {
-		return Type.ASTORE;
+		return Type.AMUSEO;
 	}
 
 }
