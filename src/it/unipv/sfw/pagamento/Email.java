@@ -13,7 +13,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import it.unipv.sfw.controller.ControllerManager;
 import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
@@ -68,13 +67,16 @@ public class Email {
 		return messaggio;
 	}
 	
-	/*public String messaggioPartita() {
+	public String messaggioPartita() {
 		String messaggio = "";
+		Sessione s = Sessione.getIstance();
+		String posto = "Settore " + s.getSettore() + ", Blocco " + s.getBlocco() + ", Anello " + s.getAnello() + ", Posto " + s.getPosto() + ".";
 		
-		messaggio += "Il pagamento per la partita " + Sessione.getIstance().getCurrentPartita().getCasa() + "-" + Sessione.getIstance().getCurrentPartita().getOspiti() + " è avvenuto nel modo corretto.";
+		messaggio += "Il pagamento per la partita " + Sessione.getIstance().getCurrentPartita().getCasa() + "-" + Sessione.getIstance().getCurrentPartita().getOspiti() + " è avvenuto nel modo corretto.\n";
+		messaggio += "Il tuo posto è: " + posto;
 		
 		return messaggio;
-	}*/
+	}
 	
 	public String messaggioStore() {
 		String messaggio = "";
@@ -98,8 +100,6 @@ public class Email {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Sessione.getIstance().getCurrentUtente().getEmail()));
-
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lreale348@gmail.com"));
 			if(Sessione.getIstance().getCurrentPagamento() == 1) message.setSubject("Pagamento store StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 2) message.setSubject("Pagamento biglietto museo StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 3) message.setSubject("Pagamento biglietto partita StadiumSystem");

@@ -1,15 +1,9 @@
 package it.unipv.sfw.model.utente;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 import it.unipv.sfw.dao.DAOFactory;
-import it.unipv.sfw.dao.IUtenteDAO;
-import it.unipv.sfw.dao.mysql.ClienteDAO;
-import it.unipv.sfw.dao.mysql.UtenteDAO;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.EmptyFieldException;
