@@ -34,6 +34,13 @@ public class Riconoscimento {
 		this.imgid = imgid;
 	}
 	
+	public Riconoscimento(int anno, String descrizione, TipoRiconoscimento tipo, String imgid) {
+		this.anno = anno;
+		this.descrizione = descrizione;
+		this.tipo = "" + tipo;
+		this.imgid = imgid;
+	}
+	
 	/**
 	 * Funzione utilizzata per cambiare la descrizione del riconoscimento.
 	 * @param descrizione

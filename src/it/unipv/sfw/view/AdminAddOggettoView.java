@@ -143,8 +143,7 @@ public class AdminAddOggettoView extends AView {
 		
 		JScrollPane testo = new JScrollPane(descrizioneField);
 		testo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
-		//descrizioneField.setColumns(30);
-		//descrizioneField.setRows(5);
+		
 		descrizioneField.setLineWrap(true);
 		descrizioneField.setWrapStyleWord(true);
 		
@@ -292,5 +291,21 @@ public class AdminAddOggettoView extends AView {
 	
 	public JComboBox<String> getObjectType() {
 		return selectNewObjectType;
+	}
+	
+	public JComboBox<String> getObjectSubType() {
+		return selectObjectSubType;
+	}
+	
+	public int getAnno() {
+		return (int) anno.getValue();
+	}
+	
+	public String getNomeImg() {
+		return imgPath.getText();
+	}
+	
+	public String getDescrizioneField() {
+		return descrizioneField.getText();
 	}
 }

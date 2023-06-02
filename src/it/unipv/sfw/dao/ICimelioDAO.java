@@ -49,4 +49,10 @@ public interface ICimelioDAO {
 	 */
 	boolean deleteById(int id);
 
+	/**
+	 * @param c Cimelio di cui ritornare l'id con cui è salvato nel database.
+	 * @return Id del cimelio.
+	 */
+	int selectId(Cimelio c);
+
 }

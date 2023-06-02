@@ -47,5 +47,11 @@ public interface IRiconoscimentoDAO {
 	 * @return True se l'eliminazione è avvenuta con successo, altrimenti False.
 	 */
 	boolean deleteById(int id);
+	
+	/**
+	 * @param c Riconoscimento di cui ritornare l'id con cui è salvato nel database.
+	 * @return Id del riconoscimento.
+	 */
+	int selectId(Riconoscimento r);
 
 }

@@ -33,7 +33,7 @@ public class CimelioDAO implements ICimelioDAO {
 		
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
-			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?)";
+			String query = "INSERT INTO " + SCHEMA + "(NOME, ANNO, DESCRIZIONE, NOME_IMG) VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, cim.getTipo());
@@ -135,6 +135,31 @@ public class CimelioDAO implements ICimelioDAO {
 	}
 	
 	@Override
+	public int selectId(Cimelio c) {
+		
+		int result = 0;
+		
+		PreparedStatement st1;
+		ResultSet rs1;
+	
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			
+			Connection conn = db.getConnection();
+			String query = "SELECT * FROM " + SCHEMA + " WHERE NOME=? AND ANNO=?";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, c.getTipo());
+			st1.setInt(2, c.getAnno());
+			rs1 = st1.executeQuery();
+			
+			rs1.next();
+			result = rs1.getInt(1);
+			
+		} catch (Exception e) {e.printStackTrace();}
+		
+		return result;
+	}
+	
+	@Override
 	public boolean deleteById(int id) {
 		
 		boolean result = true;
@@ -172,7 +197,7 @@ public class CimelioDAO implements ICimelioDAO {
 			Connection conn = db.getConnection();
 			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + SCHEMA + "ORDER BY ANNO";
+			String query = "SELECT * FROM " + SCHEMA + " ORDER BY ANNO";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {

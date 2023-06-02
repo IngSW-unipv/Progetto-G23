@@ -23,13 +23,14 @@ import it.unipv.sfw.view.elements.MuseoItemPanel;
 
 public class AdminMuseoView extends AView {
 
+	ArrayList<Cimelio> cimeli = new ArrayList<>();
+	ArrayList<Riconoscimento> riconoscimenti = new ArrayList<>();
 	private JButton partiteButton, storeButton, utenteButton;
 	private MenuUtente utente;
 	private JButton inserisciButton;
 	private JPanel pezzimuseo;
 	private HashMap<Integer, MuseoItemPanel> pezzo = new HashMap<>();
 	private ArrayList<PezzoMuseoButton> buttons = new ArrayList<>();
-	private int i = 0;
 	private int npezzi;
 	private Dimension dim;
 	
@@ -37,9 +38,9 @@ public class AdminMuseoView extends AView {
 		
 		this.dim = dim;
 	
-		ArrayList<Cimelio> cimeli = museum.getCimeli();
+		cimeli = museum.getCimeli();
 		int ncim = cimeli.size();
-		ArrayList<Riconoscimento> riconoscimenti = museum.getRiconoscimenti();
+		riconoscimenti = museum.getRiconoscimenti();
 		int nric = riconoscimenti.size();
 		npezzi = nric + ncim;
 		
@@ -125,6 +126,30 @@ public class AdminMuseoView extends AView {
 	public ArrayList<PezzoMuseoButton> getRimuoviButtons() {
 		return buttons;
 	}
+	/*
+	public void addMuseoItemPanel(Cimelio c) {
+		//aggiungo
+		pezzo.put(c.getId(), new MuseoItemPanel(c, true));
+		pezzimuseo.add(pezzo.get(c.getId()));
+		buttons.add(pezzo.get(c.getId()).getRimuoviButton());
+		npezzi++;
+		//refresho
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi))));
+		pezzimuseo.revalidate();
+		pezzimuseo.repaint();
+	}
+	
+	public void addMuseoItemPanel(Riconoscimento r) {
+		//aggiungo
+		pezzo.put(r.getId(), new MuseoItemPanel(r, true));
+		pezzimuseo.add(pezzo.get(r.getId()));
+		buttons.add(pezzo.get(r.getId()).getRimuoviButton());
+		npezzi++;
+		//refresho
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi))));
+		pezzimuseo.revalidate();
+		pezzimuseo.repaint();
+	}*/
 	
 	public void removeMuseoItemPanel(int i) {
 		pezzimuseo.remove(pezzo.remove(i));
@@ -161,4 +186,5 @@ public class AdminMuseoView extends AView {
 	public void menu(boolean stato) {
 		utente.getMenuButton().setPopupMenuVisible(stato);
 	}
+	
 }

@@ -30,17 +30,22 @@ import it.unipv.sfw.view.elements.MuseoItemPanel;
 
 public class MuseoView extends AView {
 	
+	ArrayList<Cimelio> cimeli = new ArrayList<>();
+	ArrayList<Riconoscimento> riconoscimenti = new ArrayList<>();
 	private JButton partiteButton, storeButton, utenteButton;
 	private MenuUtente utente;
 	private JButton acquistaBiglietto;
 	private JPanel pezzimuseo;
+	int npezzi;
 	
 	public MuseoView(Museo museum, Dimension dim) {
 	
-		ArrayList<Cimelio> cimeli = museum.getCimeli();
+		cimeli = museum.getCimeli();
 		int ncim = cimeli.size();
-		ArrayList<Riconoscimento> riconoscimenti = museum.getRiconoscimenti();
+		riconoscimenti = museum.getRiconoscimenti();
 		int nric = riconoscimenti.size();
+		
+		npezzi = ncim + nric;
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
@@ -103,7 +108,7 @@ public class MuseoView extends AView {
 			pezzimuseo.add(pezzo);
 		}
 		
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*nric)));
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*npezzi)));
 		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 

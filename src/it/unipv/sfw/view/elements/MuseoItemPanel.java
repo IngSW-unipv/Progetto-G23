@@ -30,7 +30,7 @@ public class MuseoItemPanel extends JPanel {
 		descr_pezzo.setLineWrap(true);
 		descr_pezzo.setWrapStyleWord(true);
 		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 15));
-		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
+		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:(Max 100 parole)"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(r.getDescrizione());
 		
@@ -54,7 +54,7 @@ public class MuseoItemPanel extends JPanel {
 		}
 		column_pezzo.add(descr_pezzo);
 		
-		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + r.getImgid() + ".png"));
+		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + r.getImgid()));
 		image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 180, java.awt.Image.SCALE_SMOOTH));
 		JLabel image = new JLabel();
 		image.setIcon(image_pezzo);
@@ -68,13 +68,14 @@ public class MuseoItemPanel extends JPanel {
 	public MuseoItemPanel(Cimelio c, boolean isAdmin) {
 
 		JLabel titolo_pezzo = new JLabel(c.getTipo() + " " + c.getAnno());
-		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 13));
+		titolo_pezzo.setFont(new java.awt.Font("Arial", 1, 18));
 		
 		JTextArea descr_pezzo = new JTextArea(5, 30); 
 		descr_pezzo.setEditable(false);
 		descr_pezzo.setLineWrap(true);
+		descr_pezzo.setWrapStyleWord(true);
 		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 15));
-		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
+		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:(Max 100 parole)"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(c.getDescrizione());
 		
@@ -98,7 +99,7 @@ public class MuseoItemPanel extends JPanel {
 		}
 		column_pezzo.add(descr_pezzo);
 		
-		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + c.getImgid() + ".png"));
+		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + c.getImgid()));
 		image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 180, java.awt.Image.SCALE_SMOOTH));
 		JLabel image = new JLabel();
 		image.setIcon(image_pezzo);

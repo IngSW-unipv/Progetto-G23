@@ -28,7 +28,16 @@ public class Cimelio {
 	public Cimelio(String descrizione, TipoCimelio tipo, int id, int anno, String imgid) {
 		this.tipo = "" + tipo;
 		this.id = id;
+		this.anno = anno;
 		this.descrizione = descrizione;
+		this.setImgid(imgid);
+	}
+	
+	//costruttore per admin
+	public Cimelio(String descrizione, TipoCimelio tipo, int anno, String imgid) {
+		this.tipo = "" + tipo;
+		this.descrizione = descrizione;
+		this.anno = anno;
 		this.setImgid(imgid);
 	}
 	
@@ -67,7 +76,7 @@ public class Cimelio {
 	 * @return Il tipo del cimelio.
 	 */
 	public String getTipo() {
-		return "" + tipo;
+		return tipo;
 	}
 
 	public int getAnno() {

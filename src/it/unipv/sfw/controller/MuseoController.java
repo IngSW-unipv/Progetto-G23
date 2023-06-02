@@ -26,8 +26,10 @@ public class MuseoController extends AController {
 		Museo museum = new Museo(storia, 14, 30, 18, 30);
 		
 		ArrayList<Riconoscimento> ric_arraylist = DAOFactory.createIRiconoscimentoDAO().selectAllOrderByData();
+		ArrayList<Cimelio> cim_arraylist = DAOFactory.createICimelioDAO().selectAllOrderByData();
 		
 		museum.setRiconsocimenti(ric_arraylist);
+		museum.setCimeli(cim_arraylist);
 		
 		MuseoView mview = new MuseoView(museum, dim);
 		
@@ -75,6 +77,11 @@ public class MuseoController extends AController {
 	@Override
 	public Type getType() {
 		return Type.MUSEO;
+	}
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
 	}
 
 }
