@@ -21,6 +21,8 @@ public class Biglietto {
 	private Calendar data;
 	private Time ora;
 	
+	public Biglietto() {}
+	
 	public Biglietto(String email, double prezzo, Calendar data, Time ora) {
 		this.email = email;
 		this.prezzo = prezzo;

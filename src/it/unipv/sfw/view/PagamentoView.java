@@ -33,7 +33,7 @@ public class PagamentoView extends AView{
 	private final int ANNO = 2023;
 	
 	private Carta carta;
-	private JPanel infoPanel;
+	private JPanel infoPanel, btnsPanel;
 	private JButton backBtn, okBtn;
 	
 	
@@ -65,6 +65,9 @@ public class PagamentoView extends AView{
 		JPanel centralPanel = new JPanel();
 		JPanel selectScadenza = new JPanel();
 		JPanel centerPanelBtns = new JPanel();
+		JPanel btnsPanel1 = new JPanel();
+		JPanel btnsPanel2 = new JPanel();
+		btnsPanel = new JPanel();
 		infoPanel = new JPanel();
 		
 		centralPanel.setLayout(new BorderLayout());
@@ -139,10 +142,19 @@ public class PagamentoView extends AView{
 		infoPanel.add(cvvTxt);
 		infoPanel.add(salvaCb);
 		infoPanel.setBorder(new EmptyBorder(dim.height/6, dim.width/7, dim.height/6,  dim.width/7));
+
+		btnsPanel1.add(new JLabel("N.B. continuando riceverai una mail di conferma."));
+		btnsPanel2.setLayout(new GridLayout(1, 2));
+		btnsPanel2.add(backBtn);
+		btnsPanel2.add(okBtn);
+
+		btnsPanel.setLayout(new GridLayout(2, 1, dim.width/192, 3));
+		btnsPanel.setBorder(new EmptyBorder(0, dim.width/7, 0,  dim.width/7));
+		btnsPanel.add(btnsPanel1);
+		btnsPanel.add(btnsPanel2);
 		
-		centerPanelBtns.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-		centerPanelBtns.add(backBtn);
-		centerPanelBtns.add(okBtn);
+		centerPanelBtns.setLayout(new BorderLayout());
+		centerPanelBtns.add(btnsPanel);
 		
 		centralPanel.setLayout(new BorderLayout());
 		centralPanel.add(title, BorderLayout.NORTH);
@@ -158,11 +170,13 @@ public class PagamentoView extends AView{
 
 	@Override
 	public void onWindowResized(Dimension dim) {
-
 		infoPanel.setBorder(new EmptyBorder(dim.height/6, dim.width/7, dim.height/6,  dim.width/7));
-	
+		btnsPanel.setBorder(new EmptyBorder(0, dim.width/7, 0,  dim.width/7));
+		
 		infoPanel.revalidate();
+		btnsPanel.revalidate();
 		infoPanel.repaint();
+		btnsPanel.repaint();
 	}
 	
 	public JButton getBackBtn() {

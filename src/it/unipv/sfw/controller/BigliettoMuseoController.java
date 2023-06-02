@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
@@ -63,6 +64,12 @@ public class BigliettoMuseoController extends AController {
 					calendarDate.set(Calendar.HOUR, bview.getEnteredTime().getHour());
 					calendarDate.set(Calendar.MINUTE, bview.getEnteredTime().getMinute());
 					
+					Biglietto b = new Biglietto(bview.getEnteredEmail(), bview.getPrice(), calendarDate, Time.valueOf(bview.getEnteredTime()));
+					HashMap<Biglietto, Integer> bigliettoScelte = new HashMap<Biglietto, Integer>();
+					bigliettoScelte.put(b, (int) bview.getTotalPeople().getSelectedItem());
+					Sessione.getIstance().setCurrentBiglietto(bigliettoScelte);
+					
+					
 					DAOFactory.createIBigliettoMuseoDAO().insertBigliettiMuseo(
 							new Biglietto(
 								Sessione.getIstance().getCurrentUtente().getEmail(),
@@ -71,6 +78,7 @@ public class BigliettoMuseoController extends AController {
 								Time.valueOf(bview.getEnteredTime())),
 							(int) bview.getTotalPeople().getSelectedItem(),
 							bview.getEnteredEmail());
+					
 				}
 				catch (WrongEmailFormatException err) {
 					bview.upEmailError();

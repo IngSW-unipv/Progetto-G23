@@ -2,13 +2,8 @@ package it.unipv.sfw.model.utente;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 import it.unipv.sfw.dao.DAOFactory;
-import it.unipv.sfw.dao.IUtenteDAO;
-import it.unipv.sfw.dao.mysql.ClienteDAO;
-import it.unipv.sfw.dao.mysql.UtenteDAO;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
 import it.unipv.sfw.exceptions.AccountNotFoundException;
 import it.unipv.sfw.exceptions.EmptyFieldException;
@@ -16,6 +11,7 @@ import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
+import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.Merchandising;
@@ -38,6 +34,7 @@ public class Sessione {
 	private Pair<Merchandising, Integer> merchAdmin;
 	private Partita currentPartita;
 	private Utente currentUtente;
+	private HashMap<Biglietto, Integer> currentBiglietto;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
 
 	private Sessione() {	
@@ -47,6 +44,7 @@ public class Sessione {
 		currentPagamento = 0;
 		carrello = null;
 		scelte = new HashMap<>();
+		currentBiglietto = null;
 	}
 	
 	
@@ -141,6 +139,7 @@ public class Sessione {
 		scelte.clear();
 		carrello = null;
 		currentPartita = null;
+		currentBiglietto = null;
 	}
 
 	/**
@@ -148,6 +147,30 @@ public class Sessione {
 	 */
 	public Utente getCurrentUtente() {
 		return currentUtente;
+	}
+	
+	public Biglietto getCurrentBiglietto() {
+		Biglietto b = new Biglietto();
+		
+		for(Map.Entry<Biglietto, Integer> entry: currentBiglietto.entrySet()) {
+			b = entry.getKey();
+		}
+		
+		return b;
+	}
+	
+	public int getNBiglietti() {
+		int n = 0;
+		
+		for(Map.Entry<Biglietto, Integer> entry: currentBiglietto.entrySet()) {
+			n = entry.getValue();
+		}
+		
+		return n;
+	}
+	
+	public void setCurrentBiglietto(HashMap<Biglietto, Integer> currentBiglietto) {
+		this.currentBiglietto = currentBiglietto;
 	}
 	
 	/**

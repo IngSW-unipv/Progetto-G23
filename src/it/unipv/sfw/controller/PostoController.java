@@ -40,7 +40,7 @@ public class PostoController extends AController {
 						". Per la partita contro: " 
 						+ s.getCurrentPartita().getOspiti() + ".");
 				// Update database with booking
-				s.book();
+				//s.book();
 
 				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
 			}

@@ -1,6 +1,7 @@
 package it.unipv.sfw.pagamento;
 
 import java.io.FileInputStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -12,7 +13,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import it.unipv.sfw.controller.ControllerManager;
+import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
 
@@ -51,10 +52,36 @@ public class Email {
 		});
 	}
 	
+	public String messaggioMuseo() {
+		String messaggio = "";
+		Biglietto b = Sessione.getIstance().getCurrentBiglietto();
+		int n = Sessione.getIstance().getNBiglietti();
+		
+		String giorno = "" + (b.getData().get(Calendar.DAY_OF_MONTH) - 1) + "-" + (b.getData().get(Calendar.MONTH) + 1) + "-" + b.getData().get(Calendar.YEAR);
+		String ora = "" + b.getOra().getHours() + ":" + b.getOra().getMinutes();
+		
+		if (n == 1) messaggio += "Il pagamento del biglietto per il museo è avvenuto correttamente.\n";
+		else messaggio += "Il pagamento dei " + n + " biglietti per il museo è avvenuto correttamente.\n";
+		messaggio += "Puoi accedere il giorno " + giorno +  " alle ore " + ora + ".";
+		
+		return messaggio;
+	}
+	
 	public String messaggioPartita() {
 		String messaggio = "";
+		Sessione s = Sessione.getIstance();
+		String posto = "Settore " + s.getSettore() + ", Blocco " + s.getBlocco() + ", Anello " + s.getAnello() + ", Posto " + s.getPosto() + ".";
 		
-		messaggio += "Il pagamento per la partita " + Sessione.getIstance().getCurrentPartita().getCasa() + "-" + Sessione.getIstance().getCurrentPartita().getOspiti() + " è avvenuto nel modo corretto.";
+		messaggio += "Il pagamento per la partita " + Sessione.getIstance().getCurrentPartita().getCasa() + "-" + Sessione.getIstance().getCurrentPartita().getOspiti() + " è avvenuto nel modo corretto.\n";
+		messaggio += "Il tuo posto è: " + posto;
+		
+		return messaggio;
+	}
+	
+	public String messaggioAbbonamento() {
+		String messaggio = "";
+		
+		messaggio += "Pagamento effettuato. Nuovo livello di abbonamento: ";
 		
 		return messaggio;
 	}
@@ -81,8 +108,22 @@ public class Email {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Sessione.getIstance().getCurrentUtente().getEmail()));
-
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lreale348@gmail.com"));
+			
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lreale348@gmail,com"));
+			if(Sessione.getIstance().getCurrentPagamento() == 1) message.setSubject("Pagamento store StadiumSystem");
+			else if (Sessione.getIstance().getCurrentPagamento() == 2) message.setSubject("Pagamento biglietto museo StadiumSystem");
+			else if (Sessione.getIstance().getCurrentPagamento() == 3) message.setSubject("Pagamento biglietto partita StadiumSystem");
+			message.setContent(messaggio, "text/plain"); Transport.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendEmail(String messaggio, String destinatario) throws MessagingException{
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
 			if(Sessione.getIstance().getCurrentPagamento() == 1) message.setSubject("Pagamento store StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 2) message.setSubject("Pagamento biglietto museo StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 3) message.setSubject("Pagamento biglietto partita StadiumSystem");
