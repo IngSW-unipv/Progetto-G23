@@ -41,7 +41,7 @@ public class PartiteView extends AView {
 	private JPanel top, bottoni;
 	private JButton bmuseo, bshop;
 	private MenuUtente u;
-	private Image img2;
+	private ImageIcon img2;
 
 	// variabili del middle
 	private JPanel middle, p;
@@ -49,6 +49,7 @@ public class PartiteView extends AView {
 	private ArrayList<JLabel> partite;
 	private ArrayList<UtenteButton> acquista;
 	private ArrayList<JPanel> tabellone;
+	ArrayList<JLabel> immagini;
 	private JScrollPane pane;
 
 	public PartiteView(Partita[] par, Dimension dim) {
@@ -92,18 +93,27 @@ public class PartiteView extends AView {
 		partite = new ArrayList<JLabel>();
 		acquista = new ArrayList<UtenteButton>();
 		tabellone = new ArrayList<JPanel>();
+		immagini=new ArrayList<JLabel>();
 
 		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
 
-		img2 = new ImageIcon(this.getClass().getResource("/stemma.jpg")).getImage();
 		for (int i = 0; i < righe; i++) {
-			partite.add(new JLabel("<html> " + par[i].getOspiti() + "<br><br>" + par[i].getData()
-					+ "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <br><b<br><br></html>"));
+			partite.add(new JLabel("<html>	Inter - " + par[i].getOspiti() + "<br><br>" + par[i].getData()+"<br><br></html>"));
+			partite.get(i).setBorder(BorderFactory.createEmptyBorder(0,50,0,0));
+			
+			immagini.add(new JLabel(""));
+			img2 = new ImageIcon(this.getClass().getResource("/Stemma_"+par[i].getOspiti()+".png"));
+			img2=new ImageIcon(img2.getImage().getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH));
+			immagini.get(i).setIcon(img2);
+			immagini.get(i).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 			acquista.add(new UtenteButton("Acquista", i));
 			tabellone.add(new JPanel());
-			tabellone.get(i).add(partite.get(i));
-			tabellone.get(i).add(acquista.get(i));
-			partite.get(i).setIcon(new ImageIcon(img2));
+			tabellone.get(i).setPreferredSize(new Dimension(500,150));
+			tabellone.get(i).setLayout(new BorderLayout());
+			
+			tabellone.get(i).add(partite.get(i),BorderLayout.CENTER);
+			tabellone.get(i).add(acquista.get(i),BorderLayout.SOUTH);
+			tabellone.get(i).add(immagini.get(i),BorderLayout.EAST);
 			tabellone.get(i).setBorder(BorderFactory.createLineBorder(Color.black));
 			partite.get(i).setFont(new java.awt.Font("Arial", 1, 18));
 		}
