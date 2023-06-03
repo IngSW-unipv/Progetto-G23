@@ -75,13 +75,20 @@ public class MuseoView extends AView {
 		JPanel centralPanel = new JPanel();
 		centralPanel.setLayout(new BorderLayout());
 		
-		JLabel title = new JLabel("Museo:");
+		JPanel titlePanel = new JPanel(); 
+		titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		titlePanel.setBackground(Color.BLACK);
+		
+		JLabel title = new JLabel("MUSEO");
+		title.setForeground(Color.WHITE);
 		title.setFont(new java.awt.Font("Arial", 1, 24));
-		title.setBackground(Color.CYAN);
+		title.setBackground(Color.BLACK);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		centralPanel.add(title, BorderLayout.NORTH);
+		titlePanel.add(title);
+		
+		centralPanel.add(titlePanel, BorderLayout.NORTH);
 		
 		JPanel centralMiddlePanel = new JPanel();
 		centralMiddlePanel.setLayout(new BorderLayout());
