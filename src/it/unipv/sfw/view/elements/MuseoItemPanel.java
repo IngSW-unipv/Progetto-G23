@@ -54,7 +54,7 @@ public class MuseoItemPanel extends JPanel {
 		}
 		column_pezzo.add(descr_pezzo);
 		
-		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + r.getImgid()));
+		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/museo/" + r.getImgid()));
 		image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 180, java.awt.Image.SCALE_SMOOTH));
 		JLabel image = new JLabel();
 		image.setIcon(image_pezzo);
@@ -99,7 +99,7 @@ public class MuseoItemPanel extends JPanel {
 		}
 		column_pezzo.add(descr_pezzo);
 		
-		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/" + c.getImgid()));
+		ImageIcon image_pezzo = new ImageIcon(getClass().getResource("/museo/" + c.getImgid()));
 		image_pezzo = new ImageIcon(image_pezzo.getImage().getScaledInstance(100, 180, java.awt.Image.SCALE_SMOOTH));
 		JLabel image = new JLabel();
 		image.setIcon(image_pezzo);

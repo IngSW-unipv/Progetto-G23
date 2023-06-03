@@ -54,7 +54,7 @@ public class AdminAddOggettoController extends AController{
 	            File currentDirFile = new File(".");
 	            String helper = currentDirFile.getAbsolutePath();
 	            
-	            fileChooser.setCurrentDirectory(new File(helper+"\\img"));
+	            fileChooser.setCurrentDirectory(new File(helper+"\\img\\museo"));
 
 	            int option = fileChooser.showOpenDialog(null);
 	            if(option == JFileChooser.APPROVE_OPTION){
