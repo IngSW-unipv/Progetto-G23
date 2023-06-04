@@ -2,12 +2,12 @@ package it.unipv.sfw.pagamento;
 
 public class Carta {
 	
-	private String nome, cognome, paese, dataScadenza;
+	private String nome, cognome, dataScadenza;
 	private int nCartaCredito, CVV;
 	
 	
 	
-	public Carta(String nome, String cognome, String paese, int nCartaCredito, String dataScadenza, int CVV) {
+	public Carta(String nome, String cognome, int nCartaCredito, String dataScadenza, int CVV) {
 		this.cognome = cognome;
 		this.CVV = CVV;
 		this.nome = nome;
@@ -53,9 +53,5 @@ public class Carta {
 	
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
-	public void setPaese(String paese) {
-		this.paese = paese;
 	}
 }
