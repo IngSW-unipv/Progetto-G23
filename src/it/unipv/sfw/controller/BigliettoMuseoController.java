@@ -52,8 +52,7 @@ public class BigliettoMuseoController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
-					
+			
 					Utente.checkEmail(bview.getEnteredEmail());
 					bview.checkEnteredDate();
 					bview.checkEnteredTime();
@@ -64,7 +63,7 @@ public class BigliettoMuseoController extends AController {
 					calendarDate.set(Calendar.HOUR, bview.getEnteredTime().getHour());
 					calendarDate.set(Calendar.MINUTE, bview.getEnteredTime().getMinute());
 					
-					Biglietto b = new Biglietto(bview.getEnteredEmail(), bview.getPrice(), calendarDate, Time.valueOf(bview.getEnteredTime()));
+					Biglietto b = new Biglietto(bview.getEnteredEmail(), bview.getEnteredEmail(), bview.getPrice(), calendarDate, Time.valueOf(bview.getEnteredTime()));
 					HashMap<Biglietto, Integer> bigliettoScelte = new HashMap<Biglietto, Integer>();
 					bigliettoScelte.put(b, (int) bview.getTotalPeople().getSelectedItem());
 					Sessione.getIstance().setCurrentBiglietto(bigliettoScelte);
@@ -73,11 +72,11 @@ public class BigliettoMuseoController extends AController {
 					DAOFactory.createIBigliettoMuseoDAO().insertBigliettiMuseo(
 							new Biglietto(
 								Sessione.getIstance().getCurrentUtente().getEmail(),
+								bview.getEnteredEmail(),
 								bview.getPrice(),
 								calendarDate,
 								Time.valueOf(bview.getEnteredTime())),
-							(int) bview.getTotalPeople().getSelectedItem(),
-							bview.getEnteredEmail());
+							(int) bview.getTotalPeople().getSelectedItem());
 					
 				}
 				catch (WrongEmailFormatException err) {

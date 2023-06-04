@@ -3,9 +3,16 @@ package it.unipv.sfw.dao.mysql;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import it.unipv.sfw.dao.IBigliettoMuseoDAO;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.utente.Cliente;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.biglietto.Biglietto}. 
@@ -17,7 +24,7 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 	private static final String SCHEMA = "BIGLIETTI_MUSEO";
 	
 	@Override
-	public boolean insertBigliettiMuseo(Biglietto ticket, int numeroPersone, String emailConferma) {
+	public boolean insertBigliettiMuseo(Biglietto ticket, int numeroPersone) {
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -29,7 +36,7 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + ticket.getEmail());
-			st1.setString(2, "" + emailConferma);
+			st1.setString(2, "" + ticket.getEmailConferma());
 			st1.setInt(3, numeroPersone);
 			st1.setDate(4, new java.sql.Date(ticket.getData().getTimeInMillis()));
 			st1.setTime(5, ticket.getOra());
@@ -43,5 +50,35 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 		
 		return esito;
 	}
+	
+	@Override
+	public ArrayList<Biglietto> selectAll() {
+		
+		ArrayList<Biglietto> result = new ArrayList<>();
+		
+		Statement st1;
+		ResultSet rs1;
+		
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			st1 = conn.createStatement();
+			String query = "SELECT * FROM " + SCHEMA;
+			rs1 = st1.executeQuery(query);
+			
+			while(rs1.next()) {
+				String str = rs1.getString(4);
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
+				cal.setTime(sdf.parse(str));
+				Biglietto c = new Biglietto(rs1.getString(1), rs1.getString(2), rs1.getDouble(3)* Biglietto.prezzoMuseo , cal, rs1.getTime(5));
+				result.add(c);
+			}
+			
+			
+		} catch (Exception e){e.printStackTrace();}
+		
+		return result;
+	}
+	
 
 }

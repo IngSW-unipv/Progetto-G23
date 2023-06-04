@@ -145,8 +145,8 @@ public class BigliettoMuseoView extends AView {
 		
 		Integer[] nbiglietti = {1, 2, 3, 4};
 		numero = new JComboBox(nbiglietti);
-		numero.setSelectedIndex(0);
-		
+		numero.setSelectedIndex(1);
+	
 		numeroPanel.add(numero_label);
 		numeroPanel.add(numero);
 		
@@ -157,7 +157,7 @@ public class BigliettoMuseoView extends AView {
 		numero_label.setFont(medium_font);
 		numero_label.setOpaque(true);
 		
-		prezzotot = new JLabel("€0");
+		prezzotot = new JLabel("€15");
 		prezzotot.setFont(medium_font);
 		prezzotot.setOpaque(true);
 		

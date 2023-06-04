@@ -52,6 +52,14 @@ public class AdminMuseoController extends AController{
 			
 		});
 		
+		mview.getRegistroButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(Type.BREGISTRO);
+			}
+			
+		});
+		
 		for(PezzoMuseoButton button : mview.getRimuoviButtons()) {
 			button.addActionListener(new ActionListener() {
 				@Override

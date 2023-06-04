@@ -28,6 +28,7 @@ public class AdminMuseoView extends AView {
 	private JButton partiteButton, storeButton, utenteButton;
 	private MenuUtente utente;
 	private JButton inserisciButton;
+	private JButton registroButton;
 	private JPanel pezzimuseo;
 	private HashMap<Integer, MuseoItemPanel> pezzo = new HashMap<>();
 	private ArrayList<PezzoMuseoButton> buttons = new ArrayList<>();
@@ -50,7 +51,7 @@ public class AdminMuseoView extends AView {
 		topPanel.setBackground(Color.gray);
 		
 		JPanel topPanelButtons = new JPanel();
-		topPanelButtons.setBackground(new Color(138, 102, 66));
+		topPanelButtons.setBackground(Color.BLUE);
 		topPanelButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		
 		partiteButton = new JButton("PARTITE");
@@ -72,26 +73,41 @@ public class AdminMuseoView extends AView {
 		JPanel centralPanel = new JPanel();
 		centralPanel.setLayout(new BorderLayout());
 		
-		JLabel title = new JLabel("Controllo Museo:");
+		JPanel titlePanel = new JPanel();
+		titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		titlePanel.setBackground(Color.BLACK);
+		
+		JLabel title = new JLabel("GESTIONE MUSEO");
 		title.setFont(new java.awt.Font("Arial", 1, 24));
-		title.setBackground(new Color(138, 102, 66));
+		title.setBackground(Color.BLACK);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
+		title.setForeground(Color.WHITE);
 		
-		centralPanel.add(title, BorderLayout.NORTH);
+		titlePanel.add(title);
+		
+		centralPanel.add(titlePanel, BorderLayout.NORTH);
 		
 		JPanel centralMiddlePanel = new JPanel();
 		centralMiddlePanel.setLayout(new BorderLayout());
 		
 		JPanel bigliettoPanel = new JPanel();
+		
 		inserisciButton = new JButton("INSERISCI TROFEO O CIMELIO");
 		inserisciButton.setBackground(Color.WHITE);
 		inserisciButton.setPreferredSize(new Dimension(200, 30));
+		
+		registroButton = new JButton("REGISTRO VENDITA");
+		registroButton.setBackground(Color.WHITE);
+		registroButton.setPreferredSize(new Dimension(200, 30));
+		
 		bigliettoPanel.setPreferredSize(new Dimension(100, 40));
-		bigliettoPanel.setBackground(Color.YELLOW);
+		bigliettoPanel.setBackground(Color.BLUE);
 		bigliettoPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		bigliettoPanel.setOpaque(true);
 		bigliettoPanel.add(inserisciButton);
+		bigliettoPanel.add(registroButton);
+		
 		centralMiddlePanel.add(bigliettoPanel, BorderLayout.NORTH);
 		
 		pezzimuseo = new JPanel();
@@ -126,30 +142,6 @@ public class AdminMuseoView extends AView {
 	public ArrayList<PezzoMuseoButton> getRimuoviButtons() {
 		return buttons;
 	}
-	/*
-	public void addMuseoItemPanel(Cimelio c) {
-		//aggiungo
-		pezzo.put(c.getId(), new MuseoItemPanel(c, true));
-		pezzimuseo.add(pezzo.get(c.getId()));
-		buttons.add(pezzo.get(c.getId()).getRimuoviButton());
-		npezzi++;
-		//refresho
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi))));
-		pezzimuseo.revalidate();
-		pezzimuseo.repaint();
-	}
-	
-	public void addMuseoItemPanel(Riconoscimento r) {
-		//aggiungo
-		pezzo.put(r.getId(), new MuseoItemPanel(r, true));
-		pezzimuseo.add(pezzo.get(r.getId()));
-		buttons.add(pezzo.get(r.getId()).getRimuoviButton());
-		npezzi++;
-		//refresho
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi))));
-		pezzimuseo.revalidate();
-		pezzimuseo.repaint();
-	}*/
 	
 	public void removeMuseoItemPanel(int i) {
 		pezzimuseo.remove(pezzo.remove(i));
@@ -173,6 +165,10 @@ public class AdminMuseoView extends AView {
 		
 	public JButton getInserisciButton() {
 		return inserisciButton;
+	}
+	
+	public JButton getRegistroButton() {
+		return registroButton;
 	}
 	
 	public JMenuItem getProfiloPersonaleButton() {

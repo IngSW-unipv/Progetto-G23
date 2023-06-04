@@ -17,14 +17,17 @@ import java.util.GregorianCalendar;
 public class Biglietto {
 
 	private String email;
+	private String emailConferma;
 	private double prezzo;
+	public final static double prezzoMuseo = 15;
 	private Calendar data;
 	private Time ora;
 	
 	public Biglietto() {}
 	
-	public Biglietto(String email, double prezzo, Calendar data, Time ora) {
+	public Biglietto(String email, String emaiConferma, double prezzo, Calendar data, Time ora) {
 		this.email = email;
+		this.emailConferma = emaiConferma;
 		this.prezzo = prezzo;
 		this.data = new GregorianCalendar();
 		this.data = data;
@@ -81,5 +84,13 @@ public class Biglietto {
 
 	public void setOra(Time ora) {
 		this.ora = ora;
+	}
+
+	public String getEmailConferma() {
+		return emailConferma;
+	}
+
+	public void setEmailConferma(String emailConferma) {
+		this.emailConferma = emailConferma;
 	}
 }

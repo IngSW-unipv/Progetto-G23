@@ -58,21 +58,21 @@ public class AdminAddOggettoView extends AView {
 		JLabel blue_label_up = new JLabel();
 		blue_label_up.setLayout(new BorderLayout());
 		blue_label_up.setPreferredSize(new Dimension(100,100));
-		blue_label_up.setBackground(Color.YELLOW);
+		blue_label_up.setBackground(Color.BLUE);
 		blue_label_up.setOpaque(true);
 		blue_label_up.setHorizontalAlignment(JLabel.CENTER);
 		
 		ImageIcon backpage = new ImageIcon(getClass().getResource("/backpage1.png"));
 		backpage = new ImageIcon(backpage.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
 		backButton = new JButton("", backpage);
-		backButton.setBackground(Color.YELLOW);
+		backButton.setBackground(Color.BLUE);
 		backButton.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		
 		JLabel title = new JLabel("  PAGINA DI INSERIMENTO:");
 		title.setPreferredSize(new Dimension(200, 50));
 		title.setFont(title_font);
-		title.setBackground(Color.YELLOW);
+		title.setBackground(Color.BLUE);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -186,8 +186,8 @@ public class AdminAddOggettoView extends AView {
 		containerDescription.add(selectImagePanel);
 		
 		// 3
-		JPanel annoContenitore = new JPanel();
-		annoContenitore.setLayout(new GridLayout(1, 2, 200, 0));
+		JPanel lastRowContainer = new JPanel();
+		lastRowContainer.setLayout(new GridLayout(1, 2, 200, 0));
 		
 		//3.1
 		JPanel annoPanel = new JPanel();
@@ -212,13 +212,13 @@ public class AdminAddOggettoView extends AView {
 		aggiungiButton.setBackground(Color.WHITE);
 		aggiungiButton.setPreferredSize(new Dimension(200, 50));
 		
-		annoContenitore.add(annoPanel);
-		annoContenitore.add(aggiungiButton);
+		lastRowContainer.add(annoPanel);
+		lastRowContainer.add(aggiungiButton);
 		
 		
 		centralContainer.add(selectPanel);
 		centralContainer.add(containerDescription);
-		centralContainer.add(annoContenitore);
+		centralContainer.add(lastRowContainer);
 		
 		this.add(blue_label_up, BorderLayout.NORTH);
 		this.add(centralContainer, BorderLayout.CENTER);

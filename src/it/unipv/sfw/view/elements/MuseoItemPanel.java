@@ -30,7 +30,7 @@ public class MuseoItemPanel extends JPanel {
 		descr_pezzo.setLineWrap(true);
 		descr_pezzo.setWrapStyleWord(true);
 		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 15));
-		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:(Max 100 parole)"));
+		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(r.getDescrizione());
 		
@@ -75,7 +75,7 @@ public class MuseoItemPanel extends JPanel {
 		descr_pezzo.setLineWrap(true);
 		descr_pezzo.setWrapStyleWord(true);
 		descr_pezzo.setFont(new java.awt.Font("Arial", 1, 15));
-		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:(Max 100 parole)"));
+		descr_pezzo.setBorder(BorderFactory.createTitledBorder("Descrizione:"));
 		descr_pezzo.setOpaque(false);
 		descr_pezzo.setText(c.getDescrizione());
 		
