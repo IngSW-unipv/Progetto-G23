@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.time.Instant;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -23,7 +26,11 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 import it.unipv.sfw.view.elements.MenuUtente;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 
 /**
@@ -49,9 +56,10 @@ public class PartiteView extends AView {
 	private ArrayList<JLabel> partite;
 	private ArrayList<UtenteButton> acquista;
 	private ArrayList<JPanel> tabellone;
-	ArrayList<JLabel> immagini;
+	private ArrayList<JLabel> immagini;
 	private JScrollPane pane;
 
+	@SuppressWarnings("deprecation")
 	public PartiteView(Partita[] par, Dimension dim) {
 
 		righe = par.length;
@@ -59,7 +67,6 @@ public class PartiteView extends AView {
 		bottoni = new JPanel();
 		u=new MenuUtente();
 
-		
 		bmuseo = new JButton("MUSEO");
 		bmuseo.setBackground(Color.WHITE);
 		bmuseo.setFont(new java.awt.Font("Arial", 1, 18));
@@ -96,10 +103,14 @@ public class PartiteView extends AView {
 		immagini=new ArrayList<JLabel>();
 
 		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
+		Calendar d=new GregorianCalendar();
+		
 
 		for (int i = 0; i < righe; i++) {
+			d=par[i].getCalendarDate();
 			partite.add(new JLabel("<html>	Inter - " + par[i].getOspiti() + "<br><br>" + par[i].getData()+"<br><br></html>"));
 			partite.get(i).setBorder(BorderFactory.createEmptyBorder(0,50,0,0));
+			
 			
 			immagini.add(new JLabel(""));
 			img2 = new ImageIcon(this.getClass().getResource("/Stemma_"+par[i].getOspiti()+".png"));
@@ -107,18 +118,23 @@ public class PartiteView extends AView {
 			immagini.get(i).setIcon(img2);
 			immagini.get(i).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 			acquista.add(new UtenteButton("Acquista", i));
+			
+			
 			tabellone.add(new JPanel());
 			tabellone.get(i).setPreferredSize(new Dimension(500,150));
 			tabellone.get(i).setLayout(new BorderLayout());
 			
 			tabellone.get(i).add(partite.get(i),BorderLayout.CENTER);
 			tabellone.get(i).add(acquista.get(i),BorderLayout.SOUTH);
-			tabellone.get(i).add(immagini.get(i),BorderLayout.EAST);
+			tabellone.get(i).add(immagini.get(i),BorderLayout.WEST);
 			tabellone.get(i).setBorder(BorderFactory.createLineBorder(Color.black));
 			partite.get(i).setFont(new java.awt.Font("Arial", 1, 18));
+			if(d.getTime().before(Calendar.getInstance().getTime())) {
+				acquista.get(i).setEnabled(false);
+			}
 		}
 		
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150*righe)));
+		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175*righe)));
 
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 
@@ -158,7 +174,7 @@ public class PartiteView extends AView {
 	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));		
+		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175 * righe)));		
 		p.revalidate();
 		p.repaint();	
 	}
