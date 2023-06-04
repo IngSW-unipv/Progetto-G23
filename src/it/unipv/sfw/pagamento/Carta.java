@@ -2,16 +2,17 @@ package it.unipv.sfw.pagamento;
 
 public class Carta {
 	
-	private String nome, cognome, dataScadenza;
-	private int nCartaCredito, CVV;
+	private String nome, cognome;
+	private int nCartaCredito, CVV, meseScadenza, annoScadenza;
 	
 	
 	
-	public Carta(String nome, String cognome, int nCartaCredito, String dataScadenza, int CVV) {
+	public Carta(String nome, String cognome, int nCartaCredito, int meseScadenza, int annoScadenza, int CVV) {
 		this.cognome = cognome;
 		this.CVV = CVV;
 		this.nome = nome;
-		this.dataScadenza = dataScadenza;
+		this.meseScadenza = meseScadenza;
+		this.annoScadenza = annoScadenza;
 		this.nCartaCredito = nCartaCredito;
 	}
 	
@@ -21,10 +22,6 @@ public class Carta {
 	
 	public int getCVV() {
 		return CVV;
-	}
-	
-	public String getDataScadenza() {
-		return dataScadenza;
 	}
 	
 	public int getnCartaCredito() {
@@ -43,15 +40,27 @@ public class Carta {
 		CVV = cVV;
 	}
 	
-	public void setDataScadenza(String dataScadenza) {
-		this.dataScadenza = dataScadenza;
-	}
-	
 	public void setnCartaCredito(int nCartaCredito) {
 		this.nCartaCredito = nCartaCredito;
 	}
 	
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public int getAnnoScadenza() {
+		return annoScadenza;
+	}
+	
+	public int getMeseScadenza() {
+		return meseScadenza;
+	}
+	
+	public void setAnnoScadenza(int annoScadenza) {
+		this.annoScadenza = annoScadenza;
+	}
+	
+	public void setMeseScadenza(int meseScadenza) {
+		this.meseScadenza = meseScadenza;
 	}
 }

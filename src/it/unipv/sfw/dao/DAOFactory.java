@@ -4,6 +4,7 @@ import it.unipv.sfw.dao.mysql.AbbonamentoDAO;
 import it.unipv.sfw.dao.mysql.AcquistiStoreDAO;
 import it.unipv.sfw.dao.mysql.AdminDAO;
 import it.unipv.sfw.dao.mysql.BigliettoMuseoDAO;
+import it.unipv.sfw.dao.mysql.CartaPagamentoDAO;
 import it.unipv.sfw.dao.mysql.CimelioDAO;
 import it.unipv.sfw.dao.mysql.ClienteDAO;
 import it.unipv.sfw.dao.mysql.PartitaDAO;
@@ -77,6 +78,18 @@ public class DAOFactory {
 	public static IBigliettoMuseoDAO createIBigliettoMuseoDAO() {
 		switch (instance.dbType) {
 			case MYSQL: return new BigliettoMuseoDAO();
+		}
+		throw new RuntimeException("Instanza DAOFactory non inizializzata.");
+	}
+	
+	/**
+	 * Metodo che crea il DAO relativo ai biglietti del museo.
+	 * @throws Lancia una RuntimeException nel caso in cui l'istanza di DAOFactory non sia stata inizializzata.
+	 * @return Un'istanza di CartaPagamentoDAO.
+	 */
+	public static ICartaPagamentoDAO createICartaPagamentoDAO() {
+		switch (instance.dbType) {
+			case MYSQL: return new CartaPagamentoDAO();
 		}
 		throw new RuntimeException("Instanza DAOFactory non inizializzata.");
 	}
