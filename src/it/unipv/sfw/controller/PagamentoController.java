@@ -3,10 +3,14 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 
 import javax.mail.MessagingException;
 
+import it.unipv.sfw.dao.DAOFactory;
+import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.pagamento.Carta;
 import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
 
@@ -44,11 +48,12 @@ public class PagamentoController extends AController{
 				} catch (MessagingException e1) {
 					e1.printStackTrace();
 				}
-				Sessione.getIstance().resetScelte();
+				
+				if (v.getsalvaCB().isSelected()) DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0));
 				ControllerManager.getInstance().loadController(Type.PARTITE);
 			}
 		});
-		
+		Sessione.getIstance().resetScelte();
 		view = v;
 	}
 	
