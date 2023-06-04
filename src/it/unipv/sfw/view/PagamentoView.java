@@ -35,7 +35,9 @@ public class PagamentoView extends AView{
 	private Carta carta;
 	private JPanel infoPanel, btnsPanel;
 	private JButton backBtn, okBtn;
-	
+	private JCheckBox salvaCb;
+	private JTextField nomeTxt, cognomeTxt, nCartaTxt, cvvTxt;
+	private JComboBox <Integer> meseOp, annoOp;
 	
 	public PagamentoView(Dimension dim) {
 		// Fonts
@@ -103,13 +105,13 @@ public class PagamentoView extends AView{
 		}
 		yearToChoose[5] = ANNO;
 		
-		JTextField nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
-		JTextField cognomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
-		JTextField nCartaTxt = new JTextField();
-		JTextField cvvTxt = new JTextField();
-		JComboBox <Integer> meseOp = new JComboBox<>(monthToChoose);
-		JComboBox <Integer> annoOp = new JComboBox<>(yearToChoose);
-		JCheckBox salvaCb = new JCheckBox("Salva metodo di pagamento");
+		nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
+		cognomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
+		nCartaTxt = new JTextField();
+		cvvTxt = new JTextField();
+		meseOp = new JComboBox<>(monthToChoose);
+		annoOp = new JComboBox<>(yearToChoose);
+		salvaCb = new JCheckBox("Salva metodo di pagamento");
 		okBtn = new JButton("Conferma");
 		if(Sessione.getIstance().getCurrentPagamento() == 1) backBtn = new JButton("Carrello");
 		else if (Sessione.getIstance().getCurrentPagamento() == 2) backBtn = new JButton("Museo");
@@ -185,5 +187,33 @@ public class PagamentoView extends AView{
 	
 	public JButton getOkBtn() {
 		return okBtn;
+	}
+	
+	public JCheckBox getsalvaCB() {
+		return salvaCb;
+	}
+	
+	public String getNome() {
+		return nomeTxt.getText();
+	}
+	
+	public String getCognome() {
+		return cognomeTxt.getText();
+	}
+	
+	public int getNCarta() {
+		return Integer.parseInt(nCartaTxt.getText());
+	}
+	
+	public int getCvv() {
+		return Integer.parseInt(cvvTxt.getText());
+	}
+	
+	public int getMese() {
+		return (int) meseOp.getSelectedItem();
+	}
+	
+	public int getAnno() {
+		return (int) annoOp.getSelectedItem();
 	}
 }
