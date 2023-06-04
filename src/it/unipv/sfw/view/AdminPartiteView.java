@@ -6,7 +6,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -30,7 +32,7 @@ private int righe;
 	private JPanel top, bottoni;
 	private JButton bmuseo, bshop;
 	private MenuUtente u;
-	private Image img2;
+	private ImageIcon img2;
 
 	// variabili del middle
 	private JPanel middle, p;
@@ -38,9 +40,10 @@ private int righe;
 	private ArrayList<JLabel> partite;
 	private ArrayList<JMenuBar> i;
 	private ArrayList<InfoMenu>info;
-	ArrayList<JLabel>infoPartita;
+	private ArrayList<JLabel>infoPartita;
 	private ArrayList<JPanel> tabellone;
 	private JScrollPane pane;
+	private ArrayList<JLabel> immagini;
 
 	public AdminPartiteView(Partita[] par, Dimension dim) {
 
@@ -83,29 +86,45 @@ private int righe;
 		info=new ArrayList<InfoMenu>();
 		tabellone = new ArrayList<JPanel>();
 		infoPartita=new ArrayList<JLabel>();
-
+		immagini=new ArrayList<JLabel>();
 		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
+		Calendar d=new GregorianCalendar();
+		ArrayList<JPanel> bottone=new ArrayList<JPanel>();
 
-		img2 = new ImageIcon(this.getClass().getResource("/stemma.jpg")).getImage();
+		
 		for (int j = 0; j < righe; j++) {
-			partite.add(new JLabel("<html> " + par[j].getOspiti() + "<br><br>" + par[j].getData()
-					+ "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <br><b<br><br></html>"));
+			d=par[j].getCalendarDate();
+			partite.add(new JLabel("<html> " + par[j].getOspiti() + "<br><br>" + par[j].getData()+"<br><br></html>"));
 			i.add(new JMenuBar());
 			info.add(new InfoMenu("informazioni",j));
 			infoPartita.add(new JLabel(""));
+			immagini.add(new JLabel(""));
+			img2 = new ImageIcon(this.getClass().getResource("/Stemma_"+par[j].getOspiti()+".png"));
+			img2=new ImageIcon(img2.getImage().getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH));
+			immagini.get(j).setIcon(img2);
 			
+			
+			immagini.get(j).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 			info.get(j).add(infoPartita.get(j));
 			i.get(j).add(info.get(j));
+			bottone.add(new JPanel());
+			bottone.get(j).add(i.get(j));
+			
 			tabellone.add(new JPanel());
-			tabellone.get(j).add(partite.get(j));
-			tabellone.get(j).add(i.get(j)); 
-			partite.get(j).setIcon(new ImageIcon(img2));
+			tabellone.get(j).setPreferredSize(new Dimension(500,150));
+			tabellone.get(j).setLayout(new BorderLayout());
+			
+			tabellone.get(j).add(partite.get(j),BorderLayout.CENTER);
+			tabellone.get(j).add(bottone.get(j),BorderLayout.EAST);
+			tabellone.get(j).add(immagini.get(j),BorderLayout.WEST);
 			tabellone.get(j).setBorder(BorderFactory.createLineBorder(Color.black));
 			partite.get(j).setFont(new java.awt.Font("Arial", 1, 18));
+			if(d.getTime().after(Calendar.getInstance().getTime())) {
+				i.get(j).setEnabled(false);
+			}
 		}
 
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150*righe)));
-
+		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175*righe)));
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 
 		for (JPanel t : tabellone) {
@@ -147,7 +166,7 @@ private int righe;
 	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));		
+		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175 * righe)));		
 		p.revalidate();
 		p.repaint();	
 	}
