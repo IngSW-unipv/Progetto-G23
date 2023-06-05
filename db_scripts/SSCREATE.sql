@@ -7,14 +7,14 @@ create table UTENTI (
 		EMAIL CHAR(255) PRIMARY KEY,
         NOME CHAR(255),
         COGNOME CHAR(255),
-        PASS CHAR(255),
+        PASS CHAR(255),			-- temp
         TIPO ENUM('ADMIN', 'CLIENTE'),
         NASCITA DATE
 );
 
 create table ABBONAMENTI (
 		EMAIL CHAR(255) PRIMARY KEY,
-        GRADO ENUM('1', '2', '3'),
+        GRADO ENUM('1', '2'),		-- temp
         FOREIGN KEY (EMAIL) REFERENCES UTENTI(EMAIL) ON UPDATE CASCADE ON DELETE CASCADE
 );
 

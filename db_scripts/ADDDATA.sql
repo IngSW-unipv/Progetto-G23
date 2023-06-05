@@ -31,9 +31,13 @@ values
     
 insert into museo_items(nome, anno, descrizione, nome_img)
 values
-	('Coppa', 2022, "Coppa vinta dall'inter che prevede la partecipazione di 20 squadre di Serie A, 20 di Serie B, 29 di Serie C e 29 di Serie D", "coppaitalia"),
-    ('Coppa', 2010, "Coppa che prevede innanzitutto la partecipazione di 20 squadre di Serie A, 20 di Serie B, 29 di Serie C e 29 di Serie D, grazie anche a questo trofeo l'inter fece il Triplete", "coppaitalia"),
-    ('Coppa', 2022, "La Supercoppa mette annualmente di fronte il club campione d'Italia e quello vincitore della Coppa Italia", "supercoppa"),
-    ('Coppa', 2010, "La Supercoppa mette annualmente di fronte il club campione d'Italia e quello vincitore della Coppa Italia,grazie anche a questo trofeo l'inter fece il Triplete", "supercoppa"),
-    ('Trofeo', 2021, "La Supercoppa mette annualmente di fronte il club campione d'Italia e quello vincitore della Coppa Italia", "scudetto"),
-    ('Trofeo', 2010, "Trofeo che attesta la vittoria del campionato utenti,grazie anche a questo trofeo l'inter fece il Triplete", "scudetto");
+	('Fotografia', 1997, "Foto di Ronaldo Luis Nazario da Lima o megli conosciuto come Ronaldo 'il feonomeno' nel 1997, anno in cui vinse il pallone d'oro. In quella stagione (1997-98) il brasiliano era insindacabilmente il calciatore più forte al mondo.", "ronaldoPalloneDOro.jpg"),
+	('Maglia', 2010, "Maglia indossata da Diego Milito durante la finale di Champions League in cui andò a segno con una  doppietta che permise di conquistare la coppa dall grandi orecchie, la terza nella storia del club. Sul retro è riportata la firma dello stesso Diego Milito.", "magliettaMilito.png"),
+	('Champions_League', 2010, "La coppa dalle grandi orecchie conquistata dalla formazione leggendaria del 2010 contro il Bayern Monaco a Madrid. La terza e per ora piu recente della stora del club.", "champions.png"),
+    ('Coppa_Del_Mondo_Per_Club', 2010, "Coppa del mondo per club vinta nell''anno storico del triplete, prima ed unica squadra italiana ad aver conseguito questo successo sportivo.", "coppaclub.png"),
+    ('Coppa_Italia', 2022, "Coppa vinta dall'inter che prevede la partecipazione di 20 squadre di Serie A, 20 di Serie B, 29 di Serie C e 29 di Serie D", "coppaitalia.png"),
+    ('Coppa_Italia', 2010, "Coppa che prevede innanzitutto la partecipazione di 20 squadre di Serie A, 20 di Serie B, 29 di Serie C e 29 di Serie D, grazie anche a questo trofeo l'inter fece il Triplete", "coppaitalia.png"),
+    ('Supercoppa_Italiana', 2022, "La Supercoppa mette annualmente di fronte il club campione d'Italia e quello vincitore della Coppa Italia", "supercoppa.png"),
+    ('Supercoppa_Italiana', 2010, "La Supercoppa mette annualmente di fronte il club campione d'Italia e quello vincitore della Coppa Italia,grazie anche a questo trofeo l'inter fece il Triplete", "supercoppa.png"),
+    ('SerieA', 2021, "Trofeo che attesta la vittoria del campionato utenti", "scudetto.png"),
+    ('SerieA', 2010, "Trofeo che attesta la vittoria del campionato utenti,grazie anche a questo trofeo l'inter fece il Triplete", "scudetto.png");
