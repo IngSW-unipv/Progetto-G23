@@ -31,7 +31,13 @@ public interface IPostoDAO {
 	/**
 	 * @return Un array che contiene tutti i posti occupati per ciascuna partita.
 	 */
-	ArrayList<Posto> selectAllOrderBydata();
+	public ArrayList<Posto> selectAllOrderBydata();
+	
+	/**
+	 * @return Un array che contiene tutti i posti occupati per la partita selezionata.
+	 * @param dataPartita
+	 */
+	public ArrayList<Posto> selectByData(Calendar dataPartita);
 	
 	/**
 	 * @param email Email identificativa del cliente di cui si vuole sapere il numero di biglietti acquistati.

@@ -1,50 +1,42 @@
 package it.unipv.sfw.model.partita;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import it.unipv.sfw.dao.DAOFactory;
 
 /**
  * Classe che rappresenta lo stadio accessibile al {@link it.unipv.sfw.model.utente.Cliente}.
- * @author Lorenzo Reale
+ * @author Lorenzo Reale, Gabriele Invernizzi
  * @see it.unipv.sfw.model.utente.Cliente
  */
 public class Stadio {
 
 	private ArrayList<Posto> posti;
-	private boolean libero;
 
-	public Stadio() {
-		libero = true;
-		posti = new ArrayList<Posto>();
+	public Stadio(Calendar dataPartita) {
+		posti = DAOFactory.createIPostoDAO().selectByData(dataPartita);
 	}
 
-	/**
-	 * Funzione utilizzata per segnalare che lo stadio è pieno.
-	 * @param lib False se è pieno, altrimenti true.
-	 */
-	public void setLibero(boolean lib) {
-		libero = lib;
-	}
 
 	/**
-	 * @return False se lo stadio è occupato, altrimenti true.
+	 * Controlla se un posto è libero.
+	 * @param settore
+	 * @param anello
+	 * @param blocco
+	 * @param posto
+	 * @return true se è libero, falso altrimenti.
 	 */
-	public boolean getLibero() {
-		return libero;
-	}
-
-	/**
-	 * Funzione utilizzata per settare lo stadio occupato se non ci sono più settori liberi.
-	 */
-	public void checkLibero() {
-		int lib = 0;
-
-		for (int i = 0; i < posti.size(); i++) {
-			if (posti.get(i).getLibero() == true)
-				lib++;
-		}
-
-		if (lib == 0)
-			libero = false;
+	public boolean isLibero(int settore, int anello, int blocco, int posto) {	
+		return !posti.stream()
+			.filter(p -> {
+				return p.getNSettore() == settore &&
+						p.getNAnello() == anello &&
+						p.getNBlocco() == blocco &&
+						p.getNPosto() == posto;
+			})
+			.findAny()
+			.isPresent();
 	}
 
 }

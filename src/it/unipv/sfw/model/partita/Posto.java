@@ -74,5 +74,4 @@ public class Posto {
 	public int getNSettore() {
 		return nSettore;
 	}
-	
 }

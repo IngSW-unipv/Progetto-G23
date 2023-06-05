@@ -110,6 +110,7 @@ public class PostoDAO implements IPostoDAO {
 		return result;
 	}
 
+	@Override
 	public ArrayList<Posto> selectByData(Calendar dataPartita) {
 		
 		ArrayList<Posto> result = new ArrayList<>();
