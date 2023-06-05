@@ -59,7 +59,6 @@ public class PartiteView extends AView {
 	private ArrayList<JLabel> immagini;
 	private JScrollPane pane;
 
-	@SuppressWarnings("deprecation")
 	public PartiteView(Partita[] par, Dimension dim) {
 
 		righe = par.length;
@@ -118,6 +117,7 @@ public class PartiteView extends AView {
 			immagini.get(i).setIcon(img2);
 			immagini.get(i).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 			acquista.add(new UtenteButton("Acquista", i));
+			acquista.get(i).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 			
 			
 			tabellone.add(new JPanel());
