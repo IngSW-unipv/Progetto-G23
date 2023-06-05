@@ -2,7 +2,6 @@ package it.unipv.sfw.model.utente;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.function.Predicate;
 
 import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
@@ -20,12 +19,10 @@ import it.unipv.sfw.model.abbonamento.TipoAbb;
 public class Cliente extends Utente {
 	private Calendar dataNascita;
 	private Abbonamento abb;
-	private boolean isGiornalista;
 
 	public Cliente(String nome, String cognome, String email, String pass, Calendar dataNascita) {
 		super(nome, cognome, email, pass);
 		this.abb = null;
-		isGiornalista = false;
 		this.dataNascita = dataNascita;
 	}
 	
@@ -69,13 +66,6 @@ public class Cliente extends Utente {
 		} else {
 			return false;
 		}
-	}
-	
-	/**
-	 * Funzione che cambia il tipo di utente a giornalista.
-	 */
-	public void setTypeToGiornalista() {
-		isGiornalista = true;
 	}
 
 	/** 
@@ -135,7 +125,7 @@ public class Cliente extends Utente {
 
 	@Override
 	public Type getType() {
-		return isGiornalista ? Utente.Type.GIORNALISTA : Utente.Type.CLIENTE;
+		return Utente.Type.CLIENTE;
 	}
 	
 	/**
