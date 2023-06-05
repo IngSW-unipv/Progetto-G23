@@ -37,7 +37,7 @@ public class PartitaDAO implements IPartitaDAO {
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss", Locale.ITALY);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 			st1 = conn.createStatement();
 			String query = "SELECT * FROM " + SCHEMA;
 			rs1 = st1.executeQuery(query);

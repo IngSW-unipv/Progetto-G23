@@ -56,7 +56,7 @@ public class Partita {
 	 * @return La data della partita.
 	 */
 	public String getData() {
-		SimpleDateFormat formattedDate = new SimpleDateFormat("dd / MMM / YYYY - hh:mm");
+		SimpleDateFormat formattedDate = new SimpleDateFormat("dd / MMM / yyyy - HH:mm");
 		return formattedDate.format(dataPartita.getTime());
 	}
 
