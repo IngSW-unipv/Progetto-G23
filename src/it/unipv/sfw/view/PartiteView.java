@@ -69,7 +69,7 @@ public class PartiteView extends AView {
 		bmuseo = new JButton("MUSEO");
 		bmuseo.setBackground(Color.WHITE);
 		bmuseo.setFont(new java.awt.Font("Arial", 1, 18));
-		bshop = new JButton("SHOP");
+		bshop = new JButton("STORE");
 		bshop.setBackground(Color.WHITE);
 		bshop.setFont(new java.awt.Font("Arial", 1, 18));
 
@@ -91,17 +91,24 @@ public class PartiteView extends AView {
 
 		p = new JPanel();
 
-		titolo = new JLabel("Elenco Partite:");
+		JPanel titlePanel = new JPanel(); 
+		titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		titlePanel.setBackground(Color.BLACK);
+		
+		titolo = new JLabel("PARTITE");
+		titolo.setForeground(Color.WHITE);
 		titolo.setFont(new java.awt.Font("Arial", 1, 24));
-		titolo.setBackground(Color.CYAN);
+		titolo.setBackground(Color.BLACK);
 		titolo.setOpaque(true);
+		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		titlePanel.add(titolo);
 
 		partite = new ArrayList<JLabel>();
 		acquista = new ArrayList<UtenteButton>();
 		tabellone = new ArrayList<JPanel>();
 		immagini=new ArrayList<JLabel>();
 
-		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
 		Calendar d=new GregorianCalendar();
 		
 
@@ -147,7 +154,7 @@ public class PartiteView extends AView {
 		pane.getVerticalScrollBar().setUnitIncrement(10);
 
 		middle.setLayout(new BorderLayout());
-		middle.add(titolo, BorderLayout.NORTH);
+		middle.add(titlePanel, BorderLayout.NORTH);
 		middle.add(pane, BorderLayout.CENTER);
 
 		this.setLayout(new BorderLayout());

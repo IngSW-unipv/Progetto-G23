@@ -61,7 +61,7 @@ public class MuseoView extends AView {
 		partiteButton.setBackground(Color.WHITE);
 		partiteButton.setFont(new java.awt.Font("Arial", 1, 18));
 		
-		storeButton = new JButton("SHOP");
+		storeButton = new JButton("STORE");
 		storeButton.setBackground(Color.WHITE);
 		storeButton.setFont(new java.awt.Font("Arial", 1, 18));
 		
