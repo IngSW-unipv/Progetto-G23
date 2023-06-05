@@ -71,12 +71,10 @@ public class Sessione {
 		Utente c = DAOFactory.createIUtenteDAO().selectByEmail(email);
 		
 		String strPass = new String(pass);
-		
 		if (c == null)
 			throw new AccountNotFoundException(email);
 		if (!c.getPassword().equals(strPass))
 			throw new WrongPasswordException(email);
-		
 		this.setCurrentUtente(c);
 	}
 	

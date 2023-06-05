@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import it.unipv.sfw.exceptions.AccountNotFoundException;
+import it.unipv.sfw.exceptions.EmptyFieldException;
+import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
@@ -64,18 +66,17 @@ public class LoginController extends AController {
 		LoginView v = (LoginView)view;
 		
 		// Try to login into session
+		
 		try {
 			Sessione.getIstance().login(
-					v.getUsernameField().getText(),
+					v.getUsernameField().getText(), 
 					v.getPasswordField().getPassword()
 			);
-		} catch (AccountNotFoundException err) {
-			v.upError();
-			return;
-		} catch (WrongPasswordException err) {
+		} catch (WrongPasswordException | AccountNotFoundException err) {
 			v.upError();
 			return;
 		}
+		
 		
 		if (Sessione.getIstance().getCurrentUtente().getType() == Utente.Type.ADMIN) {
 			ControllerManager.getInstance().loadController(Type.APARTITE);

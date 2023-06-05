@@ -104,16 +104,17 @@ public class UtenteDAO implements IUtenteDAO {
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			rs1 = st1.executeQuery();
-			rs1.next();
-			String tipo = rs1.getString(5);
-			if(tipo.equals("" + Type.ADMIN)) {
-				result = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
-			} else if(tipo.equals("" + Type.CLIENTE) || tipo.equals("" + Type.GIORNALISTA)) {
-				String str = rs1.getString(6);
-				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
-				cal.setTime(sdf.parse(str));
-				result = new Cliente (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), cal);
+			if (rs1.next()) {
+				String tipo = rs1.getString(5);
+				if (tipo.equals("" + Type.ADMIN)) {
+					result = new Admin(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
+				} else if (tipo.equals("" + Type.CLIENTE) || tipo.equals("" + Type.GIORNALISTA)) {
+					String str = rs1.getString(6);
+					Calendar cal = Calendar.getInstance();
+					SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
+					cal.setTime(sdf.parse(str));
+					result = new Cliente(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), cal);
+				}
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
