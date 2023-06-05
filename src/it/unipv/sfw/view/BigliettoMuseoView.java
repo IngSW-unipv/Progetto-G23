@@ -9,8 +9,6 @@ import java.awt.GridLayout;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Year;
-import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -20,12 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.xml.crypto.Data;
 
-import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.DateTimePicker;
 import com.github.lgooddatepicker.components.TimePickerSettings;
@@ -33,6 +27,8 @@ import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 
 import it.unipv.sfw.exceptions.EmptyDateException;
 import it.unipv.sfw.exceptions.EmptyTimeException;
+import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.utente.Sessione;
 
 
 public class BigliettoMuseoView extends AView {
@@ -64,7 +60,7 @@ public class BigliettoMuseoView extends AView {
 	
 		
 		contenitore = new JPanel();
-		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
+		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 0));
 		contenitore.setAlignmentY(LEFT_ALIGNMENT);
 		
 		JPanel emailPanel = new JPanel();
@@ -74,6 +70,7 @@ public class BigliettoMuseoView extends AView {
 		email_label.setFont(medium_font);
 		email_label.setOpaque(true);
 		email_box = new JTextField();
+		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		emailError = new JPanel();
 		emailError.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JLabel e_error = new JLabel("Formato email inserito non valido!");
@@ -145,7 +142,7 @@ public class BigliettoMuseoView extends AView {
 		
 		Integer[] nbiglietti = {1, 2, 3, 4};
 		numero = new JComboBox(nbiglietti);
-		numero.setSelectedIndex(1);
+		numero.setSelectedIndex(0);
 	
 		numeroPanel.add(numero_label);
 		numeroPanel.add(numero);
@@ -157,7 +154,7 @@ public class BigliettoMuseoView extends AView {
 		numero_label.setFont(medium_font);
 		numero_label.setOpaque(true);
 		
-		prezzotot = new JLabel("€15");
+		prezzotot = new JLabel();
 		prezzotot.setFont(medium_font);
 		prezzotot.setOpaque(true);
 		
@@ -236,10 +233,10 @@ public class BigliettoMuseoView extends AView {
 	public void upEmailError() {
 		emailError.setVisible(true);
 		dataError.setVisible(false);
-		email_box.setText("");
+		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		numero.setSelectedIndex(0);
-		setPrice(0);
+		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
 		contenitore.repaint();
 	}
 	
@@ -247,10 +244,10 @@ public class BigliettoMuseoView extends AView {
 		d_error.setText("Data non inserita!");
 		dataError.setVisible(true);
 		emailError.setVisible(false);
-		email_box.setText("");
+		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		numero.setSelectedIndex(0);
-		setPrice(0);
+		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
 		contenitore.repaint();
 	}
 	
@@ -258,12 +255,25 @@ public class BigliettoMuseoView extends AView {
 		d_error.setText("Ora non inserita!");
 		dataError.setVisible(true);
 		emailError.setVisible(false);
-		email_box.setText("");
+		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		numero.setSelectedIndex(0);
-		setPrice(0);
+		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
 		contenitore.repaint();
 	}
+	
+	public void upDayError() {
+		d_error.setText("Hai gia acquistato un biglietto per il giorno selezionato!");
+		dataError.setVisible(true);
+		emailError.setVisible(false);
+		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
+		chDate.setDateTimeStrict(null);
+		numero.setSelectedIndex(0);
+		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
+		contenitore.repaint();
+	}
+	
+	
 	
 	public JButton getAcquistaButton() {
 		return acquistaButton;
@@ -324,12 +334,12 @@ public class BigliettoMuseoView extends AView {
 	
 	@Override
 	public void onLoad() {
-		email_box.setText("");
+		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		dataError.setVisible(false);
 		emailError.setVisible(false);
 		numero.setSelectedIndex(0);
-		setPrice(0);
+		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
 	}
 
 }

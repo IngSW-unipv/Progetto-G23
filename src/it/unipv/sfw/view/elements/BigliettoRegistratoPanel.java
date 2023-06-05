@@ -15,8 +15,8 @@ public class BigliettoRegistratoPanel extends JPanel {
 	public BigliettoRegistratoPanel(Biglietto b) {
 		
 		JPanel tabelPanel = new JPanel();
-		tabelPanel.setLayout(new GridLayout(2, 2));
-		tabelPanel.setPreferredSize(new Dimension(500, 200));
+		tabelPanel.setLayout(new GridLayout(2, 2, 0, 5));
+		tabelPanel.setPreferredSize(new Dimension(500, 70));
 		
 		//1.1
 		JPanel emailUtentePanel = new JPanel();
@@ -27,24 +27,24 @@ public class BigliettoRegistratoPanel extends JPanel {
 		
 		emailUtentePanel.add(email1_label);
 		emailUtentePanel.add(emailUtente1);
-		//1.2
-		JPanel vuoto = new JPanel();
 		
-		//2.1
+		//1.2
 		JPanel emailBigliettoPanel = new JPanel();
 		emailBigliettoPanel.setLayout(new GridLayout(2, 1));
-		
+				
 		JLabel email2_label = new JLabel("Email di ricezione conferma: ");
 		JLabel emailUtente2 = new JLabel(b.getEmailConferma());
-		
+			
 		emailBigliettoPanel.add(email2_label);
 		emailBigliettoPanel.add(emailUtente2);
 		
+		//2.1
+		//vuoto
+		
 		//2.2
-		JLabel ricavoSingolo = new JLabel("Ricavo vendita: " + b.getPrezzo());
+		JLabel ricavoSingolo = new JLabel("Ricavo vendita: €" + b.getPrezzo());
 		
 		tabelPanel.add(emailUtentePanel);
-		tabelPanel.add(vuoto);
 		tabelPanel.add(emailBigliettoPanel);
 		tabelPanel.add(ricavoSingolo);
 		

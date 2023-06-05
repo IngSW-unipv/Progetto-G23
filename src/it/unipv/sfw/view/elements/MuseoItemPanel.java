@@ -1,5 +1,6 @@
 package it.unipv.sfw.view.elements;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -45,9 +46,9 @@ public class MuseoItemPanel extends JPanel {
 			rimuoviButton.setBackground(Color.WHITE);
 			rimuoviButton.setPreferredSize(new Dimension(100, 25));
 			
-			firstRawPanel.setLayout(new GridLayout(1, 2));
-			firstRawPanel.add(titolo_pezzo);
-			firstRawPanel.add(rimuoviButton);
+			firstRawPanel.setLayout(new BorderLayout());
+			firstRawPanel.add(titolo_pezzo, BorderLayout.CENTER);
+			firstRawPanel.add(rimuoviButton, BorderLayout.EAST);
 			column_pezzo.add(firstRawPanel);
 		} else {
 			column_pezzo.add(titolo_pezzo);
@@ -90,9 +91,9 @@ public class MuseoItemPanel extends JPanel {
 			rimuoviButton.setBackground(Color.WHITE);
 			rimuoviButton.setPreferredSize(new Dimension(100, 25));
 			
-			firstRawPanel.setLayout(new GridLayout(1, 2));
-			firstRawPanel.add(titolo_pezzo);
-			firstRawPanel.add(rimuoviButton);
+			firstRawPanel.setLayout(new BorderLayout());
+			firstRawPanel.add(titolo_pezzo, BorderLayout.CENTER);
+			firstRawPanel.add(rimuoviButton, BorderLayout.EAST);
 			column_pezzo.add(firstRawPanel);
 		} else {
 			column_pezzo.add(titolo_pezzo);
