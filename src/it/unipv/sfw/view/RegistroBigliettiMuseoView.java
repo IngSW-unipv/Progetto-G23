@@ -59,12 +59,23 @@ public class RegistroBigliettiMuseoView extends AView {
 		
 		JPanel registro = new JPanel();
 		
+		double ricaviCounter = 0;
+		
 		for(Biglietto b : venduti) {
+			ricaviCounter += b.getPrezzo();
 			BigliettoRegistratoPanel biglietto = new BigliettoRegistratoPanel(b);
 			registro.add(biglietto);
 		}
 		
-		registro.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(nBiglietti))));
+		JPanel ricavoTot = new JPanel();
+		JLabel ricavoTot_label = new JLabel("RICAVO TOTALE: €" + ricaviCounter);
+		ricavoTot_label.setFont(new java.awt.Font("Arial", 1, 16));
+		ricavoTot.setLayout(new FlowLayout());
+		ricavoTot.add(ricavoTot_label);
+		
+		registro.add(ricavoTot);
+		
+		registro.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (110*(nBiglietti)+50)));
 		registro.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		JScrollPane registroContainer = new JScrollPane(registro);
