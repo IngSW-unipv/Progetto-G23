@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import it.unipv.sfw.dao.DAOFactory;
+
 /**
  * Classe che rappresenta il museo visitabile dal {@link it.unipv.sfw.model.utente.Cliente}.
  * @author Lorenzo Reale
@@ -30,8 +32,8 @@ public class Museo {
 		
 		aperto = false;
 		
-		cimeli = new ArrayList<Cimelio>();
-		riconoscimenti = new ArrayList<Riconoscimento>();
+		cimeli =  DAOFactory.createICimelioDAO().selectAll();
+		riconoscimenti = DAOFactory.createIRiconoscimentoDAO().selectAll();
 	}
 	
 	public void setRiconsocimenti(ArrayList<Riconoscimento> ric) {
@@ -77,7 +79,7 @@ public class Museo {
 	 * @param storia
 	 */
 	public void setStoria(String storia) {
-		storiaSquadra = storia;
+		this.storiaSquadra = storia;
 	}
 	
 	/**

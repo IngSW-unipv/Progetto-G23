@@ -12,7 +12,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import it.unipv.sfw.dao.IPostoDAO;
+import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
+import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.model.utente.Cliente;
 
 /**
@@ -77,7 +79,7 @@ public class PostoDAO implements IPostoDAO {
 	}
 	
 	@Override
-	public ArrayList<Posto> selectAllOrderBydata() {	//posti occupati
+	public ArrayList<Posto> selectAllOrderBydata() {
 		
 		ArrayList<Posto> result = new ArrayList<>();
 		
@@ -87,7 +89,7 @@ public class PostoDAO implements IPostoDAO {
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();	
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY - hh:mm", Locale.ITALY);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 			
 			st1 = conn.createStatement();
 			String query = "SELECT * FROM " + SCHEMA + " ORDER BY DATA";
@@ -108,6 +110,39 @@ public class PostoDAO implements IPostoDAO {
 		return result;
 	}
 
+	public ArrayList<Posto> selectByData(Calendar dataPartita) {
+		
+		ArrayList<Posto> result = new ArrayList<>();
+		
+		PreparedStatement st1;
+		ResultSet rs1;
+		
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
+			
+			String query = "SELECT * FROM " + SCHEMA + " WHERE DATA=?";
+			st1 = conn.prepareStatement(query);
+			
+			st1.setString(1, "" + dataPartita);
+			
+			rs1 = st1.executeQuery();
+			
+			while(rs1.next()) {
+				String dateInString = rs1.getString(1);
+				Date date = (Date) sdf.parse(dateInString);
+				Calendar data = Calendar.getInstance();
+				data = new GregorianCalendar();
+				data.setTime(date);
+				Posto p = new Posto(rs1.getInt(2), rs1.getInt(3), rs1.getInt(4), rs1.getInt(5), data);
+				result.add(p);
+			}
+			
+		} catch (Exception e) {e.printStackTrace();}
+		
+		return result;
+	}
 
 	@Override
 	public boolean insertPosto(Posto posto, Cliente cliente) {

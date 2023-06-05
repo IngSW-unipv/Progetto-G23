@@ -64,7 +64,7 @@ public class BigliettoMuseoView extends AView {
 		contenitore.setAlignmentY(LEFT_ALIGNMENT);
 		
 		JPanel emailPanel = new JPanel();
-		emailPanel.setPreferredSize(new Dimension(400, 75));
+		emailPanel.setPreferredSize(new Dimension(400, 75));       ////
 		emailPanel.setLayout(new GridLayout(3, 1));
 		JLabel email_label = new JLabel("Inserire email:");
 		email_label.setFont(medium_font);
@@ -83,7 +83,7 @@ public class BigliettoMuseoView extends AView {
 		
 		//1
 		JPanel visitaPanel = new JPanel();
-		visitaPanel.setPreferredSize(new Dimension(400, 75));
+		visitaPanel.setPreferredSize(new Dimension(400, 75));         ////
 		visitaPanel.setLayout(new GridLayout(3, 1));
 		
 		//1.1
@@ -98,7 +98,7 @@ public class BigliettoMuseoView extends AView {
 		DatePickerSettings dateSettings = new DatePickerSettings();
 		TimePickerSettings timeSettings = new TimePickerSettings();
 		chDate = new DateTimePicker(dateSettings, timeSettings);
-		chDate.setPreferredSize(new Dimension(300, 20));
+		chDate.setPreferredSize(new Dimension(300, 20));                      ////
 		LocalDate today = LocalDate.now();
 		dateSettings.setDateRangeLimits(today.minusDays(0), today.plusDays(70));
 		dateSettings.setAllowKeyboardEditing(false);
@@ -134,7 +134,7 @@ public class BigliettoMuseoView extends AView {
 		JPanel numeroPanel = new JPanel();
 		numeroPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		numeroPanel.setAlignmentY(LEFT_ALIGNMENT);
-		numeroPanel.setPreferredSize(new Dimension(400, 55));
+		numeroPanel.setPreferredSize(new Dimension(400, 55));          		////
 		
 		JLabel numero_label = new JLabel("Selezionare numero biglietti:");
 		numero_label.setFont(medium_font);
@@ -166,7 +166,7 @@ public class BigliettoMuseoView extends AView {
 		acquistaPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		acquistaButton = new JButton("ACQUISTA BIGLIETTO");
 		acquistaButton.setBackground(Color.WHITE);
-		acquistaButton.setPreferredSize(new Dimension(300,50));
+		acquistaButton.setPreferredSize(new Dimension(300,50));				///
 		acquistaButton.setFont(button_font);
 		acquistaPanel.add(acquistaButton);	
 	
@@ -183,7 +183,7 @@ public class BigliettoMuseoView extends AView {
 		ImageIcon scudettobasso = new ImageIcon(getClass().getResource("/scudettointer.png"));
 		scudettobasso = new ImageIcon(scudettobasso.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
 		JLabel scudetto = new JLabel();
-		scudetto.setPreferredSize(new Dimension(100,125));
+		scudetto.setPreferredSize(new Dimension(100,125)); 			///
 		scudetto.setBackground(Color.BLUE);
 		scudetto.setOpaque(true);
 		scudetto.setHorizontalAlignment(JLabel.CENTER);
@@ -192,12 +192,12 @@ public class BigliettoMuseoView extends AView {
 		this.add(scudetto, BorderLayout.SOUTH);
 		
 		JLabel blue_label_dx = new JLabel();
-		blue_label_dx.setPreferredSize(new Dimension(200,200));
+		blue_label_dx.setPreferredSize(new Dimension(200,200)); 			///
 		blue_label_dx.setBackground(Color.BLACK);
 		blue_label_dx.setOpaque(true);
 		
 		JLabel blue_label_sx= new JLabel();
-		blue_label_sx.setPreferredSize(new Dimension(200,200));
+		blue_label_sx.setPreferredSize(new Dimension(200,200));				////
 		blue_label_sx.setBackground(Color.BLACK);
 		blue_label_sx.setOpaque(true);
 		
@@ -206,7 +206,7 @@ public class BigliettoMuseoView extends AView {
 		
 		JLabel blue_label_up = new JLabel();
 		blue_label_up.setLayout(new BorderLayout());
-		blue_label_up.setPreferredSize(new Dimension(100,100));
+		blue_label_up.setPreferredSize(new Dimension(100,100)); 			////
 		blue_label_up.setBackground(Color.BLUE);
 		blue_label_up.setOpaque(true);
 		blue_label_up.setHorizontalAlignment(JLabel.CENTER);

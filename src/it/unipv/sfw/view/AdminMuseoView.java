@@ -20,6 +20,7 @@ import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.view.buttons.PezzoMuseoButton;
 import it.unipv.sfw.view.elements.MenuUtente;
 import it.unipv.sfw.view.elements.MuseoItemPanel;
+import it.unipv.sfw.view.elements.MuseoStoryPanel;
 
 public class AdminMuseoView extends AView {
 
@@ -111,6 +112,8 @@ public class AdminMuseoView extends AView {
 		centralMiddlePanel.add(bigliettoPanel, BorderLayout.NORTH);
 		
 		pezzimuseo = new JPanel();
+		
+		pezzimuseo.add(new MuseoStoryPanel(dim, museum.getStoria()));
 		
 		for(Cimelio c : cimeli) {
 			pezzo.put(c.getId(), new MuseoItemPanel(c, true));

@@ -26,6 +26,7 @@ import it.unipv.sfw.model.museo.Museo;
 import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.view.elements.MenuUtente;
 import it.unipv.sfw.view.elements.MuseoItemPanel;
+import it.unipv.sfw.view.elements.MuseoStoryPanel;
 
 
 public class MuseoView extends AView {
@@ -105,6 +106,8 @@ public class MuseoView extends AView {
 		
 		pezzimuseo = new JPanel();
 		
+		pezzimuseo.add(new MuseoStoryPanel(dim, museum.getStoria()));
+		
 		for(Cimelio c : cimeli) {
 			MuseoItemPanel pezzo = new MuseoItemPanel(c, false);
 			pezzimuseo.add(pezzo);
@@ -116,7 +119,7 @@ public class MuseoView extends AView {
 		}
 		
 		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*npezzi)));
-		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
+		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 500, 25));
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 
 		scrollTrofei.getVerticalScrollBar().setUnitIncrement(20);
