@@ -30,7 +30,7 @@ private int righe;
 	
 	// variabili del top
 	private JPanel top, bottoni;
-	private JButton bmuseo, bshop;
+	private JButton bmuseo, bshop, addpartita;
 	private MenuUtente u;
 	private ImageIcon img2;
 
@@ -58,6 +58,9 @@ private int righe;
 		bshop = new JButton("STORE");
 		bshop.setBackground(Color.WHITE);
 		bshop.setFont(new java.awt.Font("Arial", 1, 18));
+		addpartita = new JButton("Aggiungi partita");
+		addpartita.setBackground(Color.WHITE);
+		//addpartita.setFont(new java.awt.Font("Arial", 1, 18));
 
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
@@ -86,8 +89,10 @@ private int righe;
 		titolo.setBackground(Color.BLACK);
 		titolo.setOpaque(true);
 		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		titlePanel.add(titolo);
+			
+		titlePanel.setLayout(new BorderLayout());
+		titlePanel.add(titolo,BorderLayout.CENTER);
+		titlePanel.add(addpartita,BorderLayout.EAST);
 
 		partite = new ArrayList<JLabel>();
 		i=new ArrayList<JMenuBar>();
@@ -167,6 +172,9 @@ private int righe;
 		return bmuseo;
 	}
 	
+	public JButton getAddPartitaButton() {
+		return addpartita;
+	}	
 	
 	public JMenuItem getProfiloPersonaleButton() {
 		return  u.getProfiloPersonale();

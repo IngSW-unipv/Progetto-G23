@@ -57,6 +57,13 @@ public class AdminPartiteController extends AController{
 			}
 		});
 		
+		v.getAddPartitaButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(Type.AADDPARTITA);
+			}
+		});
+		
 		MouseListener a=new MouseListener() {
 					
 			@Override

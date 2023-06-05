@@ -63,6 +63,7 @@ public class ControllerManager {
 		this.addController(new AdminAddOggettoController());
 		this.addController(new AdminModifyStoreController());
 		this.addController(new RegistroBigliettiMuseoController());
+		this.addController(new AdminAddPartiteController());
 		
 		currentController = null;
 		
