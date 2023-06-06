@@ -23,6 +23,7 @@ public class AdminModifyStoreController extends AController {
 		v.getBackBtn().addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Sessione.getIstance().setMerchAdmin(null);
 				ControllerManager.getInstance().loadController(AController.Type.ASTORE);
 			}
 		});
