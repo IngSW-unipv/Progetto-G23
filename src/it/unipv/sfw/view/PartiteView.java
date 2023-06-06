@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -65,13 +66,16 @@ public class PartiteView extends AView {
 		top = new JPanel();
 		bottoni = new JPanel();
 		u=new MenuUtente();
-
+		
+		Font medium=new Font("Arial", 1, 18);
+		Font large=new Font("Arial",1,24);
+		
 		bmuseo = new JButton("MUSEO");
 		bmuseo.setBackground(Color.WHITE);
-		bmuseo.setFont(new java.awt.Font("Arial", 1, 18));
+		bmuseo.setFont(medium);
 		bshop = new JButton("STORE");
 		bshop.setBackground(Color.WHITE);
-		bshop.setFont(new java.awt.Font("Arial", 1, 18));
+		bshop.setFont(medium);
 
 
 		bottoni.setBackground(Color.BLUE);
@@ -97,7 +101,7 @@ public class PartiteView extends AView {
 		
 		titolo = new JLabel("PARTITE");
 		titolo.setForeground(Color.WHITE);
-		titolo.setFont(new java.awt.Font("Arial", 1, 24));
+		titolo.setFont(large);
 		titolo.setBackground(Color.BLACK);
 		titolo.setOpaque(true);
 		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -135,7 +139,7 @@ public class PartiteView extends AView {
 			tabellone.get(i).add(acquista.get(i),BorderLayout.SOUTH);
 			tabellone.get(i).add(immagini.get(i),BorderLayout.WEST);
 			tabellone.get(i).setBorder(BorderFactory.createLineBorder(Color.black));
-			partite.get(i).setFont(new java.awt.Font("Arial", 1, 18));
+			partite.get(i).setFont(medium);
 			if(d.getTime().before(Calendar.getInstance().getTime())) {
 				acquista.get(i).setEnabled(false);
 			}
