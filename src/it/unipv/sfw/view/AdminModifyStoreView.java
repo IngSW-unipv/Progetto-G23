@@ -38,8 +38,13 @@ public class AdminModifyStoreView extends AView {
 		fieldsPanel.setLayout(new GridBagLayout());
 		
 		// Titolo
-		JPanel titlePanel = new JPanel();		
-		JLabel titoloLabel = new JLabel("AGGIUNGI ITEM");
+		JPanel titlePanel = new JPanel();
+		JLabel titoloLabel;
+		if (item == null)
+			titoloLabel = new JLabel("AGGIUNGI ITEM");
+		else
+			titoloLabel = new JLabel("MODIFICA ITEM");
+
 		titoloLabel.setFont(largeFont);
 		titoloLabel.setHorizontalAlignment(JLabel.CENTER);
 		titlePanel.setBorder(new EmptyBorder(0, 0, 50, 0));
@@ -70,6 +75,13 @@ public class AdminModifyStoreView extends AView {
 		descr.setLineWrap(true);
 		descr.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		
+		if (item != null) {
+			nome.setText(item.getKey().getNome());
+			prezzo.setText(String.format("%.2f", item.getKey().getPrezzo()));
+			quantita.setText("" + item.getVal());
+			descr.setText(item.getKey().getDescrizione());
+		}
+
 		confirmBtn = new JButton("CONFERMA");
 		confirmBtn.setFont(mediumFont);
 		deleteBtn = new JButton("ELIMINA");
