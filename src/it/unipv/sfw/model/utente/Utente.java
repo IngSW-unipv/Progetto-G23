@@ -16,7 +16,7 @@ import it.unipv.sfw.exceptions.WrongEmailFormatException;
  */
 public abstract class Utente {
 	public enum Type {
-		GIORNALISTA, ADMIN, CLIENTE
+		ADMIN, CLIENTE
 	}
 
 	protected String nome;
@@ -33,7 +33,7 @@ public abstract class Utente {
 	}
 	
 	/**
-	 * @return Il tipo di utente (giornalista, admin o cliente).
+	 * @return Il tipo di utente (admin o cliente).
 	 */
 	public abstract Type getType();
 	

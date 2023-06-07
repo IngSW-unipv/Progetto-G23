@@ -43,8 +43,8 @@ public class Sessione {
 		currentPartita = null;
 		currentPagamento = 0;
 		carrello = null;
-		scelte = new HashMap<>();
 		currentBiglietto = null;
+		scelte = new HashMap<>();
 	}
 	
 	
@@ -296,10 +296,16 @@ public class Sessione {
 		carrello = null;
 	}
 	
+	/**
+	 * @param m Un Pair di merchandising e integer, quest'ultimo è la quantità.
+	 */
 	public void setMerchAdmin(Pair<Merchandising, Integer> m) {
 		merchAdmin = m;
 	}
 	
+	/**
+	 * @return Un Pair di merchandising e integer, quest'ultimo è la quantità.
+	 */
 	public Pair<Merchandising, Integer> getMerchAdmin() {
 		return merchAdmin;
 	}

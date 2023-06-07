@@ -6,10 +6,6 @@ package it.unipv.sfw.model.store;
  * @see StoreOnline
  */
 public class Merchandising implements Comparable<Merchandising> {
-	
-	public enum Merch {
-		MAGLIETTA, CAPPELLO, SCIARPA, TUTA, PANTALONCINI, CALZETTONI, TSHIRT;
-	}
 
 	private String nome;
 	private double prezzo;
@@ -58,7 +54,6 @@ public class Merchandising implements Comparable<Merchandising> {
 	}
 
 	public int getId() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 	
