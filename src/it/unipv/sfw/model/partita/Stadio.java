@@ -12,10 +12,10 @@ import it.unipv.sfw.dao.DAOFactory;
  */
 public class Stadio {
 
-	public final int N_SETTORI = 8;
-	public final int ANELLI_PER_SETTORE = 3;
-	public final int BLOCCHI_PER_ANELLO = 50;
-	public final int POSTI_PER_BLOCCO = 50;
+	public static final int N_SETTORI = 8;
+	public static final int ANELLI_PER_SETTORE = 3;
+	public static final int BLOCCHI_PER_ANELLO = 50;
+	public static final int POSTI_PER_BLOCCO = 50;
 	
 	private ArrayList<Posto> posti;
 
@@ -87,7 +87,8 @@ public class Stadio {
 				})
 				.count();
 		
-		return blocchiOccInAnello >= BLOCCHI_PER_ANELLO ? false : true;
+		return blocchiOccInAnello >= (BLOCCHI_PER_ANELLO * POSTI_PER_BLOCCO)  
+				? false : true;
 	}
 	
 	/**
@@ -100,6 +101,7 @@ public class Stadio {
 				.filter(p -> p.getNSettore() == settore)
 				.count();
 		
-		return anelliOccInSettore >= ANELLI_PER_SETTORE ? false : true;
+		return anelliOccInSettore >= (ANELLI_PER_SETTORE * BLOCCHI_PER_ANELLO * POSTI_PER_BLOCCO)
+				? false : true;
 	}
 }
