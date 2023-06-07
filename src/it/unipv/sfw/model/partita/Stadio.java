@@ -19,8 +19,19 @@ public class Stadio {
 	
 	private ArrayList<Posto> posti;
 
+	/**
+	 * @param dataPartita Data della partita interessata.
+	 */
 	public Stadio(Calendar dataPartita) {
 		posti = DAOFactory.createIPostoDAO().selectByData(dataPartita);
+	}
+	
+	/**
+	 * Costruttore utilizzato principalmente per testing.
+	 * @param postiOccupatiPartita ArrayList di posti occupati in una determinata partita.
+	 */
+	public Stadio(ArrayList<Posto> postiOccupatiPartita) {
+		posti = postiOccupatiPartita;
 	}
 
 
