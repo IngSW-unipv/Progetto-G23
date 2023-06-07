@@ -32,7 +32,7 @@ public class PartiteController extends AController {
 	@Override
 	public void initialize(Dimension dim) {
 		
-		ArrayList<Partita> p_arrlist = DAOFactory.createIPartitaDAO().selectAll();
+		ArrayList<Partita> p_arrlist = DAOFactory.createIPartitaDAO().selectAllOrdered();
 		
 		p = new Partita[p_arrlist.size()];
 		

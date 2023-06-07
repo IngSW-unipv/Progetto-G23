@@ -27,7 +27,7 @@ public class PartitaDAO implements IPartitaDAO {
 	private final int bigliettiTot = 80000;
 	
 	@Override
-	public ArrayList<Partita> selectAll() {
+	public ArrayList<Partita> selectAllOrdered() {
 		
 		ArrayList<Partita> result = new ArrayList<>();
 		
@@ -39,7 +39,7 @@ public class PartitaDAO implements IPartitaDAO {
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + SCHEMA;
+			String query = "SELECT * FROM " + SCHEMA + " ORDER BY DAT DESC";
 			rs1 = st1.executeQuery(query);
 			
 			

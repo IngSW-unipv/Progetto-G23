@@ -17,7 +17,7 @@ public interface IPartitaDAO {
 	/**
 	 * @return Un array che contiene tutte le partite registrate nel database.
 	 */
-	ArrayList<Partita> selectAll();
+	ArrayList<Partita> selectAllOrdered();
 
 	/**
 	 * @param dataPartita Data identificativa di un partita.
