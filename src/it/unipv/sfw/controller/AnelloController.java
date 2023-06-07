@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 
 import it.unipv.sfw.controller.AController.Type;
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AnelloView;
 import it.unipv.sfw.view.buttons.AnelloButton;
@@ -21,7 +22,9 @@ public class AnelloController extends AController {
 
 	@Override
 	public void initialize(Dimension dim) {
-		view = new AnelloView(dim);
+		Sessione s = Sessione.getIstance();
+		Stadio stadio = new Stadio(s.getCurrentPartita().getCalendarDate());
+		view = new AnelloView(dim, stadio, s.getSettore());
 
 		ActionListener a = new ActionListener() {
 			@Override

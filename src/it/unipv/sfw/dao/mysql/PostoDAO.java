@@ -1,20 +1,18 @@
 package it.unipv.sfw.dao.mysql;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import it.unipv.sfw.dao.IPostoDAO;
-import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
-import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.model.utente.Cliente;
 
 /**
@@ -63,7 +61,7 @@ public class PostoDAO implements IPostoDAO {
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE DATA=?";
+			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE DAT=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + dataPartita);
@@ -92,7 +90,7 @@ public class PostoDAO implements IPostoDAO {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 			
 			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + SCHEMA + " ORDER BY DATA";
+			String query = "SELECT * FROM " + SCHEMA + " ORDER BY DAT";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
@@ -123,16 +121,16 @@ public class PostoDAO implements IPostoDAO {
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 			
-			String query = "SELECT * FROM " + SCHEMA + " WHERE DATA=?";
+			String query = "SELECT * FROM " + SCHEMA + " WHERE DAT=?";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(1, "" + dataPartita);
+			st1.setString(1, sdf.format(dataPartita.getTime()));
 			
 			rs1 = st1.executeQuery();
 			
 			while(rs1.next()) {
 				String dateInString = rs1.getString(1);
-				Date date = (Date) sdf.parse(dateInString);
+				Date date = sdf.parse(dateInString);
 				Calendar data = Calendar.getInstance();
 				data = new GregorianCalendar();
 				data.setTime(date);

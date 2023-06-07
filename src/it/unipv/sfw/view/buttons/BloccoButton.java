@@ -14,10 +14,11 @@ public class BloccoButton extends JButton {
 	private int code;
 	private boolean stato;
 
-	public BloccoButton( int code, ImageIcon img, boolean stato) {
+	public BloccoButton( int code, ImageIcon img, boolean stato, boolean isEnabled) {
 		super(img);
 		this.code = code;
 		this.stato = stato;
+		this.setEnabled(isEnabled);
 	}
 
 	public int getCode() {

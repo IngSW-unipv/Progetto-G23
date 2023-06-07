@@ -14,7 +14,12 @@ values
     ('2023-1-3 21:30:00', 'Fiorentina', 50, 60000),
     ('2023-1-4 15:00:00', 'Sassuolo', 50, 60000),
     ('2023-1-5 15:00:00', 'Salernitana', 50, 60000),
-    ('2023-1-6 15:00:00', 'Roma', 50, 60000);
+    ('2023-1-6 15:00:00', 'Roma', 50, 60000),
+    ('2024-1-6 15:00:00', 'Roma', 50, 60000);
+    
+insert into posti
+values
+	('2024-1-6 15:00:00', 1, 1, 1, 1, 'a');
     
 insert into store_items(nome, prezzo, quantita_rimanente, descrizione)
 values

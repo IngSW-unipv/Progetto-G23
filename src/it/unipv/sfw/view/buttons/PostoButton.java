@@ -13,9 +13,10 @@ public class PostoButton extends JButton {
 	private int code;
 	private boolean stato;
 
-	public PostoButton(int code, ImageIcon img, boolean stato) {
+	public PostoButton(int code, ImageIcon img, boolean stato, boolean isEnabled) {
 		super(img);
 		this.code = code;
+		this.setEnabled(isEnabled);
 	}
 
 	public int getCode() {

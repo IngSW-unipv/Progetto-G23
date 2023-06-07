@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.view.buttons.AnelloButton;
 
 
@@ -33,7 +34,7 @@ public class AnelloView extends AView {
 	private ImageIcon img;
 	
 	
-	public AnelloView(Dimension dim) {
+	public AnelloView(Dimension dim, Stadio stadio, int n_settore) {
 		
 
 		contenitore=new JPanel();
@@ -47,8 +48,9 @@ public class AnelloView extends AView {
 		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width),(int)(dim.height-60)/3,  java.awt.Image.SCALE_SMOOTH)); 
 				
 		for(int i=0;i<n_anelli;i++) {
-			a.add(new AnelloButton(3-i,img,true));
-			idAnello.add(new JLabel("A"+(3-i)));
+			int n_anello = 3 - i;
+			a.add(new AnelloButton(n_anello,img,true, stadio.isLibero(n_settore, n_anello)));
+			idAnello.add(new JLabel("A"+n_anello));
 			anello.add(new JPanel());
 		}
 		

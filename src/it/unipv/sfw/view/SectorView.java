@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.view.buttons.SectorButton;
 
 
@@ -31,7 +32,7 @@ public class SectorView extends AView {
 	private ImageIcon imgS1,imgS2,imgS3,imgS4,imgS5,imgS6,imgS7,imgS8;
 	private ArrayList<SectorButton> s;
 
-	public SectorView(Dimension dim) {
+	public SectorView(Dimension dim, Stadio stadio) {
 
 		middle = new JPanel();
 		campo = new JLabel();
@@ -62,14 +63,14 @@ public class SectorView extends AView {
 		imgS8 = new ImageIcon(this.getClass().getResource("/Settore8.png"));
 		imgS8=new ImageIcon(imgS8.getImage().getScaledInstance((int)((dim.width)/4), (dim.height-50)/2,java.awt.Image.SCALE_SMOOTH ));
 
-		s.add(new SectorButton("",1,true,imgS1));
-		s.add(new SectorButton("",2,true,imgS2));
-		s.add(new SectorButton("",3,true,imgS3));
-		s.add(new SectorButton("",4,true,imgS4));
-		s.add(new SectorButton("",5,true,imgS5));
-		s.add(new SectorButton("",6,true,imgS6));
-		s.add(new SectorButton("",7,true,imgS7));
-		s.add(new SectorButton("",8,true,imgS8));
+		s.add(new SectorButton("",1,true,imgS1, stadio.isLibero(1)));
+		s.add(new SectorButton("",2,true,imgS2, stadio.isLibero(2)));
+		s.add(new SectorButton("",3,true,imgS3, stadio.isLibero(3)));
+		s.add(new SectorButton("",4,true,imgS4, stadio.isLibero(4)));
+		s.add(new SectorButton("",5,true,imgS5, stadio.isLibero(5)));
+		s.add(new SectorButton("",6,true,imgS6, stadio.isLibero(6)));
+		s.add(new SectorButton("",7,true,imgS7, stadio.isLibero(7)));
+		s.add(new SectorButton("",8,true,imgS8, stadio.isLibero(8)));
 
 		imgC = new ImageIcon(this.getClass().getResource("/Campo.png")).getImage();
 		campo.setIcon(new ImageIcon(imgC.getScaledInstance(dim.width/2,(dim.height-45)/2, java.awt.Image.SCALE_SMOOTH)));

@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.view.buttons.PostoButton;
 
 
@@ -30,7 +31,7 @@ public class PostoView extends AView {
 	private ArrayList<JPanel> gruppo;
 	private ImageIcon img;
 
-	public PostoView(int posti,Dimension dim) {
+	public PostoView(int posti,Dimension dim, Stadio stadio, int n_settore, int n_anello, int n_blocco) {
 
 		blocco = new JPanel();
 		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
@@ -43,8 +44,9 @@ public class PostoView extends AView {
 
 
 		for (int i = 0; i < posti; i++) {
-			posto.add(new PostoButton(50-i, img, true));
-			nomeposto.add(new JLabel("" + (50-i)));
+			int n_posto = 50 - i;
+			posto.add(new PostoButton(n_posto, img, true, stadio.isLibero(n_settore, n_anello, n_blocco, n_posto)));
+			nomeposto.add(new JLabel("" + n_posto));
 			nomeposto.get(i).setBackground(Color.red);
 			gruppo.add(new JPanel());
 

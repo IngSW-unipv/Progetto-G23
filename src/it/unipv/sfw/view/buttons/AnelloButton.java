@@ -14,10 +14,11 @@ public class AnelloButton extends JButton {
 	private int code;
 	private boolean stato;
 
-	public AnelloButton(int code, ImageIcon img, boolean stato) {
+	public AnelloButton(int code, ImageIcon img, boolean stato, boolean isEnabled) {
 		super(img);
 		this.code = code;
 		this.stato = stato;
+		this.setEnabled(isEnabled);
 	}
 
 	public int getCode() {

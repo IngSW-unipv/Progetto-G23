@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.model.partita.Posto;
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.PostoView;
@@ -23,7 +24,10 @@ public class PostoController extends AController {
 	
 	@Override
 	public void initialize(Dimension dim) {
-		PostoView v = new PostoView(50,dim);
+		Sessione s = Sessione.getIstance();
+		Stadio stadio = new Stadio(s.getCurrentPartita().getCalendarDate());
+		
+		PostoView v = new PostoView(50, dim, stadio, s.getSettore(), s.getAnello(), s.getBlocco());
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -31,16 +35,6 @@ public class PostoController extends AController {
 				int code = ((PostoButton)e.getSource()).getCode();
 				Sessione s = Sessione.getIstance();
 				s.setPosto(code);
-				// temp stampa acquisto
-				System.out.println("Posto selezionato: S" +
-						s.getSettore() +
-						", B" + s.getBlocco() +
-						", A" + s.getAnello() +
-						", P" + s.getPosto() + 
-						". Per la partita contro: " 
-						+ s.getCurrentPartita().getOspiti() + ".");
-				// Update database with booking
-				//s.book();
 
 				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
 			}

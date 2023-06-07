@@ -17,10 +17,11 @@ public class SectorButton extends JButton {
 							// sarà true se non tutti i posti sono stati occupati
 
 	
-	public SectorButton(String string, int code, boolean stato,ImageIcon img) {
+	public SectorButton(String string, int code, boolean stato,ImageIcon img, boolean isEnabled) {
 		super(string,img);
 		this.code = code;
 		this.stato = stato;
+		this.setEnabled(isEnabled);
 	}
 
 	public int getCode() {

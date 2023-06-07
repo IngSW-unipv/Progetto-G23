@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.view.buttons.BloccoButton;
 /**
  * Classe che crea la view dei vari blocchi di un anello. 
@@ -29,7 +30,7 @@ public class BloccoView extends AView {
 	private int b;
 	private  ImageIcon img;
 
-	public BloccoView(int ptot,Dimension dim) {
+	public BloccoView(int ptot,Dimension dim, Stadio stadio, int n_settore, int n_anello) {
 		
 		tabellone = new JPanel();
 		tabellone.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
@@ -42,8 +43,9 @@ public class BloccoView extends AView {
 		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-50)/5,java.awt.Image.SCALE_SMOOTH));
 
 		for (int i = 0; i < b; i++) {
-			blocco.add(new BloccoButton(50-i, img,true));
-			idBlocco.add(new JLabel("B"+(50-i)));
+			int n_blocco = 50 - i;
+			blocco.add(new BloccoButton(n_blocco, img,true, stadio.isLibero(n_settore, n_anello, n_blocco)));
+			idBlocco.add(new JLabel("B"+n_blocco));
 			gruppo.add(new JPanel());
 			
 

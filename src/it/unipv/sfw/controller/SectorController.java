@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 
 import it.unipv.sfw.controller.AController.Type;
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.SectorView;
@@ -22,13 +23,14 @@ public class SectorController extends AController {
 	
 	@Override
 	public void initialize(Dimension d) {
-		view = new SectorView(d);
+		Stadio stadio = new Stadio(Sessione.getIstance().getCurrentPartita().getCalendarDate());
+		view = new SectorView(d, stadio);
 		
 		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int code = ((SectorButton)e.getSource()).getCode();
-				Sessione.getIstance().setSettore(code);;
+				Sessione.getIstance().setSettore(code);
 				ControllerManager.getInstance().loadController(Type.ANELLO);
 			}
 		};

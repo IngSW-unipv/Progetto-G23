@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 
 import it.unipv.sfw.controller.AController.Type;
+import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.BloccoView;
 import it.unipv.sfw.view.buttons.BloccoButton;
@@ -21,7 +22,9 @@ public class BloccoController extends AController {
 	
 	@Override
 	public void initialize(Dimension dim) {	
-		view=new BloccoView(2500,dim);
+		Sessione s = Sessione.getIstance();
+		Stadio stadio = new Stadio(s.getCurrentPartita().getCalendarDate());
+		view = new BloccoView(2500, dim, stadio, s.getSettore(), s.getAnello());
 		
 		ActionListener a = new ActionListener() {
 			@Override
