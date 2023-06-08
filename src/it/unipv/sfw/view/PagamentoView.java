@@ -23,6 +23,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import it.unipv.sfw.exceptions.EmptyDateException;
+import it.unipv.sfw.exceptions.EmptyNameException;
+import it.unipv.sfw.exceptions.WrongCvvException;
+import it.unipv.sfw.exceptions.WrongNumberException;
+import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.pagamento.Carta;
@@ -179,6 +184,36 @@ public class PagamentoView extends AView{
 		btnsPanel.revalidate();
 		infoPanel.repaint();
 		btnsPanel.repaint();
+	}
+	
+	public void checkEnteredName() throws EmptyNameException {
+		if (nomeTxt.getText().equals("") || cognomeTxt.getText().equals("")) {
+			throw new EmptyNameException();
+		}
+	}
+	
+	public boolean isNumber(String str) {
+		boolean flag = true;
+		
+		try {
+			Integer.parseInt(str);
+		}catch(Exception e) {
+			flag = false;
+		}
+		
+		return flag;
+	}
+	
+	public void checkEnteredNumber() throws WrongNumberException {
+		if (nCartaTxt.getText().equals("") || nCartaTxt.getText().length() != 16 || isNumber(nCartaTxt.getText()) == false) {
+			throw new WrongNumberException();
+		}
+	}
+	
+	public void checkEnteredCvv() throws WrongCvvException {
+		if (cvvTxt.getText().equals("") || cvvTxt.getText().length() != 3 || isNumber(cvvTxt.getText()) == false) {
+			throw new WrongCvvException();
+		}
 	}
 	
 	public JButton getBackBtn() {
