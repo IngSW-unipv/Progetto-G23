@@ -86,11 +86,11 @@ public class PagamentoView extends AView{
 		
 		centralPanel.setLayout(new BorderLayout());
 		selectScadenza.setLayout(new GridLayout(1, 2));
-		nomePanel.setLayout(new GridLayout(1, 2));
-		cognomePanel.setLayout(new GridLayout(1, 2));
-		numeroPanel.setLayout(new GridLayout(1, 2));
-		scadenzaPanel.setLayout(new GridLayout(1, 2));
-		cvvPanel.setLayout(new GridLayout(1, 2));
+		nomePanel.setLayout(new GridLayout(2, 1));
+		cognomePanel.setLayout(new GridLayout(2, 1));
+		numeroPanel.setLayout(new GridLayout(2, 1));
+		scadenzaPanel.setLayout(new GridLayout(2, 1));
+		cvvPanel.setLayout(new GridLayout(2, 1));
 
 		JLabel title = new JLabel("Pagamento:");
 		title.setFont(veryLargeFont);
@@ -103,26 +103,32 @@ public class PagamentoView extends AView{
 		nomeErr = new JLabel("Il nome inserito non è valido!");
 		nomeErr.setFont(shortFont);
 		nomeErr.setVisible(false);
+		nomeErr.setSize(0, dim.height/14);
+		nomeErr.setForeground(Color.RED);
 		JLabel cognome = new JLabel("Cognome:");
 		cognome.setFont(largeFont);
 		cognomeErr = new JLabel("Il cognome inserito non è valido!");
 		cognomeErr.setFont(shortFont);
 		cognomeErr.setVisible(false);
+		cognomeErr.setForeground(Color.RED);
 		JLabel numero = new JLabel("Numero:");
 		numero.setFont(largeFont);
 		numeroErr = new JLabel("Il numero inserito non è valido!");
 		numeroErr.setFont(shortFont);
 		numeroErr.setVisible(false);
+		numeroErr.setForeground(Color.RED);
 		JLabel scadenza = new JLabel("Scadenza (mm/aaaa):");
 		scadenza.setFont(largeFont);
 		scadenzaErr = new JLabel("");
 		scadenzaErr.setFont(shortFont);
 		scadenzaErr.setVisible(false);
+		scadenzaErr.setForeground(Color.RED);
 		JLabel cvv = new JLabel("CVV:");
 		cvv.setFont(largeFont);
 		cvvErr = new JLabel("Il CVV inserito non è valido!");
 		cvvErr.setFont(shortFont);
 		cvvErr.setVisible(false);
+		cvvErr.setForeground(Color.RED);
 		
 		Integer[] monthToChoose = new Integer[12];
 		Integer[] yearToChoose = new Integer[11];
@@ -165,28 +171,31 @@ public class PagamentoView extends AView{
 		okBtn.setFont(mediumFont);
 		
 		nomePanel.add(nome);
-		nomePanel.add(nomeTxt);
+		nomePanel.add(nomeErr);
 		cognomePanel.add(cognome);
-		cognomePanel.add(cognomeTxt);
+		cognomePanel.add(cognomeErr);
 		numeroPanel.add(numero);
-		numeroPanel.add(nCartaTxt);
+		numeroPanel.add(numeroErr);
 		scadenzaPanel.add(scadenza);
-		scadenzaPanel.add(selectScadenza);
+		scadenzaPanel.add(scadenzaErr);
 		cvvPanel.add(cvv);
-		cvvPanel.add(cvvTxt);
+		cvvPanel.add(cvvErr);
 		
-		infoPanel.setLayout(new GridLayout(11, 1, dim.width/192, 0));
+		infoPanel.setLayout(new GridLayout(6, 2, dim.width/192, 1));
 		infoPanel.add(nomePanel);
-		infoPanel.add(nomeErr);
+		infoPanel.add(nomeTxt);
 		infoPanel.add(cognomePanel);
-		infoPanel.add(cognomeErr);
+		infoPanel.add(cognomeTxt);
 		infoPanel.add(numeroPanel);
-		infoPanel.add(numeroErr);
+		infoPanel.add(nCartaTxt);
 		infoPanel.add(scadenzaPanel);
-		infoPanel.add(scadenzaErr);
+		infoPanel.add(selectScadenza);
 		infoPanel.add(cvvPanel);
-		infoPanel.add(cvvErr);
+		infoPanel.add(cvvTxt);
 		infoPanel.add(salvaCb);
+		
+		
+		
 		infoPanel.setBorder(new EmptyBorder(dim.height/10, dim.width/7, dim.height/10,  dim.width/7));
 
 		btnsPanel1.add(new JLabel("N.B. continuando riceverai una mail di conferma."));
@@ -211,12 +220,11 @@ public class PagamentoView extends AView{
 		this.setLayout(new BorderLayout());
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(centralPanel, BorderLayout.CENTER);
-		
 	}
 
 	@Override
 	public void onWindowResized(Dimension dim) {
-		infoPanel.setBorder(new EmptyBorder(dim.height/6, dim.width/7, dim.height/6,  dim.width/7));
+		infoPanel.setLayout(new GridLayout(6, 2, dim.width/192, 1));
 		btnsPanel.setBorder(new EmptyBorder(0, dim.width/7, 0,  dim.width/7));
 		
 		infoPanel.revalidate();
