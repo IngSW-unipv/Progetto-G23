@@ -1,7 +1,6 @@
 package it.unipv.sfw.model.partita;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Classe che rappresenta un posto dello {@link Stadio}.
