@@ -273,8 +273,6 @@ public class BigliettoMuseoView extends AView {
 		contenitore.repaint();
 	}
 	
-	
-	
 	public JButton getAcquistaButton() {
 		return acquistaButton;
 	}

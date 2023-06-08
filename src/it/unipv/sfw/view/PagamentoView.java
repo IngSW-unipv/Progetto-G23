@@ -43,6 +43,8 @@ public class PagamentoView extends AView{
 	private JCheckBox salvaCb;
 	private JTextField nomeTxt, cognomeTxt, nCartaTxt, cvvTxt;
 	private JComboBox <Integer> meseOp, annoOp;
+	private JLabel nomeErr, cognomeErr, numeroErr, scadenzaErr, cvvErr;
+	private int tipoErr; // 0 - nome, 1 - cognome, 2 - entrambi
 	
 	public PagamentoView(Dimension dim) {
 		// Fonts
@@ -74,27 +76,53 @@ public class PagamentoView extends AView{
 		JPanel centerPanelBtns = new JPanel();
 		JPanel btnsPanel1 = new JPanel();
 		JPanel btnsPanel2 = new JPanel();
+		JPanel nomePanel = new JPanel();
+		JPanel cognomePanel = new JPanel();
+		JPanel numeroPanel = new JPanel();
+		JPanel scadenzaPanel = new JPanel();
+		JPanel cvvPanel = new JPanel();
 		btnsPanel = new JPanel();
 		infoPanel = new JPanel();
 		
 		centralPanel.setLayout(new BorderLayout());
 		selectScadenza.setLayout(new GridLayout(1, 2));
-		
+		nomePanel.setLayout(new GridLayout(1, 2));
+		cognomePanel.setLayout(new GridLayout(1, 2));
+		numeroPanel.setLayout(new GridLayout(1, 2));
+		scadenzaPanel.setLayout(new GridLayout(1, 2));
+		cvvPanel.setLayout(new GridLayout(1, 2));
+
 		JLabel title = new JLabel("Pagamento:");
 		title.setFont(veryLargeFont);
 		title.setBackground(Color.CYAN);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 		JLabel nome = new JLabel("Nome:");
 		nome.setFont(largeFont);
+		nomeErr = new JLabel("Il nome inserito non è valido!");
+		nomeErr.setFont(shortFont);
+		nomeErr.setVisible(false);
 		JLabel cognome = new JLabel("Cognome:");
 		cognome.setFont(largeFont);
+		cognomeErr = new JLabel("Il cognome inserito non è valido!");
+		cognomeErr.setFont(shortFont);
+		cognomeErr.setVisible(false);
 		JLabel numero = new JLabel("Numero:");
 		numero.setFont(largeFont);
+		numeroErr = new JLabel("Il numero inserito non è valido!");
+		numeroErr.setFont(shortFont);
+		numeroErr.setVisible(false);
 		JLabel scadenza = new JLabel("Scadenza (mm/aaaa):");
 		scadenza.setFont(largeFont);
+		scadenzaErr = new JLabel("");
+		scadenzaErr.setFont(shortFont);
+		scadenzaErr.setVisible(false);
 		JLabel cvv = new JLabel("CVV:");
 		cvv.setFont(largeFont);
+		cvvErr = new JLabel("Il CVV inserito non è valido!");
+		cvvErr.setFont(shortFont);
+		cvvErr.setVisible(false);
 		
 		Integer[] monthToChoose = new Integer[12];
 		Integer[] yearToChoose = new Integer[11];
@@ -136,19 +164,30 @@ public class PagamentoView extends AView{
 		okBtn.setBackground(Color.WHITE);
 		okBtn.setFont(mediumFont);
 		
-		infoPanel.setLayout(new GridLayout(6, 2, dim.width/192, 1));
-		infoPanel.add(nome);
-		infoPanel.add(nomeTxt);
-		infoPanel.add(cognome);
-		infoPanel.add(cognomeTxt);
-		infoPanel.add(numero);
-		infoPanel.add(nCartaTxt);
-		infoPanel.add(scadenza);
-		infoPanel.add(selectScadenza);
-		infoPanel.add(cvv);
-		infoPanel.add(cvvTxt);
+		nomePanel.add(nome);
+		nomePanel.add(nomeTxt);
+		cognomePanel.add(cognome);
+		cognomePanel.add(cognomeTxt);
+		numeroPanel.add(numero);
+		numeroPanel.add(nCartaTxt);
+		scadenzaPanel.add(scadenza);
+		scadenzaPanel.add(selectScadenza);
+		cvvPanel.add(cvv);
+		cvvPanel.add(cvvTxt);
+		
+		infoPanel.setLayout(new GridLayout(11, 1, dim.width/192, 0));
+		infoPanel.add(nomePanel);
+		infoPanel.add(nomeErr);
+		infoPanel.add(cognomePanel);
+		infoPanel.add(cognomeErr);
+		infoPanel.add(numeroPanel);
+		infoPanel.add(numeroErr);
+		infoPanel.add(scadenzaPanel);
+		infoPanel.add(scadenzaErr);
+		infoPanel.add(cvvPanel);
+		infoPanel.add(cvvErr);
 		infoPanel.add(salvaCb);
-		infoPanel.setBorder(new EmptyBorder(dim.height/6, dim.width/7, dim.height/6,  dim.width/7));
+		infoPanel.setBorder(new EmptyBorder(dim.height/10, dim.width/7, dim.height/10,  dim.width/7));
 
 		btnsPanel1.add(new JLabel("N.B. continuando riceverai una mail di conferma."));
 		btnsPanel2.setLayout(new GridLayout(1, 2));
@@ -186,26 +225,66 @@ public class PagamentoView extends AView{
 		btnsPanel.repaint();
 	}
 	
+	public void setTipoErr(int tipoErr) {
+		this.tipoErr = tipoErr;
+	}
+	
+	public int getTipoErr() {
+		return tipoErr;
+	}
+	
+	public void upNameErr() {
+		nomeErr.setVisible(true);
+	}
+	
+	public void upSurnameErr() {
+		cognomeErr.setVisible(true);
+	}
+	
+	public void upNumberErr() {
+		numeroErr.setVisible(true);
+	}
+	
+	public void upCvvErr() {
+		cvvErr.setVisible(true);
+	}
+	
 	public void checkEnteredName() throws EmptyNameException {
-		if (nomeTxt.getText().equals("") || cognomeTxt.getText().equals("")) {
+		if(nomeTxt.getText().isEmpty() && cognomeTxt.getText().isEmpty()) {
+			setTipoErr(2);
 			throw new EmptyNameException();
+		}else {
+			if (nomeTxt.getText().isEmpty()) {
+				setTipoErr(0);
+				throw new EmptyNameException();
+			}else if(cognomeTxt.getText().isEmpty()){
+				setTipoErr(1);
+				throw new EmptyNameException();
+			}
 		}
+	}
+	
+	public void reLoad() {
+		nomeErr.setVisible(false);
+		cognomeErr.setVisible(false);
+		numeroErr.setVisible(false);
+		cvvErr.setVisible(false);
 	}
 	
 	public boolean isNumber(String str) {
 		boolean flag = true;
 		
 		try {
-			Integer.parseInt(str);
+			Long.parseLong(str);
 		}catch(Exception e) {
 			flag = false;
 		}
 		
 		return flag;
 	}
-	
+
 	public void checkEnteredNumber() throws WrongNumberException {
-		if (nCartaTxt.getText().equals("") || nCartaTxt.getText().length() != 16 || isNumber(nCartaTxt.getText()) == false) {
+		if (nCartaTxt.getText().isEmpty() || nCartaTxt.getText().length() != 16 || isNumber(nCartaTxt.getText()) == false) {
 			throw new WrongNumberException();
 		}
 	}

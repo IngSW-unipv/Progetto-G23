@@ -41,6 +41,8 @@ public class PagamentoController extends AController{
 		v.getOkBtn().addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int n = 3;
+				v.reLoad();
 				try {
 					Email a = new Email();
 					String messaggio = "";
@@ -64,13 +66,19 @@ public class PagamentoController extends AController{
 					ControllerManager.getInstance().loadController(Type.PARTITE);
 					Sessione.getIstance().resetScelte();
 				}catch (EmptyNameException e2) {
-					
+					n = v.getTipoErr();
+					if (n == 0) v.upNameErr();
+					else if (n == 1) v.upSurnameErr();
+					else if (n == 2){
+						v.upNameErr();
+						v.upSurnameErr();
+					}
 					return;
 				}catch (WrongNumberException e3) {
-					
+					v.upNumberErr();
 					return;
 				}catch(WrongCvvException e4) {
-					
+					v.upCvvErr();
 					return;
 				}
 			}
