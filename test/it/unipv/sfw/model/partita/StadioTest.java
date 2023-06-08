@@ -24,11 +24,11 @@ class StadioTest {
 		for (int i = 1; i < Stadio.ANELLI_PER_SETTORE + 1; i++)
 			for (int j = 1; j < Stadio.BLOCCHI_PER_ANELLO + 1; j++)
 				for (int k = 1; k < Stadio.POSTI_PER_BLOCCO + 1; k++)
-					posti.add(new Posto(1, j, i, k, null));
+					posti.add(new Posto(1, i, j, k, null));
 		// Riempin un anello
 		for (int i = 1; i < Stadio.BLOCCHI_PER_ANELLO + 1; i++)
 			for (int j = 1; j < Stadio.POSTI_PER_BLOCCO + 1; j++)
-				posti.add(new Posto(2, i, 1, j, null));
+				posti.add(new Posto(2, 1, i, j, null));
 		// Riempi un blocco
 		for (int i = 1; i < Stadio.POSTI_PER_BLOCCO + 1; i++)
 			posti.add(new Posto(3, 1, 1, i, null));

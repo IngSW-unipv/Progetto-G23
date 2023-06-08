@@ -5,46 +5,34 @@ import java.util.GregorianCalendar;
 
 /**
  * Classe che rappresenta un posto dello {@link Stadio}.
- * @author Lorenzo Reale
+ * @author Lorenzo Reale, Gabriele Invernizzi
  * @see Stadio
  */
 public class Posto {
 
 	private int nSettore, nBlocco, nAnello, nPosto;
 	private Calendar data;
-	private boolean libero;
 
-	public Posto(int nSettore, int nBlocco, int nAnello, int nPosto, Calendar data) {
+	public Posto(int nSettore, int nAnello, int nBlocco, int nPosto, Calendar data) {
 		this.nPosto = nPosto;
-		data = new GregorianCalendar();
 		this.data = data;
 		this.nBlocco = nBlocco;
 		this.nAnello = nAnello;
 		this.nSettore = nSettore;
-		libero = true;
 	}
 
 	/**
-	 * Funzione utilizzata per segnalare che un posto è pieno.
-	 * @param  lib False se è pieno, altrimenti true.
+	 * @param data
 	 */
-	public void setLibero(boolean lib) {
-		libero = lib;
-	}
-	
 	public void setData(Calendar data) {
 		this.data = data;
 	}
 	
+	/**
+	 * @return La data della partita che è associata al posto.
+	 */
 	public Calendar getData() {
 		return data;
-	}
-
-	/**
-	 * @return False se il posto è occupato, altrimenti true.
-	 */
-	public boolean getLibero() {
-		return libero;
 	}
 
 	/**

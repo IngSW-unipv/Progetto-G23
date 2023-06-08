@@ -99,7 +99,7 @@ public class PostoDAO implements IPostoDAO {
 				Calendar data = Calendar.getInstance();
 				data = new GregorianCalendar();
 				data.setTime(date);
-				Posto p = new Posto(rs1.getInt(2), rs1.getInt(3), rs1.getInt(4), rs1.getInt(5), data);
+				Posto p = new Posto(rs1.getInt(2), rs1.getInt(4), rs1.getInt(3), rs1.getInt(5), data);
 				result.add(p);
 			}
 			
@@ -134,7 +134,7 @@ public class PostoDAO implements IPostoDAO {
 				Calendar data = Calendar.getInstance();
 				data = new GregorianCalendar();
 				data.setTime(date);
-				Posto p = new Posto(rs1.getInt(2), rs1.getInt(3), rs1.getInt(4), rs1.getInt(5), data);
+				Posto p = new Posto(rs1.getInt(2), rs1.getInt(4), rs1.getInt(3), rs1.getInt(5), data);
 				result.add(p);
 			}
 			
