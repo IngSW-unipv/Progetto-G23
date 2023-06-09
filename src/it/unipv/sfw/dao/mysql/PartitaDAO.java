@@ -5,6 +5,7 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -106,18 +107,20 @@ public class PartitaDAO implements IPartitaDAO {
 		PreparedStatement st1;
 		boolean esito = true;
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
+		
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?)";
+			String query = "INSERT INTO " + SCHEMA + "(DAT, AVVERSARIO, PREZZO, BIGLIETTI_RIMANENTI) VALUES(?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(1, newPartita.getData());
+			st1.setString(1, newPartita.getDataPerDB());
 			st1.setString(2, newPartita.getOspiti());
-			st1.setInt(3, bigliettiTot);	
+			st1.setInt(3,50);
+			st1.setInt(4, bigliettiTot);
 			
 			st1.executeUpdate();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			esito = false;
@@ -141,7 +144,7 @@ public class PartitaDAO implements IPartitaDAO {
 			st1 = conn.prepareStatement(query);
 			
 			st1.setInt(1, bigliettiTot - pDao.selectCount(newPartita.getCalendarDate()));
-			st1.setString(2, newPartita.getData());
+			st1.setString(2, newPartita.getDataPerDB());
 			
 			st1.executeUpdate();
 			
