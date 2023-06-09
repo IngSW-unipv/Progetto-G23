@@ -11,9 +11,9 @@ import javax.swing.JButton;
  * @author Jacopo Piccoli
  */
 public class SquadraButton extends JButton {
-	private int uso;
+	private boolean stato;
 
-	public SquadraButton(ImageIcon img) {
+	public SquadraButton(ImageIcon img,boolean stato) {
 		super(img);
 	}
 
@@ -22,12 +22,12 @@ public class SquadraButton extends JButton {
 		this.setIcon(img);
 	}
 
-	public int getUso() {
-		return uso;
+	public boolean getUso() {
+		return stato;
 	}
 
-	public void setUso(int uso) {
-		this.uso = uso;
+	public void setUso(boolean stato) {
+		this.stato = stato;
 	}
 
 }

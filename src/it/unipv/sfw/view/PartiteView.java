@@ -118,7 +118,7 @@ public class PartiteView extends AView {
 
 		for (int i = 0; i < righe; i++) {
 			d=par[i].getCalendarDate();
-			partite.add(new JLabel("<html>	Inter - " + par[i].getOspiti() + "<br><br>" + par[i].getData()+"<br><br></html>"));
+			partite.add(new JLabel("<html>	Inter - " + par[i].getOspiti() + "<br><br>" + par[i].getDataPerPartita()+"<br><br></html>"));
 			partite.get(i).setBorder(BorderFactory.createEmptyBorder(0,50,0,0));
 			
 			

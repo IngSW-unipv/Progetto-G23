@@ -8,7 +8,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
@@ -23,6 +25,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 
 import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.view.buttons.SquadraButton;
+import it.unipv.sfw.view.buttons.UtenteButton;
  
 public class AdminAddPartiteView extends AView {
 	
@@ -67,7 +70,7 @@ public class AdminAddPartiteView extends AView {
 		
 		for(int i=0;i<19;i++) {
 			nomesquadra.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
-			sceltasquadra.add(new SquadraButton(img.get(i)));
+			sceltasquadra.add(new SquadraButton(img.get(i),false));
 			squadra.add(new JPanel());
 			squadra.get(i).setLayout(new BorderLayout());
 			squadra.get(i).add(sceltasquadra.get(i),BorderLayout.CENTER);
@@ -135,8 +138,7 @@ public class AdminAddPartiteView extends AView {
 		infoConstraints.gridy = 2;
 		info.add(aggiungi, infoConstraints);
 		
-		info.setBorder(BorderFactory.createLineBorder(Color.black,5));
-		//info.setBorder(BorderFactory.createEmptyBorder(50,0,0,0));
+		//info.setBorder(BorderFactory.createLineBorder(Color.black,5));
 	
 		middle.setPreferredSize(new Dimension(dim.width,dim.height/2));
 		middle.setLayout(new GridLayout(2,1));
@@ -144,10 +146,58 @@ public class AdminAddPartiteView extends AView {
 		middle.add(info);
 		
 		
-		
 		this.setLayout(new BorderLayout());
 		this.add(titolo,BorderLayout.NORTH);
 		this.add(middle,BorderLayout.CENTER);
 	}
+	
+	
+	public Collection<SquadraButton> getButtons() {
+		return sceltasquadra;
+	}
+	
+	public JButton getAggiungiButton() {
+		return aggiungi;
+	}
+	
+	public void setUso() {
+		for(int i=0;i<19;i++) {
+			sceltasquadra.get(i).setUso(false);
+		}
+	}
+	public JButton getAggiungi() {
+		return aggiungi;
+	}
+	
+	public String getSquadraScelta() {
+		for(int i=0;i<19;i++) {
+			if(sceltasquadra.get(i).getUso()==true) {
+				
+				return nomesquadra.get(i).getText();
+			}
+		}
+		return null;
+	}
+	
+	public LocalDate getData() {
+		return data.getDate();
+	}
+	
+	public String getOra() {
+		return (String) orario.getSelectedItem();
+	}
+	
+	public void setSquadra() {
+		for(int i=0;i<19;i++) {
+			if(sceltasquadra.get(i).getUso()==true) {
+				sceltasquadra.get(i).setBackground(Color.GREEN);
+			}else {
+				sceltasquadra.get(i).setBackground(Color.WHITE);
+			}
+		}
+		
+	}
+	
+	
 
 }

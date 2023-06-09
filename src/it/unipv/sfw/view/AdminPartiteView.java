@@ -107,7 +107,7 @@ private int righe;
 		
 		for (int j = 0; j < righe; j++) {
 			d=par[j].getCalendarDate();
-			partite.add(new JLabel("<html> " + par[j].getOspiti() + "<br><br>" + par[j].getData()+"<br><br></html>"));
+			partite.add(new JLabel("<html> " + par[j].getOspiti() + "<br><br>" + par[j].getDataPerPartita()+"<br><br></html>"));
 			i.add(new JMenuBar());
 			info.add(new InfoMenu("informazioni",j));
 			infoPartita.add(new JLabel(""));
