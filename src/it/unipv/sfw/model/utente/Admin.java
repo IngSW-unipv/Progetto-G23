@@ -1,7 +1,5 @@
 package it.unipv.sfw.model.utente;
 
-import java.util.Calendar;
-
 /**
  * Classe che estende {@link Utente} e rappresenta l'admin. 
  * @author Federico Romano
