@@ -97,6 +97,8 @@ public class AdminDAO implements IAdminDAO {
 	
 	@Override
 	public boolean insertAdmin(Admin adminInput) {
+		// Assicura che l'email sia in lowercase.
+		adminInput.setEmail(adminInput.getEmail().toLowerCase());
 		
 		PreparedStatement st1;
 		boolean esito = true;

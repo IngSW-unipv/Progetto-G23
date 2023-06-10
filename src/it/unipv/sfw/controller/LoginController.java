@@ -69,7 +69,7 @@ public class LoginController extends AController {
 		
 		try {
 			Sessione.getIstance().login(
-					v.getUsernameField().getText(), 
+					v.getUsernameField().getText().toLowerCase(), 
 					v.getPasswordField().getPassword()
 			);
 		} catch (WrongPasswordException | AccountNotFoundException err) {

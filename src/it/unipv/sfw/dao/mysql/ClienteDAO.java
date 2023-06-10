@@ -107,6 +107,8 @@ public class ClienteDAO implements IClienteDAO {
 	
 	@Override
 	public boolean insertCliente(Cliente clienteInput) {
+		// Assicura che l'email sia in lowercase.
+		clienteInput.setEmail(clienteInput.getEmail().toLowerCase());
 		
 		PreparedStatement st1;
 		boolean esito = true;

@@ -63,7 +63,9 @@ public class UtenteDAO implements IUtenteDAO {
 	
 	@Override
 	public boolean insertUtente(Utente u) {
-
+		// Assicura che l'email sia in lowercase.
+		u.setEmail(u.getEmail().toLowerCase());
+		
 		PreparedStatement st1;
 		boolean esito = true;
 		

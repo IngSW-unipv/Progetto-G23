@@ -77,7 +77,7 @@ public class RegistrazioneController extends AController {
 		Cliente u = new Cliente(
 				v.getNome().getText(),
 				v.getCognome().getText(),
-				v.getEmail().getText(),
+				v.getEmail().getText().toLowerCase(),
 				new String(v.getPassword().getPassword()),
 				cal);
 		try {	
