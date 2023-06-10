@@ -67,6 +67,14 @@ public class AdminAddPartiteController extends AController{
 			}
 		});
 		
+		v.getHome().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(Type.APARTITE);
+			}
+		});
+		
 		view =v;
 	}
 	

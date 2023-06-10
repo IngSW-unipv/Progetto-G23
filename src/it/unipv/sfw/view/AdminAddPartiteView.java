@@ -33,11 +33,11 @@ public class AdminAddPartiteView extends AView {
 	
 	private ArrayList<JLabel> nomesquadra;
 	private ArrayList<ImageIcon> img;
-	private ImageIcon img2;
+	private ImageIcon img2,img3;
 	private ArrayList<SquadraButton> sceltasquadra;
 	private ArrayList<JPanel>squadra;
 	private JComboBox<String> orario;
-	private JButton aggiungi;
+	private JButton aggiungi,home;
 	private JPanel middle;
 	private DatePicker data;
 	
@@ -56,9 +56,22 @@ public class AdminAddPartiteView extends AView {
 		orario=new JComboBox<String>(opzioni);
 		middle=new JPanel();
 		
+		
+		
 		JLabel titolo=new JLabel("AGGIUNGI UNA PARTITA");
 		titolo.setFont(large);
-		titolo.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+		titolo.setHorizontalAlignment(JLabel.CENTER);
+		titolo.setBackground(Color.BLUE);
+		titolo.setOpaque(true);
+		
+		home=new JButton("");
+		img3=new ImageIcon((new ImageIcon(this.getClass().getResource("/home.png"))).getImage().getScaledInstance(50, 50,java.awt.Image.SCALE_SMOOTH  ));
+		home.setIcon(img3);
+		
+		JPanel top=new JPanel();
+		top.setLayout(new BorderLayout());
+		top.add(titolo,BorderLayout.CENTER);
+		top.add(home,BorderLayout.EAST);
 		
 		for(Squadre s: Squadre.values()) {
 			if(s!=Squadre.Inter) {
@@ -100,6 +113,7 @@ public class AdminAddPartiteView extends AView {
 		selezionesquadra.add(squadra.get(16));
 		selezionesquadra.add(squadra.get(17));
 		selezionesquadra.add(squadra.get(18));
+		selezionesquadra.setBorder(BorderFactory.createEmptyBorder(20,0,20,0));
 		selezionesquadra.setBackground(Color.black);
 		
 		JPanel info=new JPanel();
@@ -147,7 +161,7 @@ public class AdminAddPartiteView extends AView {
 		
 		
 		this.setLayout(new BorderLayout());
-		this.add(titolo,BorderLayout.NORTH);
+		this.add(top,BorderLayout.NORTH);
 		this.add(middle,BorderLayout.CENTER);
 	}
 	
@@ -185,6 +199,10 @@ public class AdminAddPartiteView extends AView {
 	
 	public String getOra() {
 		return (String) orario.getSelectedItem();
+	}
+	
+	public JButton getHome() {
+		return home;
 	}
 	
 	public void setSquadra() {
