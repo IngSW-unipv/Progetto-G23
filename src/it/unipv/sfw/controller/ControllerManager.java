@@ -22,6 +22,10 @@ import it.unipv.sfw.frame.Frame;
 
 public class ControllerManager {
 	
+	/**
+	 * Punto d'ingresso dell'applicazione.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ControllerManager m = ControllerManager.getInstance();
 		m.loadController(AController.Type.LOGIN);

@@ -4,11 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,7 +24,6 @@ import it.unipv.sfw.view.buttons.AnelloButton;
  */
 public class AnelloView extends AView {
 
-	private final int n_anelli = 3;
 	private JPanel contenitore;
 	private ArrayList<AnelloButton> a;
 	private ArrayList<JLabel>idAnello;
@@ -47,14 +44,14 @@ public class AnelloView extends AView {
 		img = new ImageIcon(this.getClass().getResource("/Spalti.JPG"));
 		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width),(int)(dim.height-60)/3,  java.awt.Image.SCALE_SMOOTH)); 
 				
-		for(int i=0;i<n_anelli;i++) {
+		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
 			int n_anello = 3 - i;
 			a.add(new AnelloButton(n_anello,img,true, stadio.isLibero(n_settore, n_anello)));
 			idAnello.add(new JLabel("A"+n_anello));
 			anello.add(new JPanel());
 		}
 		
-		for(int i=0;i<n_anelli;i++) {
+		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
 			anello.get(i).setLayout(new BorderLayout());
 			anello.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			anello.get(i).add(a.get(i), BorderLayout.CENTER);
@@ -87,7 +84,7 @@ public class AnelloView extends AView {
 		
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 		
-		for(int i=0;i<n_anelli;i++) {
+		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
 			a.get(i).modificaImg(img);
 			a.get(i).revalidate();
 			anello.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));

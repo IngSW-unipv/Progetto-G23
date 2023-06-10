@@ -53,18 +53,24 @@ public class Partita {
 	}
 
 	/**
-	 * @return La data della partita.
+	 * @return La data della partita in formato "dd / MMM / yyyy - HH:mm".
 	 */
 	public String getDataPerPartita() {
 		SimpleDateFormat formattedDate = new SimpleDateFormat("dd / MMM / yyyy - HH:mm");
 		return formattedDate.format(dataPartita.getTime());
 	}
 	
+	/**
+	 * @return La data della partita in formato "yyyy-MM-dd HH:mm:ss".
+	 */
 	public String getDataPerDB() {
 		SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return formattedDate.format(dataPartita.getTime());
 	}
 
+	/**
+	 * @return La data della partita in un Calendar.
+	 */
 	public Calendar getCalendarDate() {
 		return dataPartita;
 	}

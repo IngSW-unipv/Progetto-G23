@@ -24,7 +24,7 @@ public class BloccoController extends AController {
 	public void initialize(Dimension dim) {	
 		Sessione s = Sessione.getIstance();
 		Stadio stadio = new Stadio(s.getCurrentPartita().getCalendarDate());
-		view = new BloccoView(2500, dim, stadio, s.getSettore(), s.getAnello());
+		view = new BloccoView(dim, stadio, s.getSettore(), s.getAnello());
 		
 		ActionListener a = new ActionListener() {
 			@Override

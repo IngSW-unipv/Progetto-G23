@@ -5,11 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
-import it.unipv.sfw.controller.AController.Type;
-import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.model.utente.Sessione;
-import it.unipv.sfw.view.AView;
 import it.unipv.sfw.view.PostoView;
 import it.unipv.sfw.view.buttons.PostoButton;
 
@@ -27,7 +24,7 @@ public class PostoController extends AController {
 		Sessione s = Sessione.getIstance();
 		Stadio stadio = new Stadio(s.getCurrentPartita().getCalendarDate());
 		
-		PostoView v = new PostoView(50, dim, stadio, s.getSettore(), s.getAnello(), s.getBlocco());
+		PostoView v = new PostoView(dim, stadio, s.getSettore(), s.getAnello(), s.getBlocco());
 		
 		ActionListener a = new ActionListener() {
 			@Override

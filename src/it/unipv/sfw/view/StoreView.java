@@ -84,7 +84,7 @@ public class StoreView extends AView {
 		
 		JLabel title = new JLabel("STORE");
 		title.setForeground(Color.WHITE);
-		title.setFont(new java.awt.Font("Arial", 1, 24));
+		title.setFont(veryLargeFont);
 		title.setBackground(Color.BLACK);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -27,10 +26,9 @@ public class BloccoView extends AView {
 	private ArrayList<BloccoButton> blocco;
 	private ArrayList<JLabel> idBlocco;
 	private ArrayList<JPanel> gruppo;
-	private int b;
 	private  ImageIcon img;
 
-	public BloccoView(int ptot,Dimension dim, Stadio stadio, int n_settore, int n_anello) {
+	public BloccoView(Dimension dim, Stadio stadio, int n_settore, int n_anello) {
 		
 		tabellone = new JPanel();
 		tabellone.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
@@ -38,12 +36,11 @@ public class BloccoView extends AView {
 		idBlocco=new ArrayList<JLabel>();
 		gruppo=new ArrayList<JPanel>();
 
-		b = ptot / 50;
 		img=new ImageIcon(this.getClass().getResource("/blocco.jpg"));
 		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-50)/5,java.awt.Image.SCALE_SMOOTH));
 
-		for (int i = 0; i < b; i++) {
-			int n_blocco = 50 - i;
+		for (int i = 0; i < Stadio.BLOCCHI_PER_ANELLO; i++) {
+			int n_blocco = Stadio.BLOCCHI_PER_ANELLO - i;
 			blocco.add(new BloccoButton(n_blocco, img,true, stadio.isLibero(n_settore, n_anello, n_blocco)));
 			idBlocco.add(new JLabel("B"+n_blocco));
 			gruppo.add(new JPanel());
@@ -51,7 +48,7 @@ public class BloccoView extends AView {
 
 		}
 		
-		for(int i=0;i<b;i++) {
+		for(int i=0;i<Stadio.BLOCCHI_PER_ANELLO;i++) {
 			gruppo.get(i).setLayout(new BorderLayout());
 			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			gruppo.get(i).add(blocco.get(i), BorderLayout.CENTER);
@@ -63,7 +60,7 @@ public class BloccoView extends AView {
 		}
 		
 
-		tabellone.setLayout(new GridLayout((int) (b / 10),10));
+		tabellone.setLayout(new GridLayout((int) (Stadio.BLOCCHI_PER_ANELLO / 10),10));
 
 		for (JPanel j : gruppo) {
 			j.setSize(50, 30);
@@ -84,7 +81,7 @@ public class BloccoView extends AView {
 
 		tabellone.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 
-		for(int i=0;i<b;i++) {
+		for(int i=0;i<Stadio.BLOCCHI_PER_ANELLO;i++) {
 			blocco.get(i).modificaImg(img);
 			blocco.get(i).revalidate();
 			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));

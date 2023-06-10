@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,7 +30,7 @@ public class PostoView extends AView {
 	private ArrayList<JPanel> gruppo;
 	private ImageIcon img;
 
-	public PostoView(int posti,Dimension dim, Stadio stadio, int n_settore, int n_anello, int n_blocco) {
+	public PostoView(Dimension dim, Stadio stadio, int n_settore, int n_anello, int n_blocco) {
 
 		blocco = new JPanel();
 		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
@@ -43,8 +42,8 @@ public class PostoView extends AView {
 		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-100)/5,java.awt.Image.SCALE_SMOOTH));
 
 
-		for (int i = 0; i < posti; i++) {
-			int n_posto = 50 - i;
+		for (int i = 0; i < Stadio.POSTI_PER_BLOCCO; i++) {
+			int n_posto = Stadio.POSTI_PER_BLOCCO - i;
 			posto.add(new PostoButton(n_posto, img, true, stadio.isLibero(n_settore, n_anello, n_blocco, n_posto)));
 			nomeposto.add(new JLabel("" + n_posto));
 			nomeposto.get(i).setBackground(Color.red);
@@ -52,7 +51,7 @@ public class PostoView extends AView {
 
 		}
 
-		for (int i = 0; i < posti; i++) {
+		for (int i = 0; i < Stadio.POSTI_PER_BLOCCO; i++) {
 			gruppo.get(i).setLayout(new BorderLayout());
 			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			gruppo.get(i).add(posto.get(i), BorderLayout.CENTER);
@@ -89,7 +88,7 @@ public class PostoView extends AView {
 
 		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 		
-		for(int i=0;i<50;i++) {
+		for(int i=0;i<Stadio.POSTI_PER_BLOCCO;i++) {
 			posto.get(i).modificaImg(img);
 			posto.get(i).revalidate();
 			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
