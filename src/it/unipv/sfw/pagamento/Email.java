@@ -1,6 +1,5 @@
 package it.unipv.sfw.pagamento;
 
-import java.io.FileInputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class Email {
 	private static void init() {
 		props = new Properties();
 		try {
-			props.load(new FileInputStream("properties/mail_properties"));
+			props.load(Email.class.getClassLoader().getResourceAsStream("mail_properties"));
 			isInit = true;
 		} catch (Exception e) {
 			e.printStackTrace();

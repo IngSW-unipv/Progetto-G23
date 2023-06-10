@@ -1,6 +1,5 @@
 package it.unipv.sfw.dao.mysql;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -32,7 +31,7 @@ public class DBConnection implements AutoCloseable {
 		
 		try {
 			dbURL = String.format(dbURL,schema); 
-			
+
 			// Apertura connessione
 			conn = DriverManager.getConnection(dbURL);
 		} catch (SQLException e) {
@@ -46,7 +45,7 @@ public class DBConnection implements AutoCloseable {
 	private static void init() {
 		Properties p = new Properties(System.getProperties());
 		try {
-			p.load(new FileInputStream("properties/properties"));
+			p.load(DBConnection.class.getClassLoader().getResourceAsStream("properties"));
 			dbDriver = p.getProperty(PROPERTYDBDRIVER);
 			dbURL = p.getProperty(PROPERTYDBURL);
 			
