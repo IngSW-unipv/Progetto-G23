@@ -78,7 +78,7 @@ public class AdminModifyStoreView extends AView {
 		if (item != null) {
 			nome.setText(item.getKey().getNome());
 			prezzo.setText(String.format("%.2f", item.getKey().getPrezzo()));
-			quantita.setText("" + item.getVal());
+			quantita.setText("" + item.getValue());
 			descr.setText(item.getKey().getDescrizione());
 		}
 

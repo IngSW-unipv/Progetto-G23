@@ -33,7 +33,7 @@ public class StoreItemDAO implements IStoreItemDAO {
 
 			st1.setString(1, merch.getKey().getNome());                  
 			st1.setString(2, merch.getKey().getDescrizione());
-			st1.setInt(3, merch.getVal());
+			st1.setInt(3, merch.getValue());
 			st1.setDouble(4, merch.getKey().getPrezzo());
 			st1.setInt(5, merch.getKey().getId());
 			

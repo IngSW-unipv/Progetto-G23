@@ -68,7 +68,7 @@ public class AdminModifyStoreController extends AController {
 					merchToBeUpdated.getKey().setNomeMerch(nome);
 					merchToBeUpdated.getKey().setDescrizione(descr);
 					merchToBeUpdated.getKey().setPrezzo(prezzo);
-					merchToBeUpdated.setVal(quantita);
+					merchToBeUpdated.setValue(quantita);
 					
 					DAOFactory.createIStoreItemDAO().updateItem(merchToBeUpdated);
 					Sessione.getIstance().setMerchAdmin(null);
