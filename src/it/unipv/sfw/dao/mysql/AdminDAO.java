@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import it.unipv.sfw.dao.IAdminDAO;
 import it.unipv.sfw.model.utente.Admin;
@@ -32,11 +35,15 @@ public class AdminDAO implements IAdminDAO {
 			Connection conn = db.getConnection();
 			
 			st1 = conn.createStatement();
-			String query = "SELECT (NOME, COGNOME, EMAIL, PASSWORD) FROM " + SCHEMA + " WHERE TIPO='ADMIN'";
+			String query = "SELECT (NOME, COGNOME, EMAIL, PASSWORD,NASCITA) FROM " + SCHEMA + " WHERE TIPO='ADMIN'";
 			rs1 = st1.executeQuery(query);
 			
 			while(rs1.next()) {
-				Admin a = new Admin(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
+				String str = rs1.getString(6);
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
+				cal.setTime(sdf.parse(str));
+				Admin a = new Admin(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4),cal);
 				result.add(a);
 			}
 			
@@ -62,7 +69,11 @@ public class AdminDAO implements IAdminDAO {
 			rs1 = st1.executeQuery();
 			
 			while(rs1.next()) {
-				result = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4));
+				String str = rs1.getString(6);
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
+				cal.setTime(sdf.parse(str));
+				result = new Admin (rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4),cal);
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
