@@ -63,8 +63,9 @@ public class PostoDAO implements IPostoDAO {
 			
 			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE DAT=?";
 			st1 = conn.prepareStatement(query);
+			SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			
-			st1.setString(1, "" + dataPartita);
+			st1.setString(1, "" + formattedDate.format(dataPartita.getTime()));
 			
 			rs1 = st1.executeQuery();
 			

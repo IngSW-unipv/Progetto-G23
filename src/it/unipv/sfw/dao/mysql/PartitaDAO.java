@@ -107,7 +107,6 @@ public class PartitaDAO implements IPartitaDAO {
 		PreparedStatement st1;
 		boolean esito = true;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 		
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
