@@ -3,6 +3,7 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Time;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -79,12 +80,16 @@ public class BigliettoMuseoController extends AController {
 							(int) bview.getTotalPeople().getSelectedItem());
 					
 				}
+				catch (SQLIntegrityConstraintViolationException err){
+					bview.upDateError("Hai già preso un biglietto per questo giorno!");
+					return;
+				}
 				catch (WrongEmailFormatException err) {
 					bview.upEmailError();
 					return;
 				}
 				catch (EmptyDateException err) {
-					bview.upDateError();
+					bview.upDateError("Data non inserita!");
 					return;
 				}
 				catch (EmptyTimeException err) {

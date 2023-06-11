@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 	private static final String SCHEMA = "BIGLIETTI_MUSEO";
 	
 	@Override
-	public boolean insertBigliettiMuseo(Biglietto ticket, int numeroPersone) {
+	public boolean insertBigliettiMuseo(Biglietto ticket, int numeroPersone) throws SQLIntegrityConstraintViolationException{
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -43,10 +45,12 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 			
 			st1.executeUpdate(); 
 			
+		} catch (SQLException e) {
+			throw new SQLIntegrityConstraintViolationException();
 		} catch (Exception e) {
 			e.printStackTrace();
 			esito = false;
-		} 
+		}
 		
 		return esito;
 	}

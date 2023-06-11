@@ -240,8 +240,8 @@ public class BigliettoMuseoView extends AView {
 		contenitore.repaint();
 	}
 	
-	public void upDateError() {
-		d_error.setText("Data non inserita!");
+	public void upDateError(String errore) {
+		d_error.setText(errore);
 		dataError.setVisible(true);
 		emailError.setVisible(false);
 		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
