@@ -1,5 +1,6 @@
 package it.unipv.sfw.model.partita;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -32,6 +33,14 @@ public class Posto {
 	 */
 	public Calendar getData() {
 		return data;
+	}
+	
+	/**
+	 * @return La data in formato "yyyy-MM-dd HH:mm:ss".
+	 */
+	public String getDataPerDB() {
+		SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return formattedDate.format(data.getTime());
 	}
 
 	/**

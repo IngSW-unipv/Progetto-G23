@@ -139,7 +139,7 @@ public class PartitaDAO implements IPartitaDAO {
     	try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "UPDATE " + SCHEMA + " SET BIGLIETTIRIMANENTI=? WHERE DATA=?";
+			String query = "UPDATE " + SCHEMA + " SET BIGLIETTI_RIMANENTI=? WHERE DAT=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setInt(1, bigliettiTot - pDao.selectCount(newPartita.getCalendarDate()));

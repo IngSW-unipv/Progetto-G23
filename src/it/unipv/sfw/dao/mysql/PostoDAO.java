@@ -156,7 +156,7 @@ public class PostoDAO implements IPostoDAO {
 			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(1,"" + posto.getData());
+			st1.setString(1,"" + posto.getDataPerDB());
 			st1.setInt(2, posto.getNSettore());
 			st1.setInt(3, posto.getNBlocco());
 			st1.setInt(4, posto.getNAnello());
