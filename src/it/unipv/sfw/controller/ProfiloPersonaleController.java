@@ -7,12 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Collection;
 
-import it.unipv.sfw.controller.AController.Type;
-import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
-import it.unipv.sfw.model.partita.Partita;
-import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.ProfiloPersonaleView;
@@ -20,17 +16,18 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 
 public class ProfiloPersonaleController extends AController{
 	
-	private Cliente c; 
+	private Utente u; 
 
 	@Override
 	public void initialize(Dimension dim) {
 		try {
-			c = (Cliente)Sessione.getIstance().getCurrentUtente();
+			
+			u = Sessione.getIstance().getCurrentUtente();
 		} catch (Exception e) {
 		      System.out.println("Errore");
 	    }
 		
-		ProfiloPersonaleView v = new ProfiloPersonaleView(dim,c);
+		ProfiloPersonaleView v = new ProfiloPersonaleView(dim,u);
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -40,15 +37,22 @@ public class ProfiloPersonaleController extends AController{
 		};
 		
 		Collection<UtenteButton> btns = v.getButtons();
-		for (UtenteButton b : btns){
-			b.addActionListener(a);
+		if(u.getType()==it.unipv.sfw.model.utente.Utente.Type.CLIENTE) {
+			for (UtenteButton b : btns){
+				b.addActionListener(a);
+			}
 		}
 			
 		
 		v.getHome().addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControllerManager.getInstance().loadController(Type.PARTITE);
+				if(u.getType()==it.unipv.sfw.model.utente.Utente.Type.ADMIN) {
+					ControllerManager.getInstance().loadController(Type.APARTITE);
+					
+				}else {
+					ControllerManager.getInstance().loadController(Type.PARTITE);
+				}
 			}
 		});
 		
@@ -89,7 +93,7 @@ public class ProfiloPersonaleController extends AController{
 						
 				try {
 					Sessione.getIstance().commutaPassword(
-								c,
+								u,
 								new String(v.getVecchiaPassword().getPassword()),
 								new String(v.getNuovaPassword().getPassword())
 							);

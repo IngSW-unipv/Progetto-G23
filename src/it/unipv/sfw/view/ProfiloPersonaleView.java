@@ -23,74 +23,73 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 
 import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Utente;
+import it.unipv.sfw.model.utente.Utente.Type;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
 public class ProfiloPersonaleView extends AView {
 	
-	private JPanel titolo,dati,bottoni,contenitore;
+	private JPanel contenitore;
 	private JLabel errorLabel;
 	private JButton cambioPassBtn, homeBtn;
 	private ArrayList <UtenteButton> acquista;
 	private JPasswordField vecchiaPass,nuovaPass,confermaPass;
 	private JMenuBar i,abb;
 	private JMenu abbBtn,info;
-	private JTabbedPane tabbedPane;
-	private Icon img;
-	private String tipoClinte;
 	
 	
-	
-	public ProfiloPersonaleView(Dimension dim,Cliente cliente) {
+	public ProfiloPersonaleView(Dimension dim,Utente u) {
 		
 		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 24);
 		
-		titolo=new JPanel();
-		dati=new JPanel();
-		bottoni=new JPanel();
-		contenitore=new JPanel();
-		tabbedPane = new JTabbedPane();
+		
 		
 		JLabel titoloLabel=new JLabel("PROFILO PERSONALE");
-		titoloLabel.setBackground(Color.CYAN);
+		titoloLabel.setBackground(Color.BLUE);
 		titoloLabel.setOpaque(true);
 		titoloLabel.setFont(largeFont);
 		
 		JLabel nomeLabel=new JLabel("Nome:");
 		nomeLabel.setFont(mediumFont);
-		JLabel nome=new JLabel(cliente.getNome());
+		JLabel nome=new JLabel(u.getNome());
 		nome.setFont(mediumFont);
 		
 		JLabel cognomeLabel=new JLabel("Cognome:");
 		cognomeLabel.setFont(mediumFont);
-		JLabel cognome=new JLabel(cliente.getCognome());
+		JLabel cognome=new JLabel(u.getCognome());
 		cognome.setFont(mediumFont);
 		
 		JLabel emailLabel=new JLabel("Email:");
 		emailLabel.setFont(mediumFont);
-		JLabel email=new JLabel(cliente.getEmail());
+		JLabel email=new JLabel(u.getEmail());
 		email.setFont(mediumFont);
 		
 		JLabel dataLabel=new JLabel("Data di nascita:");
 		dataLabel.setFont(mediumFont);
-		JLabel datanascita=new JLabel(cliente.getDataNascita());
+		JLabel datanascita=new JLabel(""+u.getDataNascita());
 		datanascita.setFont(mediumFont);
 		
 		JLabel clienteLabel=new JLabel("Tipo di Utente:");
 		clienteLabel.setFont(mediumFont);
 		
-		if(cliente.getAbb() == null) {
-			tipoClinte="Cliente";
-		} else {
-			switch (cliente.getAbb().getTipoAbb()) {
-			case TESSERA: tipoClinte="Tesserato"; break;
-			case LIV1: tipoClinte = "Abbonato di livello 1"; break;
-			case LIV2: tipoClinte = "Abbonato di livello 2"; break;
-			case LIV3: tipoClinte = "Abbonato di livello 3"; break;
+		String tipoUtente = null;
+		if(u.getType()==Type.CLIENTE) {
+			if(((Cliente)u).getAbb() == null) {
+				tipoUtente="Cliente";
+			} else {
+				switch (((Cliente)u).getAbb().getTipoAbb()) {
+				case TESSERA: tipoUtente="Tesserato"; break;
+				case LIV1: tipoUtente = "Abbonato di livello 1"; break;
+				case LIV2: tipoUtente = "Abbonato di livello 2"; break;
+				case LIV3: tipoUtente = "Abbonato di livello 3"; break;
+				}
 			}
+		}else {
+			tipoUtente = "Amministratore";
 		}
 		
-		JLabel tipocliente=new JLabel(tipoClinte);
+		JLabel tipocliente=new JLabel(tipoUtente);
 		tipocliente.setFont(mediumFont);
 		
 		JLabel bigliettiLabel=new JLabel("Numero di Biglietti acquistati:");
@@ -124,59 +123,73 @@ public class ProfiloPersonaleView extends AView {
         abb3.setPreferredSize(d);
         abb3.setLayout(new BorderLayout());
         
-        acquista=new ArrayList<UtenteButton>();
+        JPanel bottoni=new JPanel();
         
-        acquista.add(new UtenteButton("Acquista",0));
-        acquista.add(new UtenteButton("Acquista",1));
-        acquista.add(new UtenteButton("Acquista",2));
-        
-        JLabel abb1Label=new JLabel("<html>Il primo livello include tutti i biglietti per le partite giocate in casa,<br> "
-        		+ "darà ai clienti una visibilità anticipata per la prenotazione dei biglietti,<br> "
-        		+ "e inoltre permetterà loro di prenotare un massimo di quattro biglietti.</html>");
-        
-        JLabel abb2Label=new JLabel("<html>Il secondo livello oltre ai vantaggi descritti per il primo livello, "
-        		+ "include un supplemento di due biglietti prenotabili e permetterà loro di prenotare i biglietti "
-        		+ "in un settore riservato solo agli abbonati di livello due e tre.</html>");
-        
-        JLabel abb3Label=new JLabel("<html>Il livello tre oltre ai vantaggi descritti per il primo e secondo livello, "
-        		+ "non limita i biglietti da loro prenotabili per le partite e include uno sconto sugli acquisti effettuabili "
-        		+ "sullo store e per l’acquisto di biglietti per il museo.<html>");
-        
-        abb1.add(abb1Label,BorderLayout.CENTER);
-        abb1.add(acquista.get(0),BorderLayout.SOUTH);
-        abb2.add(abb2Label,BorderLayout.CENTER);
-        abb2.add(acquista.get(1),BorderLayout.SOUTH);
-        abb3.add(abb3Label,BorderLayout.CENTER);
-        abb3.add(acquista.get(2),BorderLayout.SOUTH);
-        
-        tabbedPane.addTab("Abbonamento Liv. 1", abb1);
-        tabbedPane.addTab("Abbonamento Liv. 2", abb2);
-        tabbedPane.addTab("Abbonamento Liv. 3", abb3);
-		
-		abbBtn.add(tabbedPane);
-		abb.add(abbBtn);
+        if(u.getType()==Type.CLIENTE) {
+	        acquista=new ArrayList<UtenteButton>();
+	        
+	        acquista.add(new UtenteButton("Acquista",0));
+	        acquista.add(new UtenteButton("Acquista",1));
+	        acquista.add(new UtenteButton("Acquista",2));
+	        
+	        JLabel abb1Label=new JLabel("<html>Il primo livello include tutti i biglietti per le partite giocate in casa,<br> "
+	        		+ "darà ai clienti una visibilità anticipata per la prenotazione dei biglietti,<br> "
+	        		+ "e inoltre permetterà loro di prenotare un massimo di quattro biglietti.</html>");
+	        
+	        JLabel abb2Label=new JLabel("<html>Il secondo livello oltre ai vantaggi descritti per il primo livello, "
+	        		+ "include un supplemento di due biglietti prenotabili e permetterà loro di prenotare i biglietti "
+	        		+ "in un settore riservato solo agli abbonati di livello due e tre.</html>");
+	        
+	        JLabel abb3Label=new JLabel("<html>Il livello tre oltre ai vantaggi descritti per il primo e secondo livello, "
+	        		+ "non limita i biglietti da loro prenotabili per le partite e include uno sconto sugli acquisti effettuabili "
+	        		+ "sullo store e per l’acquisto di biglietti per il museo.<html>");
+	        
+	        abb1.add(abb1Label,BorderLayout.CENTER);
+	        abb1.add(acquista.get(0),BorderLayout.SOUTH);
+	        abb2.add(abb2Label,BorderLayout.CENTER);
+	        abb2.add(acquista.get(1),BorderLayout.SOUTH);
+	        abb3.add(abb3Label,BorderLayout.CENTER);
+	        abb3.add(acquista.get(2),BorderLayout.SOUTH);
+	        
+	        JTabbedPane tabbedPane=new JTabbedPane();
+	        tabbedPane.addTab("Abbonamento Liv. 1", abb1);
+	        tabbedPane.addTab("Abbonamento Liv. 2", abb2);
+	        tabbedPane.addTab("Abbonamento Liv. 3", abb3);
 			
-		JPanel abbPanel=new JPanel();
-		abbPanel.setLayout(new BorderLayout());
-		abbPanel.add(abb, BorderLayout.CENTER);
-		abbPanel.add(i, BorderLayout.EAST);
+			abbBtn.add(tabbedPane);
+			abb.add(abbBtn);
+				
+			JPanel abbPanel=new JPanel();
+			abbPanel.setLayout(new BorderLayout());
+			abbPanel.add(abb, BorderLayout.CENTER);
+			abbPanel.add(i, BorderLayout.EAST);
+			
+			
+			bottoni.setLayout(new FlowLayout());
+			bottoni.add(cambioPassBtn);
+			bottoni.add(abbPanel);
+			bottoni.setOpaque(true);
+        }else {
+        	
+        	bottoni.setLayout(new FlowLayout());
+    		bottoni.add(cambioPassBtn);
+    		bottoni.setOpaque(true);
+        }
 		
-		img = new ImageIcon(getClass().getResource("/home.png"));
+		Icon img = new ImageIcon(getClass().getResource("/home.png"));
 		
 		homeBtn=new JButton();
 		homeBtn.setIcon(img);
 		homeBtn.setBackground(Color.BLUE);
 		homeBtn.setOpaque(true);
 		
+		JPanel titolo=new JPanel();
 		titolo.setLayout(new BorderLayout());
-		titoloLabel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE,10));
+		titoloLabel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK,10));
 		titolo.add(titoloLabel,BorderLayout.CENTER);
 		titolo.add(homeBtn,BorderLayout.EAST);
 		
-		bottoni.setLayout(new FlowLayout());
-		bottoni.add(cambioPassBtn);
-		bottoni.add(abbPanel);
-		bottoni.setOpaque(true);
+		JPanel dati= new JPanel();
 
 		dati.setLayout(new GridLayout(6, 2, 0, 3));
 		dati.add(nomeLabel);
@@ -189,15 +202,15 @@ public class ProfiloPersonaleView extends AView {
 		dati.add(datanascita);
 		dati.add(clienteLabel);
 		dati.add(tipocliente);
-		dati.add(bigliettiLabel);
-		dati.add(bigliettiacquistati);
+		if(u.getType()==Type.CLIENTE) {
+			dati.add(bigliettiLabel);
+			dati.add(bigliettiacquistati);
+		}
+		
 		dati.setPreferredSize(new Dimension(dim.width/2,200));
 		dati.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,dim.width/5));
 		
 		JPanel cambiaPass=new JPanel();
-		JPanel titoloCambiaPass=new JPanel();
-		JPanel valoriCambioPass=new JPanel();
-		
 		JLabel cambiaPassword=new JLabel("Cambia Password");
 		JLabel vecchiaPassword=new JLabel("Vecchia Password*:");
 		JLabel nuovaPassword=new JLabel ("Nuova Password*:");
@@ -245,6 +258,7 @@ public class ProfiloPersonaleView extends AView {
 		cambiaPass.add(confermaPass, infoConstraints);
 		cambiaPass.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
 		
+		contenitore=new JPanel();
 		contenitore.setLayout(new BorderLayout());
 		contenitore.add(dati,BorderLayout.NORTH);
 		contenitore.add(cambiaPass,BorderLayout.WEST);
