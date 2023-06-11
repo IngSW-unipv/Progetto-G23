@@ -118,7 +118,7 @@ public class MuseoView extends AView {
 			pezzimuseo.add(pezzo);
 		}
 		
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*npezzi)));
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi)+510)));
 		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 500, 25));
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 
