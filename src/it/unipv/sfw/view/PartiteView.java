@@ -104,7 +104,8 @@ public class PartiteView extends AView {
 		titolo.setFont(large);
 		titolo.setBackground(Color.BLACK);
 		titolo.setOpaque(true);
-		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
+		titolo.setBorder(BorderFactory.createEmptyBorder(0,0,0,40));
+		titolo.setHorizontalAlignment(JLabel.CENTER);
 		
 		titlePanel.add(titolo);
 

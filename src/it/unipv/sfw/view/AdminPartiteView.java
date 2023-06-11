@@ -88,7 +88,8 @@ private int righe;
 		titolo.setFont(new java.awt.Font("Arial", 1, 24));
 		titolo.setBackground(Color.BLACK);
 		titolo.setOpaque(true);
-		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
+		titolo.setBorder(BorderFactory.createEmptyBorder(0,100,0,0));
+		titolo.setHorizontalAlignment(JLabel.CENTER);
 			
 		titlePanel.setLayout(new BorderLayout());
 		titlePanel.add(titolo,BorderLayout.CENTER);
