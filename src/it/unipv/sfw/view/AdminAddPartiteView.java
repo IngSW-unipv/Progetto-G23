@@ -38,7 +38,7 @@ public class AdminAddPartiteView extends AView {
 	private ArrayList<JPanel>squadra;
 	private JComboBox<String> orario;
 	private JButton aggiungi,home;
-	private JPanel middle;
+	private JPanel middle,selezionesquadra;
 	private DatePicker data;
 	
 	public AdminAddPartiteView(Dimension dim) {
@@ -50,7 +50,7 @@ public class AdminAddPartiteView extends AView {
 		squadra=new ArrayList<JPanel>();
 		img=new ArrayList<ImageIcon>();
 		sceltasquadra=new ArrayList<SquadraButton>();
-		JPanel selezionesquadra=new JPanel();
+		selezionesquadra=new JPanel();
 		data=new DatePicker();
 		data.setDateToToday();
 		orario=new JComboBox<String>(opzioni);
@@ -65,7 +65,7 @@ public class AdminAddPartiteView extends AView {
 		titolo.setOpaque(true);
 		
 		home=new JButton("");
-		img3=new ImageIcon((new ImageIcon(this.getClass().getResource("/home.png"))).getImage().getScaledInstance(50, 50,java.awt.Image.SCALE_SMOOTH  ));
+		img3=new ImageIcon((new ImageIcon(this.getClass().getResource("/home.png"))).getImage());
 		home.setIcon(img3);
 		
 		JPanel top=new JPanel();
@@ -213,6 +213,19 @@ public class AdminAddPartiteView extends AView {
 				sceltasquadra.get(i).setBackground(Color.WHITE);
 			}
 		}
+		
+	}
+	
+	public void onWindowResized(Dimension dim) {
+		/*for(int i=0;i<19;i++) {
+			img.get(i).setImage(img.get(i).getImage().getScaledInstance(dim.width/12, dim.height/12, java.awt.Image.SCALE_SMOOTH));
+			//sceltasquadra.get(i).modificaImg(new ImageIcon(img.get(i).getImage()));
+			squadra.get(i).revalidate();
+			squadra.get(i).repaint();
+		}*/
+
+		this.revalidate();
+		this.repaint();
 		
 	}
 	

@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
@@ -32,6 +33,13 @@ public class AdminPartiteController extends AController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//ControllerManager.getInstance().loadController(8);
+			}
+		});
+		
+		v.getProfiloPersonaleButton().addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerManager.getInstance().loadController(Type.PROFILO);
 			}
 		});
 		
