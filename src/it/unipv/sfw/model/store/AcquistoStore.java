@@ -1,6 +1,7 @@
 package it.unipv.sfw.model.store;
 
 import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Utente;
 
 /**
  * Classe che rappresenta l'acquisto di un item dello store 
@@ -11,10 +12,10 @@ import it.unipv.sfw.model.utente.Cliente;
 public class AcquistoStore {
 	
 	private Merchandising item;
-	private Cliente buyer;
+	private Utente buyer;
 	private int quantita;
 	
-	public AcquistoStore(Merchandising item, Cliente buyer, int quantita) {
+	public AcquistoStore(Merchandising item, Utente buyer, int quantita) {
 		this.setItem(item);
 		this.setBuyer(buyer);
 		this.setQuantita(quantita);
@@ -28,11 +29,11 @@ public class AcquistoStore {
 		this.item = item;
 	}
 
-	public Cliente getBuyer() {
+	public Utente getBuyer() {
 		return buyer;
 	}
 
-	public void setBuyer(Cliente buyer) {
+	public void setBuyer(Utente buyer) {
 		this.buyer = buyer;
 	}
 

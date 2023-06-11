@@ -37,7 +37,6 @@ public class PagamentoView extends AView{
 	
 	private final int ANNO = 2023;
 	
-	private Carta carta;
 	private JPanel infoPanel, btnsPanel;
 	private JButton backBtn, okBtn;
 	private JCheckBox salvaCb;
@@ -164,7 +163,6 @@ public class PagamentoView extends AView{
 		selectScadenza.add(meseOp);
 		selectScadenza.add(annoOp);
 		
-		
 		backBtn.setBackground(Color.WHITE);
 		backBtn.setFont(mediumFont);
 		okBtn.setBackground(Color.WHITE);
@@ -182,6 +180,7 @@ public class PagamentoView extends AView{
 		cvvPanel.add(cvvErr);
 		
 		infoPanel.setLayout(new GridLayout(6, 2, dim.width/192, 1));
+		infoPanel.setBorder(new EmptyBorder(dim.height/10, dim.width/7, dim.height/10,  dim.width/7));
 		infoPanel.add(nomePanel);
 		infoPanel.add(nomeTxt);
 		infoPanel.add(cognomePanel);
@@ -193,10 +192,6 @@ public class PagamentoView extends AView{
 		infoPanel.add(cvvPanel);
 		infoPanel.add(cvvTxt);
 		infoPanel.add(salvaCb);
-		
-		
-		
-		infoPanel.setBorder(new EmptyBorder(dim.height/10, dim.width/7, dim.height/10,  dim.width/7));
 
 		btnsPanel1.add(new JLabel("N.B. continuando riceverai una mail di conferma."));
 		btnsPanel2.setLayout(new GridLayout(1, 2));
