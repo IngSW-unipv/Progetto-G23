@@ -17,11 +17,10 @@ import it.unipv.sfw.model.abbonamento.TipoAbb;
  * @see it.unipv.sfw.model.abbonamento.TipoAbb
  */
 public class Cliente extends Utente {
-	private Calendar dataNascita;
 	private Abbonamento abb;
 
 	public Cliente(String nome, String cognome, String email, String pass, Calendar dataNascita) {
-		super(nome, cognome, email, pass);
+		super(nome, cognome, email, pass,dataNascita);
 		this.abb = null;
 		this.dataNascita = dataNascita;
 	}
@@ -34,14 +33,6 @@ public class Cliente extends Utente {
 		return abb;
 	}
 	
-	/**
-	 * @return La data di nascita del cliente.
-	 */
-	public String getDataNascita() {
-		SimpleDateFormat formattedDate = new SimpleDateFormat("YYYY-MM-dd");
-		return formattedDate.format(dataNascita.getTime());
-	}
-
 	/**
 	 * @param tipo Tipo di abbonamento.
 	 * @return Il prezzo del {@link TipoAbb} passato come parametro.

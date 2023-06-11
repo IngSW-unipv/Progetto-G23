@@ -1,5 +1,7 @@
 package it.unipv.sfw.model.utente;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -24,14 +26,24 @@ public abstract class Utente {
 	protected String email;
 	protected String password;
 	protected String s;
+	protected Calendar dataNascita;
 
-	public Utente(String nome, String cognome, String email, String pass) {
+	public Utente(String nome, String cognome, String email, String pass,Calendar dataNascita) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
 		this.password = pass;
+		this.dataNascita=dataNascita;
 	}
-	
+
+	/**
+	 * @return La data di nascita del cliente.
+	 */
+	public String getDataNascita() {
+		SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");
+		return formattedDate.format(dataNascita.getTime());
+	}
+
 	/**
 	 * @return Il tipo di utente (admin o cliente).
 	 */
