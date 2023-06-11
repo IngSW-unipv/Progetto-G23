@@ -60,7 +60,7 @@ public class BigliettoMuseoView extends AView {
 	
 		
 		contenitore = new JPanel();
-		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 0));
+		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 5));
 		contenitore.setAlignmentY(LEFT_ALIGNMENT);
 		
 		JPanel emailPanel = new JPanel();
@@ -100,9 +100,9 @@ public class BigliettoMuseoView extends AView {
 		chDate = new DateTimePicker(dateSettings, timeSettings);
 		chDate.setPreferredSize(new Dimension(300, 20));                      ////
 		LocalDate today = LocalDate.now();
-		dateSettings.setDateRangeLimits(today.minusDays(0), today.plusDays(70));
+		dateSettings.setDateRangeLimits(today.plusDays(1), today.plusDays(70));
 		dateSettings.setAllowKeyboardEditing(false);
-		timeSettings.generatePotentialMenuTimes(TimeIncrement.ThirtyMinutes, LocalTime.of(14, 0), LocalTime.of(18, 0));
+		timeSettings.generatePotentialMenuTimes(TimeIncrement.OneHour, LocalTime.of(14, 0), LocalTime.of(18, 0));
 		timeSettings.setAllowKeyboardEditing(false);
 		
 		i=new JMenuBar();

@@ -64,7 +64,9 @@ public class BigliettoMuseoController extends AController {
 					calendarDate.set(Calendar.HOUR, bview.getEnteredTime().getHour());
 					calendarDate.set(Calendar.MINUTE, bview.getEnteredTime().getMinute());
 					
-					Biglietto b = new Biglietto(bview.getEnteredEmail().toLowerCase(), bview.getEnteredEmail().toLowerCase(), bview.getPrice(), calendarDate, Time.valueOf(bview.getEnteredTime()));
+					Biglietto b = new Biglietto(bview.getEnteredEmail().toLowerCase(), bview.getEnteredEmail().toLowerCase(),
+												bview.getPrice(), calendarDate, Time.valueOf(bview.getEnteredTime()));
+					
 					HashMap<Biglietto, Integer> bigliettoScelte = new HashMap<Biglietto, Integer>();
 					bigliettoScelte.put(b, (int) bview.getTotalPeople().getSelectedItem());
 					Sessione.getIstance().setCurrentBiglietto(bigliettoScelte);
