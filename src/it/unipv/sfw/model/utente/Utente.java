@@ -28,7 +28,7 @@ public abstract class Utente {
 	protected String s;
 	protected Calendar dataNascita;
 
-	public Utente(String nome, String cognome, String email, String pass,Calendar dataNascita) {
+	public Utente(String nome, String cognome, String email, String pass, Calendar dataNascita) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
@@ -116,7 +116,7 @@ public abstract class Utente {
 		};
 	
 		// Controlla che non vi siano campi vuoti
-		if (isValid.test(nome) || isValid.test(cognome) || isValid.test(password))
+		if (isValid.test(nome) || isValid.test(cognome) || isValid.test(password) || dataNascita == null)
 			throw new EmptyFieldException();
 		// Controlla formato email
 		checkEmail(email);

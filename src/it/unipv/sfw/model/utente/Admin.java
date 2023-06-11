@@ -9,7 +9,7 @@ import java.util.Calendar;
  */
 public class Admin extends Utente {
 
-	public Admin(String nome, String cognome, String email, String pass,Calendar dataNascita) {
+	public Admin(String nome, String cognome, String email, String pass, Calendar dataNascita) {
 		super(nome, cognome, email, pass,dataNascita);
 	}
 
