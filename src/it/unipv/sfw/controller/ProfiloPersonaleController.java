@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Collection;
 
+import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.model.utente.Sessione;
@@ -17,6 +18,7 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 public class ProfiloPersonaleController extends AController{
 	
 	private Utente u; 
+	private int biglietti;
 
 	@Override
 	public void initialize(Dimension dim) {
@@ -26,8 +28,8 @@ public class ProfiloPersonaleController extends AController{
 		} catch (Exception e) {
 		      System.out.println("Errore");
 	    }
-		
-		ProfiloPersonaleView v = new ProfiloPersonaleView(dim,u);
+		biglietti=DAOFactory.createIPostoDAO().selectCount(u.getEmail());
+		ProfiloPersonaleView v = new ProfiloPersonaleView(dim,u,biglietti);
 		
 		ActionListener a = new ActionListener() {
 			@Override

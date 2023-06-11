@@ -38,7 +38,7 @@ public class ProfiloPersonaleView extends AView {
 	private JMenu abbBtn,info;
 	
 	
-	public ProfiloPersonaleView(Dimension dim,Utente u) {
+	public ProfiloPersonaleView(Dimension dim,Utente u, int biglietti) {
 		
 		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 24);
@@ -94,7 +94,7 @@ public class ProfiloPersonaleView extends AView {
 		
 		JLabel bigliettiLabel=new JLabel("Numero di Biglietti acquistati:");
 		bigliettiLabel.setFont(mediumFont);
-		JLabel bigliettiacquistati=new JLabel("0");
+		JLabel bigliettiacquistati=new JLabel(""+biglietti);
 		bigliettiacquistati.setFont(mediumFont);
 		
 		i=new JMenuBar();		
