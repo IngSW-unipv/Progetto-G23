@@ -127,7 +127,7 @@ public class AdminMuseoView extends AView {
 			buttons.add(pezzo.get(r.getId()).getRimuoviButton());
 		}
 		
-		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi))));
+		pezzimuseo.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (240*(npezzi)+510)));
 		pezzimuseo.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 		
 		JScrollPane scrollTrofei = new JScrollPane(pezzimuseo); 
