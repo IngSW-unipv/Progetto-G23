@@ -13,7 +13,7 @@ import java.util.Locale;
 
 import it.unipv.sfw.dao.IPostoDAO;
 import it.unipv.sfw.model.partita.Posto;
-import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Utente;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.partita.Posto}
@@ -145,7 +145,7 @@ public class PostoDAO implements IPostoDAO {
 	}
 
 	@Override
-	public boolean insertPosto(Posto posto, Cliente cliente) {
+	public boolean insertPosto(Posto posto, Utente utente) {
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -161,7 +161,7 @@ public class PostoDAO implements IPostoDAO {
 			st1.setInt(3, posto.getNBlocco());
 			st1.setInt(4, posto.getNAnello());
 			st1.setInt(5, posto.getNPosto());
-			st1.setString(6, cliente.getEmail());
+			st1.setString(6, utente.getEmail());
 			
 			st1.executeUpdate();
 			

@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import it.unipv.sfw.dao.mysql.PostoDAO;
 import it.unipv.sfw.model.partita.Posto;
-import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Utente;
 
 /**
  * Interfaccia DAO per {@link it.unipv.sfw.model.partita.Posto}.
@@ -20,7 +20,7 @@ public interface IPostoDAO {
 	 * @param posto Posto nuovo da inserire nel database.
 	 * @return True se l'inserimento è avvenuto con successo, altrimenti False.
 	 */
-	boolean insertPosto(Posto posto, Cliente cliente);
+	boolean insertPosto(Posto posto, Utente utente);
 	
 	/**
 	 * @param dataPartita Data identificativa di una partita di cui si vuole conoscere i posti occupati.

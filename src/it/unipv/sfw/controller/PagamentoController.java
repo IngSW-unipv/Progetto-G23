@@ -14,6 +14,8 @@ import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.partita.Partita;
+import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
@@ -70,6 +72,9 @@ public class PagamentoController extends AController{
 						break;
 					case 3:
 						messaggio = a.messaggioPartita();
+						Posto posto = new Posto(Sessione.getIstance().getSettore(), Sessione.getIstance().getAnello(), Sessione.getIstance().getBlocco(), Sessione.getIstance().getPosto(), Sessione.getIstance().getCurrentPartita().getCalendarDate());
+						DAOFactory.createIPostoDAO().insertPosto(posto, Sessione.getIstance().getCurrentUtente());
+						DAOFactory.createIPartitaDAO().updatePartita(Sessione.getIstance().getCurrentPartita());
 						break;
 					default:
 						messaggio = a.messaggioAbbonamento();
