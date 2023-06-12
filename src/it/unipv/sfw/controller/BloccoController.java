@@ -24,7 +24,7 @@ public class BloccoController extends AController {
 	public void initialize(Dimension dim) {	
 		Sessione s = Sessione.getIstance();
 		Stadio stadio = new Stadio(s.getCurrentPartita().getCalendarDate());
-		view = new BloccoView(dim, stadio, s.getSettore(), s.getAnello());
+		BloccoView v = new BloccoView(dim, stadio, s.getSettore(), s.getAnello());
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -35,9 +35,20 @@ public class BloccoController extends AController {
 			}
 		};
 		
-		Collection<BloccoButton> btns = ((BloccoView)view).getAllBloccoButton();
+		Collection<BloccoButton> btns = v.getAllBloccoButton();
 		for (BloccoButton b : btns)
 			b.addActionListener(a);
+
+		v.getHomeButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ControllerManager.getInstance().loadController(Type.PARTITE);
+			}
+		});
+		
+		view=v;
 	}
 
 	@Override

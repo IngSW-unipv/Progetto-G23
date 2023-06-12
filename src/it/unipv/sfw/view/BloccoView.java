@@ -3,12 +3,15 @@ package it.unipv.sfw.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -25,11 +28,28 @@ public class BloccoView extends AView {
 
 	private JPanel tabellone;
 	private ArrayList<BloccoButton> blocco;
+	private JButton homeBtn;
 	private ArrayList<JLabel> idBlocco;
 	private ArrayList<JPanel> gruppo;
 	private  ImageIcon img;
 
 	public BloccoView(Dimension dim, Stadio stadio, int n_settore, int n_anello) {
+		
+		Font largeFont = new Font("Arial", 1, 32);
+				
+		JLabel titolo=new JLabel("SELEZIONA UN BLOCCO");
+		titolo.setFont(largeFont);
+		titolo.setHorizontalAlignment(JLabel.CENTER);
+		titolo.setBorder(BorderFactory.createEmptyBorder(0,50,0,0));
+		
+		homeBtn=new JButton();
+		homeBtn.setIcon(new ImageIcon(getClass().getResource("/home.png")));
+		
+		JPanel title=new JPanel();
+		title.setLayout(new BorderLayout());
+		title.add(titolo,BorderLayout.CENTER);
+		title.add(homeBtn,BorderLayout.EAST);
+		
 		
 		tabellone = new JPanel();
 		tabellone.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
@@ -74,12 +94,17 @@ public class BloccoView extends AView {
 			tabellone.add(j);
 
 		}
-		
-		this.add(tabellone);
+		this.setLayout(new BorderLayout());
+		this.add(title,BorderLayout.NORTH);
+		this.add(tabellone,BorderLayout.CENTER);
 	}
 
 	public Collection<BloccoButton> getAllBloccoButton() {
 		return blocco;
+	}
+	
+	public JButton getHomeButton(){
+		return homeBtn;
 	}
 	
 	@Override
