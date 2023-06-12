@@ -51,7 +51,7 @@ public class AnelloView extends AView {
 			anello.add(new JPanel());
 		}
 		
-		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
+		for(int i=Stadio.ANELLI_PER_SETTORE;i>=0;i--) {
 			anello.get(i).setLayout(new BorderLayout());
 			anello.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			anello.get(i).add(a.get(i), BorderLayout.CENTER);

@@ -48,7 +48,7 @@ public class BloccoView extends AView {
 
 		}
 		
-		for(int i=0;i<Stadio.BLOCCHI_PER_ANELLO;i++) {
+		for(int i=Stadio.BLOCCHI_PER_ANELLO;i>=0;i--) {
 			gruppo.get(i).setLayout(new BorderLayout());
 			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			gruppo.get(i).add(blocco.get(i), BorderLayout.CENTER);
