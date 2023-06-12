@@ -46,25 +46,20 @@ public class PartiteView extends AView {
 	private int righe;
 	
 	// variabili del top
-	private JPanel top, bottoni;
 	private JButton bmuseo, bshop;
 	private MenuUtente u;
 	private ImageIcon img2;
 
 	// variabili del middle
-	private JPanel middle, p;
-	private JLabel titolo;
+	private JPanel partitePanel;
 	private ArrayList<JLabel> partite;
 	private ArrayList<UtenteButton> acquista;
 	private ArrayList<JPanel> tabellone;
 	private ArrayList<JLabel> immagini;
-	private JScrollPane pane;
 
 	public PartiteView(Partita[] par, Dimension dim) {
 
 		righe = par.length;
-		top = new JPanel();
-		bottoni = new JPanel();
 		u=new MenuUtente();
 		
 		Font medium=new Font("Arial", 1, 18);
@@ -77,11 +72,13 @@ public class PartiteView extends AView {
 		bshop.setBackground(Color.WHITE);
 		bshop.setFont(medium);
 
-
+		JPanel bottoni=new JPanel();
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		bottoni.add(bmuseo);
 		bottoni.add(bshop);
+		
+		JPanel top=new JPanel();
 
 		top.setLayout(new BorderLayout());
 		top.add(bottoni, BorderLayout.CENTER);
@@ -91,14 +88,15 @@ public class PartiteView extends AView {
 		top.setBackground(Color.gray);
 
 		// configurazione del middle
-		middle = new JPanel();
+		
 
-		p = new JPanel();
+		
 
 		JPanel titlePanel = new JPanel(); 
 		titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		titlePanel.setBackground(Color.BLACK);
 		
+		JLabel titolo=new JLabel();
 		titolo = new JLabel("PARTITE");
 		titolo.setForeground(Color.WHITE);
 		titolo.setFont(large);
@@ -131,7 +129,6 @@ public class PartiteView extends AView {
 			acquista.add(new UtenteButton("Acquista", i));
 			acquista.get(i).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 			
-			
 			tabellone.add(new JPanel());
 			tabellone.get(i).setPreferredSize(new Dimension(500,150));
 			tabellone.get(i).setLayout(new BorderLayout());
@@ -145,19 +142,20 @@ public class PartiteView extends AView {
 				acquista.get(i).setEnabled(false);
 			}
 		}
-		
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175*righe)));
+		partitePanel=new JPanel();
+		partitePanel.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175*righe)));
 
-		p.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
+		partitePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 
 		for (JPanel t : tabellone) {
-			p.add(t);
+			partitePanel.add(t);
 		}
-
-		pane = new JScrollPane(p);
+		
+		JScrollPane pane = new JScrollPane(partitePanel);
 
 		pane.getVerticalScrollBar().setUnitIncrement(10);
-
+		
+		JPanel middle = new JPanel();
 		middle.setLayout(new BorderLayout());
 		middle.add(titlePanel, BorderLayout.NORTH);
 		middle.add(pane, BorderLayout.CENTER);
@@ -186,9 +184,9 @@ public class PartiteView extends AView {
 	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175 * righe)));		
-		p.revalidate();
-		p.repaint();	
+		partitePanel.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175 * righe)));		
+		partitePanel.revalidate();
+		partitePanel.repaint();	
 	}
 	
 	public JMenuItem getExit() {
