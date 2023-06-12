@@ -80,7 +80,7 @@ public class Email {
 	public String messaggioAbbonamento() {
 		String messaggio = "";
 		
-		messaggio += "Pagamento effettuato. Nuovo livello di abbonamento: ";
+		messaggio += "Pagamento effettuato. Nuovo livello di abbonamento: " + Sessione.getIstance().getCurrentAbb();
 		
 		return messaggio;
 	}
@@ -107,14 +107,13 @@ public class Email {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Sessione.getIstance().getCurrentUtente().getEmail()));
-			
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lreale348@gmail,com"));
 			if(Sessione.getIstance().getCurrentPagamento() == 1) message.setSubject("Pagamento store StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 2) message.setSubject("Pagamento biglietto museo StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 3) message.setSubject("Pagamento biglietto partita StadiumSystem");
-			message.setContent(messaggio, "text/plain"); Transport.send(message);
+			message.setContent(messaggio, "text/plain"); 
+			Transport.send(message);
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MessagingException();
 		}
 	}
 	
@@ -128,7 +127,7 @@ public class Email {
 			else if (Sessione.getIstance().getCurrentPagamento() == 3) message.setSubject("Pagamento biglietto partita StadiumSystem");
 			message.setContent(messaggio, "text/plain"); Transport.send(message);
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MessagingException();
 		}
 	}
 	
