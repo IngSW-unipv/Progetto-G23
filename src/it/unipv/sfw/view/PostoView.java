@@ -51,7 +51,7 @@ public class PostoView extends AView {
 
 		}
 
-		for (int i = 0; i < Stadio.POSTI_PER_BLOCCO; i++) {
+		for (int i=Stadio.POSTI_PER_BLOCCO;i>=0;i--) {
 			gruppo.get(i).setLayout(new BorderLayout());
 			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			gruppo.get(i).add(posto.get(i), BorderLayout.CENTER);
