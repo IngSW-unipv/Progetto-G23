@@ -105,7 +105,6 @@ public class AdminPartiteController extends AController{
 				Calendar cal=Calendar.getInstance();
 				cal.setTime(data);
 				postioccupati = DAOFactory.createIPostoDAO().selectCount(cal);
-				System.out.println(postioccupati);
 				v.OpenInfoPartita(true,code,postioccupati);
 				
 			}

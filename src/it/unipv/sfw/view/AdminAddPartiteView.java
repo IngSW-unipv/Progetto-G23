@@ -217,12 +217,12 @@ public class AdminAddPartiteView extends AView {
 	}
 	
 	public void onWindowResized(Dimension dim) {
-		/*for(int i=0;i<19;i++) {
+		for(int i=0;i<19;i++) {
 			img.get(i).setImage(img.get(i).getImage().getScaledInstance(dim.width/12, dim.height/12, java.awt.Image.SCALE_SMOOTH));
-			//sceltasquadra.get(i).modificaImg(new ImageIcon(img.get(i).getImage()));
+			sceltasquadra.get(i).modificaImg(new ImageIcon(img.get(i).getImage()));
 			squadra.get(i).revalidate();
 			squadra.get(i).repaint();
-		}*/
+		}
 
 		this.revalidate();
 		this.repaint();
