@@ -3,6 +3,8 @@ package it.unipv.sfw.dao.mysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -31,8 +33,8 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 			Connection conn = db.getConnection();	
 			
 			st1 = conn.createStatement();
-			String query = "SELECT NOME, COGNOME, NUMERO, SCADENZA_MESE, SCADENZA_ANNO"
-						 + "FROM " + SCHEMA + " WHERE A = EMAIL";
+			String query = "SELECT NOME, COGNOME, NUMERO, SCADENZA_MESE, SCADENZA_ANNO "
+						 + "FROM " + SCHEMA;
 			
 			
 			rs1 = st1.executeQuery(query);
@@ -48,7 +50,35 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 	}
 	
 	@Override
-	public boolean insertCarta(Carta carta) {
+	public ArrayList<Carta> selectByUtente() {
+			
+		ArrayList<Carta> result= new ArrayList<>();
+			
+		PreparedStatement st1;
+		ResultSet rs1;
+			
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();	
+			
+			String query = "SELECT NOME, COGNOME, NUMERO, SCADENZA_MESE, SCADENZA_ANNO "
+						 + "FROM " + SCHEMA + " WHERE EMAIL=?";
+			st1 = conn.prepareStatement(query);
+			
+			st1.setString(1, Sessione.getIstance().getCurrentUtente().getEmail());
+			rs1 = st1.executeQuery(query);
+				
+			while(rs1.next()) {
+				Carta carta = new Carta(rs1.getString(1), rs1.getString(2), rs1.getInt(3), rs1.getInt(4), rs1.getInt(5), 0);
+				result.add(carta);
+			}
+			
+		} catch (Exception e){e.printStackTrace();}
+		
+		return result;
+	}
+	
+	@Override
+	public boolean insertCarta(Carta carta) throws SQLIntegrityConstraintViolationException{
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -68,8 +98,9 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 			
 			st1.executeUpdate(); 
 			
+		} catch (SQLException e) {
+			throw new SQLIntegrityConstraintViolationException();
 		} catch (Exception e) {
-			e.printStackTrace();
 			esito = false;
 		} 
 		
