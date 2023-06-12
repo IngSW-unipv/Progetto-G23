@@ -3,6 +3,7 @@ package it.unipv.sfw.controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,11 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.mail.MessagingException;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.EventListenerList;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyNameException;
@@ -48,6 +54,17 @@ public class PagamentoController extends AController{
 				}
 			}
 		});
+		
+		if(v.riempiCarte() == true) {
+			
+			v.getCarte().addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					v.setCarta();
+				}
+			});
+		}
 		
 		v.getOkBtn().addActionListener(new ActionListener() {	
 			@Override
@@ -94,7 +111,15 @@ public class PagamentoController extends AController{
 						break;
 					}
 					
-					if (v.getsalvaCB().isSelected()) DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0));
+					if (v.getsalvaCB().isSelected()) { 
+						try{
+							DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0));
+						}catch (SQLIntegrityConstraintViolationException err) {
+							v.upNumberErr();
+							return;
+						}
+					
+					}
 					
 					try {
 						if (Sessione.getIstance().getCurrentPagamento() == 2) a.sendEmail(messaggio, Sessione.getIstance().getCurrentBiglietto().getEmail());

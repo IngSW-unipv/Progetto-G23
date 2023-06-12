@@ -28,6 +28,10 @@ public class Carta {
 		return nCartaCredito;
 	}
 	
+	public String getnCartaCreditoStr() {
+		return "" + nCartaCredito;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

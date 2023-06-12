@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.GridBagLayoutInfo;
 import java.awt.GridLayout;
 import java.awt.geom.Dimension2D;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -23,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyDateException;
 import it.unipv.sfw.exceptions.EmptyNameException;
 import it.unipv.sfw.exceptions.WrongCvvException;
@@ -38,12 +40,14 @@ public class PagamentoView extends AView{
 	private final int ANNO = 2023;
 	
 	private JPanel infoPanel, btnsPanel;
-	private JButton backBtn, okBtn;
+	private JButton backBtn, okBtn, carteBtn;
 	private JCheckBox salvaCb;
 	private JTextField nomeTxt, cognomeTxt, nCartaTxt, cvvTxt;
 	private JComboBox <Integer> meseOp, annoOp;
 	private JLabel nomeErr, cognomeErr, numeroErr, scadenzaErr, cvvErr;
 	private int tipoErr; // 0 - nome, 1 - cognome, 2 - entrambi
+	private ArrayList <Carta> carteDisp = new ArrayList<>();
+	private JComboBox <String> cartaOp;
 	
 	public PagamentoView(Dimension dim) {
 		// Fonts
@@ -159,7 +163,7 @@ public class PagamentoView extends AView{
 		meseOp.setSelectedIndex(0);
 		annoOp.setSelectedIndex(5);
 		salvaCb.setFont(shortFont);
-
+		
 		selectScadenza.add(meseOp);
 		selectScadenza.add(annoOp);
 		
@@ -179,7 +183,7 @@ public class PagamentoView extends AView{
 		cvvPanel.add(cvv);
 		cvvPanel.add(cvvErr);
 		
-		infoPanel.setLayout(new GridLayout(6, 2, dim.width/192, 1));
+		infoPanel.setLayout(new GridLayout(7, 2, dim.width/192, 1));
 		infoPanel.setBorder(new EmptyBorder(dim.height/10, dim.width/7, dim.height/10,  dim.width/7));
 		infoPanel.add(nomePanel);
 		infoPanel.add(nomeTxt);
@@ -191,6 +195,24 @@ public class PagamentoView extends AView{
 		infoPanel.add(selectScadenza);
 		infoPanel.add(cvvPanel);
 		infoPanel.add(cvvTxt);
+		if(riempiCarte() == true) {
+			String [] numeri = new String[99];
+			for(int i=0; i<carteDisp.size(); i++) {
+				numeri[i] = "" + carteDisp.get(i).getnCartaCredito();
+			}
+			cartaOp = new JComboBox<>(numeri);
+			JLabel carteSalvate = new JLabel("Carte salvate:");
+			carteBtn = new JButton("Usa carta");
+			JPanel cartePanel = new JPanel();
+			cartePanel.add(carteSalvate);
+			cartePanel.add(carteBtn);
+			cartePanel.setLayout(new GridLayout(2, 1));
+			numeroPanel.add(numero);
+			numeroPanel.add(numeroErr);
+			carteSalvate.setFont(largeFont);
+			infoPanel.add(cartePanel);
+			infoPanel.add(cartaOp);
+		}
 		infoPanel.add(salvaCb);
 
 		btnsPanel1.add(new JLabel("N.B. continuando riceverai una mail di conferma."));
@@ -226,6 +248,29 @@ public class PagamentoView extends AView{
 		btnsPanel.revalidate();
 		infoPanel.repaint();
 		btnsPanel.repaint();
+	}
+	
+	public JButton getCarte() {
+		return carteBtn;
+	}
+	
+	public void setCarta() {
+		for(int i=0; i<carteDisp.size(); i++ ) {
+			if(carteDisp.get(i).getnCartaCreditoStr().equals(cartaOp.getSelectedItem())) {
+				nomeTxt.setText(carteDisp.get(i).getNome());
+				cognomeTxt.setText(carteDisp.get(i).getCognome());
+				nCartaTxt.setText("" + carteDisp.get(i).getnCartaCredito());
+				meseOp.setSelectedItem(carteDisp.get(i).getMeseScadenza());
+				annoOp.setSelectedItem(carteDisp.get(i).getAnnoScadenza());
+			}
+		}
+	}
+	
+	public boolean riempiCarte() {
+		boolean flag = true;
+		carteDisp = DAOFactory.createICartaPagamentoDAO().selectAll();
+		if(carteDisp.isEmpty()) flag = false;
+		return flag;
 	}
 	
 	public void setTipoErr(int tipoErr) {
@@ -278,7 +323,7 @@ public class PagamentoView extends AView{
 		boolean flag = true;
 		
 		try {
-			Long.parseLong(str);
+			Integer.parseInt(str);
 		}catch(Exception e) {
 			flag = false;
 		}
@@ -287,7 +332,7 @@ public class PagamentoView extends AView{
 	}
 
 	public void checkEnteredNumber() throws WrongNumberException {
-		if (nCartaTxt.getText().isEmpty() || nCartaTxt.getText().length() != 16 || isNumber(nCartaTxt.getText()) == false) {
+		if (nCartaTxt.getText().isEmpty() || nCartaTxt.getText().length() != 8 || isNumber(nCartaTxt.getText()) == false) {
 			throw new WrongNumberException();
 		}
 	}
