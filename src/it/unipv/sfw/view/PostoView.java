@@ -66,20 +66,7 @@ public class PostoView extends AView {
 				gruppo.get(n_posto).setBackground(Color.RED);
 			gruppo.get(n_posto).setOpaque(true);
 		}
-/*
-		for (int i=Stadio.POSTI_PER_BLOCCO-1;i>=0;i--) {
-			gruppo.get(i).setLayout(new BorderLayout());
-			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
-			gruppo.get(i).add(posto.get(i), BorderLayout.CENTER);
-			gruppo.get(i).add(nomeposto.get(i), BorderLayout.SOUTH);
-			nomeposto.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
-			if (stadio.isLibero(n_settore, n_anello, n_blocco, i))
-				gruppo.get(49-i).setBackground(Color.GREEN);
-			else
-				gruppo.get(i).setBackground(Color.RED);
-			gruppo.get(i).setOpaque(true);
-		}
-*/
+		
 		blocco.setLayout(new GridLayout(5,10));
 
 		for (JPanel j : gruppo) {
