@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,7 +27,7 @@ import it.unipv.sfw.model.partita.Partita.Squadre;
 public class PartitaDAO implements IPartitaDAO {
 
 	private static final String SCHEMA = "PARTITE";
-	private final int bigliettiTot = 80000;
+	private final int bigliettiTot = 60000;
 	
 	@Override
 	public ArrayList<Partita> selectAllOrdered() {
@@ -102,7 +104,7 @@ public class PartitaDAO implements IPartitaDAO {
 	}
 	
 	@Override
-	public boolean insertPartita(Partita newPartita) {
+	public boolean insertPartita(Partita newPartita) throws SQLIntegrityConstraintViolationException{
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -120,8 +122,9 @@ public class PartitaDAO implements IPartitaDAO {
 			st1.setInt(4, bigliettiTot);
 			
 			st1.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLIntegrityConstraintViolationException();
 		} catch (Exception e) {
-			e.printStackTrace();
 			esito = false;
 		} 
 		

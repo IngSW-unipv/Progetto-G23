@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -93,7 +94,11 @@ public class AdminAddPartiteController extends AController{
 			Date date = (Date) sdf.parse(data_ora);
 			cal=Calendar.getInstance();
 			cal.setTime(date);
-			DAOFactory.createIPartitaDAO().insertPartita(new Partita(cal,ospiti));
+			try {
+				DAOFactory.createIPartitaDAO().insertPartita(new Partita(cal,ospiti));
+			} catch (SQLIntegrityConstraintViolationException e) {
+				System.out.println("Partita già programmata per questa data!");
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

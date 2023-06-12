@@ -1,5 +1,6 @@
 package it.unipv.sfw.dao;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -28,8 +29,9 @@ public interface IPartitaDAO {
 	/**
 	 * @param newPartita Partita da inserire nel database.
 	 * @return True se l'inserimento è avvenuto con successo, altrimenti False.
+	 * @throws SQLIntegrityConstraintViolationException 
 	 */
-	boolean insertPartita(Partita newPartita);
+	boolean insertPartita(Partita newPartita) throws SQLIntegrityConstraintViolationException;
 
 	/**
 	 * @param newPartita Partita di cui si vuole aggiornare il campo 'bigliettirimanenti'.
