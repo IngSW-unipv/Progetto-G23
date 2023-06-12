@@ -216,6 +216,8 @@ public class ProfiloPersonaleView extends AView {
 		JLabel nuovaPassword=new JLabel ("Nuova Password*:");
 		JLabel confermaPassword=new JLabel("Conferma nuova password*:");
 		errorLabel=new JLabel("");
+		errorLabel.setFont(mediumFont);
+		errorLabel.setForeground(Color.red);
 		
 		vecchiaPass=new JPasswordField();
 		nuovaPass=new JPasswordField();
@@ -232,12 +234,14 @@ public class ProfiloPersonaleView extends AView {
 		GridBagConstraints infoConstraints = new GridBagConstraints();
 
 		infoConstraints.fill = GridBagConstraints.HORIZONTAL;
-		infoConstraints.gridwidth = 2;
 		infoConstraints.insets = new Insets(7, 1, 5, 15);
 		
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 0;
 		cambiaPass.add(cambiaPassword, infoConstraints);
+		infoConstraints.gridx = 1;
+		infoConstraints.gridy = 0;
+		cambiaPass.add(errorLabel, infoConstraints);
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 1;
 		cambiaPass.add(vecchiaPassword, infoConstraints);

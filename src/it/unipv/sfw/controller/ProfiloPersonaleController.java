@@ -111,6 +111,8 @@ public class ProfiloPersonaleController extends AController{
 								new String(v.getVecchiaPassword().getPassword()),
 								new String(v.getNuovaPassword().getPassword())
 							);
+					ControllerManager.getInstance().loadController(Type.PARTITE);
+					
 				} catch(PasswordPrecedenteErrataException err) {
 					v.ErroreVecchiaPassword();			
 				} catch(OldPasswordReusedException err) {
