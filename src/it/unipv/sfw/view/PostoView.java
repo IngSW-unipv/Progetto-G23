@@ -34,36 +34,52 @@ public class PostoView extends AView {
 
 		blocco = new JPanel();
 		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		gruppo = new ArrayList<JPanel>();
-		posto = new ArrayList<PostoButton>();
-		nomeposto = new ArrayList<JLabel>();
+		gruppo = new ArrayList<JPanel>(Stadio.POSTI_PER_BLOCCO);
+		posto = new ArrayList<PostoButton>(Stadio.POSTI_PER_BLOCCO);
+		nomeposto = new ArrayList<JLabel>(Stadio.POSTI_PER_BLOCCO);
+		for (int i = 0; i < Stadio.POSTI_PER_BLOCCO; i++) {
+			gruppo.add(null);
+			posto.add(null);
+			nomeposto.add(null);
+		}
 
 		img = new ImageIcon(getClass().getResource("/Posto.jpg"));
 		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-100)/5,java.awt.Image.SCALE_SMOOTH));
 
-
+		
 		for (int i = 0; i < Stadio.POSTI_PER_BLOCCO; i++) {
-			int n_posto = Stadio.POSTI_PER_BLOCCO - i;
-			posto.add(new PostoButton(n_posto, img, true, stadio.isLibero(n_settore, n_anello, n_blocco, n_posto)));
-			nomeposto.add(new JLabel("" + n_posto));
-			nomeposto.get(i).setBackground(Color.red);
-			gruppo.add(new JPanel());
-
+			int n_posto = Stadio.POSTI_PER_BLOCCO - i - 1;
+			boolean isLibero = stadio.isLibero(n_settore, n_anello, n_blocco, n_posto+1);
+			posto.set(n_posto, new PostoButton(n_posto+1, img, true, isLibero));
+			nomeposto.set(n_posto, new JLabel("" + (n_posto+1)));
+			nomeposto.get(n_posto).setBackground(Color.red);
+			gruppo.set(n_posto, new JPanel());
+			
+			gruppo.get(n_posto).setLayout(new BorderLayout());
+			gruppo.get(n_posto).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
+			gruppo.get(n_posto).add(posto.get(n_posto), BorderLayout.CENTER);
+			gruppo.get(n_posto).add(nomeposto.get(n_posto), BorderLayout.SOUTH);
+			nomeposto.get(n_posto).setHorizontalAlignment((int) CENTER_ALIGNMENT);
+			if (isLibero)
+				gruppo.get(n_posto).setBackground(Color.GREEN);
+			else
+				gruppo.get(n_posto).setBackground(Color.RED);
+			gruppo.get(n_posto).setOpaque(true);
 		}
-
-		for (int i=Stadio.POSTI_PER_BLOCCO;i>=0;i--) {
+/*
+		for (int i=Stadio.POSTI_PER_BLOCCO-1;i>=0;i--) {
 			gruppo.get(i).setLayout(new BorderLayout());
 			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			gruppo.get(i).add(posto.get(i), BorderLayout.CENTER);
 			gruppo.get(i).add(nomeposto.get(i), BorderLayout.SOUTH);
 			nomeposto.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
 			if (stadio.isLibero(n_settore, n_anello, n_blocco, i))
-				gruppo.get(i).setBackground(Color.GREEN);
+				gruppo.get(49-i).setBackground(Color.GREEN);
 			else
 				gruppo.get(i).setBackground(Color.RED);
 			gruppo.get(i).setOpaque(true);
 		}
-
+*/
 		blocco.setLayout(new GridLayout(5,10));
 
 		for (JPanel j : gruppo) {
