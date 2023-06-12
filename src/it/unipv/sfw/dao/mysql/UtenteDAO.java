@@ -114,9 +114,9 @@ public class UtenteDAO implements IUtenteDAO {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALY);
 				cal.setTime(sdf.parse(str));
 				if (tipo.equals("" + Type.ADMIN)) {
-					result = new Admin(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4),cal);
+					result = new Admin(rs1.getString(3), rs1.getString(2), rs1.getString(1), rs1.getString(4),cal);
 				} else if (tipo.equals("" + Type.CLIENTE)) {
-					result = new Cliente(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), cal);
+					result = new Cliente(rs1.getString(3), rs1.getString(2), rs1.getString(1), rs1.getString(4), cal);
 				}
 			}
 			

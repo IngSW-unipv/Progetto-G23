@@ -131,7 +131,7 @@ public class ProfiloPersonaleView extends AView {
 	        acquista.add(new UtenteButton("Acquista",0));
 	        acquista.add(new UtenteButton("Acquista",1));
 	        acquista.add(new UtenteButton("Acquista",2));
-	        
+
 	        JLabel abb1Label=new JLabel("<html>Il primo livello include tutti i biglietti per le partite giocate in casa,<br> "
 	        		+ "darà ai clienti una visibilità anticipata per la prenotazione dei biglietti,<br> "
 	        		+ "e inoltre permetterà loro di prenotare un massimo di quattro biglietti.</html>");

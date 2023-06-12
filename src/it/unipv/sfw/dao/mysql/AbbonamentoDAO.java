@@ -26,12 +26,11 @@ public class AbbonamentoDAO implements IAbbonamentoDAO {
     	try (DBConnection db = new DBConnection(SCHEMA)) {
     		Connection conn = db.getConnection();
     		
-			String query = "INSERT INTO " +  SCHEMA + " VALUES(?,?) WHERE CLIENTE.EMAIL=?";
+			String query = "INSERT INTO " +  SCHEMA + " VALUES(?,?)";
 			st1 = conn.prepareStatement(query);
-			
+
 			st1.setString(1, nuovoAbbonato.getEmail());
-			st1.setString(2, "" + nuovoAbbonato.getAbb().getTipoAbb());
-			st1.setString(3, nuovoAbbonato.getEmail());
+			st1.setString(2, nuovoAbbonato.getAbb().getTipoAbb().toString());
 			
 			st1.executeUpdate();
 			

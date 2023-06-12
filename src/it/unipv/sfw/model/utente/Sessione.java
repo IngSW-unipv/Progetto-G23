@@ -11,6 +11,7 @@ import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
+import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
@@ -36,6 +37,7 @@ public class Sessione {
 	private Utente currentUtente;
 	private HashMap<Biglietto, Integer> currentBiglietto;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
+	private TipoAbb currentAbb;
 
 	private Sessione() {	
 		merchAdmin = null;
@@ -45,6 +47,7 @@ public class Sessione {
 		carrello = null;
 		currentBiglietto = null;
 		scelte = new HashMap<>();
+		currentAbb = null;
 	}
 	
 	
@@ -138,6 +141,7 @@ public class Sessione {
 		carrello = null;
 		currentPartita = null;
 		currentBiglietto = null;
+		currentAbb = null;
 	}
 
 	/**
@@ -178,6 +182,22 @@ public class Sessione {
 	 */
 	public void setCurrentUtente(Utente currentU) {
 		currentUtente = currentU;
+	}
+	
+	/**
+	 * Funzione che permette di impostare come {@link TipoAbb} corrente 
+	 * quello passato come parametro.
+	 * @param currentAbb Tipo di abbonamento corrente.
+	 */
+	public void setCurrentAbb(TipoAbb currentAbb) {
+		this.currentAbb = currentAbb;
+	}
+	
+	/**
+	 * @return {@link TipoAbb}.
+	 */
+	public TipoAbb getCurrentAbb() {
+		return currentAbb;
 	}
 	
 	/**

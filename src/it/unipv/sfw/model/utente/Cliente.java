@@ -46,16 +46,9 @@ public class Cliente extends Utente {
 	/**
 	 * Funzione che permette al cliente di abbonarsi.
 	 * @param tipoAbb Tipo di abbonamento.
-	 * @return True se il cliente non ha un abbonamento attivo
-	 * oppure False se il cliente ne ha già uno attivo.
 	 */
-	public boolean abbona(TipoAbb tipoAbb) {
-		if (this.abb == null) {
-			this.abb = new Abbonamento(tipoAbb);
-			return true;
-		} else {
-			return false;
-		}
+	public void abbona(TipoAbb tipoAbb) {
+		this.abb = new Abbonamento(tipoAbb);
 	}
 
 	/** 

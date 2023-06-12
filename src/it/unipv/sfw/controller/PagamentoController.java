@@ -4,6 +4,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -18,6 +22,7 @@ import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
+import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.pagamento.Carta;
@@ -78,17 +83,26 @@ public class PagamentoController extends AController{
 						break;
 					default:
 						messaggio = a.messaggioAbbonamento();
+						Utente utente = Sessione.getIstance().getCurrentUtente();
+						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+						Date date = sdf.parse(utente.getDataNascita());
+						Calendar data_nascita = Calendar.getInstance();
+						data_nascita.setTime(date);
+						Cliente cliente = new Cliente(utente.getNome(), utente.getCognome(), utente.getEmail(), utente.getPassword(), data_nascita);
+						cliente.abbona(Sessione.getIstance().getCurrentAbb());
+						DAOFactory.createIAbbonamentoDAO().insertAbbonamento(cliente);
 						break;
 					}
+					
+					if (v.getsalvaCB().isSelected()) DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0));
 					
 					try {
 						if (Sessione.getIstance().getCurrentPagamento() == 2) a.sendEmail(messaggio, Sessione.getIstance().getCurrentBiglietto().getEmail());
 						else a.sendEmail(messaggio);
 					} catch (MessagingException err) {
-						err.printStackTrace();
+						System.out.println("Email non valida");
 					}
 					
-					if (v.getsalvaCB().isSelected()) DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0));
 					ControllerManager.getInstance().loadController(Type.PARTITE);
 					Sessione.getIstance().resetScelte();
 				}catch (EmptyNameException err) {
@@ -106,6 +120,8 @@ public class PagamentoController extends AController{
 				}catch(WrongCvvException err) {
 					v.upCvvErr();
 					return;
+				} catch (ParseException err) {
+					err.printStackTrace();
 				}
 			}
 		});
