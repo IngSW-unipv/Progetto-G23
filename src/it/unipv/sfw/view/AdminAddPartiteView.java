@@ -38,6 +38,7 @@ public class AdminAddPartiteView extends AView {
 	private ArrayList<JPanel>squadra;
 	private JComboBox<String> orario;
 	private JButton aggiungi,home;
+	private JLabel errorLabel;
 	private JPanel middle,selezionesquadra;
 	private DatePicker data;
 	
@@ -123,13 +124,16 @@ public class AdminAddPartiteView extends AView {
 		
 		JLabel h=new JLabel("Ora:");
 		h.setFont(medium);
+		errorLabel=new JLabel(" ");
+		errorLabel.setForeground(Color.RED);
+		
 		
 		aggiungi=new JButton("AGGIUNGI");
 		aggiungi.setFont(medium);
 		
 		info.setLayout(new GridBagLayout());		
 		GridBagConstraints infoConstraints = new GridBagConstraints();
-		infoConstraints.insets = new Insets(3,2,20,15);
+		infoConstraints.insets = new Insets(3,3,20,15);
 
 		infoConstraints.gridwidth = 1;
 		infoConstraints.gridx = 0;
@@ -150,6 +154,10 @@ public class AdminAddPartiteView extends AView {
 		infoConstraints.gridwidth = 2;
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 2;
+		info.add(errorLabel, infoConstraints);
+		infoConstraints.gridwidth = 2;
+		infoConstraints.gridx = 0;
+		infoConstraints.gridy = 3;
 		info.add(aggiungi, infoConstraints);
 		
 		//info.setBorder(BorderFactory.createLineBorder(Color.black,5));
@@ -216,6 +224,19 @@ public class AdminAddPartiteView extends AView {
 		
 	}
 	
+	public void onSquadError(String errore) {
+		errorLabel.setText(errore);
+	}
+	
+	public void onAddError(String errore) {
+		errorLabel.setText(errore);
+	}
+	
+	public void success(String string) {
+		errorLabel.setForeground(Color.GREEN);
+		errorLabel.setText(string);
+	}
+	
 	public void onWindowResized(Dimension dim) {
 		for(int i=0;i<19;i++) {
 			img.get(i).setImage(img.get(i).getImage().getScaledInstance(dim.width/12, dim.height/12, java.awt.Image.SCALE_SMOOTH));
@@ -228,6 +249,9 @@ public class AdminAddPartiteView extends AView {
 		this.repaint();
 		
 	}
+
+
+	
 	
 	
 

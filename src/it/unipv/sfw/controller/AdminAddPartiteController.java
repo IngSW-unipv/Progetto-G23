@@ -83,28 +83,33 @@ public class AdminAddPartiteController extends AController{
 		AdminAddPartiteView v=(AdminAddPartiteView)view;
 		
 		LocalDate inputDate = v.getData();
-		Squadre ospiti= Squadre.valueOf(Squadre.class,v.getSquadraScelta());
-		String ora=v.getOra();
-		String data_ora=""+inputDate.toString()+" "+ora+":00";
-		Calendar cal;
-		
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 		try {
-			Date date = (Date) sdf.parse(data_ora);
-			cal=Calendar.getInstance();
-			cal.setTime(date);
+			Squadre ospiti= Squadre.valueOf(Squadre.class,v.getSquadraScelta());
+				
+			String ora=v.getOra();
+			String data_ora=""+inputDate.toString()+" "+ora+":00";
+			Calendar cal;
+			
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
 			try {
-				DAOFactory.createIPartitaDAO().insertPartita(new Partita(cal,ospiti));
-			} catch (SQLIntegrityConstraintViolationException e) {
-				System.out.println("Partita già programmata per questa data!");
+				Date date = (Date) sdf.parse(data_ora);
+				cal=Calendar.getInstance();
+				cal.setTime(date);
+				try {
+					DAOFactory.createIPartitaDAO().insertPartita(new Partita(cal,ospiti));
+					v.success("La partita è stata aggiunta");
+				} catch (SQLIntegrityConstraintViolationException e) {
+					v.onAddError("Partita già programmata per questa data!");
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (Exception e) {
+			v.onSquadError("Non è stata selezionata nessuna squadra");
 		}
 	}
-	
 	
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
