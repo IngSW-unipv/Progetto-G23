@@ -24,7 +24,7 @@ public class AnelloController extends AController {
 	public void initialize(Dimension dim) {
 		Sessione s = Sessione.getIstance();
 		Stadio stadio = new Stadio(s.getCurrentPartita().getCalendarDate());
-		view = new AnelloView(dim, stadio, s.getSettore());
+		AnelloView v = new AnelloView(dim, stadio, s.getSettore());
 
 		ActionListener a = new ActionListener() {
 			@Override
@@ -35,10 +35,20 @@ public class AnelloController extends AController {
 			}
 		};
 
-		Collection<AnelloButton> btns = ((AnelloView) view).getButtons();
+		Collection<AnelloButton> btns = v.getButtons();
 		for (AnelloButton b : btns)
 			b.addActionListener(a);
-
+		
+		v.getHomeButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ControllerManager.getInstance().loadController(Type.PARTITE);
+			}
+		});
+		
+		view=v;
 	}
 
 	@Override

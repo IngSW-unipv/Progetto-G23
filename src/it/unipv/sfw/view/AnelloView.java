@@ -3,11 +3,14 @@ package it.unipv.sfw.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,16 +29,30 @@ public class AnelloView extends AView {
 
 	private JPanel contenitore;
 	private ArrayList<AnelloButton> anello;
+	private JButton homeBtn;
 	private ArrayList<JLabel>idAnello;
 	private ArrayList<JPanel>gruppo;
 	private ImageIcon img;
 	
 	
 	public AnelloView(Dimension dim, Stadio stadio, int n_settore) {
-		
 
-		contenitore=new JPanel();
-		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		Font largeFont = new Font("Arial", 1, 32);
+		
+		JLabel titolo=new JLabel("SELEZIONA UN ANELLO");
+		titolo.setFont(largeFont);
+		titolo.setHorizontalAlignment(JLabel.CENTER);
+		titolo.setBorder(BorderFactory.createEmptyBorder(0,50,0,0));
+		
+		homeBtn=new JButton();
+		homeBtn.setIcon(new ImageIcon(getClass().getResource("/home.png")));
+		
+		JPanel title=new JPanel();
+		title.setLayout(new BorderLayout());
+		title.add(titolo,BorderLayout.CENTER);
+		title.add(homeBtn,BorderLayout.EAST);
+
+		
 		anello = new ArrayList<AnelloButton>(stadio.ANELLI_PER_SETTORE);
 		idAnello=new ArrayList<JLabel>(stadio.ANELLI_PER_SETTORE);
 		gruppo = new ArrayList<JPanel>(stadio.ANELLI_PER_SETTORE);
@@ -71,7 +88,8 @@ public class AnelloView extends AView {
 		}
 		
 		
-		
+		contenitore=new JPanel();
+		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 		contenitore.setLayout(new GridLayout((int) 3,1));
 
 		for (JPanel j : gruppo) {
@@ -80,13 +98,18 @@ public class AnelloView extends AView {
 		}
 		
 		
-		
+		this.setLayout(new BorderLayout());
+		this.add(title,BorderLayout.NORTH);
 		this.add(contenitore, BorderLayout.CENTER);
 
 	}
 
 	public Collection<AnelloButton> getButtons() {
 		return anello;
+	}
+	
+	public JButton getHomeButton(){
+		return homeBtn;
 	}
 	
 	@Override
