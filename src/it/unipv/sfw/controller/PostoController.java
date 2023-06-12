@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
+import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.PostoView;
@@ -41,7 +42,17 @@ public class PostoController extends AController {
 		for (PostoButton b : btns)
 			b.addActionListener(a);
 		
-		view = v;
+
+		v.getHomeButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ControllerManager.getInstance().loadController(Type.PARTITE);
+			}
+		});
+		
+		view=v;
 	}
 
 	@Override

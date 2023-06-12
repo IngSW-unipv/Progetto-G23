@@ -3,12 +3,14 @@ package it.unipv.sfw.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,14 +28,29 @@ public class PostoView extends AView {
 
 	private JPanel blocco;
 	private ArrayList<PostoButton> posto;
+	private JButton homeBtn;
 	private ArrayList<JLabel> nomeposto;
 	private ArrayList<JPanel> gruppo;
 	private ImageIcon img;
 
 	public PostoView(Dimension dim, Stadio stadio, int n_settore, int n_anello, int n_blocco) {
+		
+		Font largeFont = new Font("Arial", 1, 32);
+		
+		JLabel titolo=new JLabel("SELEZIONA UN POSTO");
+		titolo.setFont(largeFont);
+		titolo.setHorizontalAlignment(JLabel.CENTER);
+		titolo.setBorder(BorderFactory.createEmptyBorder(0,50,0,0));
+		
+		homeBtn=new JButton();
+		homeBtn.setIcon(new ImageIcon(getClass().getResource("/home.png")));
+		
+		JPanel title=new JPanel();
+		title.setLayout(new BorderLayout());
+		title.add(titolo,BorderLayout.CENTER);
+		title.add(homeBtn,BorderLayout.EAST);
 
-		blocco = new JPanel();
-		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
+		
 		gruppo = new ArrayList<JPanel>(Stadio.POSTI_PER_BLOCCO);
 		posto = new ArrayList<PostoButton>(Stadio.POSTI_PER_BLOCCO);
 		nomeposto = new ArrayList<JLabel>(Stadio.POSTI_PER_BLOCCO);
@@ -67,6 +84,8 @@ public class PostoView extends AView {
 			gruppo.get(n_posto).setOpaque(true);
 		}
 		
+		blocco = new JPanel();
+		blocco.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 		blocco.setLayout(new GridLayout(5,10));
 
 		for (JPanel j : gruppo) {
@@ -75,15 +94,20 @@ public class PostoView extends AView {
 
 		}
 		blocco.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		this.setLayout(new BorderLayout());
+		this.add(title,BorderLayout.NORTH);
+		this.add(blocco,BorderLayout.CENTER);
 
-		this.add(blocco);
-
-		this.setVisible(true);
 
 	}
 
 	public Collection<PostoButton> getAllButtons() {
 		return posto;
+	}
+	
+	public JButton getHomeButton(){
+		return homeBtn;
 	}
 	
 	@Override
