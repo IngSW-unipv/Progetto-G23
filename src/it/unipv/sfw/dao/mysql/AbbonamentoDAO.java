@@ -2,8 +2,10 @@ package it.unipv.sfw.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import it.unipv.sfw.dao.IAbbonamentoDAO;
+import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
 
@@ -16,6 +18,33 @@ import it.unipv.sfw.model.utente.Cliente;
 public class AbbonamentoDAO implements IAbbonamentoDAO {
 	
 	private static final String SCHEMA = "ABBONAMENTI";
+	
+	@Override
+	public Abbonamento selectAbbonamentoOfClient(Cliente c) {
+
+    	PreparedStatement st1;
+    	ResultSet rs1;
+    	Abbonamento res = null;
+    	
+    	try (DBConnection db = new DBConnection(SCHEMA)) {
+    		Connection conn = db.getConnection();
+    		
+			String query = "SELECT GRADO FROM " + SCHEMA + " WHERE EMAIL=?";
+			st1 = conn.prepareStatement(query);
+
+			st1.setString(1, c.getEmail());
+			rs1 = st1.executeQuery();
+			
+			if (rs1.next()) {
+				res = new Abbonamento(TipoAbb.valueOf(rs1.getString(1)));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return res;
+	}
 	
     @Override
 	public boolean insertAbbonamento(Cliente nuovoAbbonato) {

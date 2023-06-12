@@ -6,6 +6,9 @@ values
 	('a', 'a', 'a', 'a', 'CLIENTE','2001-04-26'),
 	('b', 'b', 'b', 'b', 'ADMIN','2002-10-02');
 
+insert into abbonamenti
+values
+	('a', 'LIV1');
 
 insert into partite
 values

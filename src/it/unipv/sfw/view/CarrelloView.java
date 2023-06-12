@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import it.unipv.sfw.model.store.Merchandising;
+import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.view.buttons.StoreButton;
 import it.unipv.sfw.view.elements.CartItemPanel;
 
@@ -37,7 +38,7 @@ public class CarrelloView extends AView {
 	private HashMap<Merchandising, CartItemPanel> itemPanels;
 	private JButton acquistaBtn;
 	
-	public CarrelloView(HashMap<Merchandising, Integer> carrello, Dimension dim) {
+	public CarrelloView(HashMap<Merchandising, Integer> carrello, Cliente c, Dimension dim) {
 		merch_n = carrello.size();
 		
 		// Fonts
@@ -105,9 +106,15 @@ public class CarrelloView extends AView {
 			itemPanels.put(m, panel);
 			itemList.add(panel);
 		}
-		
+		double discount = c.getAbb().getSconto();
+		float discounted_price = (float) (total_price * discount);
+		float discount_diff = total_price - discounted_price;
+		String totalSring = "TOTALE: " + String.format("%.2f", total_price) + " €";
+		if (discount < 1.0)
+			totalSring += " - " + String.format("%.2f", discount_diff) + " € = " +
+					String.format("%.2f", discounted_price) + " €";
 		// Buy panel
-		JLabel priceTot = new JLabel("TOTALE: " + String.format("%.2f", total_price) + " €");
+		JLabel priceTot = new JLabel(totalSring);
 		priceTot.setFont(largeFont);
 		
 		JPanel buy_panel = new JPanel();

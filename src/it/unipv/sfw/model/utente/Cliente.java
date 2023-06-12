@@ -33,6 +33,13 @@ public class Cliente extends Utente {
 	}
 	
 	/**
+	 * @param abb Abbonamento.
+	 */
+	public void setAbb(Abbonamento abb) {
+		this.abb = abb;
+	}
+	
+	/**
 	 * @param tipo Tipo di abbonamento.
 	 * @return Il prezzo del {@link TipoAbb} passato come parametro.
 	 */

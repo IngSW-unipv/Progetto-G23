@@ -49,6 +49,24 @@ public class Abbonamento {
 	}
 	
 	/**
+	 * @return Fattore di sconto in base al tipo di abbonamento.
+	 */
+	public double getSconto() {
+		switch(this.tipoAbb) {
+		case LIV0:
+			return 1.0;
+		case LIV1:
+			return 0.75;
+		case LIV2:
+			return 0.5;
+		case LIV3:
+			return 0.0;
+		default: 
+			return 1.0;
+		}
+	}
+	
+	/**
 	 * Funzione utilizzata per cambiare il prezzo dell'abbonamento.
 	 * @param prezzo
 	 * @return True se l'operazione è andata a buon fine, altrimenti false.
