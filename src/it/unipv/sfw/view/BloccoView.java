@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.view.buttons.BloccoButton;
+import it.unipv.sfw.view.buttons.PostoButton;
 /**
  * Classe che crea la view dei vari blocchi di un anello. 
  *
@@ -32,34 +33,37 @@ public class BloccoView extends AView {
 		
 		tabellone = new JPanel();
 		tabellone.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		blocco = new ArrayList<BloccoButton>();
-		idBlocco=new ArrayList<JLabel>();
-		gruppo=new ArrayList<JPanel>();
+		blocco = new ArrayList<BloccoButton>(Stadio.BLOCCHI_PER_ANELLO);
+		idBlocco=new ArrayList<JLabel>(Stadio.BLOCCHI_PER_ANELLO);
+		gruppo=new ArrayList<JPanel>(Stadio.BLOCCHI_PER_ANELLO);
+		
+		for (int i = 0; i < Stadio.BLOCCHI_PER_ANELLO; i++) {
+			gruppo.add(null);
+			blocco.add(null);
+			idBlocco.add(null);
+		}
 
 		img=new ImageIcon(this.getClass().getResource("/blocco.jpg"));
 		img=new ImageIcon(img.getImage().getScaledInstance((int)(dim.width)/10,(int)(dim.height-50)/5,java.awt.Image.SCALE_SMOOTH));
 
 		for (int i = 0; i < Stadio.BLOCCHI_PER_ANELLO; i++) {
-			int n_blocco = Stadio.BLOCCHI_PER_ANELLO - i;
-			blocco.add(new BloccoButton(n_blocco, img,true, stadio.isLibero(n_settore, n_anello, n_blocco)));
-			idBlocco.add(new JLabel("B"+n_blocco));
-			gruppo.add(new JPanel());
+			int n_blocco = Stadio.BLOCCHI_PER_ANELLO - i - 1;
+			boolean isLibero = stadio.isLibero(n_settore, n_anello, n_blocco+1);
+			blocco.set(n_blocco, new BloccoButton(n_blocco+1, img, true, isLibero));
+			idBlocco.set(n_blocco, new JLabel("" + (n_blocco+1)));
+			idBlocco.get(n_blocco).setBackground(Color.red);
+			gruppo.set(n_blocco, new JPanel());
 			
-
-		}
-		
-		for(int i=Stadio.BLOCCHI_PER_ANELLO;i>=0;i--) {
-			gruppo.get(i).setLayout(new BorderLayout());
-			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
-			gruppo.get(i).add(blocco.get(i), BorderLayout.CENTER);
-			gruppo.get(i).add(idBlocco.get(i), BorderLayout.SOUTH);
-			idBlocco.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
-			if (stadio.isLibero(n_settore, n_anello, i))
-				gruppo.get(i).setBackground(Color.GREEN);
+			gruppo.get(n_blocco).setLayout(new BorderLayout());
+			gruppo.get(n_blocco).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
+			gruppo.get(n_blocco).add(blocco.get(n_blocco), BorderLayout.CENTER);
+			gruppo.get(n_blocco).add(idBlocco.get(n_blocco), BorderLayout.SOUTH);
+			idBlocco.get(n_blocco).setHorizontalAlignment((int) CENTER_ALIGNMENT);
+			if (isLibero)
+				gruppo.get(n_blocco).setBackground(Color.GREEN);
 			else
-				gruppo.get(i).setBackground(Color.RED);
-			gruppo.get(i).setOpaque(true);
-
+				gruppo.get(n_blocco).setBackground(Color.RED);
+			gruppo.get(n_blocco).setOpaque(true);
 		}
 		
 

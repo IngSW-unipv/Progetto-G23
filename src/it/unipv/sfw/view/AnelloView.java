@@ -51,16 +51,13 @@ public class AnelloView extends AView {
 			anello.add(new JPanel());
 		}
 		
-		for(int i=Stadio.ANELLI_PER_SETTORE;i>=0;i--) {
+		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
 			anello.get(i).setLayout(new BorderLayout());
 			anello.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
 			anello.get(i).add(a.get(i), BorderLayout.CENTER);
 			anello.get(i).add(idAnello.get(i), BorderLayout.SOUTH);
 			idAnello.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
-			if (stadio.isLibero(n_settore, i))
-				anello.get(i).setBackground(Color.GREEN);
-			else
-				anello.get(i).setBackground(Color.RED);
+			anello.get(i).setBackground(Color.GREEN);
 			anello.get(i).setOpaque(true);
 		}
 		
