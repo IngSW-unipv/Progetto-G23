@@ -14,7 +14,7 @@ create table UTENTI (
 
 create table ABBONAMENTI (
 		EMAIL CHAR(255) PRIMARY KEY,
-        GRADO ENUM('1', '2'),		-- temp
+        GRADO ENUM('LIV1', 'LIV2', 'LIV3'),		-- temp
         FOREIGN KEY (EMAIL) REFERENCES UTENTI(EMAIL) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
