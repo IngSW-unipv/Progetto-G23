@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
@@ -19,6 +21,7 @@ import it.unipv.sfw.view.elements.InfoMenu;
 public class AdminPartiteController extends AController{
 	
 	private Partita[] p;
+	private int postioccupati;
 	
 	@Override
 	public void initialize(Dimension dim) {
@@ -90,14 +93,20 @@ public class AdminPartiteController extends AController{
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
 				int code = ((InfoMenu)e.getComponent()).getCode();
-				v.setInfoPartita(false,code);
+				v.CloseInfoPartita(false, code);
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
+				
 				int code = ((InfoMenu)e.getComponent()).getCode();
-				v.setInfoPartita(true,code);
+				Date data= p[code].getCalendarDate().getTime();
+				Calendar cal=Calendar.getInstance();
+				cal.setTime(data);
+				postioccupati = DAOFactory.createIPostoDAO().selectCount(cal);
+				System.out.println(postioccupati);
+				v.OpenInfoPartita(true,code,postioccupati);
 				
 			}
 			

@@ -27,8 +27,7 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 
 public class AdminAddPartiteController extends AController{
 	
-	private String nomesquadra;
-	private String Ora;
+	
 
 	@Override
 	public Type getType() {
