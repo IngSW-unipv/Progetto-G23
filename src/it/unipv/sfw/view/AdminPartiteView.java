@@ -29,14 +29,12 @@ public class AdminPartiteView extends AView {
 private int righe;
 	
 	// variabili del top
-	private JPanel top, bottoni;
 	private JButton bmuseo, bshop, addpartita;
 	private MenuUtente u;
 	private ImageIcon img2;
 
 	// variabili del middle
-	private JPanel middle, p;
-	private JLabel titolo;
+	private JPanel  partitePanel;
 	private ArrayList<JLabel> partite;
 	private ArrayList<JMenuBar> i;
 	private ArrayList<InfoMenu>info;
@@ -48,8 +46,6 @@ private int righe;
 	public AdminPartiteView(Partita[] par, Dimension dim) {
 
 		righe = par.length;
-		top = new JPanel();
-		bottoni = new JPanel();
 		u=new MenuUtente();
 		
 		bmuseo = new JButton("MUSEO");
@@ -61,12 +57,14 @@ private int righe;
 		addpartita = new JButton("Aggiungi partita");
 		addpartita.setBackground(Color.WHITE);
 		//addpartita.setFont(new java.awt.Font("Arial", 1, 18));
-
+		
+		JPanel bottoni=new JPanel();
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		bottoni.add(bmuseo);
 		bottoni.add(bshop);
-
+		
+		JPanel top=new JPanel();
 		top.setLayout(new BorderLayout());
 		top.add(bottoni, BorderLayout.CENTER);
 		top.add(u, BorderLayout.EAST);
@@ -75,14 +73,15 @@ private int righe;
 		top.setBackground(Color.gray);
 
 		// configurazione del middle
-		middle = new JPanel();
+		
 
-		p = new JPanel();
+		partitePanel = new JPanel();
 
 		JPanel titlePanel = new JPanel(); 
 		titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		titlePanel.setBackground(Color.BLACK);
 		
+		JLabel titolo=new JLabel();
 		titolo = new JLabel("PARTITE");
 		titolo.setForeground(Color.WHITE);
 		titolo.setFont(new java.awt.Font("Arial", 1, 24));
@@ -138,17 +137,18 @@ private int righe;
 			}
 		}
 
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175*righe)));
-		p.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
+		partitePanel.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175*righe)));
+		partitePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 
 		for (JPanel t : tabellone) {
-			p.add(t);
+			partitePanel.add(t);
 		}
 
-		pane = new JScrollPane(p);
+		pane = new JScrollPane(partitePanel);
 
 		pane.getVerticalScrollBar().setUnitIncrement(10);
-
+		
+		JPanel middle=new JPanel();
 		middle.setLayout(new BorderLayout());
 		middle.add(titlePanel, BorderLayout.NORTH);
 		middle.add(pane, BorderLayout.CENTER);
@@ -189,9 +189,9 @@ private int righe;
 	
 	@Override
 	public void onWindowResized(Dimension dim) {
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175 * righe)));		
-		p.revalidate();
-		p.repaint();	
+		partitePanel.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (175 * righe)));		
+		partitePanel.revalidate();
+		partitePanel.repaint();	
 	}
 	
 	public JMenuItem getExit() {
