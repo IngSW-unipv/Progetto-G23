@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.view.CarrelloView;
 import it.unipv.sfw.view.buttons.StoreButton;
 
@@ -16,9 +17,9 @@ public class CarrelloController extends AController {
 	
 	@Override
 	public void initialize(Dimension dim) {
-		carrello = Sessione.getIstance().getCarrello();
+		Sessione s = Sessione.getIstance();
 		
-		CarrelloView v = new CarrelloView(carrello, dim);
+		CarrelloView v = new CarrelloView(s.getCarrello(), (Cliente)s.getCurrentUtente(), dim);
 		
 		v.getStoreBtn().addActionListener(new ActionListener() {	
 			@Override

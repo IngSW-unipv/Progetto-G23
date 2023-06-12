@@ -78,6 +78,10 @@ public class Sessione {
 			throw new AccountNotFoundException(email);
 		if (!c.getPassword().equals(strPass))
 			throw new WrongPasswordException(email);
+		if (c.getType() == Utente.Type.CLIENTE) {
+			Cliente cli = (Cliente)c;
+			cli.setAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfClient(cli));
+		}
 		this.setCurrentUtente(c);
 	}
 	
