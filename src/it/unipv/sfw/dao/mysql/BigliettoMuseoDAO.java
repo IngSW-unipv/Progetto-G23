@@ -55,6 +55,23 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 		return esito;
 	}
 	
+	@Override 
+	public void removeLast() {
+		
+		Statement st1;
+		
+		try (
+			DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+			st1 = conn.createStatement();
+			String query = "DELETE FROM " + SCHEMA + " ORDER BY NUMERO DESC LIMIT 1";
+			st1.executeUpdate(query);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 	@Override
 	public ArrayList<Biglietto> selectAll() {
 		

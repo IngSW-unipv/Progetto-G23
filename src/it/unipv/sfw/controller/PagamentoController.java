@@ -48,7 +48,10 @@ public class PagamentoController extends AController{
 			public void actionPerformed(ActionEvent e) {
 				switch (Sessione.getIstance().getCurrentPagamento()) {
 				case 1: ControllerManager.getInstance().loadController(Type.CARRELLO); break;
-				case 2: ControllerManager.getInstance().loadController(Type.BIGLIETTO_MUSEO); break;
+				case 2: 
+					DAOFactory.createIBigliettoMuseoDAO().removeLast();
+					ControllerManager.getInstance().loadController(Type.BIGLIETTO_MUSEO);
+					break;
 				case 3: ControllerManager.getInstance().loadController(Type.PARTITE); break;
 				default: ControllerManager.getInstance().loadController(Type.PROFILO);
 				}

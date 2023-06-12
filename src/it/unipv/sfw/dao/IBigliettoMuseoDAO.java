@@ -27,4 +27,6 @@ public interface IBigliettoMuseoDAO {
 	 */
 	ArrayList<Biglietto> selectAll();
 
+	void removeLast();
+
 }
