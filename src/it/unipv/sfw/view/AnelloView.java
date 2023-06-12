@@ -25,9 +25,9 @@ import it.unipv.sfw.view.buttons.AnelloButton;
 public class AnelloView extends AView {
 
 	private JPanel contenitore;
-	private ArrayList<AnelloButton> a;
+	private ArrayList<AnelloButton> anello;
 	private ArrayList<JLabel>idAnello;
-	private ArrayList<JPanel>anello;
+	private ArrayList<JPanel>gruppo;
 	private ImageIcon img;
 	
 	
@@ -36,34 +36,45 @@ public class AnelloView extends AView {
 
 		contenitore=new JPanel();
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
-		a = new ArrayList<AnelloButton>();
-		idAnello=new ArrayList<JLabel>();
-		anello = new ArrayList<JPanel>();
+		anello = new ArrayList<AnelloButton>(stadio.ANELLI_PER_SETTORE);
+		idAnello=new ArrayList<JLabel>(stadio.ANELLI_PER_SETTORE);
+		gruppo = new ArrayList<JPanel>(stadio.ANELLI_PER_SETTORE);
+		
+		for(int i=0;i<stadio.ANELLI_PER_SETTORE;i++) {
+			gruppo.add(null);
+			idAnello.add(null);
+			anello.add(null);
+		}
 
 		
 		img = new ImageIcon(this.getClass().getResource("/Spalti.JPG"));
 		img = new ImageIcon(img.getImage().getScaledInstance((int)(dim.width),(int)(dim.height-60)/3,  java.awt.Image.SCALE_SMOOTH)); 
 				
 		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
-			int n_anello = 3 - i;
-			a.add(new AnelloButton(n_anello,img,true, stadio.isLibero(n_settore, n_anello)));
-			idAnello.add(new JLabel("A"+n_anello));
-			anello.add(new JPanel());
+			int n_anello =Stadio.ANELLI_PER_SETTORE - i - 1;
+			boolean isLibero=stadio.isLibero(n_settore, n_anello+1);
+			anello.set(n_anello,new AnelloButton(n_anello+1,img,true,isLibero));
+			idAnello.set(n_anello, new JLabel("A"+(n_anello+1)));
+			idAnello.get(n_anello).setBackground(Color.red);
+			gruppo.set(n_anello,new JPanel());
+			
+			gruppo.get(n_anello).setLayout(new BorderLayout());
+			gruppo.get(n_anello).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
+			gruppo.get(n_anello).add(anello.get(n_anello), BorderLayout.CENTER);
+			gruppo.get(n_anello).add(idAnello.get(n_anello), BorderLayout.SOUTH);
+			idAnello.get(n_anello).setHorizontalAlignment((int) CENTER_ALIGNMENT);
+			if (isLibero)
+				gruppo.get(n_anello).setBackground(Color.GREEN);
+			else
+				gruppo.get(n_anello).setBackground(Color.RED);
+			gruppo.get(n_anello).setOpaque(true);
 		}
 		
-		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
-			anello.get(i).setLayout(new BorderLayout());
-			anello.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
-			anello.get(i).add(a.get(i), BorderLayout.CENTER);
-			anello.get(i).add(idAnello.get(i), BorderLayout.SOUTH);
-			idAnello.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
-			anello.get(i).setBackground(Color.GREEN);
-			anello.get(i).setOpaque(true);
-		}
+		
 		
 		contenitore.setLayout(new GridLayout((int) 3,1));
 
-		for (JPanel j : anello) {
+		for (JPanel j : gruppo) {
 			contenitore.add(j);
 
 		}
@@ -75,7 +86,7 @@ public class AnelloView extends AView {
 	}
 
 	public Collection<AnelloButton> getButtons() {
-		return a;
+		return anello;
 	}
 	
 	@Override
@@ -85,12 +96,12 @@ public class AnelloView extends AView {
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));
 		
 		for(int i=0;i<Stadio.ANELLI_PER_SETTORE;i++) {
-			a.get(i).modificaImg(img);
-			a.get(i).revalidate();
-			anello.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
+			anello.get(i).modificaImg(img);
 			anello.get(i).revalidate();
-			anello.get(i).revalidate();
-			anello.get(i).repaint();
+			gruppo.get(i).setPreferredSize(new Dimension((int)(dim.width)/10,(int)((dim.height-45)/5)));
+			gruppo.get(i).revalidate();
+			gruppo.get(i).revalidate();
+			gruppo.get(i).repaint();
 		}
 		
 		contenitore.revalidate();
