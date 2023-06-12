@@ -22,6 +22,11 @@ import it.unipv.sfw.view.elements.MenuUtente;
 import it.unipv.sfw.view.elements.MuseoItemPanel;
 import it.unipv.sfw.view.elements.MuseoStoryPanel;
 
+/**
+ * View per il controllo degli oggetti nel museo per l'admin.
+ * 
+ * @author Federico Romano
+ */
 public class AdminMuseoView extends AView {
 
 	ArrayList<Cimelio> cimeli = new ArrayList<>();
@@ -142,10 +147,16 @@ public class AdminMuseoView extends AView {
 		this.add(centralPanel, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * @return Un arraylist contenente tutti i bottoni "RIMUOVI".
+	 */
 	public ArrayList<PezzoMuseoButton> getRimuoviButtons() {
 		return buttons;
 	}
 	
+	/**
+	 * Metodo che rimuove un pannello contenente un oggetto del museo.
+	 */
 	public void removeMuseoItemPanel(int i) {
 		pezzimuseo.remove(pezzo.remove(i));
 		npezzi--;
@@ -154,36 +165,53 @@ public class AdminMuseoView extends AView {
 		pezzimuseo.repaint();
 	}
 	
+	/**
+	 * @return Il bottone "PARTITE".
+	 */
 	public JButton getPartiteButton() {
 		return partiteButton;
 	}
 	
+	/**
+	 * @return Il bottone "STORE".
+	 */
 	public JButton getStoreButton() {
 		return storeButton;
 	}
 	
+	/**
+	 * @return Il bottone utente.
+	 */
 	public JButton getUtenteButton() {
 		return utenteButton;
 	}
 		
+	/**
+	 * @return Il bottone "INSERISCI TROFEO O CIMELIO".
+	 */
 	public JButton getInserisciButton() {
 		return inserisciButton;
 	}
 	
+	/**
+	 * @return Il bottone "REGISTRO VENDITA",
+	 */
 	public JButton getRegistroButton() {
 		return registroButton;
 	}
 	
+	/**
+	 * @return Il tasto "esci".
+	 */
 	public JMenuItem getProfiloPersonaleButton() {
 		return utente.getProfiloPersonale();
 	}
 	
+	/**
+	 * @return Il tasto "esci".
+	 */
 	public JMenuItem getExit() {
 		return utente.getExit();
-	}
-	
-	public void menu(boolean stato) {
-		utente.getMenuButton().setPopupMenuVisible(stato);
 	}
 	
 }

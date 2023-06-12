@@ -30,7 +30,11 @@ import it.unipv.sfw.exceptions.EmptyTimeException;
 import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.utente.Sessione;
 
-
+/**
+ * View per l'acquisto di biglietti per il museo.
+ * 
+ * @author Federico Romano
+ */
 public class BigliettoMuseoView extends AView {
 
 	
@@ -230,6 +234,9 @@ public class BigliettoMuseoView extends AView {
 		
 	}
 	
+	/**
+	 * Metodo che visualizza a schermo l'errore riguardante l'email inserita.
+	 */
 	public void upEmailError() {
 		emailError.setVisible(true);
 		dataError.setVisible(false);
@@ -240,6 +247,9 @@ public class BigliettoMuseoView extends AView {
 		contenitore.repaint();
 	}
 	
+	/**
+	 * Metodo che visualizza a schermo l'errore riguardante la data inserita.
+	 */
 	public void upDateError(String errore) {
 		d_error.setText(errore);
 		dataError.setVisible(true);
@@ -251,6 +261,9 @@ public class BigliettoMuseoView extends AView {
 		contenitore.repaint();
 	}
 	
+	/**
+	 * Metodo che visualizza a schermo l'errore riguardante l'ora inserita.
+	 */
 	public void upTimeError() {
 		d_error.setText("Ora non inserita!");
 		dataError.setVisible(true);
@@ -262,6 +275,9 @@ public class BigliettoMuseoView extends AView {
 		contenitore.repaint();
 	}
 	
+	/**
+	 * Metodo che visualizza a schermo l'errore riguardante il giorno inserito.
+	 */
 	public void upDayError() {
 		d_error.setText("Hai gia acquistato un biglietto per il giorno selezionato!");
 		dataError.setVisible(true);
@@ -273,59 +289,100 @@ public class BigliettoMuseoView extends AView {
 		contenitore.repaint();
 	}
 	
+	/**
+	 * @return Il bottone "ACQUISTA BIGLIETTO".
+	 */
 	public JButton getAcquistaButton() {
 		return acquistaButton;
 	}
 	
+	/**
+	 * @return Il bottone per tornare alla pagina precedente.
+	 */
 	public JButton getBackButton() {
 		return backButton;
 	}
 	
+	/**
+	 * @return La mail inserita.
+	 */
 	public String getEnteredEmail() {
 		return email_box.getText();
 	}
 	
+	/**
+	 * Metodo che lancia un'eccezione se si verifica un errore nella data selezionata.
+	 * @throws EmptyDateException
+	 */
 	public void checkEnteredDate() throws EmptyDateException {
 		if (chDate.getDatePicker().getDateStringOrEmptyString().equals("")) {
 			throw new EmptyDateException(chDate.getDatePicker());
 		}
 	}
 	
+	/**
+	 * Metodo che lancia un'eccezione se si verifica un errore nell'ora selezionata.
+	 * @throws EmptyDateException
+	 */
 	public void checkEnteredTime() throws EmptyTimeException {
 		if (chDate.getTimePicker().getTimeStringOrEmptyString().equals("")) {
 			throw new EmptyTimeException(chDate.getTimePicker());
 		}
 	}
 	
+	/**
+	 * @return La data e l'ora selezionate.
+	 */
 	public LocalDateTime getEnteredDateAndTime() {
 		return chDate.getDateTimeStrict();
 	}
 	
+	/**
+	 * @return La data selezionata.
+	 */
 	public LocalDate getEnteredData() {
 		return chDate.getDatePicker().getDate();
 	}
 	
+	/**
+	 * @return L'ora selezionata.
+	 */
 	public LocalTime getEnteredTime() {
 		return chDate.getTimePicker().getTime();
 	}
 	
+	/**
+	 * @return La lista contenente il numero possibile di biglietti.
+	 */
 	public JComboBox<Integer> getTotalPeople() {
 		return numero;
 	}
 	
+	/**
+	 * @return Il numero di biglietti selezionati.
+	 */
 	public int getNumeroBiglietti() {
 		return (int) numero.getSelectedItem();
 	}
 	
+	/**
+	 * Metodo che visualizza il prezzo.
+	 */
 	public void setPrice(double price) {
 		prezzotot.setText("€" + price);
 		prezzotot.repaint();
 	}
 	
+	/**
+	 * @return Il prezzo dato dalla selezione del numero di biglietti.
+	 */
 	public double getPrice() {
 		return Double.parseDouble(prezzotot.getText().split("€")[1]);
 	}
 	
+	/**
+	 * @return Il prezzo singolo del biglietto.
+	 */
 	public double getHeadPrice() {
 		return headPrice;
 	}

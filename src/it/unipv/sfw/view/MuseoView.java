@@ -28,7 +28,11 @@ import it.unipv.sfw.view.elements.MenuUtente;
 import it.unipv.sfw.view.elements.MuseoItemPanel;
 import it.unipv.sfw.view.elements.MuseoStoryPanel;
 
-
+/**
+ * View per il museo.
+ * 
+ * @author Federico Romano
+ */
 public class MuseoView extends AView {
 	
 	ArrayList<Cimelio> cimeli = new ArrayList<>();
@@ -148,31 +152,46 @@ public class MuseoView extends AView {
 		this.add(centralPanel, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * @return Il bottone "PARTITE".
+	 */
 	public JButton getPartiteButton() {
 		return partiteButton;
 	}
 	
+	/**
+	 * @return Il bottone "STORE".
+	 */
 	public JButton getStoreButton() {
 		return storeButton;
 	}
 	
+	/**
+	 * @return Il bottone utente.
+	 */
 	public JButton getUtenteButton() {
 		return utenteButton;
 	}
 		
+	/**
+	 * @return Il bottone "ACQUISTA BIGLIETTO".
+	 */
 	public JButton getAcquistaButton() {
 		return acquistaBiglietto;
 	}
 	
+	/**
+	 * @return Il tasto "profilo personale".
+	 */
 	public JMenuItem getProfiloPersonaleButton() {
 		return utente.getProfiloPersonale();
 	}
 	
+	/**
+	 * @return Il tasto "esci".
+	 */
 	public JMenuItem getExit() {
 		return utente.getExit();
 	}
 	
-	public void menu(boolean stato) {
-		utente.getMenuButton().setPopupMenuVisible(stato);
-	}
 }

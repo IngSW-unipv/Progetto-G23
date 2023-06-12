@@ -10,6 +10,11 @@ import it.unipv.sfw.dao.ICartaPagamentoDAO;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.pagamento.Carta;
 
+/**
+ * Classe DAO per {@link it.unipv.sfw.pagammento.Carta}. 
+ * @author Federico Romano
+ * @see it.unipv.sfw.pagammento.Carta
+ */
 public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 
 	private static final String SCHEMA = "CARTA_PAGAMENTO";

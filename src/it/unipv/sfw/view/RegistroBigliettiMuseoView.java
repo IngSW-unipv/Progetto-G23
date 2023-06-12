@@ -16,6 +16,11 @@ import javax.swing.JScrollPane;
 import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.view.elements.BigliettoRegistratoPanel;
 
+/**
+ * View per il registro vendita dei biglietti del museo.
+ * 
+ * @author Federico Romano
+ */
 public class RegistroBigliettiMuseoView extends AView {
 	
 	private Dimension dim;
@@ -86,6 +91,9 @@ public class RegistroBigliettiMuseoView extends AView {
 		
 	}
 	
+	/**
+	 * @return Il bottone per tornare alla pagina precedente.
+	 */
 	public JButton getBackButton() {
 		return backButton;
 	}

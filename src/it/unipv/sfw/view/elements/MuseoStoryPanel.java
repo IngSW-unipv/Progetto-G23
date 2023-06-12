@@ -10,7 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-
+/**
+ * Classe che rappresenta il pannello contenente la storia del club.
+ * 
+ * @author Federico Romano
+ *
+ */
 public class MuseoStoryPanel extends JPanel {
 
 	public MuseoStoryPanel(Dimension dim, String storia) {

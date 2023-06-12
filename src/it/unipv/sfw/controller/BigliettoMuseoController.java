@@ -23,6 +23,13 @@ import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.BigliettoMuseoView;
 import it.unipv.sfw.view.LoginView;
 
+/**
+ * Controller che si occupa della BigliettoMuseoView.
+ * 
+ * @author Federico Romano
+ * @see AController
+ * @see it.unipv.sfw.view.BigliettoMuseoView
+ */
 public class BigliettoMuseoController extends AController {
 	
 	@Override

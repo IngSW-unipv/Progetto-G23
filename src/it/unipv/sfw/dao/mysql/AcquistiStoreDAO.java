@@ -19,9 +19,6 @@ import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Cliente;
 
-//(item id, email, quantita)
-// -------  -----
-
 /**
  * Classe DAO per gli acquisti nello store .
  * @author Federico Romano

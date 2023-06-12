@@ -30,6 +30,11 @@ import it.unipv.sfw.model.museo.Cimelio.TipoCimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.model.museo.Riconoscimento.TipoRiconoscimento;
 
+/**
+ * View per l'aggiunta oggetti nel museo per l'admin.
+ * 
+ * @author Federico Romano
+ */
 public class AdminAddOggettoView extends AView {
 
 	private JPanel centralContainer;
@@ -225,6 +230,10 @@ public class AdminAddOggettoView extends AView {
 		
 	}
 	
+	/**
+	 * Metodo che rende selezionabile il sottotipo del tipo Cimelio
+	 * quando esso viene selezionato.
+	 */
 	public void showCimelioSubType() {
 		if (!iscSubTypeShown()) {
 			if (isrSubTypeShown()) {
@@ -239,14 +248,24 @@ public class AdminAddOggettoView extends AView {
 		}
 	}
 	
+	/**
+	 * Metodo che segnala se i sottotipi del tipo Cimelio sono selezionabili.
+	 */
 	public boolean iscSubTypeShown() {
 		return cSubTypeShown;
 	}
 
+	/**
+	 * Metodo che imposta lo stato dei sottotipi di Cimelio come selezionabili.
+	 */
 	public void setcSubTypeShown(boolean state) {
 		this.cSubTypeShown = state;
 	}
 	
+	/**
+	 * Metodo che rende selezionabile il sottotipo del tipo Riconoscimento
+	 * quando esso viene selezionato.
+	 */
 	public void showRiconoscimentoSubType() {
 		if (!isrSubTypeShown()) {
 			if (iscSubTypeShown()) {
@@ -261,50 +280,79 @@ public class AdminAddOggettoView extends AView {
 		}
 	}
 	
+	/**
+	 * Metodo che segnala se i sottotipi del tipo Riconoscimento sono selezionabili.
+	 */
 	public boolean isrSubTypeShown() {
 		return rSubTypeShown;
 	}
 
+	/**
+	 * Metodo che imposta lo stato dei sottotipi di Riconoscimento come selezionabili.
+	 */
 	public void setrSubTypeShown(boolean state) {
 		this.rSubTypeShown = state;
 	}
 	
+	/**
+	 * @return Il bottone per tornare alla pagina precedente.
+	 */
 	public JButton getBackButton() {
 		return backButton;
 	}
 	
+	/**
+	 * @return Il bottone "AGGIUNGI AL MUSEO".
+	 */
 	public JButton getAggiungiButton() {
 		return aggiungiButton;
 	}
 	
+	/**
+	 * @return il bottone "SELEZIONA IMMAGINE".
+	 */
 	public JButton getAddImageButton() {
 		return addImageButton;
 	}
 	
-	public String getImagePath() {
-		return imgPath.getText();
-	}
-	
+	/**
+	 * @param path Nome dell'immagine da visualizzare nel campo apposito.
+	 */
 	public void setImagePath(String path) {
 		imgPath.setText(path);
 	}
 	
+	/**
+	 * @return La lista dei tipi di oggetti selezionabili.
+	 */
 	public JComboBox<String> getObjectType() {
 		return selectNewObjectType;
 	}
 	
+	/**
+	 * @return La lista dei sottotipi degli oggetti selezionabili.
+	 */
 	public JComboBox<String> getObjectSubType() {
 		return selectObjectSubType;
 	}
 	
+	/**
+	 * @return L'anno selezionato.
+	 */
 	public int getAnno() {
 		return (int) anno.getValue();
 	}
 	
+	/**
+	 * @return Il nome dell'immagine selezionata con relativa estensione.
+	 */
 	public String getNomeImg() {
 		return imgPath.getText();
 	}
 	
+	/**
+	 * @return La descrizione da voler visualizzare per l'oggetto da aggiungere.
+	 */
 	public String getDescrizioneField() {
 		return descrizioneField.getText();
 	}

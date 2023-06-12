@@ -16,6 +16,13 @@ import it.unipv.sfw.utilities.ImageFilter;
 import it.unipv.sfw.view.AdminAddOggettoView;
 import it.unipv.sfw.view.AdminMuseoView;
 
+/**
+ * Controller che si occupa della AdminAddOggettoView.
+ * 
+ * @author Federico Romano
+ * @see AController
+ * @see it.unipv.sfw.view.AdminAddOggettoView
+ */
 public class AdminAddOggettoController extends AController{
 
 	@Override

@@ -10,6 +10,13 @@ import javax.swing.JPanel;
 
 import it.unipv.sfw.model.biglietti.Biglietto;
 
+/**
+ * Classe che rappresenta il pannello contenente le informazioni
+ * di un biglietto per il museo venduto.
+ * 
+ * @author Federico Romano.
+ *
+ */
 public class BigliettoRegistratoPanel extends JPanel {
 
 	public BigliettoRegistratoPanel(Biglietto b) {

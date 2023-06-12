@@ -14,6 +14,13 @@ import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.MuseoView;
 
+/**
+ * Controller che si occupa della MuseoView.
+ * 
+ * @author Federico Romano
+ * @see AController
+ * @see it.unipv.sfw.view.MuseoView
+ */
 public class MuseoController extends AController {
 
 	String storia = new String("LIl Football Club Internazionale Milano, "

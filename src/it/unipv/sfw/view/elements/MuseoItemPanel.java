@@ -17,6 +17,13 @@ import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
 import it.unipv.sfw.view.buttons.PezzoMuseoButton;
 
+/**
+ * Classe che rappresenta il pannello contenente le informazioni
+ * di un oggetto del museo.
+ * 
+ * @author Federico Romano
+ *
+ */
 public class MuseoItemPanel extends JPanel {
 
 	private PezzoMuseoButton rimuoviButton;
@@ -111,6 +118,9 @@ public class MuseoItemPanel extends JPanel {
 		this.add(column_pezzo);
 	}
 	
+	/**
+	 * @return Il bottone "RIMUOVI".
+	 */
 	public PezzoMuseoButton getRimuoviButton() {
 		return rimuoviButton;
 	}

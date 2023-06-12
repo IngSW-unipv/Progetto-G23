@@ -4,6 +4,11 @@ import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 
+/**
+ * Classe utilizzata per filtrare solo file di immagini.
+ * @author Federico Romano
+ *
+ */
 public class ImageFilter extends FileFilter {
 
 	public final static String JPEG = "jpeg";

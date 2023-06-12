@@ -7,6 +7,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+/**
+ * 
+ * Classe che rappresenta il menu utente.
+ * 
+ * @author Jacopo Piccoli, Federico Romano
+ *
+ */
 public class MenuUtente extends JMenuBar {
 
 	private JMenu menuutente;
@@ -29,14 +36,23 @@ public class MenuUtente extends JMenuBar {
 		
 	}
 	
+	/**
+	 * @return Il menu.
+	 */
 	public JMenu getMenuButton() {
 		return menuutente;
 	}
 	
+	/**
+	 * @return Il tasto "profilo personale".
+	 */
 	public JMenuItem getProfiloPersonale() {
 		return pp;
 	}
 	
+	/**
+	 * @return Il tasto "esci".
+	 */
 	public JMenuItem getExit() {
 		return esci;
 	}
