@@ -24,7 +24,7 @@ public class SectorController extends AController {
 	@Override
 	public void initialize(Dimension d) {
 		Stadio stadio = new Stadio(Sessione.getIstance().getCurrentPartita().getCalendarDate());
-		view = new SectorView(d, stadio);
+		SectorView v = new SectorView(d, stadio);
 		
 		ActionListener a = new ActionListener() {
 			@Override
@@ -35,11 +35,23 @@ public class SectorController extends AController {
 			}
 		};
 		
-		Collection<SectorButton> btns = ((SectorView)view).getSectorButtons();
+		Collection<SectorButton> btns = v.getSectorButtons();
 		for (SectorButton b : btns)
 			b.addActionListener(a);
+		
+		v.getHomeButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ControllerManager.getInstance().loadController(Type.PARTITE);
+			}
+		});
+		
+		view=v;
 	}
-
+	
+		
 	@Override
 	public Type getType() {
 		return Type.SETTORE;

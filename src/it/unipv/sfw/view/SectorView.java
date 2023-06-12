@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,24 +29,17 @@ import it.unipv.sfw.view.buttons.SectorButton;
 
 public class SectorView extends AView {
 
-	private JPanel middle, north, east, south, west, prova, settori;
+	private JPanel north, east, south, west, prova, settori;
 	private JLabel campo;
 	private Image imgC;
 	private ImageIcon imgS1,imgS2,imgS3,imgS4,imgS5,imgS6,imgS7,imgS8;
+	private JButton homeBtn;
 	private ArrayList<SectorButton> s;
 
 	public SectorView(Dimension dim, Stadio stadio) {
-
-		middle = new JPanel();
-		campo = new JLabel();
-		north = new JPanel();
-		east = new JPanel();
-		south = new JPanel();
-		west = new JPanel();
-		prova = new JPanel();
-		settori = new JPanel();
-		settori.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
 		
+		Font largeFont = new Font("Arial", 1, 32);
+
 		s = new ArrayList<SectorButton>();
 		
 		imgS1 = new ImageIcon(this.getClass().getResource("/Settore1.png"));
@@ -71,12 +67,30 @@ public class SectorView extends AView {
 		s.add(new SectorButton("",6,true,imgS6, stadio.isLibero(6)));
 		s.add(new SectorButton("",7,true,imgS7, stadio.isLibero(7)));
 		s.add(new SectorButton("",8,true,imgS8, stadio.isLibero(8)));
+		
+		
+		JLabel titolo=new JLabel("SELEZIONA UN SETTORE");
+		titolo.setFont(largeFont);
+		titolo.setHorizontalAlignment(JLabel.CENTER);
+		titolo.setBorder(BorderFactory.createEmptyBorder(0,50,0,0));
+		
+		homeBtn=new JButton();
+		homeBtn.setIcon(new ImageIcon(getClass().getResource("/home.png")));
+		
+		JPanel title=new JPanel();
+		title.setLayout(new BorderLayout());
+		title.add(titolo,BorderLayout.CENTER);
+		title.add(homeBtn,BorderLayout.EAST);
 
+		campo = new JLabel();
 		imgC = new ImageIcon(this.getClass().getResource("/Campo.png")).getImage();
 		campo.setIcon(new ImageIcon(imgC.getScaledInstance(dim.width/2,(dim.height-45)/2, java.awt.Image.SCALE_SMOOTH)));
 		
+		JPanel middle=new JPanel();
 		middle.add(campo);
+		
 
+		north = new JPanel();
 		north.setLayout(new GridLayout(1, 2));
 		s.get(0).setBackground(Color.red);
 		s.get(0).setOpaque(true);
@@ -86,6 +100,7 @@ public class SectorView extends AView {
 		s.get(1).setOpaque(true);
 		north.add(s.get(1));
 
+		east = new JPanel();
 		east.setLayout(new GridLayout(2, 1));
 		s.get(2).setBackground(Color.yellow);
 		s.get(2).setOpaque(true);
@@ -95,6 +110,7 @@ public class SectorView extends AView {
 		s.get(3).setOpaque(true);
 		east.add(s.get(3));
 
+		south = new JPanel();
 		south.setLayout(new GridLayout(1, 2));
 		s.get(5).setBackground(Color.GREEN);
 		s.get(5).setOpaque(true);
@@ -104,6 +120,7 @@ public class SectorView extends AView {
 		s.get(4).setOpaque(true);
 		south.add(s.get(4));
 
+		west = new JPanel();
 		west.setLayout(new GridLayout(2, 1));
 		s.get(7).setBackground(Color.orange);
 		s.get(7).setOpaque(true);
@@ -119,24 +136,31 @@ public class SectorView extends AView {
 		west.setPreferredSize(new Dimension((int)((dim.width)/4), (dim.height)));
 		east.setPreferredSize(new Dimension((int)((dim.width)/4), (dim.height)));
 
+		prova = new JPanel();
 		prova.setLayout(new BorderLayout());
 		prova.add(north, BorderLayout.NORTH);
 		prova.add(campo, BorderLayout.CENTER);
 		prova.add(south, BorderLayout.SOUTH);
 		
 
-
+		settori = new JPanel();
+		settori.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
 		settori.setLayout(new BorderLayout());
 		settori.add(west, BorderLayout.WEST);
 		settori.add(prova, BorderLayout.CENTER);
 		settori.add(east, BorderLayout.EAST);
 
-		this.add(settori);
+		this.setLayout(new BorderLayout());
+		this.add(title,BorderLayout.NORTH);
+		this.add(settori,BorderLayout.CENTER);
 
 	}
 
 	public Collection<SectorButton> getSectorButtons() {
 		return s;
+	}
+	public JButton getHomeButton(){
+		return homeBtn;
 	}
 	
 	@Override
