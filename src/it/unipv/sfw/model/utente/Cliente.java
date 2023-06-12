@@ -20,7 +20,7 @@ public class Cliente extends Utente {
 
 	public Cliente(String nome, String cognome, String email, String pass, Calendar dataNascita) {
 		super(nome, cognome, email, pass, dataNascita);
-		this.abb = null;
+		this.abb = new Abbonamento(TipoAbb.LIV0);
 		this.dataNascita = dataNascita;
 	}
 	
@@ -57,7 +57,7 @@ public class Cliente extends Utente {
 	 */
 	public int getLevel(TipoAbb tipoAbb) {
 		switch (tipoAbb) {
-		case TESSERA:
+		case LIV0:
 			return 0;
 		case LIV1:
 			return 1;
@@ -75,7 +75,7 @@ public class Cliente extends Utente {
 	 */
 	public int getLevel() {
 		switch (this.abb.getTipoAbb()) {
-		case TESSERA:
+		case LIV0:
 			return 0;
 		case LIV1:
 			return 1;

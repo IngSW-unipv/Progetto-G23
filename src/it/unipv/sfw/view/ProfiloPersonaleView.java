@@ -79,7 +79,7 @@ public class ProfiloPersonaleView extends AView {
 				tipoUtente="Cliente";
 			} else {
 				switch (((Cliente)u).getAbb().getTipoAbb()) {
-				case TESSERA: tipoUtente="Tesserato"; break;
+				case LIV0: tipoUtente= "Nessun abbonamento"; break;
 				case LIV1: tipoUtente = "Abbonato di livello 1"; break;
 				case LIV2: tipoUtente = "Abbonato di livello 2"; break;
 				case LIV3: tipoUtente = "Abbonato di livello 3"; break;

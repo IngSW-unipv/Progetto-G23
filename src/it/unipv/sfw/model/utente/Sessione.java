@@ -93,7 +93,7 @@ public class Sessione {
 		// Controlla che il cliente sia valido
 		c.checkValidity();
 		// Inserisci in db
-		if(!(DAOFactory.createIClienteDAO().insertCliente(c)))
+		if(!(DAOFactory.createIClienteDAO().insertCliente(c) && DAOFactory.createIAbbonamentoDAO().insertAbbonamento(c)))
 			throw new AccountAlreadyExistsException(c.getEmail());
 		// Login
 		this.setCurrentUtente(c);

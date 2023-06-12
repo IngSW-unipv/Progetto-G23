@@ -35,7 +35,7 @@ public class Abbonamento {
 	 */
 	public double getPrezzo() {   
 		switch(this.tipoAbb) {
-			case TESSERA:
+			case LIV0:
 				return 30;
 			case LIV1:
 				return 500;

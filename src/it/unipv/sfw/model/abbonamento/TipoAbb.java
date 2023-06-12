@@ -8,5 +8,5 @@ package it.unipv.sfw.model.abbonamento;
  * @see it.unipv.sfw.model.utente.Cliente
  */
 public enum TipoAbb {
-	TESSERA, LIV1, LIV2, LIV3;
+	LIV0, LIV1, LIV2, LIV3;
 }
