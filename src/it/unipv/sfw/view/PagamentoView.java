@@ -323,7 +323,7 @@ public class PagamentoView extends AView{
 		boolean flag = true;
 		
 		try {
-			Integer.parseInt(str);
+			Long.parseLong(str);
 		}catch(Exception e) {
 			flag = false;
 		}
@@ -332,7 +332,7 @@ public class PagamentoView extends AView{
 	}
 
 	public void checkEnteredNumber() throws WrongNumberException {
-		if (nCartaTxt.getText().isEmpty() || nCartaTxt.getText().length() != 8 || isNumber(nCartaTxt.getText()) == false) {
+		if (nCartaTxt.getText().isEmpty() || nCartaTxt.getText().length() != 16 || isNumber(nCartaTxt.getText()) == false) {
 			throw new WrongNumberException();
 		}
 	}
@@ -363,8 +363,8 @@ public class PagamentoView extends AView{
 		return cognomeTxt.getText();
 	}
 	
-	public int getNCarta() {
-		return Integer.parseInt(nCartaTxt.getText());
+	public long getNCarta() {
+		return Long.parseLong(nCartaTxt.getText());
 	}
 	
 	public int getCvv() {

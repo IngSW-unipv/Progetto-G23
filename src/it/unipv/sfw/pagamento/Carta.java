@@ -3,11 +3,11 @@ package it.unipv.sfw.pagamento;
 public class Carta {
 	
 	private String nome, cognome;
-	private int nCartaCredito, CVV, meseScadenza, annoScadenza;
+	private int CVV, meseScadenza, annoScadenza;
+	private long nCartaCredito;
 	
 	
-	
-	public Carta(String nome, String cognome, int nCartaCredito, int meseScadenza, int annoScadenza, int CVV) {
+	public Carta(String nome, String cognome, long nCartaCredito, int meseScadenza, int annoScadenza, int CVV) {
 		this.cognome = cognome;
 		this.CVV = CVV;
 		this.nome = nome;
@@ -24,7 +24,7 @@ public class Carta {
 		return CVV;
 	}
 	
-	public int getnCartaCredito() {
+	public long getnCartaCredito() {
 		return nCartaCredito;
 	}
 	

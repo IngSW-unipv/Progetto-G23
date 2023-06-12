@@ -40,7 +40,7 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 			rs1 = st1.executeQuery(query);
 				
 			while(rs1.next()) {
-				Carta carta = new Carta(rs1.getString(1), rs1.getString(2), rs1.getInt(3), rs1.getInt(4), rs1.getInt(5), 0);
+				Carta carta = new Carta(rs1.getString(1), rs1.getString(2), rs1.getLong(3), rs1.getInt(4), rs1.getInt(5), 0);
 				result.add(carta);
 			}
 			
@@ -68,7 +68,7 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 			rs1 = st1.executeQuery(query);
 				
 			while(rs1.next()) {
-				Carta carta = new Carta(rs1.getString(1), rs1.getString(2), rs1.getInt(3), rs1.getInt(4), rs1.getInt(5), 0);
+				Carta carta = new Carta(rs1.getString(1), rs1.getString(2), rs1.getLong(3), rs1.getInt(4), rs1.getInt(5), 0);
 				result.add(carta);
 			}
 			
@@ -92,7 +92,7 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 			st1.setString(1, Sessione.getIstance().getCurrentUtente().getEmail());
 			st1.setString(2, carta.getNome());
 			st1.setString(3, carta.getCognome());
-			st1.setInt(4, carta.getnCartaCredito());
+			st1.setLong(4, carta.getnCartaCredito());
 			st1.setInt(5, carta.getMeseScadenza());
 			st1.setInt(6, carta.getAnnoScadenza());
 			
