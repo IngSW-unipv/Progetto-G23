@@ -57,7 +57,10 @@ public class AnelloView extends AView {
 			anello.get(i).add(a.get(i), BorderLayout.CENTER);
 			anello.get(i).add(idAnello.get(i), BorderLayout.SOUTH);
 			idAnello.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
-			anello.get(i).setBackground(Color.GREEN);
+			if (stadio.isLibero(n_settore, i))
+				anello.get(i).setBackground(Color.GREEN);
+			else
+				anello.get(i).setBackground(Color.RED);
 			anello.get(i).setOpaque(true);
 		}
 		

@@ -54,7 +54,10 @@ public class BloccoView extends AView {
 			gruppo.get(i).add(blocco.get(i), BorderLayout.CENTER);
 			gruppo.get(i).add(idBlocco.get(i), BorderLayout.SOUTH);
 			idBlocco.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
-			gruppo.get(i).setBackground(Color.GREEN);
+			if (stadio.isLibero(n_settore, n_anello, i))
+				gruppo.get(i).setBackground(Color.GREEN);
+			else
+				gruppo.get(i).setBackground(Color.RED);
 			gruppo.get(i).setOpaque(true);
 
 		}
