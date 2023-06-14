@@ -42,7 +42,7 @@ public class RegistroBigliettiMuseoController extends AController {
 	
 	@Override
 	public void onLoad(Dimension dim) {
-		view.onWindowResized(dim);
+		this.initialize(dim);
 		view.onLoad();
 		Sessione.getIstance().setCurrentPagamento(2);
 	}

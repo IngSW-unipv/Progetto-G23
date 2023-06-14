@@ -81,7 +81,7 @@ public class RegistroBigliettiMuseoView extends AView {
 		registro.add(ricavoTot);
 		
 		registro.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (110*(nBiglietti)+50)));
-		registro.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
+		registro.setLayout(new FlowLayout(FlowLayout.CENTER, 800, 25));
 		
 		JScrollPane registroContainer = new JScrollPane(registro);
 		registroContainer.getVerticalScrollBar().setUnitIncrement(20);

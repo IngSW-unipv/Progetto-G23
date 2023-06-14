@@ -5,10 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -22,6 +19,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.DateTimePicker;
@@ -67,11 +65,12 @@ public class BigliettoMuseoView extends AView {
 	
 		
 		contenitore = new JPanel();
-		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 5));
+		contenitore.setLayout(new FlowLayout(FlowLayout.CENTER, (int)dim.getWidth(), 3));
 		contenitore.setAlignmentY(LEFT_ALIGNMENT);
+		contenitore.setPreferredSize(new Dimension((int)dim.getWidth()/2, (int)(dim.getHeight()*3)/5));
 		
 		JPanel emailPanel = new JPanel();
-		emailPanel.setPreferredSize(new Dimension(400, 75));       ////
+		emailPanel.setPreferredSize(new Dimension((int)dim.getWidth()/2, (int)dim.getHeight()/8));       ///
 		emailPanel.setLayout(new GridLayout(3, 1));
 		JLabel email_label = new JLabel("Inserire email:");
 		email_label.setFont(medium_font);
@@ -90,7 +89,7 @@ public class BigliettoMuseoView extends AView {
 		
 		//1
 		JPanel visitaPanel = new JPanel();
-		visitaPanel.setPreferredSize(new Dimension(400, 75));         ////
+		visitaPanel.setPreferredSize(new Dimension((int)dim.getWidth()/2, (int)dim.getHeight()/5));         ////
 		visitaPanel.setLayout(new GridLayout(3, 1));
 		
 		//1.1
@@ -100,12 +99,12 @@ public class BigliettoMuseoView extends AView {
 		
 		//1.2
 		JPanel dataPanel = new JPanel();
-		dataPanel.setLayout(new GridBagLayout());
-		dataPanel.setPreferredSize(new Dimension(400, 75));
+		dataPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		DatePickerSettings dateSettings = new DatePickerSettings();
 		TimePickerSettings timeSettings = new TimePickerSettings();
 		chDate = new DateTimePicker(dateSettings, timeSettings);
+		chDate.setPreferredSize(new Dimension(300, 30));                      ////
 		LocalDate today = LocalDate.now();
 		dateSettings.setDateRangeLimits(today.plusDays(1), today.plusDays(70));
 		dateSettings.setAllowKeyboardEditing(false);
@@ -120,19 +119,9 @@ public class BigliettoMuseoView extends AView {
 							+ " facenti parte dell'intera storia del club.<br>");
 		info.add(infoOrario);
 		i.add(info);
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.insets = new Insets(0, 0, 0, 2);
-		constraints.gridy = 0;
-		constraints.gridx = 0;
-		constraints.weightx = 0.8;
-		dataPanel.add(chDate, constraints);
-		constraints.fill = GridBagConstraints.NONE;
-		constraints.insets = new Insets(0, 0, 0, 0);
-		constraints.gridx = 1;
-		constraints.weightx = 0.2;
-		dataPanel.add(i, constraints);
 
+		dataPanel.add(chDate);
+		dataPanel.add(i);
 		
 		//1.3
 		dataError = new JPanel();
@@ -151,7 +140,7 @@ public class BigliettoMuseoView extends AView {
 		JPanel numeroPanel = new JPanel();
 		numeroPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		numeroPanel.setAlignmentY(LEFT_ALIGNMENT);
-		numeroPanel.setPreferredSize(new Dimension(400, 55));          		////
+		numeroPanel.setPreferredSize(new Dimension((int)dim.getWidth()/2, (int)dim.getHeight()/14));          		////
 		
 		JLabel numero_label = new JLabel("Selezionare numero biglietti:");
 		numero_label.setFont(medium_font);
