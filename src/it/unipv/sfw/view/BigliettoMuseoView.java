@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -97,12 +100,12 @@ public class BigliettoMuseoView extends AView {
 		
 		//1.2
 		JPanel dataPanel = new JPanel();
-		dataPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		dataPanel.setLayout(new GridBagLayout());
+		dataPanel.setPreferredSize(new Dimension(400, 75));
 		
 		DatePickerSettings dateSettings = new DatePickerSettings();
 		TimePickerSettings timeSettings = new TimePickerSettings();
 		chDate = new DateTimePicker(dateSettings, timeSettings);
-		chDate.setPreferredSize(new Dimension(300, 20));                      ////
 		LocalDate today = LocalDate.now();
 		dateSettings.setDateRangeLimits(today.plusDays(1), today.plusDays(70));
 		dateSettings.setAllowKeyboardEditing(false);
@@ -117,9 +120,19 @@ public class BigliettoMuseoView extends AView {
 							+ " facenti parte dell'intera storia del club.<br>");
 		info.add(infoOrario);
 		i.add(info);
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.insets = new Insets(0, 0, 0, 2);
+		constraints.gridy = 0;
+		constraints.gridx = 0;
+		constraints.weightx = 0.8;
+		dataPanel.add(chDate, constraints);
+		constraints.fill = GridBagConstraints.NONE;
+		constraints.insets = new Insets(0, 0, 0, 0);
+		constraints.gridx = 1;
+		constraints.weightx = 0.2;
+		dataPanel.add(i, constraints);
 
-		dataPanel.add(chDate);
-		dataPanel.add(i);
 		
 		//1.3
 		dataError = new JPanel();
