@@ -109,7 +109,7 @@ public class PagamentoController extends AController{
 						Calendar data_nascita = Calendar.getInstance();
 						data_nascita.setTime(date);
 						Cliente cliente = new Cliente(utente.getNome(), utente.getCognome(), utente.getEmail(), utente.getPassword(), data_nascita);
-						cliente.abbona(Sessione.getIstance().getCurrentAbb());
+						cliente.abbona(Sessione.getIstance().getTipoAbb());
 						DAOFactory.createIAbbonamentoDAO().insertAbbonamento(cliente);
 						break;
 					}

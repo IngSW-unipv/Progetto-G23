@@ -13,21 +13,12 @@ import java.util.GregorianCalendar;
  */
 public class Abbonamento {
 	private TipoAbb tipoAbb;
-	private Calendar dataInizio;
 	private double prezzo;
 	
+	public Abbonamento() {}
 	public Abbonamento(TipoAbb tipo) {
 		this.tipoAbb = tipo;
-		this.dataInizio = new GregorianCalendar(); 
 		this.prezzo = this.getPrezzo();
-	}
-	
-	/**
-	 * @return La data di inizio validità dell'abbonamento.
-	 */
-	public String getDataInizio() {
-		SimpleDateFormat formattedDate = new SimpleDateFormat("dd / MMM / YYYY");
-		return formattedDate.format(dataInizio);
 	}
 	
 	/**
@@ -53,8 +44,6 @@ public class Abbonamento {
 	 */
 	public double getSconto() {
 		switch(this.tipoAbb) {
-		case LIV0:
-			return 1.0;
 		case LIV1:
 			return 0.75;
 		case LIV2:

@@ -11,6 +11,7 @@ import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
+import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.biglietti.Biglietto;
 import it.unipv.sfw.model.partita.Partita;
@@ -37,7 +38,7 @@ public class Sessione {
 	private Utente currentUtente;
 	private HashMap<Biglietto, Integer> currentBiglietto;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
-	private TipoAbb currentAbb;
+	private Abbonamento currentAbb;
 
 	private Sessione() {	
 		merchAdmin = null;
@@ -47,7 +48,7 @@ public class Sessione {
 		carrello = null;
 		currentBiglietto = null;
 		scelte = new HashMap<>();
-		currentAbb = null;
+		currentAbb = new Abbonamento();
 	}
 	
 	
@@ -83,6 +84,7 @@ public class Sessione {
 			cli.setAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfClient(cli));
 		}
 		this.setCurrentUtente(c);
+		this.setCurrentAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfUtente(c).getTipoAbb());
 	}
 	
 	/**
@@ -194,13 +196,20 @@ public class Sessione {
 	 * @param currentAbb Tipo di abbonamento corrente.
 	 */
 	public void setCurrentAbb(TipoAbb currentAbb) {
-		this.currentAbb = currentAbb;
+		this.currentAbb.setTipoAbb(currentAbb);
 	}
 	
 	/**
 	 * @return {@link TipoAbb}.
 	 */
-	public TipoAbb getCurrentAbb() {
+	public TipoAbb getTipoAbb() {
+		return currentAbb.getTipoAbb();
+	}
+	
+	/**
+	 * @return {@link TipoAbb}.
+	 */
+	public Abbonamento getCurrentAbb() {
 		return currentAbb;
 	}
 	

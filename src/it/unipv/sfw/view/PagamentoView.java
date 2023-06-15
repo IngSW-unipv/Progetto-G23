@@ -11,6 +11,7 @@ import java.awt.geom.Dimension2D;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyDateException;
@@ -30,6 +32,7 @@ import it.unipv.sfw.exceptions.EmptyNameException;
 import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.pagamento.Carta;
@@ -95,7 +98,28 @@ public class PagamentoView extends AView{
 		scadenzaPanel.setLayout(new GridLayout(2, 1));
 		cvvPanel.setLayout(new GridLayout(2, 1));
 
-		JLabel title = new JLabel("Pagamento:");
+		double prezzo = 0;
+		switch(Sessione.getIstance().getCurrentPagamento()) {
+		case 1: 
+			for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
+				int price = 0;
+				price += entry.getKey().getPrezzo();
+				price = price * entry.getValue();
+				prezzo += price;
+			}
+			break;
+		case 2:
+			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
+			break;
+		case 3:
+			prezzo = 50;
+			break;
+		default:
+			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
+			break;
+		}
+		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
+		JLabel title = new JLabel("Totale: " + String.format("%.2f", prezzo) + " €");
 		title.setFont(veryLargeFont);
 		title.setBackground(Color.CYAN);
 		title.setOpaque(true);

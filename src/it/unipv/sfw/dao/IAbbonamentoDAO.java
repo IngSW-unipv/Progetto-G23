@@ -4,6 +4,7 @@ import it.unipv.sfw.dao.mysql.AbbonamentoDAO;
 import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Utente;
 
 /**
  * Interfaccia DAO per {@link it.unipv.sfw.model.abbonamento.Abbonamento}.
@@ -34,5 +35,7 @@ public interface IAbbonamentoDAO {
 	 * @return Abbonamento se esiste, null altrimenti.
 	 */
 	Abbonamento selectAbbonamentoOfClient(Cliente c);
+
+	Abbonamento selectAbbonamentoOfUtente(Utente u);
 
 }
