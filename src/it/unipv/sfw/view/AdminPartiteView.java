@@ -110,7 +110,7 @@ private int righe;
 			partite.add(new JLabel("<html> " + par[j].getOspiti() + "<br><br>" + par[j].getDataPerPartita()+"<br><br></html>"));
 			i.add(new JMenuBar());
 			info.add(new InfoMenu("informazioni",j));
-			infoPartita.add(new JLabel("<html>Posti occupati: <br><br>Clienti presenti: <br><br>Abbonati presenti: <br><br>Totale ricavi: </html> "));
+			infoPartita.add(new JLabel("<html>Posti occupati: <br><br>Clienti presenti: <br><br>Abbonati presenti: &nbsp &nbsp<br><br>Totale ricavi: </html> "));
 			immagini.add(new JLabel(""));
 			img2 = new ImageIcon(this.getClass().getResource("/Stemma_"+par[j].getOspiti()+".png"));
 			img2=new ImageIcon(img2.getImage().getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH));
@@ -162,9 +162,9 @@ private int righe;
 		return info;
 	}
 	
-	public void OpenInfoPartita(boolean stato,int code,int postioccupati) {
+	public void OpenInfoPartita(boolean stato,int code,int postioccupati, int clientipresenti, int abbonatipresenti) {
 		info.get(code).setPopupMenuVisible(stato);
-		infoPartita.get(code).setText("<html>Posti occupati: "+postioccupati+"<br><br>Clienti presenti: <br><br>Abbonati presenti: <br><br>Totale ricavi: </html>");
+		infoPartita.get(code).setText("<html>Posti occupati: "+postioccupati+"<br><br>Clienti presenti: "+clientipresenti+"<br><br>Abbonati presenti: "+abbonatipresenti+"<br><br>Totale ricavi: </html>");
 	}
 	
 	public void CloseInfoPartita(Boolean stato,int code) {

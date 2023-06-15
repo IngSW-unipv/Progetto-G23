@@ -22,6 +22,8 @@ public class AdminPartiteController extends AController{
 	
 	private Partita[] p;
 	private int postioccupati;
+	private int clientipresenti;
+	private int abbonatipresenti;
 	
 	@Override
 	public void initialize(Dimension dim) {
@@ -105,7 +107,9 @@ public class AdminPartiteController extends AController{
 				Calendar cal=Calendar.getInstance();
 				cal.setTime(data);
 				postioccupati = DAOFactory.createIPostoDAO().selectCount(cal);
-				v.OpenInfoPartita(true,code,postioccupati);
+				clientipresenti=DAOFactory.createIPostoDAO().clientipresenti(cal);
+				abbonatipresenti=postioccupati-clientipresenti;
+				v.OpenInfoPartita(true,code,postioccupati,clientipresenti,abbonatipresenti);
 				
 			}
 			
