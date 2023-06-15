@@ -172,5 +172,33 @@ public class PostoDAO implements IPostoDAO {
 		
 		return esito;
 	}
+
+	@Override
+	public int clientipresenti(Calendar dataPartita) {
+		int clientip = 0;
+		
+		PreparedStatement st1;
+		ResultSet rs1;
+		
+		try (DBConnection db = new DBConnection("POSTI, ABBONAMENTI")) {
+			Connection conn = db.getConnection();
+			
+			String query = "SELECT COUNT(EMAIL) FROM POSTI WHERE POSTI.EMAIL IN (SELECT EMAIL FROM ABBONAMENTI WHERE GRADO NOT LIKE 'LIV0') AND DAT=?";
+			st1 = conn.prepareStatement(query);
+			SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			st1 = conn.prepareStatement(query);
+			
+			st1.setString(1,""+dataPartita);
+			
+			rs1 = st1.executeQuery();
+			
+			rs1.next(); 		// A ResultSet cursor is initially positioned before the first row
+			clientip = rs1.getInt(1);
+			
+		} catch (Exception e){e.printStackTrace();}
+		
+		return clientip;
+	}
 		
 }

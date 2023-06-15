@@ -44,5 +44,11 @@ public interface IPostoDAO {
 	 * @return Il numero di biglietti acquistati dal cliente identificato dalla mail passata come parametro.
 	 */
 	int selectCount(String email);
+	
+	/**
+	 * @param dataPartita data di cui si vuole sapere quanti clienti sono presenti.
+	 * @return numero di clienti, che sono sono abboanti, presenti a quella partita.
+	 */
+	int clientipresenti(Calendar dataPartita);
 
 }
