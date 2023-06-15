@@ -265,7 +265,7 @@ public class PagamentoView extends AView{
 
 	@Override
 	public void onWindowResized(Dimension dim) {
-		infoPanel.setLayout(new GridLayout(6, 2, dim.width/192, 1));
+		infoPanel.setLayout(new GridLayout(7, 2, dim.width/192, 1));
 		btnsPanel.setBorder(new EmptyBorder(0, dim.width/7, 0,  dim.width/7));
 		
 		infoPanel.revalidate();
