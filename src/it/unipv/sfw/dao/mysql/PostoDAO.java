@@ -187,9 +187,7 @@ public class PostoDAO implements IPostoDAO {
 			st1 = conn.prepareStatement(query);
 			SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			
-			st1 = conn.prepareStatement(query);
-			
-			st1.setString(1,""+dataPartita);
+			st1.setString(1, "" + formattedDate.format(dataPartita.getTime()));
 			
 			rs1 = st1.executeQuery();
 			
