@@ -39,6 +39,7 @@ public class Sessione {
 	private HashMap<Biglietto, Integer> currentBiglietto;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
 	private Abbonamento currentAbb;
+	private TipoAbb abbToUpdate;
 
 	private Sessione() {	
 		merchAdmin = null;
@@ -175,6 +176,22 @@ public class Sessione {
 		}
 		
 		return n;
+	}
+	
+	/**
+	 * @return {@link TipoAbb} della sessione corrente.
+	 */
+	public TipoAbb getAbbToUpdate() {
+		return abbToUpdate;
+	}
+	
+	/**
+	 * Funzione che permette di impostare come {@link TipoAbb} corrente 
+	 * quello passato come parametro.
+	 * @param abbToUpdate
+	 */
+	public void setAbbToUpdate(TipoAbb abbToUpdate) {
+		this.abbToUpdate = abbToUpdate;
 	}
 	
 	public void setCurrentBiglietto(HashMap<Biglietto, Integer> currentBiglietto) {

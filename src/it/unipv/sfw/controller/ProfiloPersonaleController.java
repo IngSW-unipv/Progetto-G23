@@ -45,13 +45,13 @@ public class ProfiloPersonaleController extends AController{
 				b.addActionListener(a);
 				switch(b.getCode()) {
 				case 0:
-					Sessione.getIstance().setCurrentAbb(TipoAbb.LIV1);
+					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV1);
 					break;
 				case 1:
-					Sessione.getIstance().setCurrentAbb(TipoAbb.LIV2);
+					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV2);
 					break;
 				default:
-					Sessione.getIstance().setCurrentAbb(TipoAbb.LIV3);
+					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV3);
 					break;
 				}
 			}

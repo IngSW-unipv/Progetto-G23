@@ -108,7 +108,7 @@ public class AbbonamentoDAO implements IAbbonamentoDAO {
     	try (DBConnection db = new DBConnection(SCHEMA)) {
     		Connection conn = db.getConnection();
     		
-			String query = "UPDATE " +  SCHEMA + " SET LIVELLO=? WHERE EMAIL=?";
+			String query = "UPDATE " +  SCHEMA + " SET GRADO=? WHERE EMAIL=?";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, "" + livello);

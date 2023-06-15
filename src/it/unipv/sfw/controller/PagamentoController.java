@@ -110,7 +110,8 @@ public class PagamentoController extends AController{
 						data_nascita.setTime(date);
 						Cliente cliente = new Cliente(utente.getNome(), utente.getCognome(), utente.getEmail(), utente.getPassword(), data_nascita);
 						cliente.abbona(Sessione.getIstance().getTipoAbb());
-						DAOFactory.createIAbbonamentoDAO().insertAbbonamento(cliente);
+						DAOFactory.createIAbbonamentoDAO().updateAbbonamento(cliente, Sessione.getIstance().getAbbToUpdate());
+						Sessione.getIstance().setCurrentAbb(Sessione.getIstance().getAbbToUpdate());
 						break;
 					}
 					
@@ -121,7 +122,6 @@ public class PagamentoController extends AController{
 							v.upNumberErr();
 							return;
 						}
-					
 					}
 					
 					try {
