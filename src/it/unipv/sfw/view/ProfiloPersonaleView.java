@@ -23,6 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 
 import it.unipv.sfw.model.utente.Cliente;
+import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.model.utente.Utente.Type;
 import it.unipv.sfw.view.buttons.UtenteButton;
@@ -78,7 +79,7 @@ public class ProfiloPersonaleView extends AView {
 			if(((Cliente)u).getAbb() == null) {
 				tipoUtente="Cliente";
 			} else {
-				switch (((Cliente)u).getAbb().getTipoAbb()) {
+				switch (Sessione.getIstance().getTipoAbb()) {
 				case LIV0: tipoUtente= "Nessun abbonamento"; break;
 				case LIV1: tipoUtente = "Abbonato di livello 1"; break;
 				case LIV2: tipoUtente = "Abbonato di livello 2"; break;
@@ -146,10 +147,10 @@ public class ProfiloPersonaleView extends AView {
 	        
 	       
 			if(((Cliente)u).getAbb() != null) {
-				switch (((Cliente)u).getAbb().getTipoAbb()) {
+				switch (Sessione.getIstance().getTipoAbb()) {
 				case LIV1: acquista.get(0).setEnabled(false); break;
-				case LIV2: acquista.get(1).setEnabled(false); break;
-				case LIV3: acquista.get(2).setEnabled(false); break;
+				case LIV2: acquista.get(0).setEnabled(false); acquista.get(1).setEnabled(false); break;
+				case LIV3: acquista.get(0).setEnabled(false); acquista.get(1).setEnabled(false); acquista.get(2).setEnabled(false); break;
 				}
 			}
 			
