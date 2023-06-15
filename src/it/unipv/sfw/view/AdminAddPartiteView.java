@@ -73,7 +73,7 @@ public class AdminAddPartiteView extends AView {
 		for(Squadre s: Squadre.values()) {
 			if(s!=Squadre.Inter) {
 				nomesquadra.add(new JLabel(""+s));
-				imgStemma.add(new ImageIcon((new ImageIcon(getClass().getResource("/Stemma_"+s+".png"))).getImage().getScaledInstance(dim.width/12, dim.height/12, java.awt.Image.SCALE_SMOOTH)));
+				imgStemma.add(new ImageIcon((new ImageIcon(getClass().getResource("/Stemma_"+s+".png"))).getImage().getScaledInstance(dim.width/15, dim.height/12, java.awt.Image.SCALE_SMOOTH)));
 			}
 		}
 		
@@ -234,9 +234,15 @@ public class AdminAddPartiteView extends AView {
 	}
 	
 	public void onWindowResized(Dimension dim) {
+		
+		imgStemma.clear();
+		for(Squadre s: Squadre.values()) {
+			if(s!=Squadre.Inter) {
+				imgStemma.add(new ImageIcon((new ImageIcon(getClass().getResource("/Stemma_"+s+".png"))).getImage().getScaledInstance(dim.width/15, dim.height/12, java.awt.Image.SCALE_SMOOTH)));
+			}
+		}
 		for(int i=0;i<19;i++) {
-			imgStemma.get(i).setImage(imgStemma.get(i).getImage().getScaledInstance(dim.width/12, dim.height/12, java.awt.Image.SCALE_SMOOTH));
-			sceltasquadra.get(i).modificaImg(new ImageIcon(imgStemma.get(i).getImage()));
+			sceltasquadra.get(i).modificaImg(imgStemma.get(i));
 			squadra.get(i).revalidate();
 			squadra.get(i).repaint();
 		}
