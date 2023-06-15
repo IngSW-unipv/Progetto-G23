@@ -144,6 +144,16 @@ public class ProfiloPersonaleView extends AView {
 	        		+ "non limita i biglietti da loro prenotabili per le partite e include uno sconto sugli acquisti effettuabili "
 	        		+ "sullo store e per l’acquisto di biglietti per il museo.<html>");
 	        
+	       
+			if(((Cliente)u).getAbb() != null) {
+				switch (((Cliente)u).getAbb().getTipoAbb()) {
+				case LIV1: acquista.get(0).setEnabled(false); break;
+				case LIV2: acquista.get(1).setEnabled(false); break;
+				case LIV3: acquista.get(2).setEnabled(false); break;
+				}
+			}
+			
+	        
 	        abb1.add(abb1Label,BorderLayout.CENTER);
 	        abb1.add(acquista.get(0),BorderLayout.SOUTH);
 	        abb2.add(abb2Label,BorderLayout.CENTER);
@@ -155,6 +165,7 @@ public class ProfiloPersonaleView extends AView {
 	        tabbedPane.addTab("Abbonamento Liv. 1", abb1);
 	        tabbedPane.addTab("Abbonamento Liv. 2", abb2);
 	        tabbedPane.addTab("Abbonamento Liv. 3", abb3);
+	        
 			
 			abbBtn.add(tabbedPane);
 			abb.add(abbBtn);
