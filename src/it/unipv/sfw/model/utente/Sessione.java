@@ -104,6 +104,7 @@ public class Sessione {
 			throw new AccountAlreadyExistsException(c.getEmail());
 		// Login
 		this.setCurrentUtente(c);
+		this.setCurrentAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfUtente(c).getTipoAbb());
 	}
 	
 	/**
@@ -148,7 +149,6 @@ public class Sessione {
 		carrello = null;
 		currentPartita = null;
 		currentBiglietto = null;
-		currentAbb = null;
 	}
 
 	/**

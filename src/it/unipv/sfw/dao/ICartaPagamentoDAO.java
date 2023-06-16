@@ -3,6 +3,7 @@ package it.unipv.sfw.dao;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
+import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.pagamento.Carta;
 
 /**
@@ -22,7 +23,7 @@ public interface ICartaPagamentoDAO {
 	 * @param Carta carta da inserire nel db.
 	 * @return True se l'inserimento è avvenuto con successo, altrimenti False.
 	 */
-	boolean insertCarta(Carta carta) throws SQLIntegrityConstraintViolationException;
+	boolean insertCarta(Carta carta, Utente c) throws SQLIntegrityConstraintViolationException;
 
-	ArrayList<Carta> selectByUtente();
+	ArrayList<Carta> selectByUtente(Utente c);
 }

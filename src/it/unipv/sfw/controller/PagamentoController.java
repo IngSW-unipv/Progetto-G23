@@ -117,7 +117,7 @@ public class PagamentoController extends AController{
 					
 					if (v.getsalvaCB().isSelected()) { 
 						try{
-							DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0));
+							DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0), Sessione.getIstance().getCurrentUtente());
 						}catch (SQLIntegrityConstraintViolationException err) {
 							v.upNumberErr();
 							return;

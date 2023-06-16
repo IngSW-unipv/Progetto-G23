@@ -171,7 +171,7 @@ public class PagamentoView extends AView{
 		}
 		yearToChoose[5] = ANNO;
 		
-		nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
+		nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getNome());
 		cognomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
 		nCartaTxt = new JTextField();
 		cvvTxt = new JTextField();
@@ -292,7 +292,8 @@ public class PagamentoView extends AView{
 	
 	public boolean riempiCarte() {
 		boolean flag = true;
-		carteDisp = DAOFactory.createICartaPagamentoDAO().selectAll();
+		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(Sessione.getIstance().getCurrentUtente());
+		
 		if(carteDisp.isEmpty()) flag = false;
 		return flag;
 	}

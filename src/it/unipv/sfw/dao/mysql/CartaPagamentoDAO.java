@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import it.unipv.sfw.dao.ICartaPagamentoDAO;
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.pagamento.Carta;
 
 /**
@@ -50,8 +51,7 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 	}
 	
 	@Override
-	public ArrayList<Carta> selectByUtente() {
-			
+	public ArrayList<Carta> selectByUtente(Utente c) {
 		ArrayList<Carta> result= new ArrayList<>();
 			
 		PreparedStatement st1;
@@ -61,14 +61,13 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 			Connection conn = db.getConnection();	
 			
 			String query = "SELECT NOME, COGNOME, NUMERO, SCADENZA_MESE, SCADENZA_ANNO "
-						 + "FROM " + SCHEMA + " WHERE EMAIL=?";
+						 + "FROM " + SCHEMA + " WHERE EMAIL LIKE ?";
 			st1 = conn.prepareStatement(query);
-			
-			st1.setString(1, Sessione.getIstance().getCurrentUtente().getEmail());
-			rs1 = st1.executeQuery(query);
+			st1.setString(1, c.getEmail());
+			rs1 = st1.executeQuery();
 				
 			while(rs1.next()) {
-				Carta carta = new Carta(rs1.getString(1), rs1.getString(2), rs1.getLong(3), rs1.getInt(4), rs1.getInt(5), 0);
+				Carta carta = new Carta(rs1.getString(1), rs1.getString(2), Long.parseLong(rs1.getString(3)), rs1.getInt(4), rs1.getInt(5), 0);
 				result.add(carta);
 			}
 			
@@ -78,7 +77,7 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 	}
 	
 	@Override
-	public boolean insertCarta(Carta carta) throws SQLIntegrityConstraintViolationException{
+	public boolean insertCarta(Carta carta, Utente c) throws SQLIntegrityConstraintViolationException{
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -89,7 +88,7 @@ public class CartaPagamentoDAO implements ICartaPagamentoDAO{
 			String query = "INSERT INTO " + SCHEMA + "(EMAIL, NOME, COGNOME, NUMERO, SCADENZA_MESE, SCADENZA_ANNO) VALUES(?,?,?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(1, Sessione.getIstance().getCurrentUtente().getEmail());
+			st1.setString(1, c.getEmail());
 			st1.setString(2, carta.getNome());
 			st1.setString(3, carta.getCognome());
 			st1.setLong(4, carta.getnCartaCredito());
