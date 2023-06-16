@@ -61,8 +61,8 @@ public class AnelloView extends AView {
 		}
 
 		img = new ImageIcon(this.getClass().getResource("/Spalti.JPG"));
-		img = new ImageIcon(img.getImage().getScaledInstance((dim.width), (dim.height - 60) / 3,
-				java.awt.Image.SCALE_SMOOTH));
+		img = new ImageIcon(
+				img.getImage().getScaledInstance((dim.width), (dim.height - 60) / 3, java.awt.Image.SCALE_SMOOTH));
 
 		for (int i = 0; i < Stadio.ANELLI_PER_SETTORE; i++) {
 			int n_anello = Stadio.ANELLI_PER_SETTORE - i - 1;
@@ -115,8 +115,8 @@ public class AnelloView extends AView {
 
 	@Override
 	public void onWindowResized(Dimension dim) {
-		img = new ImageIcon(img.getImage().getScaledInstance((dim.width), (dim.height - 60) / 3,
-				java.awt.Image.SCALE_SMOOTH));
+		img = new ImageIcon(
+				img.getImage().getScaledInstance((dim.width), (dim.height - 60) / 3, java.awt.Image.SCALE_SMOOTH));
 
 		contenitore.setPreferredSize(new Dimension(dim.width, (dim.height - 45)));
 

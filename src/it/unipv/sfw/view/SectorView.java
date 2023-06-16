@@ -42,11 +42,11 @@ public class SectorView extends AView {
 		s = new ArrayList<>();
 
 		imgS1 = new ImageIcon(this.getClass().getResource("/Settore1.png"));
-		imgS1 = new ImageIcon(imgS1.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
+		imgS1 = new ImageIcon(
+				imgS1.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
 		imgS2 = new ImageIcon(this.getClass().getResource("/Settore2.png"));
-		imgS2 = new ImageIcon(imgS2.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
+		imgS2 = new ImageIcon(
+				imgS2.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
 		imgS3 = new ImageIcon(this.getClass().getResource("/Settore3.png"));
 		imgS3 = new ImageIcon(imgS3.getImage().getScaledInstance((dim.width) / 4, (dim.height - 50) / 2,
 				java.awt.Image.SCALE_SMOOTH));
@@ -54,11 +54,11 @@ public class SectorView extends AView {
 		imgS4 = new ImageIcon(imgS4.getImage().getScaledInstance((dim.width) / 4, (dim.height - 50) / 2,
 				java.awt.Image.SCALE_SMOOTH));
 		imgS5 = new ImageIcon(this.getClass().getResource("/Settore5.png"));
-		imgS5 = new ImageIcon(imgS5.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
+		imgS5 = new ImageIcon(
+				imgS5.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
 		imgS6 = new ImageIcon(this.getClass().getResource("/Settore6.png"));
-		imgS6 = new ImageIcon(imgS6.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
+		imgS6 = new ImageIcon(
+				imgS6.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
 		imgS7 = new ImageIcon(this.getClass().getResource("/Settore7.png"));
 		imgS7 = new ImageIcon(imgS7.getImage().getScaledInstance((dim.width) / 4, (dim.height - 50) / 2,
 				java.awt.Image.SCALE_SMOOTH));
@@ -176,18 +176,18 @@ public class SectorView extends AView {
 
 	@Override
 	public void onWindowResized(Dimension dim) {
-		imgS1 = new ImageIcon(imgS1.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
-		imgS2 = new ImageIcon(imgS2.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
+		imgS1 = new ImageIcon(
+				imgS1.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
+		imgS2 = new ImageIcon(
+				imgS2.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
 		imgS3 = new ImageIcon(imgS3.getImage().getScaledInstance((dim.width) / 4, (dim.height - 50) / 2,
 				java.awt.Image.SCALE_SMOOTH));
 		imgS4 = new ImageIcon(imgS4.getImage().getScaledInstance((dim.width) / 4, (dim.height - 50) / 2,
 				java.awt.Image.SCALE_SMOOTH));
-		imgS5 = new ImageIcon(imgS5.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
-		imgS6 = new ImageIcon(imgS6.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4,
-				java.awt.Image.SCALE_SMOOTH));
+		imgS5 = new ImageIcon(
+				imgS5.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
+		imgS6 = new ImageIcon(
+				imgS6.getImage().getScaledInstance((dim.width) / 4, (dim.height) / 4, java.awt.Image.SCALE_SMOOTH));
 		imgS7 = new ImageIcon(imgS7.getImage().getScaledInstance((dim.width) / 4, (dim.height - 50) / 2,
 				java.awt.Image.SCALE_SMOOTH));
 		imgS8 = new ImageIcon(imgS8.getImage().getScaledInstance((dim.width) / 4, (dim.height - 50) / 2,

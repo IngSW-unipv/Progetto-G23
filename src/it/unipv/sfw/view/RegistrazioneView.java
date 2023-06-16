@@ -51,8 +51,8 @@ public class RegistrazioneView extends AView {
 		// Inizializzazione immagine di sinistra
 		ImageIcon img = new ImageIcon(this.getClass().getResource("/stadio.png"));
 
-		img = new ImageIcon(img.getImage().getScaledInstance((dim.width) / 2, (dim.height - 45) / 2,
-				Image.SCALE_SMOOTH));
+		img = new ImageIcon(
+				img.getImage().getScaledInstance((dim.width) / 2, (dim.height - 45) / 2, Image.SCALE_SMOOTH));
 		imgLabel = new JLabel(img);
 		imgLabel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
 
@@ -239,8 +239,8 @@ public class RegistrazioneView extends AView {
 		destraPanel.setBorder(new EmptyBorder(0, destraPanelInset, 0, destraPanelInset));
 
 		imgLabel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
-		ImageIcon img = new ImageIcon(((ImageIcon) imgLabel.getIcon()).getImage()
-				.getScaledInstance((dim.width) / 2, (dim.height - 45) / 2, Image.SCALE_SMOOTH));
+		ImageIcon img = new ImageIcon(((ImageIcon) imgLabel.getIcon()).getImage().getScaledInstance((dim.width) / 2,
+				(dim.height - 45) / 2, Image.SCALE_SMOOTH));
 		imgLabel.setIcon(img);
 
 		contenitore.revalidate();

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.store.AcquistoStore;
-import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.store.StoreOnline;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.utilities.Pair;
@@ -64,8 +63,7 @@ public class AdminStoreController extends AController {
 			public void actionPerformed(ActionEvent e) {
 				StoreButton b = ((StoreButton) e.getSource());
 
-				Sessione.getIstance()
-						.setMerchAdmin(new Pair<>(b.getMerch(), b.getMerchQuantity()));
+				Sessione.getIstance().setMerchAdmin(new Pair<>(b.getMerch(), b.getMerchQuantity()));
 				ControllerManager.getInstance().loadController(Type.AMODIFYSTORE);
 			}
 		};

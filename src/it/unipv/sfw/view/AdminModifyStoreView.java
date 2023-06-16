@@ -67,7 +67,6 @@ public class AdminModifyStoreView extends AView {
 		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		errorLabel.setBorder(new EmptyBorder(0, 0, 3, 0));
 
-
 		nome = new JTextField();
 		prezzo = new JTextField();
 		quantita = new JTextField();

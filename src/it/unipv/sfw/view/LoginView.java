@@ -70,8 +70,8 @@ public class LoginView extends AView {
 		contenitore.setPreferredSize(new Dimension(dim.width, (dim.height - 45)));
 		destraPanel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
 		imgLabel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
-		img = new ImageIcon(img.getImage().getScaledInstance((dim.width) / 2, (dim.height - 45) / 2,
-				java.awt.Image.SCALE_SMOOTH));
+		img = new ImageIcon(
+				img.getImage().getScaledInstance((dim.width) / 2, (dim.height - 45) / 2, java.awt.Image.SCALE_SMOOTH));
 
 		errorPanel.add(errLabel);
 		errorPanel.setVisible(false);
@@ -170,8 +170,8 @@ public class LoginView extends AView {
 		contenitore.setPreferredSize(new Dimension(dim.width, (dim.height - 45)));
 		destraPanel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
 		imgLabel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
-		img = new ImageIcon(img.getImage().getScaledInstance((dim.width) / 2, (dim.height - 45) / 2,
-				java.awt.Image.SCALE_SMOOTH));
+		img = new ImageIcon(
+				img.getImage().getScaledInstance((dim.width) / 2, (dim.height - 45) / 2, java.awt.Image.SCALE_SMOOTH));
 		imgLabel.setIcon(img);
 
 		contenitore.revalidate();

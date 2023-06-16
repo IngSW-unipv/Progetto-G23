@@ -145,11 +145,14 @@ public class ProfiloPersonaleView extends AView {
 			acquista.add(new UtenteButton("Acquista", 1));
 			acquista.add(new UtenteButton("Acquista", 2));
 
-			JLabel abb1Label=new JLabel("<html>Il primo livello include sconti del 25% per i biglietti delle partite,del museo e dello store.<br> </html>");
-	        
-	        JLabel abb2Label=new JLabel("<html>Il primo livello include sconti del 50% per i biglietti delle partite,del museo e dello store.</html>");
-	        
-	        JLabel abb3Label=new JLabel("<html>Il primo livello include sconti del 75% per i biglietti delle partite,del museo e dello store.<html>");
+			JLabel abb1Label = new JLabel(
+					"<html>Il primo livello include sconti del 25% per i biglietti delle partite,del museo e dello store.<br> </html>");
+
+			JLabel abb2Label = new JLabel(
+					"<html>Il primo livello include sconti del 50% per i biglietti delle partite,del museo e dello store.</html>");
+
+			JLabel abb3Label = new JLabel(
+					"<html>Il primo livello include sconti del 75% per i biglietti delle partite,del museo e dello store.<html>");
 
 			if (((Cliente) u).getAbb() != null) {
 				switch (Sessione.getIstance().getTipoAbb()) {

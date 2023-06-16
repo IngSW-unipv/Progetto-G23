@@ -63,8 +63,8 @@ public class BloccoView extends AView {
 		}
 
 		img = new ImageIcon(this.getClass().getResource("/blocco.jpg"));
-		img = new ImageIcon(img.getImage().getScaledInstance((dim.width) / 10, (dim.height - 50) / 5,
-				java.awt.Image.SCALE_SMOOTH));
+		img = new ImageIcon(
+				img.getImage().getScaledInstance((dim.width) / 10, (dim.height - 50) / 5, java.awt.Image.SCALE_SMOOTH));
 
 		for (int i = 0; i < Stadio.BLOCCHI_PER_ANELLO; i++) {
 			int n_blocco = Stadio.BLOCCHI_PER_ANELLO - i - 1;
@@ -114,8 +114,8 @@ public class BloccoView extends AView {
 
 	@Override
 	public void onWindowResized(Dimension dim) {
-		img = new ImageIcon(img.getImage().getScaledInstance((dim.width) / 10, (dim.height - 50) / 5,
-				java.awt.Image.SCALE_SMOOTH));
+		img = new ImageIcon(
+				img.getImage().getScaledInstance((dim.width) / 10, (dim.height - 50) / 5, java.awt.Image.SCALE_SMOOTH));
 
 		tabellone.setPreferredSize(new Dimension(dim.width, (dim.height - 45)));
 
