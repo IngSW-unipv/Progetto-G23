@@ -12,19 +12,11 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.mail.MessagingException;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.EventListenerList;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyNameException;
 import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
-import it.unipv.sfw.exceptions.WrongEmailFormatException;
-import it.unipv.sfw.model.biglietti.Biglietto;
-import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
@@ -34,7 +26,6 @@ import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.pagamento.Carta;
 import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
-import it.unipv.sfw.view.elements.CartItemPanel;
 
 public class PagamentoController extends AController{
 

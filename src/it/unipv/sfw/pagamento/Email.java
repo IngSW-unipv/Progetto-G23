@@ -80,7 +80,7 @@ public class Email {
 	public String messaggioAbbonamento() {
 		String messaggio = "";
 		
-		messaggio += "Pagamento effettuato. Nuovo livello di abbonamento: " + Sessione.getIstance().getCurrentAbb();
+		messaggio += "Pagamento effettuato. Nuovo livello di abbonamento: " + Sessione.getIstance().getCurrentAbb().getTipoAbb();
 		
 		return messaggio;
 	}
@@ -125,6 +125,7 @@ public class Email {
 			if(Sessione.getIstance().getCurrentPagamento() == 1) message.setSubject("Pagamento store StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 2) message.setSubject("Pagamento biglietto museo StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 3) message.setSubject("Pagamento biglietto partita StadiumSystem");
+			else message.setSubject("Pagamento abbonamento");
 			message.setContent(messaggio, "text/plain"); Transport.send(message);
 		} catch (MessagingException e) {
 			throw new MessagingException();
