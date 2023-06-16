@@ -57,11 +57,10 @@ public class Email {
 		int n = Sessione.getIstance().getNBiglietti();
 		
 		String giorno = "" + (b.getData().get(Calendar.DAY_OF_MONTH) - 1) + "-" + (b.getData().get(Calendar.MONTH) + 1) + "-" + b.getData().get(Calendar.YEAR);
-		String ora = "" + b.getOra().getHours() + ":" + b.getOra().getMinutes();
 		
 		if (n == 1) messaggio += "Il pagamento del biglietto per il museo è avvenuto correttamente.\n";
 		else messaggio += "Il pagamento dei " + n + " biglietti per il museo è avvenuto correttamente.\n";
-		messaggio += "Puoi accedere il giorno " + giorno +  " alle ore " + ora + ".";
+		messaggio += "Puoi accedere il giorno " + giorno + ".";
 		
 		return messaggio;
 	}
