@@ -4,12 +4,12 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import javax.mail.MessagingException;
 
@@ -28,11 +28,33 @@ import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
 
 public class PagamentoController extends AController{
-
+	
 	@Override
 	public void initialize(Dimension dim) {
 		
-		PagamentoView v = new PagamentoView(dim);
+		double prezzo = 0;
+		switch(Sessione.getIstance().getCurrentPagamento()) {
+		case 1: 
+			for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
+				int price = 0;
+				price += entry.getKey().getPrezzo();
+				price = price * entry.getValue();
+				prezzo += price;
+			}
+			break;
+		case 2:
+			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
+			break;
+		case 3:
+			prezzo = 50;
+			break;
+		default:
+			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
+			break;
+		}
+		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
+		
+		PagamentoView v = new PagamentoView(dim, Sessione.getIstance().getCurrentUtente(), Sessione.getIstance().getCurrentPagamento(), prezzo);
 		
 		
 		v.getBackBtn().addActionListener(new ActionListener() {	
@@ -70,9 +92,9 @@ public class PagamentoController extends AController{
 					Email a = new Email();
 					String messaggio = "";
 					
-					v.checkEnteredName();
-					v.checkEnteredNumber();
-					v.checkEnteredCvv();
+					checkEnteredName();
+					checkEnteredNumber();
+					checkEnteredCvv();
 					
 					switch(Sessione.getIstance().getCurrentPagamento()) {
 					case 1: 
@@ -156,6 +178,41 @@ public class PagamentoController extends AController{
 	@Override
 	public Type getType() {
 		return Type.PAGAMENTO;
+	}
+	
+	public void checkEnteredCvv() throws WrongCvvException {
+		PagamentoView v = (PagamentoView)this.getView();
+		if (v.getCvvTxt().getText().isEmpty() || v.getCvvTxt().getText().length() != 3 || isNumber(v.getCvvTxt().getText()) == false) {
+			throw new WrongCvvException();
+		}
+	}
+	
+	public void checkEnteredNumber() throws WrongNumberException {
+		PagamentoView v = (PagamentoView)this.getView();
+		if (v.getnCartaTxt().getText().isEmpty() || v.getnCartaTxt().getText().length() != 16 || isNumber(v.getnCartaTxt().getText()) == false) {
+			throw new WrongNumberException();
+		}
+	}
+	
+	public void checkEnteredName() throws EmptyNameException {
+		PagamentoView v = (PagamentoView)this.getView();
+		if(v.getNomeTxt().getText().isEmpty() && v.getCognomeTxt().getText().isEmpty()) {
+			v.setTipoErr(2);
+			throw new EmptyNameException();
+		}else {
+			if (v.getNomeTxt().getText().isEmpty()) {
+				v.setTipoErr(0);
+				throw new EmptyNameException();
+			}else if(v.getCognomeTxt().getText().isEmpty()){
+				v.setTipoErr(1);
+				throw new EmptyNameException();
+			}
+		}
+	}
+	
+	public boolean isNumber(String str_in) {
+		final Predicate<String> isNum = (str) -> str.chars().allMatch((c) -> Character.isDigit(c));
+		return (isNum.test(str_in) && str_in.charAt(0) != '0');
 	}
 
 }

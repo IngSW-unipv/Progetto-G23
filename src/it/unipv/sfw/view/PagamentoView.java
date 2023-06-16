@@ -5,39 +5,24 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagLayoutInfo;
 import java.awt.GridLayout;
-import java.awt.geom.Dimension2D;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Predicate;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import it.unipv.sfw.dao.DAOFactory;
-import it.unipv.sfw.exceptions.EmptyDateException;
-import it.unipv.sfw.exceptions.EmptyNameException;
-import it.unipv.sfw.exceptions.WrongCvvException;
-import it.unipv.sfw.exceptions.WrongNumberException;
-import it.unipv.sfw.model.biglietti.Biglietto;
-import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
+import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.pagamento.Carta;
-import it.unipv.sfw.view.elements.CartItemPanel;
 
 public class PagamentoView extends AView{
 	
@@ -52,8 +37,10 @@ public class PagamentoView extends AView{
 	private int tipoErr; // 0 - nome, 1 - cognome, 2 - entrambi
 	private ArrayList <Carta> carteDisp = new ArrayList<>();
 	private JComboBox <String> cartaOp;
+	private Utente u;
 	
-	public PagamentoView(Dimension dim) {
+	public PagamentoView(Dimension dim, Utente u, int tipoPagamento, double prezzo) {
+		this.u = u;
 		// Fonts
 		Font shortFont = new Font("Arial", 1, 14);
 		Font mediumFont = new Font("Arial", 1, 16);
@@ -64,7 +51,7 @@ public class PagamentoView extends AView{
 		JPanel topPanel = new JPanel();
 		JPanel topPanelLbl = new JPanel();
 		
-		JLabel utente = new JLabel("Utente loggato:   " + Sessione.getIstance().getCurrentUtente().getNome() + " " + Sessione.getIstance().getCurrentUtente().getCognome());
+		JLabel utente = new JLabel("Utente loggato:   " + u.getNome() + " " + u.getCognome());
 		utente.setFont(veryLargeFont);
 		utente.setBackground(Color.BLUE);
 		utente.setOpaque(true);
@@ -99,27 +86,6 @@ public class PagamentoView extends AView{
 		scadenzaPanel.setLayout(new GridLayout(2, 1));
 		cvvPanel.setLayout(new GridLayout(2, 1));
 
-		double prezzo = 0;
-		switch(Sessione.getIstance().getCurrentPagamento()) {
-		case 1: 
-			for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
-				int price = 0;
-				price += entry.getKey().getPrezzo();
-				price = price * entry.getValue();
-				prezzo += price;
-			}
-			break;
-		case 2:
-			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
-			break;
-		case 3:
-			prezzo = 50;
-			break;
-		default:
-			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
-			break;
-		}
-		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
 		JLabel title = new JLabel("Totale: " + String.format("%.2f", prezzo) + " €");
 		title.setFont(veryLargeFont);
 		title.setBackground(Color.CYAN);
@@ -172,17 +138,17 @@ public class PagamentoView extends AView{
 		}
 		yearToChoose[5] = ANNO;
 		
-		nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getNome());
-		cognomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
+		nomeTxt = new JTextField(u.getNome());
+		cognomeTxt = new JTextField(u.getCognome());
 		nCartaTxt = new JTextField();
 		cvvTxt = new JTextField();
 		meseOp = new JComboBox<>(monthToChoose);
 		annoOp = new JComboBox<>(yearToChoose);
 		salvaCb = new JCheckBox("Salva metodo di pagamento");
 		okBtn = new JButton("Conferma");
-		if(Sessione.getIstance().getCurrentPagamento() == 1) backBtn = new JButton("Carrello");
-		else if (Sessione.getIstance().getCurrentPagamento() == 2) backBtn = new JButton("Museo");
-		else if (Sessione.getIstance().getCurrentPagamento() == 3) backBtn = new JButton("Home");
+		if(tipoPagamento == 1) backBtn = new JButton("Carrello");
+		else if (tipoPagamento == 2) backBtn = new JButton("Museo");
+		else if (tipoPagamento == 3) backBtn = new JButton("Home");
 		else backBtn = new JButton("Profilo personale");
 		
 		meseOp.setSelectedIndex(0);
@@ -293,7 +259,7 @@ public class PagamentoView extends AView{
 	
 	public boolean riempiCarte() {
 		boolean flag = true;
-		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(Sessione.getIstance().getCurrentUtente());
+		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(u);
 		
 		if(carteDisp.isEmpty()) flag = false;
 		return flag;
@@ -323,43 +289,11 @@ public class PagamentoView extends AView{
 		cvvErr.setVisible(true);
 	}
 	
-	public void checkEnteredName() throws EmptyNameException {
-		if(nomeTxt.getText().isEmpty() && cognomeTxt.getText().isEmpty()) {
-			setTipoErr(2);
-			throw new EmptyNameException();
-		}else {
-			if (nomeTxt.getText().isEmpty()) {
-				setTipoErr(0);
-				throw new EmptyNameException();
-			}else if(cognomeTxt.getText().isEmpty()){
-				setTipoErr(1);
-				throw new EmptyNameException();
-			}
-		}
-	}
-	
 	public void reLoad() {
 		nomeErr.setVisible(false);
 		cognomeErr.setVisible(false);
 		numeroErr.setVisible(false);
 		cvvErr.setVisible(false);
-	}
-	
-	public boolean isNumber(String str_in) {
-		final Predicate<String> isNum = (str) -> str.chars().allMatch((c) -> Character.isDigit(c));
-		return (isNum.test(str_in) && str_in.charAt(0) != '0');
-	}
-
-	public void checkEnteredNumber() throws WrongNumberException {
-		if (nCartaTxt.getText().isEmpty() || nCartaTxt.getText().length() != 16 || isNumber(nCartaTxt.getText()) == false) {
-			throw new WrongNumberException();
-		}
-	}
-	
-	public void checkEnteredCvv() throws WrongCvvException {
-		if (cvvTxt.getText().equals("") || cvvTxt.getText().length() != 3 || isNumber(cvvTxt.getText()) == false) {
-			throw new WrongCvvException();
-		}
 	}
 	
 	public JButton getBackBtn() {
@@ -397,4 +331,22 @@ public class PagamentoView extends AView{
 	public int getAnno() {
 		return (int) annoOp.getSelectedItem();
 	}
+	
+	public JTextField getCvvTxt() {
+		return cvvTxt;
+	}
+	
+	public JTextField getNomeTxt() {
+		return nomeTxt;
+	}
+	
+	public JTextField getnCartaTxt() {
+		return nCartaTxt;
+	}
+	
+	public JTextField getCognomeTxt() {
+		return cognomeTxt;
+	}
+	
+	
 }
