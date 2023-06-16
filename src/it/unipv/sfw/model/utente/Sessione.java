@@ -38,7 +38,6 @@ public class Sessione {
 	private Utente currentUtente;
 	private HashMap<Biglietto, Integer> currentBiglietto;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
-	private Abbonamento currentAbb;
 	private TipoAbb abbToUpdate;
 
 	private Sessione() {	
@@ -49,7 +48,6 @@ public class Sessione {
 		carrello = null;
 		currentBiglietto = null;
 		scelte = new HashMap<>();
-		currentAbb = new Abbonamento();
 	}
 	
 	
@@ -130,14 +128,6 @@ public class Sessione {
 			
 	 }
 	
-	/**
-	 * Funzione utilizzata per registrare la prenotazione di una partita.
-	 * Le scelte vengono automaticamente resettate.
-	 */
-	public void book() {	
-		this.resetScelte();
-	}
-
 	
 	/**
 	 * Funzione che resetta i campi sessione riguardanti 
@@ -213,21 +203,24 @@ public class Sessione {
 	 * @param currentAbb Tipo di abbonamento corrente.
 	 */
 	public void setCurrentAbb(TipoAbb currentAbb) {
-		this.currentAbb.setTipoAbb(currentAbb);
+		this.getCurrentAbb().setTipoAbb(currentAbb);
 	}
 	
 	/**
 	 * @return {@link TipoAbb}.
 	 */
 	public TipoAbb getTipoAbb() {
-		return currentAbb.getTipoAbb();
+		return this.getCurrentAbb().getTipoAbb();
 	}
 	
 	/**
 	 * @return {@link TipoAbb}.
 	 */
 	public Abbonamento getCurrentAbb() {
-		return currentAbb;
+		if (currentUtente.getType() == Utente.Type.CLIENTE)
+			return ((Cliente)currentUtente).getAbb();
+		else
+			return null;
 	}
 	
 	/**
