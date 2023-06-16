@@ -1,163 +1,195 @@
 package it.unipv.sfw.view;
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Image;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.view.buttons.UtenteButton;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
+import it.unipv.sfw.view.elements.MenuUtente;
 
 /**
- * Classe che crea la view della sezione partite nella pagina
- * principale dell'utente.
+ * Classe che crea la view della sezione partite nella pagina principale
+ * dell'utente.
  *
  * @author Jacopo Piccoli, Gabriele Invernizzi
  * @see it.unipv.sfw.view.buttons.UtenteButton
  */
 public class PartiteView extends AView {
-	
+
 	private int righe;
 
-	JPanel panel;
 	// variabili del top
-	private JPanel top, bottoni;
-	private JLabel icona;
-	private JButton bpart, bmuseo, bshop, butente;
-	private Icon img;
-	private Image img2;
+	private JButton bmuseo, bshop;
+	private MenuUtente u;
+	private ImageIcon img2;
 
 	// variabili del middle
-	private JPanel middle, p;
-	private JLabel titolo;
+	private JPanel partitePanel;
 	private ArrayList<JLabel> partite;
 	private ArrayList<UtenteButton> acquista;
 	private ArrayList<JPanel> tabellone;
-	private JScrollPane pane;
+	private ArrayList<JLabel> immagini;
 
 	public PartiteView(Partita[] par, Dimension dim) {
 
 		righe = par.length;
-		panel = new JPanel();
-		panel.setPreferredSize(new Dimension((int)((dim.width)), dim.height -45));
-		top = new JPanel();
-		bottoni = new JPanel();
+		u = new MenuUtente();
 
-		icona = new JLabel();
+		Font medium = new Font("Arial", 1, 18);
+		Font large = new Font("Arial", 1, 24);
 
-		bpart = new JButton("PARTITE");
-		bpart.setBackground(Color.WHITE);
-		bpart.setFont(new java.awt.Font("Arial", 1, 18));
 		bmuseo = new JButton("MUSEO");
 		bmuseo.setBackground(Color.WHITE);
-		bmuseo.setFont(new java.awt.Font("Arial", 1, 18));
-		bshop = new JButton("SHOP");
+		bmuseo.setFont(medium);
+		bshop = new JButton("STORE");
 		bshop.setBackground(Color.WHITE);
-		bshop.setFont(new java.awt.Font("Arial", 1, 18));
+		bshop.setFont(medium);
 
-		img = new ImageIcon(getClass().getResource("/utente.gif"));
-
-		butente = new JButton("", img);
-		butente.setBackground(Color.BLUE);
-
+		JPanel bottoni = new JPanel();
 		bottoni.setBackground(Color.BLUE);
 		bottoni.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
-		bottoni.add(bpart);
 		bottoni.add(bmuseo);
 		bottoni.add(bshop);
 
+		JPanel top = new JPanel();
+
 		top.setLayout(new BorderLayout());
-		top.add(butente, BorderLayout.WEST);
 		top.add(bottoni, BorderLayout.CENTER);
+		top.add(u, BorderLayout.EAST);
 
 		top.setBorder(BorderFactory.createLineBorder(Color.black));
 		top.setBackground(Color.gray);
 
 		// configurazione del middle
-		middle = new JPanel();
 
-		p = new JPanel();
+		JPanel titlePanel = new JPanel();
+		titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		titlePanel.setBackground(Color.BLACK);
 
-		titolo = new JLabel("Elenco Partite:");
-		titolo.setFont(new java.awt.Font("Arial", 1, 24));
-		titolo.setBackground(Color.CYAN);
+		JLabel titolo = new JLabel();
+		titolo = new JLabel("PARTITE");
+		titolo.setForeground(Color.WHITE);
+		titolo.setFont(large);
+		titolo.setBackground(Color.BLACK);
 		titolo.setOpaque(true);
+		titolo.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 40));
+		titolo.setHorizontalAlignment(SwingConstants.CENTER);
 
-		partite = new ArrayList<JLabel>();
-		acquista = new ArrayList<UtenteButton>();
-		tabellone = new ArrayList<JPanel>();
+		titlePanel.add(titolo);
 
-		titolo.setBorder(BorderFactory.createLineBorder(Color.black));
+		partite = new ArrayList<>();
+		acquista = new ArrayList<>();
+		tabellone = new ArrayList<>();
+		immagini = new ArrayList<>();
 
-		img2 = new ImageIcon(this.getClass().getResource("/stemma.jpg")).getImage();
+		Calendar d = new GregorianCalendar();
+
 		for (int i = 0; i < righe; i++) {
-			partite.add(new JLabel("<html> " + par[i].getOspiti() + "<br><br>" + par[i].getData()
-					+ "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <br><b<br><br></html>"));
+			d = par[i].getCalendarDate();
+			partite.add(new JLabel("<html>	Inter - " + par[i].getOspiti() + "<br><br>" + par[i].getDataPerPartita()
+					+ "<br><br></html>"));
+			partite.get(i).setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0));
+
+			immagini.add(new JLabel(""));
+			img2 = new ImageIcon(this.getClass().getResource("/Stemma_" + par[i].getOspiti() + ".png"));
+			img2 = new ImageIcon(img2.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH));
+			immagini.get(i).setIcon(img2);
+			immagini.get(i).setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 			acquista.add(new UtenteButton("Acquista", i));
+			acquista.get(i).setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 			tabellone.add(new JPanel());
-		}
+			tabellone.get(i).setPreferredSize(new Dimension(500, 150));
+			tabellone.get(i).setLayout(new BorderLayout());
 
-		for (int i = 0; i < righe; i++) {
-			tabellone.get(i).add(partite.get(i));
-			tabellone.get(i).add(acquista.get(i));
-			partite.get(i).setIcon(new ImageIcon(img2));
+			tabellone.get(i).add(partite.get(i), BorderLayout.CENTER);
+			tabellone.get(i).add(acquista.get(i), BorderLayout.SOUTH);
+			tabellone.get(i).add(immagini.get(i), BorderLayout.WEST);
 			tabellone.get(i).setBorder(BorderFactory.createLineBorder(Color.black));
-			partite.get(i).setFont(new java.awt.Font("Arial", 1, 18));
+			partite.get(i).setFont(medium);
+			if (d.getTime().before(Calendar.getInstance().getTime())) {
+				acquista.get(i).setEnabled(false);
+			}
 		}
+		partitePanel = new JPanel();
+		partitePanel.setPreferredSize(new Dimension((int) ((dim.width - 20) * 0.8), (175 * righe)));
 
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150*righe)));
-
-		p.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
+		partitePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 600, 25));
 
 		for (JPanel t : tabellone) {
-			p.add(t);
+			partitePanel.add(t);
 		}
 
-		pane = new JScrollPane(p);
+		JScrollPane pane = new JScrollPane(partitePanel);
 
+		pane.getVerticalScrollBar().setUnitIncrement(10);
+
+		JPanel middle = new JPanel();
 		middle.setLayout(new BorderLayout());
-		middle.add(titolo, BorderLayout.NORTH);
+		middle.add(titlePanel, BorderLayout.NORTH);
 		middle.add(pane, BorderLayout.CENTER);
 
-		panel.setLayout(new BorderLayout());
-		panel.add(top, BorderLayout.NORTH);
-		panel.add(middle, BorderLayout.CENTER);
-
-		this.add(panel,BorderLayout.CENTER);
-
+		this.setLayout(new BorderLayout());
+		this.add(top, BorderLayout.NORTH);
+		this.add(middle, BorderLayout.CENTER);
 	}
 
+	/**
+	 * @return Bottoni di acquista biglietto.
+	 */
 	public Collection<UtenteButton> getButtons() {
 		return acquista;
 	}
-	
-	@Override
-	public void onWindowResized(Dimension dim) {
-		p.setPreferredSize(new Dimension((int)((dim.width-20)*0.8), (150 * righe)));
-		panel.setPreferredSize(new Dimension((int)((dim.width-20)), dim.height - 45));
-		
-		panel.revalidate();
-		panel.repaint();	
+
+	/**
+	 * @return Bottone di uscita.
+	 */
+	public JMenuItem getExit() {
+		return u.getExit();
+	}
+
+	/**
+	 * @return Bottone del museo.
+	 */
+	public JButton getMuseoButton() {
+		return bmuseo;
+	}
+
+	/**
+	 * @return Bottone del profilo personale.
+	 */
+	public JMenuItem getProfiloPersonaleButton() {
+		return u.getProfiloPersonale();
+	}
+
+	/**
+	 * @return Bottone dello store.
+	 */
+	public JButton getStoreButton() {
+		return bshop;
 	}
 
 	@Override
-	public Type getType() {
-		return AView.Type.PARTITE;
+	public void onWindowResized(Dimension dim) {
+		partitePanel.setPreferredSize(new Dimension((int) ((dim.width - 20) * 0.8), (175 * righe)));
+		partitePanel.revalidate();
+		partitePanel.repaint();
 	}
 
 }

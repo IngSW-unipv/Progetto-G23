@@ -7,6 +7,13 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="img"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="properties"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="lib/flatlaf-3.1.1/flatlaf-3.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/activation-jaf1.1.1/activation-jaf1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/LGoodDatePicker-10.3.1/LGoodDatePicker-10.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/javax.mail-1.6.2/javax.mail.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

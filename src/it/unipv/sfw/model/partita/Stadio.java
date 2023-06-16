@@ -1,50 +1,101 @@
 package it.unipv.sfw.model.partita;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import it.unipv.sfw.dao.DAOFactory;
 
 /**
- * Classe che rappresenta lo stadio accessibile al {@link it.unipv.sfw.model.utente.Cliente}.
- * @author Lorenzo Reale
+ * Classe che rappresenta lo stadio accessibile al
+ * {@link it.unipv.sfw.model.utente.Cliente}.
+ *
+ * @author Lorenzo Reale, Gabriele Invernizzi
  * @see it.unipv.sfw.model.utente.Cliente
  */
 public class Stadio {
 
+	public static final int N_SETTORI = 8;
+	public static final int ANELLI_PER_SETTORE = 3;
+	public static final int BLOCCHI_PER_ANELLO = 50;
+	public static final int POSTI_PER_BLOCCO = 50;
+
 	private ArrayList<Posto> posti;
-	private boolean libero;
 
-	public Stadio() {
-		libero = true;
-		posti = new ArrayList<Posto>();
+	/**
+	 * Costruttore utilizzato principalmente per testing.
+	 *
+	 * @param postiOccupatiPartita ArrayList di posti occupati in una determinata
+	 *                             partita.
+	 */
+	public Stadio(ArrayList<Posto> postiOccupatiPartita) {
+		posti = postiOccupatiPartita;
 	}
 
 	/**
-	 * Funzione utilizzata per segnalare che lo stadio è pieno.
-	 * @param lib False se è pieno, altrimenti true.
+	 * @param dataPartita Data della partita interessata.
 	 */
-	public void setLibero(boolean lib) {
-		libero = lib;
+	public Stadio(Calendar dataPartita) {
+		posti = DAOFactory.createIPostoDAO().selectByData(dataPartita);
 	}
 
 	/**
-	 * @return False se lo stadio è occupato, altrimenti true.
+	 * Controlla se un settore è libero.
+	 *
+	 * @param settore
+	 * @return true se è libero, falso altrimenti.
 	 */
-	public boolean getLibero() {
-		return libero;
+	public boolean isLibero(int settore) {
+		long anelliOccInSettore = posti.stream().filter(p -> p.getNSettore() == settore).count();
+
+		return anelliOccInSettore >= (ANELLI_PER_SETTORE * BLOCCHI_PER_ANELLO * POSTI_PER_BLOCCO) ? false : true;
 	}
 
 	/**
-	 * Funzione utilizzata per settare lo stadio occupato se non ci sono più settori liberi.
+	 * Controlla se un anello è libero.
+	 *
+	 * @param settore
+	 * @param anello
+	 * @return true se è libero, falso altrimenti.
 	 */
-	public void checkLibero() {
-		int lib = 0;
+	public boolean isLibero(int settore, int anello) {
+		long blocchiOccInAnello = posti.stream().filter(p -> {
+			return p.getNSettore() == settore && p.getNAnello() == anello;
+		}).count();
 
-		for (int i = 0; i < posti.size(); i++) {
-			if (posti.get(i).getLibero() == true)
-				lib++;
+		return blocchiOccInAnello >= (BLOCCHI_PER_ANELLO * POSTI_PER_BLOCCO) ? false : true;
+	}
+
+	/**
+	 * Controlla se un blocco è libero.
+	 *
+	 * @param settore
+	 * @param anello
+	 * @param blocco
+	 * @return true se è libero, falso altrimenti.
+	 */
+	public boolean isLibero(int settore, int anello, int blocco) {
+		long postiOccInBlocco = posti.stream().filter(p -> {
+			return p.getNSettore() == settore && p.getNAnello() == anello && p.getNBlocco() == blocco;
+		}).count();
+
+		return postiOccInBlocco >= POSTI_PER_BLOCCO ? false : true;
+	}
+
+	/**
+	 * Controlla se un posto è libero.
+	 *
+	 * @param settore
+	 * @param anello
+	 * @param blocco
+	 * @param posto
+	 * @return true se è libero, falso altrimenti.
+	 */
+	public boolean isLibero(int settore, int anello, int blocco, int posto) {
+		for (Posto p : posti) {
+			if (p.getNSettore() == settore && p.getNAnello() == anello && p.getNBlocco() == blocco
+					&& p.getNPosto() == posto)
+				return false;
 		}
-
-		if (lib == 0)
-			libero = false;
+		return true;
 	}
-
 }

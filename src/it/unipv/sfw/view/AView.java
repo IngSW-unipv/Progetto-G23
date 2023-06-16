@@ -1,7 +1,5 @@
 package it.unipv.sfw.view;
 
-
-
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
@@ -14,28 +12,20 @@ import javax.swing.JPanel;
 
 public abstract class AView extends JPanel {
 	/**
-	 * Enumerazione che descrive il tipo di view.
-	 */	
-	public enum Type {
-		LOGIN,
-		REGISTRAZIONE,
-		PARTITE,
-		SETTORE,
-		ANELLO,
-		POSTO,
-		BLOCCO
+	 * Fuzione chiamata quando la view viene caricata dal controller.
+	 * {@link it.unipv.sfw.view.AView} la implementa vuota, per avere un
+	 * comportamento diverso deve essere sovrascritta dalle sottoclassi.
+	 */
+	public void onLoad() {
 	}
-	
-	/**
-	 *@return Tipo della view.
-	 */	
-	public abstract Type getType();
-	
+
 	/**
 	 * Fuzione chiamata quando viene attivato l'evento di window resize.
-	 * {@link it.unipv.sfw.view.AView} la implementa vuota, per avere un comportamento diverso 
-	 * deve essere sovrascritta dalle sottoclassi.
+	 * {@link it.unipv.sfw.view.AView} la implementa vuota, per avere un
+	 * comportamento diverso deve essere sovrascritta dalle sottoclassi.
+	 *
 	 * @param dim Nuova dimensione della finestra.
 	 */
-	public void onWindowResized(Dimension dim) {}
+	public void onWindowResized(Dimension dim) {
+	}
 }
