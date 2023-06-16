@@ -148,9 +148,9 @@ public class ProfiloPersonaleView extends AView {
 	       
 			if(((Cliente)u).getAbb() != null) {
 				switch (Sessione.getIstance().getTipoAbb()) {
-				case LIV1: acquista.get(0).setEnabled(false); break;
-				case LIV2: acquista.get(0).setEnabled(false); acquista.get(1).setEnabled(false); break;
-				case LIV3: acquista.get(0).setEnabled(false); acquista.get(1).setEnabled(false); acquista.get(2).setEnabled(false); break;
+				case LIV3: acquista.get(2).setEnabled(false);
+				case LIV2: acquista.get(1).setEnabled(false);
+				case LIV1: acquista.get(0).setEnabled(false);
 				}
 			}
 			
