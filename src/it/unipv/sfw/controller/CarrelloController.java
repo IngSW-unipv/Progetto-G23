@@ -11,6 +11,13 @@ import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.view.CarrelloView;
 import it.unipv.sfw.view.buttons.StoreButton;
 
+/**
+ * Controller che si occupa della CarrelloView.
+ * 
+ * @author Gabriele Invernizzi
+ * @see AController 
+ * @see it.unipv.sfw.view.CarrelloView
+ */
 public class CarrelloController extends AController {
 	
 	private HashMap<Merchandising, Integer> carrello;

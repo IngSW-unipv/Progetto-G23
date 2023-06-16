@@ -7,7 +7,6 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -39,35 +38,11 @@ import it.unipv.sfw.view.elements.CartItemPanel;
 
 public class PagamentoController extends AController{
 
-	ArrayList<Carta> carteDisp;
-	
 	@Override
 	public void initialize(Dimension dim) {
 		
-		riempiCarte();
-		double prezzo = 0;
-		switch(Sessione.getIstance().getCurrentPagamento()) {
-		case 1: 
-			for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
-				int price = 0;
-				price += entry.getKey().getPrezzo();
-				price = price * entry.getValue();
-				prezzo += price;
-			}
-			break;
-		case 2:
-			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
-			break;
-		case 3:
-			prezzo = Partita.PREZZO;
-			break;
-		default:
-			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
-			break;
-		}
-		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
+		PagamentoView v = new PagamentoView(dim);
 		
-		PagamentoView v = new PagamentoView(dim, carteDisp, prezzo, Sessione.getIstance().getCurrentUtente(), Sessione.getIstance().getCurrentPagamento());
 		
 		v.getBackBtn().addActionListener(new ActionListener() {	
 			@Override
@@ -84,7 +59,7 @@ public class PagamentoController extends AController{
 			}
 		});
 		
-		if(carteIsEmpty() == false) {
+		if(v.riempiCarte() == true) {
 			
 			v.getCarte().addActionListener(new ActionListener() {
 				
@@ -190,15 +165,6 @@ public class PagamentoController extends AController{
 	@Override
 	public Type getType() {
 		return Type.PAGAMENTO;
-	}
-	
-	private void riempiCarte() {
-		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(Sessione.getIstance().getCurrentUtente());
-		
-	}
-	
-	public boolean carteIsEmpty() {
-		return carteDisp.isEmpty();
 	}
 
 }

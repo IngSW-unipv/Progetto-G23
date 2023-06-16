@@ -11,6 +11,13 @@ import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.utilities.Pair;
 import it.unipv.sfw.view.AdminModifyStoreView;
 
+/**
+ * Controller che si occupa della AddModifyStoreView.
+ * 
+ * @author Gabriele Invernizzi
+ * @see AController 
+ * @see it.unipv.sfw.view.AddModifyStoreView
+ */
 public class AdminModifyStoreController extends AController {
 
 	@Override

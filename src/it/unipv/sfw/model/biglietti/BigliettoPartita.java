@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
  * @author Lorenzo Reale
  * @see it.unipv.sfw.model.utente.Cliente
  */
-public class BigliettoPartita extends Biglietto{
+public class BigliettoPartita extends Biglietto {
 
 	private Calendar dataDisponibilita;
 	private boolean visibilita;

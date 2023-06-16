@@ -26,18 +26,15 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
-import it.unipv.sfw.controller.PagamentoController;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyDateException;
 import it.unipv.sfw.exceptions.EmptyNameException;
 import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
 import it.unipv.sfw.model.biglietti.Biglietto;
-import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
-import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.pagamento.Carta;
 import it.unipv.sfw.view.elements.CartItemPanel;
 
@@ -52,13 +49,10 @@ public class PagamentoView extends AView{
 	private JComboBox <Integer> meseOp, annoOp;
 	private JLabel nomeErr, cognomeErr, numeroErr, scadenzaErr, cvvErr;
 	private int tipoErr; // 0 - nome, 1 - cognome, 2 - entrambi
+	private ArrayList <Carta> carteDisp = new ArrayList<>();
 	private JComboBox <String> cartaOp;
-	private ArrayList<Carta> carteDisp;
 	
-	public PagamentoView(Dimension dim, ArrayList<Carta> carte, double prezzo, Utente u, int tipoPagamento) {
-		
-		carteDisp = carte;
-		
+	public PagamentoView(Dimension dim) {
 		// Fonts
 		Font shortFont = new Font("Arial", 1, 14);
 		Font mediumFont = new Font("Arial", 1, 16);
@@ -69,7 +63,7 @@ public class PagamentoView extends AView{
 		JPanel topPanel = new JPanel();
 		JPanel topPanelLbl = new JPanel();
 		
-		JLabel utente = new JLabel("Utente loggato:   " + u.getNome() + " " + u.getCognome());
+		JLabel utente = new JLabel("Utente loggato:   " + Sessione.getIstance().getCurrentUtente().getNome() + " " + Sessione.getIstance().getCurrentUtente().getCognome());
 		utente.setFont(veryLargeFont);
 		utente.setBackground(Color.BLUE);
 		utente.setOpaque(true);
@@ -104,6 +98,27 @@ public class PagamentoView extends AView{
 		scadenzaPanel.setLayout(new GridLayout(2, 1));
 		cvvPanel.setLayout(new GridLayout(2, 1));
 
+		double prezzo = 0;
+		switch(Sessione.getIstance().getCurrentPagamento()) {
+		case 1: 
+			for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
+				int price = 0;
+				price += entry.getKey().getPrezzo();
+				price = price * entry.getValue();
+				prezzo += price;
+			}
+			break;
+		case 2:
+			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
+			break;
+		case 3:
+			prezzo = 50;
+			break;
+		default:
+			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
+			break;
+		}
+		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
 		JLabel title = new JLabel("Totale: " + String.format("%.2f", prezzo) + " €");
 		title.setFont(veryLargeFont);
 		title.setBackground(Color.CYAN);
@@ -156,17 +171,17 @@ public class PagamentoView extends AView{
 		}
 		yearToChoose[5] = ANNO;
 		
-		nomeTxt = new JTextField(u.getNome());
-		cognomeTxt = new JTextField(u.getCognome());
+		nomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getNome());
+		cognomeTxt = new JTextField(Sessione.getIstance().getCurrentUtente().getCognome());
 		nCartaTxt = new JTextField();
 		cvvTxt = new JTextField();
 		meseOp = new JComboBox<>(monthToChoose);
 		annoOp = new JComboBox<>(yearToChoose);
 		salvaCb = new JCheckBox("Salva metodo di pagamento");
 		okBtn = new JButton("Conferma");
-		if(tipoPagamento == 1) backBtn = new JButton("Carrello");
-		else if (tipoPagamento == 2) backBtn = new JButton("Museo");
-		else if (tipoPagamento == 3) backBtn = new JButton("Home");
+		if(Sessione.getIstance().getCurrentPagamento() == 1) backBtn = new JButton("Carrello");
+		else if (Sessione.getIstance().getCurrentPagamento() == 2) backBtn = new JButton("Museo");
+		else if (Sessione.getIstance().getCurrentPagamento() == 3) backBtn = new JButton("Home");
 		else backBtn = new JButton("Profilo personale");
 		
 		meseOp.setSelectedIndex(0);
@@ -204,7 +219,7 @@ public class PagamentoView extends AView{
 		infoPanel.add(selectScadenza);
 		infoPanel.add(cvvPanel);
 		infoPanel.add(cvvTxt);
-		if(carteDisp.isEmpty() == false) {
+		if(riempiCarte() == true) {
 			String [] numeri = new String[99];
 			for(int i=0; i<carteDisp.size(); i++) {
 				numeri[i] = "" + carteDisp.get(i).getnCartaCredito();
@@ -273,6 +288,14 @@ public class PagamentoView extends AView{
 				annoOp.setSelectedItem(carteDisp.get(i).getAnnoScadenza());
 			}
 		}
+	}
+	
+	public boolean riempiCarte() {
+		boolean flag = true;
+		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(Sessione.getIstance().getCurrentUtente());
+		
+		if(carteDisp.isEmpty()) flag = false;
+		return flag;
 	}
 	
 	public void setTipoErr(int tipoErr) {

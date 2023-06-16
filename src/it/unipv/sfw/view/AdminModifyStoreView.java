@@ -21,6 +21,11 @@ import com.formdev.flatlaf.ui.FlatTextAreaUI;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.utilities.Pair;
 
+/**
+ * View per la modifica dello store per l'admin.
+ * 
+ * @author Gabriele Invernizzi
+ */
 public class AdminModifyStoreView extends AView {
 	
 	private JLabel errorLabel;
@@ -154,30 +159,51 @@ public class AdminModifyStoreView extends AView {
 		errorLabel.setText("Il formato dei campi è errato.");
 	}
 	
+	/**
+	 * @return Text field del nome.
+	 */
 	public JTextField getNome() {
 		return nome;
 	}
 
+	/**
+	 * @return Text field del prezzo.
+	 */
 	public JTextField getPrezzo() {
 		return prezzo;
 	}
 
+	/**
+	 * @return Text field del quantità.
+	 */
 	public JTextField getQuantita() {
 		return quantita;
 	}
 
+	/**
+	 * @return  Text field della descrizione.
+	 */
 	public JTextArea getDescr() {
 		return descr;
 	}
 
+	/**
+	 * @return Bottone conferma.
+	 */
 	public JButton getConfirmBtn() {
 		return confirmBtn;
 	}
 
+	/**
+	 * @return Bottone back.
+	 */
 	public JButton getBackBtn() {
 		return backBtn;
 	}
 
+	/**
+	 * @return Bottone elimina.
+	 */
 	public JButton getDeleteBtn() {
 		return deleteBtn;
 	}

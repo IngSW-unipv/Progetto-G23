@@ -7,6 +7,10 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.Timer;
 
+/**
+ * Event listener del resize del frame ma solo dopo un delay;
+ * @author Gabriele Invernizzi
+ */
 public abstract class ComponentResizeEndListener 
 extends ComponentAdapter implements ActionListener {
 	private final Timer timer;
