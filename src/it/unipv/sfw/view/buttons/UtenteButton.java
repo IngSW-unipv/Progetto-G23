@@ -3,8 +3,8 @@ package it.unipv.sfw.view.buttons;
 import javax.swing.JButton;
 
 /**
- * Classe che utilizza i JButton per creare dei nuovi bottoni
- * con caratteristiche ulteriori chiamati UtenteButton.
+ * Classe che utilizza i JButton per creare dei nuovi bottoni con
+ * caratteristiche ulteriori chiamati UtenteButton.
  *
  * @author Jacopo Piccoli
  */

@@ -2,6 +2,7 @@ package it.unipv.sfw.model.store;
 
 /**
  * Classe che rappresenta il prodotto acquistabile dallo {@link StoreOnline}.
+ *
  * @author Federico Romano
  * @see StoreOnline
  */
@@ -19,26 +20,34 @@ public class Merchandising implements Comparable<Merchandising> {
 		this.descrizione = descrizione;
 	}
 
-	/**
-	 * Funzione che permette di cambiare il nome del merch a quello passato come parametro.
-	 * @param nome Nome del Merch.
-	 */
-	public void setNomeMerch(String nome) {
-		this.nome = nome;
+	@Override
+	public int compareTo(Merchandising o) {
+		return id - o.id;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		return this.id == ((Merchandising) other).getId();
 	}
 
 	/**
-	 * Funzione che permette di cambiare il prezzo del merch a quello passato come parametro.
-	 * @param prezzo
+	 * @return La descrizione dell'item.
 	 */
-	public void setPrezzo(double prezzo) {
-		this.prezzo = prezzo;
+	public String getDescrizione() {
+		return descrizione;
 	}
-	
+
 	/**
-	 * @return Il nome del merch.
+	 * @return L'id dell'item.
 	 */
-	public String getTipoMerch() {
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @return Il nome dell'item.
+	 */
+	public String getNome() {
 		return nome;
 	}
 
@@ -48,48 +57,45 @@ public class Merchandising implements Comparable<Merchandising> {
 	public double getPrezzo() {
 		return prezzo;
 	}
-	
+
 	/**
-	 * @return Il nome dell'item.
+	 * @return Il nome del merch.
 	 */
-	public String getNome() {
+	public String getTipoMerch() {
 		return nome;
 	}
 
-	/**
-	 * @return L'id dell'item.
-	 */
-	public int getId() {
+	@Override
+	public int hashCode() {
 		return id;
 	}
-	
+
 	/**
 	 * Metodo che cambia la descrizione dell'item.
+	 *
 	 * @param descrizione Descrizione da associare all'item.
 	 */
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	
+
 	/**
-	 * @return La descrizione dell'item.
+	 * Funzione che permette di cambiare il nome del merch a quello passato come
+	 * parametro.
+	 *
+	 * @param nome Nome del Merch.
 	 */
-	public String getDescrizione() {
-		return descrizione;
+	public void setNomeMerch(String nome) {
+		this.nome = nome;
 	}
-	
-	@Override
-	public int hashCode() {
-		return id;
-	}
-	
-	@Override
-	public int compareTo(Merchandising o) {
-		return id - o.id;
-	}
-	
-	@Override
-	public boolean equals(Object other) {
-		return this.id == ((Merchandising)other).getId();
+
+	/**
+	 * Funzione che permette di cambiare il prezzo del merch a quello passato come
+	 * parametro.
+	 *
+	 * @param prezzo
+	 */
+	public void setPrezzo(double prezzo) {
+		this.prezzo = prezzo;
 	}
 }

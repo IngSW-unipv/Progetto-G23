@@ -13,29 +13,34 @@ import it.unipv.sfw.view.AdminModifyStoreView;
 
 /**
  * Controller che si occupa della AddModifyStoreView.
- * 
+ *
  * @author Gabriele Invernizzi
- * @see AController 
+ * @see AController
  * @see it.unipv.sfw.view.AddModifyStoreView
  */
 public class AdminModifyStoreController extends AController {
 
 	@Override
+	public Type getType() {
+		return AController.Type.AMODIFYSTORE;
+	}
+
+	@Override
 	public void initialize(Dimension dim) {
 		AdminModifyStoreView v;
 		Pair<Merchandising, Integer> merchToBeUpdated = Sessione.getIstance().getMerchAdmin();
-		
+
 		v = new AdminModifyStoreView(merchToBeUpdated);
-		
-		v.getBackBtn().addActionListener(new ActionListener() {	
+
+		v.getBackBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Sessione.getIstance().setMerchAdmin(null);
 				ControllerManager.getInstance().loadController(AController.Type.ASTORE);
 			}
 		});
-		
-		v.getDeleteBtn().addActionListener(new ActionListener() {	
+
+		v.getDeleteBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DAOFactory.createIStoreItemDAO().deleteItem(merchToBeUpdated.getKey());
@@ -43,19 +48,18 @@ public class AdminModifyStoreController extends AController {
 				ControllerManager.getInstance().loadController(AController.Type.ASTORE);
 			}
 		});
-		
-		
-		v.getConfirmBtn().addActionListener(new ActionListener() {	
+
+		v.getConfirmBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				double prezzo;
 				int quantita;
-				
+
 				String nome = v.getNome().getText();
 				String prezzoStr = v.getPrezzo().getText();
 				String quantitaStr = v.getQuantita().getText();
 				String descr = v.getDescr().getText();
-				
+
 				try {
 					if (nome.isEmpty() || descr.isEmpty())
 						throw new MerchInvalidFieldFormatException();
@@ -76,26 +80,21 @@ public class AdminModifyStoreController extends AController {
 					merchToBeUpdated.getKey().setDescrizione(descr);
 					merchToBeUpdated.getKey().setPrezzo(prezzo);
 					merchToBeUpdated.setValue(quantita);
-					
+
 					DAOFactory.createIStoreItemDAO().updateItem(merchToBeUpdated);
 					Sessione.getIstance().setMerchAdmin(null);
 				}
-				
+
 				ControllerManager.getInstance().loadController(AController.Type.ASTORE);
 			}
 		});
-		
+
 		view = v;
-		
+
 	}
 
 	@Override
 	public void onLoad(Dimension dim) {
 		this.initialize(dim);
-	}
-
-	@Override
-	public Type getType() {
-		return AController.Type.AMODIFYSTORE;
 	}
 }

@@ -2,8 +2,8 @@ package it.unipv.sfw.exceptions;
 
 /**
  * Eccezione utilizzata nel caso in cui la data non sia
- * stata selezionata. 
- * 
+ * stata selezionata.
+ *
  * @author Federico Romano
  *
  */
@@ -17,5 +17,5 @@ public class EmptyDateException extends Exception {
 	public EmptyDateException(DatePicker input) {
 		super("Non è stata inserita alcuna data e/o ora!");
 	}
-	
+
 }

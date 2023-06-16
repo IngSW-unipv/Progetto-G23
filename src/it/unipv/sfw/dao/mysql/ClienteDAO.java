@@ -1,6 +1,6 @@
 package it.unipv.sfw.dao.mysql;
 
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -11,34 +11,67 @@ import java.util.Locale;
 
 import it.unipv.sfw.dao.IClienteDAO;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
-import it.unipv.sfw.model.utente.Admin;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.utente.Cliente}
+ *
  * @author Federico Romano
- * @see it.unipv.sfw.model.utente.Cliente   //(email, nome, cognome, pass, tipo, nascita)
+ * @see it.unipv.sfw.model.utente.Cliente //(email, nome, cognome, pass, tipo,
+ *      nascita)
  */
 public class ClienteDAO implements IClienteDAO {
-	
-	private static final String SCHEMA  = "UTENTI";
+
+	private static final String SCHEMA = "UTENTI";
+
+	@Override
+	public boolean insertCliente(Cliente clienteInput) {
+		// Assicura che l'email sia in lowercase.
+		clienteInput.setEmail(clienteInput.getEmail().toLowerCase());
+
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+
+			String query = "INSERT INTO " + SCHEMA + " (NOME, COGNOME, EMAIL, PASS, TIPO, NASCITA) VALUES(?,?,?,?,'"
+					+ Type.CLIENTE + "',?)";
+			st1 = conn.prepareStatement(query);
+
+			st1.setString(1, clienteInput.getNome());
+			st1.setString(2, clienteInput.getCognome());
+			st1.setString(3, clienteInput.getEmail());
+			st1.setString(4, clienteInput.getPassword());
+			st1.setString(5, clienteInput.getDataNascita());
+
+			st1.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			esito = false;
+		}
+
+		return esito;
+	}
 
 	@Override
 	public ArrayList<Cliente> selectAll() {
-		
+
 		ArrayList<Cliente> result = new ArrayList<>();
-		
+
 		Statement st1;
 		ResultSet rs1;
-		
+
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			st1 = conn.createStatement();
-			String query = "SELECT NOME, COGNOME, A.EMAIL, PASS, NASCITA, B.GRADO FROM " + SCHEMA + " A JOIN ABBONAMENTI B ON A.EMAIL=B.EMAIL WHERE TIPO='CLIENTE'";
+			String query = "SELECT NOME, COGNOME, A.EMAIL, PASS, NASCITA, B.GRADO FROM " + SCHEMA
+					+ " A JOIN ABBONAMENTI B ON A.EMAIL=B.EMAIL WHERE TIPO='CLIENTE'";
 			rs1 = st1.executeQuery(query);
-			
-			while(rs1.next()) {
+
+			while (rs1.next()) {
 				String str = rs1.getString(6);
 				Calendar cal = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
@@ -47,29 +80,32 @@ public class ClienteDAO implements IClienteDAO {
 				c.abbona(TipoAbb.valueOf(rs1.getString(5)));
 				result.add(c);
 			}
-			
-		} catch (Exception e){e.printStackTrace();}
-		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
-	
+
 	@Override
 	public Cliente selectByEmail(String email) {
-		
+
 		Cliente result = null;
-		
+
 		PreparedStatement st1;
 		ResultSet rs1;
-	
+
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
-			
-			String query = "SELECT NOME, COGNOME, A.EMAIL, PASS, NASCITA, B.GRADO FROM " + SCHEMA + " A JOIN ABBONAMENTI B ON A.EMAIL=B.EMAIL WHERE EMAIL=? AND TIPO='CLIENTE'";
+
+			String query = "SELECT NOME, COGNOME, A.EMAIL, PASS, NASCITA, B.GRADO FROM " + SCHEMA
+					+ " A JOIN ABBONAMENTI B ON A.EMAIL=B.EMAIL WHERE EMAIL=? AND TIPO='CLIENTE'";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, email);
 			rs1 = st1.executeQuery();
-			
-			while(rs1.next()) {
+
+			while (rs1.next()) {
 				String str = rs1.getString(6);
 				Calendar cal = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH);
@@ -77,65 +113,37 @@ public class ClienteDAO implements IClienteDAO {
 				result = new Cliente(rs1.getString(2), rs1.getString(3), rs1.getString(1), rs1.getString(4), cal);
 				result.abbona(TipoAbb.valueOf(rs1.getString(5)));
 			}
-			
-		} catch (Exception e) {e.printStackTrace();}
-		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
-	
+
 	@Override
 	public boolean updatePassword(String newPassword, Cliente account) {
-		
-    	PreparedStatement st1;
-    	boolean esito = true;
-    	
-    	try (DBConnection db = new DBConnection(SCHEMA)) {
-			Connection conn = db.getConnection();
-			
-			String query = "UPDATE " + SCHEMA + " SET PASSWORD=? WHERE EMAIL=?";
-			st1 = conn.prepareStatement(query);
-			
-			st1.setString(1, newPassword);
-			st1.setString(2, account.getEmail());
-			
-			st1.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			esito = false;
-		} 
-    	
-		return esito;
-	}
-	
-	@Override
-	public boolean insertCliente(Cliente clienteInput) {
-		// Assicura che l'email sia in lowercase.
-		clienteInput.setEmail(clienteInput.getEmail().toLowerCase());
-		
+
 		PreparedStatement st1;
 		boolean esito = true;
-		
+
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
-			
-			String query = "INSERT INTO " + SCHEMA + " (NOME, COGNOME, EMAIL, PASS, TIPO, NASCITA) VALUES(?,?,?,?,'" + Type.CLIENTE + "',?)";
+
+			String query = "UPDATE " + SCHEMA + " SET PASSWORD=? WHERE EMAIL=?";
 			st1 = conn.prepareStatement(query);
-			
-			st1.setString(1, clienteInput.getNome());
-			st1.setString(2, clienteInput.getCognome());
-			st1.setString(3, clienteInput.getEmail());
-			st1.setString(4, clienteInput.getPassword());
-			st1.setString(5, clienteInput.getDataNascita());
-			
+
+			st1.setString(1, newPassword);
+			st1.setString(2, account.getEmail());
+
 			st1.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			esito = false;
-		} 
-		
+		}
+
 		return esito;
 	}
-	
+
 }

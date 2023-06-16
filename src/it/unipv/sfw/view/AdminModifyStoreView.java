@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,20 +13,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import com.formdev.flatlaf.ui.FlatTextAreaUI;
 
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.utilities.Pair;
 
 /**
  * View per la modifica dello store per l'admin.
- * 
+ *
  * @author Gabriele Invernizzi
  */
 public class AdminModifyStoreView extends AView {
-	
+
 	private JLabel errorLabel;
 	private JTextField nome, prezzo, quantita;
 	private JTextArea descr;
@@ -38,10 +36,10 @@ public class AdminModifyStoreView extends AView {
 		Font smallFont = new Font("Arial", 1, 12);
 		Font mediumFont = new Font("Arial", 1, 16);
 		Font largeFont = new Font("Arial", 1, 24);
-				
+
 		JPanel fieldsPanel = new JPanel();
 		fieldsPanel.setLayout(new GridBagLayout());
-		
+
 		// Titolo
 		JPanel titlePanel = new JPanel();
 		JLabel titoloLabel;
@@ -51,11 +49,10 @@ public class AdminModifyStoreView extends AView {
 			titoloLabel = new JLabel("MODIFICA ITEM");
 
 		titoloLabel.setFont(largeFont);
-		titoloLabel.setHorizontalAlignment(JLabel.CENTER);
+		titoloLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titlePanel.setBorder(new EmptyBorder(0, 0, 50, 0));
 		titlePanel.add(titoloLabel);
-		
-		
+
 		JLabel nomeLabel = new JLabel("Nome:");
 		nomeLabel.setFont(mediumFont);
 		JLabel prezzoLabel = new JLabel("Prezzo:");
@@ -67,9 +64,10 @@ public class AdminModifyStoreView extends AView {
 		errorLabel = new JLabel("");
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setFont(mediumFont);
-		errorLabel.setHorizontalAlignment(JLabel.CENTER);
-		errorLabel.setBorder(new EmptyBorder(0, 0, 3, 0));;
-		
+		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		errorLabel.setBorder(new EmptyBorder(0, 0, 3, 0));
+
+
 		nome = new JTextField();
 		prezzo = new JTextField();
 		quantita = new JTextField();
@@ -79,7 +77,7 @@ public class AdminModifyStoreView extends AView {
 		descr.setWrapStyleWord(true);
 		descr.setLineWrap(true);
 		descr.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-		
+
 		if (item != null) {
 			nome.setText(item.getKey().getNome());
 			prezzo.setText(String.format("%.2f", item.getKey().getPrezzo()));
@@ -93,11 +91,11 @@ public class AdminModifyStoreView extends AView {
 		deleteBtn.setFont(mediumFont);
 		backBtn = new JButton("ANNULLA");
 		backBtn.setFont(mediumFont);
-		
+
 		GridBagConstraints gridConstraints = new GridBagConstraints();
 		gridConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridConstraints.insets = new Insets(5, 2, 0, 15);
-		
+
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 0;
 		gridConstraints.gridwidth = 5;
@@ -143,22 +141,43 @@ public class AdminModifyStoreView extends AView {
 			gridConstraints.gridx = 2;
 			fieldsPanel.add(deleteBtn, gridConstraints);
 		}
-		
+
 		JPanel container = new JPanel();
 		container.add(fieldsPanel);
-		
+
 		this.setLayout(new BorderLayout());
 		this.add(titlePanel, BorderLayout.NORTH);
 		this.add(container, BorderLayout.CENTER);
 	}
-	
+
 	/**
-	 *  Funzione chiamata nel caso in cui il formato di alcuni campi sia errato.
+	 * @return Bottone back.
 	 */
-	public void onInvalidFormat() {
-		errorLabel.setText("Il formato dei campi è errato.");
+	public JButton getBackBtn() {
+		return backBtn;
 	}
-	
+
+	/**
+	 * @return Bottone conferma.
+	 */
+	public JButton getConfirmBtn() {
+		return confirmBtn;
+	}
+
+	/**
+	 * @return Bottone elimina.
+	 */
+	public JButton getDeleteBtn() {
+		return deleteBtn;
+	}
+
+	/**
+	 * @return Text field della descrizione.
+	 */
+	public JTextArea getDescr() {
+		return descr;
+	}
+
 	/**
 	 * @return Text field del nome.
 	 */
@@ -181,30 +200,9 @@ public class AdminModifyStoreView extends AView {
 	}
 
 	/**
-	 * @return  Text field della descrizione.
+	 * Funzione chiamata nel caso in cui il formato di alcuni campi sia errato.
 	 */
-	public JTextArea getDescr() {
-		return descr;
-	}
-
-	/**
-	 * @return Bottone conferma.
-	 */
-	public JButton getConfirmBtn() {
-		return confirmBtn;
-	}
-
-	/**
-	 * @return Bottone back.
-	 */
-	public JButton getBackBtn() {
-		return backBtn;
-	}
-
-	/**
-	 * @return Bottone elimina.
-	 */
-	public JButton getDeleteBtn() {
-		return deleteBtn;
+	public void onInvalidFormat() {
+		errorLabel.setText("Il formato dei campi è errato.");
 	}
 }

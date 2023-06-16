@@ -6,6 +6,7 @@ import javax.swing.filechooser.FileFilter;
 
 /**
  * Classe utilizzata per filtrare solo file di immagini.
+ *
  * @author Federico Romano
  *
  */
@@ -17,7 +18,7 @@ public class ImageFilter extends FileFilter {
 	public final static String TIFF = "tiff";
 	public final static String TIF = "tif";
 	public final static String PNG = "png";
-	   
+
 	@Override
 	public boolean accept(File f) {
 		if (f.isDirectory()) {
@@ -26,14 +27,12 @@ public class ImageFilter extends FileFilter {
 
 		String extension = getExtension(f);
 		if (extension != null) {
-			if (extension.equals(TIFF) ||
-					extension.equals(TIF) ||
-					extension.equals(GIF) ||
-					extension.equals(JPEG) ||
-					extension.equals(JPG) ||
-					extension.equals(PNG)) {
+			if (extension.equals(TIFF) || extension.equals(TIF) || extension.equals(GIF) || extension.equals(JPEG)
+					|| extension.equals(JPG) || extension.equals(PNG)) {
 				return true;
-	         } else {return false;}
+			} else {
+				return false;
+			}
 		}
 		return false;
 	}
@@ -47,10 +46,10 @@ public class ImageFilter extends FileFilter {
 		String ext = null;
 		String s = f.getName();
 		int i = s.lastIndexOf('.');
-	   
-		if (i > 0 &&  i < s.length() - 1) {
-			ext = s.substring(i+1).toLowerCase();
+
+		if (i > 0 && i < s.length() - 1) {
+			ext = s.substring(i + 1).toLowerCase();
 		}
 		return ext;
-	} 
+	}
 }

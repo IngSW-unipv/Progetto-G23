@@ -1,18 +1,18 @@
 package it.unipv.sfw.utilities;
 
-
 /**
  * Classe utilizzata per contentere due valori contemporaneamente.
+ *
  * @author Gabriele Invernizzi
  *
  * @param <K>
  * @param <V>
  */
 public class Pair<K, V> {
-	
+
 	private K key;
 	private V val;
-	
+
 	/**
 	 * key e value verranno inizializzati a null.
 	 */
@@ -20,7 +20,7 @@ public class Pair<K, V> {
 		this.key = null;
 		this.val = null;
 	}
-	
+
 	/**
 	 * @param key
 	 * @param val
@@ -28,6 +28,15 @@ public class Pair<K, V> {
 	public Pair(K key, V val) {
 		this.key = key;
 		this.val = val;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if ((other == null) || (other.getClass() != this.getClass()))
+			return false;
+		@SuppressWarnings("unchecked")
+		Pair<K, V> o = (Pair<K, V>) other;
+		return o.getKey().equals(this.key) && o.getValue().equals(this.val);
 	}
 
 	/**
@@ -38,13 +47,6 @@ public class Pair<K, V> {
 	}
 
 	/**
-	 * @param key
-	 */
-	public void setKey(K key) {
-		this.key = key;
-	}
-
-	/**
 	 * @return Il valore di value.
 	 */
 	public V getValue() {
@@ -52,20 +54,16 @@ public class Pair<K, V> {
 	}
 
 	/**
+	 * @param key
+	 */
+	public void setKey(K key) {
+		this.key = key;
+	}
+
+	/**
 	 * @param val
 	 */
 	public void setValue(V val) {
 		this.val = val;
-	}
-	
-	@Override
-	public boolean equals(Object other) {
-		if (other == null)
-			return false;
-		if (other.getClass() != this.getClass())
-			return false;
-		@SuppressWarnings("unchecked")
-		Pair<K, V> o = (Pair<K, V>)other;
-		return o.getKey().equals(this.key) && o.getValue().equals(this.val);
 	}
 }

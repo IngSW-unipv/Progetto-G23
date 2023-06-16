@@ -8,12 +8,10 @@ import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.eventlisteners.ComponentResizeEndListener;
 import it.unipv.sfw.frame.Frame;
 
-
-
 /**
- * Classe Singleton che si occupa della gestione 
- * dei controllers e del caricamento della view corrente nel frame.
- * 
+ * Classe Singleton che si occupa della gestione dei controllers e del
+ * caricamento della view corrente nel frame.
+ *
  * @author Gabriele Invernizzi
  * @see AController
  * @see Frame
@@ -21,31 +19,44 @@ import it.unipv.sfw.frame.Frame;
  */
 
 public class ControllerManager {
-	
+
+	private static ControllerManager instance = null;
+
+	/**
+	 * @return L'istanza corrente del {@link ControllerManager} nel caso non esista
+	 *         viene creata.
+	 */
+	public static ControllerManager getInstance() {
+		if (instance == null)
+			instance = new ControllerManager();
+		return instance;
+	}
+
 	/**
 	 * Punto d'ingresso dell'applicazione.
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		ControllerManager m = ControllerManager.getInstance();
 		m.loadController(AController.Type.LOGIN);
 	}
-	
-	private static ControllerManager instance = null;
+
 	private Frame f;
 	private AController currentController;
+
 	private HashMap<AController.Type, ControllerCache> controllers;
-	
+
 	private ControllerManager() {
 		// init DAOFactory
 		DAOFactory.createInstance(DAOFactory.DBType.MYSQL);
-		
+
 		// init look and feel
 		FlatLightLaf.setup();
-		
+
 		// init frame
 		f = new Frame(900, 600);
-	
+
 		// init controllers
 		controllers = new HashMap<>(AController.Type.values().length);
 		this.addController(new LoginController());
@@ -68,9 +79,9 @@ public class ControllerManager {
 		this.addController(new AdminModifyStoreController());
 		this.addController(new RegistroBigliettiMuseoController());
 		this.addController(new AdminAddPartiteController());
-		
+
 		currentController = null;
-		
+
 		// add resize event listener
 		f.addComponentListener(new ComponentResizeEndListener(100) {
 			@Override
@@ -80,9 +91,11 @@ public class ControllerManager {
 			}
 		});
 	}
-	
+
 	/**
-	 * Aggiunge un controller a "controllers" dopo averlo inserito in un ControllerCache.
+	 * Aggiunge un controller a "controllers" dopo averlo inserito in un
+	 * ControllerCache.
+	 *
 	 * @param contr Controller da inserire.
 	 */
 	private void addController(AController contr) {
@@ -90,18 +103,11 @@ public class ControllerManager {
 		if (!controllers.containsKey(t))
 			controllers.put(t, new ControllerCache(contr));
 	}
-	
+
 	/**
-	 * @return L'istanza corrente del {@link ControllerManager} nel caso non esista viene creata.
-	 */
-	public static ControllerManager getInstance() {
-		if (instance == null)
-			instance = new ControllerManager();
-		return instance;
-	}
-	
-	/**
-	 * Funzione utilizzata per caricare un controller e la sua rispettiva view nel {@link Frame}.
+	 * Funzione utilizzata per caricare un controller e la sua rispettiva view nel
+	 * {@link Frame}.
+	 *
 	 * @param contr Controller type
 	 * @throws RuntimeException se il controller richiesto non esiste.
 	 * @see AController
@@ -114,5 +120,5 @@ public class ControllerManager {
 		currentController = controllers.get(contr).loadController(f.getCurrentSize());
 		f.loadView(currentController.getView());
 	}
-	
+
 }

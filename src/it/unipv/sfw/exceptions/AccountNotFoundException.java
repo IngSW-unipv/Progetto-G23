@@ -1,15 +1,13 @@
 package it.unipv.sfw.exceptions;
 
-
 /**
- * Eccezione utilizzata nel caso in cui sia richiesto  
- * un account inesistente.
- * 
+ * Eccezione utilizzata nel caso in cui sia richiesto un account inesistente.
+ *
  * @author Gabriele Invernizzi
  *
  */
 public class AccountNotFoundException extends Exception {
-	
+
 	private String accountEmail;
 
 	/**
@@ -19,7 +17,7 @@ public class AccountNotFoundException extends Exception {
 		super("L'account " + email + " è inesistente.");
 		accountEmail = email;
 	}
-	
+
 	/**
 	 * @return Email identificativa dell'account richiesto ma inesistente.
 	 */

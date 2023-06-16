@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 /**
  * Classe che rappresenta un posto dello {@link Stadio}.
+ *
  * @author Lorenzo Reale, Gabriele Invernizzi
  * @see Stadio
  */
@@ -22,19 +23,12 @@ public class Posto {
 	}
 
 	/**
-	 * @param data
-	 */
-	public void setData(Calendar data) {
-		this.data = data;
-	}
-	
-	/**
 	 * @return La data della partita che è associata al posto.
 	 */
 	public Calendar getData() {
 		return data;
 	}
-	
+
 	/**
 	 * @return La data in formato "yyyy-MM-dd HH:mm:ss".
 	 */
@@ -44,30 +38,37 @@ public class Posto {
 	}
 
 	/**
-	 * @return Il numero del posto.
+	 * @return Il numero dell'anello.
 	 */
-	public int getNPosto() {
-		return nPosto;
+	public int getNAnello() {
+		return nAnello;
 	}
-	
+
 	/**
 	 * @return Il numero del blocco.
 	 */
 	public int getNBlocco() {
 		return nBlocco;
 	}
-	
+
 	/**
-	 * @return Il numero dell'anello.
+	 * @return Il numero del posto.
 	 */
-	public int getNAnello() {
-		return nAnello;
+	public int getNPosto() {
+		return nPosto;
 	}
-	
+
 	/**
 	 * @return Il numero del settore.
 	 */
 	public int getNSettore() {
 		return nSettore;
+	}
+
+	/**
+	 * @param data
+	 */
+	public void setData(Calendar data) {
+		this.data = data;
 	}
 }

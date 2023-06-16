@@ -27,15 +27,52 @@ import it.unipv.sfw.pagamento.Carta;
 import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
 
-public class PagamentoController extends AController{
-	
+public class PagamentoController extends AController {
+
+	public void checkEnteredCvv() throws WrongCvvException {
+		PagamentoView v = (PagamentoView) this.getView();
+		if (v.getCvvTxt().getText().isEmpty() || v.getCvvTxt().getText().length() != 3
+				|| !isNumber(v.getCvvTxt().getText())) {
+			throw new WrongCvvException();
+		}
+	}
+
+	public void checkEnteredName() throws EmptyNameException {
+		PagamentoView v = (PagamentoView) this.getView();
+		if (v.getNomeTxt().getText().isEmpty() && v.getCognomeTxt().getText().isEmpty()) {
+			v.setTipoErr(2);
+			throw new EmptyNameException();
+		} else {
+			if (v.getNomeTxt().getText().isEmpty()) {
+				v.setTipoErr(0);
+				throw new EmptyNameException();
+			} else if (v.getCognomeTxt().getText().isEmpty()) {
+				v.setTipoErr(1);
+				throw new EmptyNameException();
+			}
+		}
+	}
+
+	public void checkEnteredNumber() throws WrongNumberException {
+		PagamentoView v = (PagamentoView) this.getView();
+		if (v.getnCartaTxt().getText().isEmpty() || v.getnCartaTxt().getText().length() != 16
+				|| !isNumber(v.getnCartaTxt().getText())) {
+			throw new WrongNumberException();
+		}
+	}
+
+	@Override
+	public Type getType() {
+		return Type.PAGAMENTO;
+	}
+
 	@Override
 	public void initialize(Dimension dim) {
-		
+
 		double prezzo = 0;
-		switch(Sessione.getIstance().getCurrentPagamento()) {
-		case 1: 
-			for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
+		switch (Sessione.getIstance().getCurrentPagamento()) {
+		case 1:
+			for (Map.Entry<Merchandising, Integer> entry : Sessione.getIstance().getCarrello().entrySet()) {
 				int price = 0;
 				price += entry.getKey().getPrezzo();
 				price = price * entry.getValue();
@@ -53,37 +90,42 @@ public class PagamentoController extends AController{
 			break;
 		}
 		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
-		
-		PagamentoView v = new PagamentoView(dim, Sessione.getIstance().getCurrentUtente(), Sessione.getIstance().getCurrentPagamento(), prezzo);
-		
-		
-		v.getBackBtn().addActionListener(new ActionListener() {	
+
+		PagamentoView v = new PagamentoView(dim, Sessione.getIstance().getCurrentUtente(),
+				Sessione.getIstance().getCurrentPagamento(), prezzo);
+
+		v.getBackBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				switch (Sessione.getIstance().getCurrentPagamento()) {
-				case 1: ControllerManager.getInstance().loadController(Type.CARRELLO); break;
-				case 2: 
+				case 1:
+					ControllerManager.getInstance().loadController(Type.CARRELLO);
+					break;
+				case 2:
 					DAOFactory.createIBigliettoMuseoDAO().removeLast();
 					ControllerManager.getInstance().loadController(Type.BIGLIETTO_MUSEO);
 					break;
-				case 3: ControllerManager.getInstance().loadController(Type.PARTITE); break;
-				default: ControllerManager.getInstance().loadController(Type.PROFILO);
+				case 3:
+					ControllerManager.getInstance().loadController(Type.PARTITE);
+					break;
+				default:
+					ControllerManager.getInstance().loadController(Type.PROFILO);
 				}
 			}
 		});
-		
-		if(v.riempiCarte() == true) {
-			
+
+		if (v.riempiCarte()) {
+
 			v.getCarte().addActionListener(new ActionListener() {
-				
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					v.setCarta();
 				}
 			});
 		}
-		
-		v.getOkBtn().addActionListener(new ActionListener() {	
+
+		v.getOkBtn().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int n = 3;
@@ -91,18 +133,20 @@ public class PagamentoController extends AController{
 				try {
 					Email a = new Email();
 					String messaggio = "";
-					
+
 					checkEnteredName();
 					checkEnteredNumber();
 					checkEnteredCvv();
-					
-					switch(Sessione.getIstance().getCurrentPagamento()) {
-					case 1: 
+
+					switch (Sessione.getIstance().getCurrentPagamento()) {
+					case 1:
 						messaggio = a.messaggioStore();
-						for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
-							AcquistoStore acquisto = new AcquistoStore(entry.getKey(), Sessione.getIstance().getCurrentUtente(), entry.getValue()) ;
+						for (Map.Entry<Merchandising, Integer> entry : Sessione.getIstance().getCarrello().entrySet()) {
+							AcquistoStore acquisto = new AcquistoStore(entry.getKey(),
+									Sessione.getIstance().getCurrentUtente(), entry.getValue());
 							DAOFactory.createIAcquistiStoreDAO().insertAcquisto(acquisto);
-							int quantita = (DAOFactory.createIStoreItemDAO().selectById(entry.getKey()).getValue() - entry.getValue());
+							int quantita = (DAOFactory.createIStoreItemDAO().selectById(entry.getKey()).getValue()
+									- entry.getValue());
 							DAOFactory.createIStoreItemDAO().updateQuantitaItem(entry.getKey(), quantita);
 						}
 						break;
@@ -111,7 +155,9 @@ public class PagamentoController extends AController{
 						break;
 					case 3:
 						messaggio = a.messaggioPartita();
-						Posto posto = new Posto(Sessione.getIstance().getSettore(), Sessione.getIstance().getAnello(), Sessione.getIstance().getBlocco(), Sessione.getIstance().getPosto(), Sessione.getIstance().getCurrentPartita().getCalendarDate());
+						Posto posto = new Posto(Sessione.getIstance().getSettore(), Sessione.getIstance().getAnello(),
+								Sessione.getIstance().getBlocco(), Sessione.getIstance().getPosto(),
+								Sessione.getIstance().getCurrentPartita().getCalendarDate());
 						DAOFactory.createIPostoDAO().insertPosto(posto, Sessione.getIstance().getCurrentUtente());
 						DAOFactory.createIPartitaDAO().updatePartita(Sessione.getIstance().getCurrentPartita());
 						break;
@@ -122,44 +168,52 @@ public class PagamentoController extends AController{
 						Date date = sdf.parse(utente.getDataNascita());
 						Calendar data_nascita = Calendar.getInstance();
 						data_nascita.setTime(date);
-						Cliente cliente = new Cliente(utente.getNome(), utente.getCognome(), utente.getEmail(), utente.getPassword(), data_nascita);
+						Cliente cliente = new Cliente(utente.getNome(), utente.getCognome(), utente.getEmail(),
+								utente.getPassword(), data_nascita);
 						cliente.abbona(Sessione.getIstance().getTipoAbb());
-						DAOFactory.createIAbbonamentoDAO().updateAbbonamento(cliente, Sessione.getIstance().getAbbToUpdate());
+						DAOFactory.createIAbbonamentoDAO().updateAbbonamento(cliente,
+								Sessione.getIstance().getAbbToUpdate());
 						Sessione.getIstance().setCurrentAbb(Sessione.getIstance().getAbbToUpdate());
 						break;
 					}
-					
-					if (v.getsalvaCB().isSelected()) { 
-						try{
-							DAOFactory.createICartaPagamentoDAO().insertCarta(new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0), Sessione.getIstance().getCurrentUtente());
-						}catch (SQLIntegrityConstraintViolationException err) {
+
+					if (v.getsalvaCB().isSelected()) {
+						try {
+							DAOFactory.createICartaPagamentoDAO().insertCarta(
+									new Carta(v.getNome(), v.getCognome(), v.getNCarta(), v.getMese(), v.getAnno(), 0),
+									Sessione.getIstance().getCurrentUtente());
+						} catch (SQLIntegrityConstraintViolationException err) {
 							v.upNumberErr();
 							return;
 						}
 					}
-					
+
 					try {
-						if (Sessione.getIstance().getCurrentPagamento() == 2) a.sendEmail(messaggio, Sessione.getIstance().getCurrentBiglietto().getEmail());
-						else a.sendEmail(messaggio);
+						if (Sessione.getIstance().getCurrentPagamento() == 2)
+							a.sendEmail(messaggio, Sessione.getIstance().getCurrentBiglietto().getEmail());
+						else
+							a.sendEmail(messaggio);
 					} catch (MessagingException err) {
 						System.out.println("Email non valida");
 					}
-					
+
 					ControllerManager.getInstance().loadController(Type.PARTITE);
 					Sessione.getIstance().resetScelte();
-				}catch (EmptyNameException err) {
+				} catch (EmptyNameException err) {
 					n = v.getTipoErr();
-					if (n == 0) v.upNameErr();
-					else if (n == 1) v.upSurnameErr();
-					else if (n == 2){
+					if (n == 0)
+						v.upNameErr();
+					else if (n == 1)
+						v.upSurnameErr();
+					else if (n == 2) {
 						v.upNameErr();
 						v.upSurnameErr();
 					}
 					return;
-				}catch (WrongNumberException err) {
+				} catch (WrongNumberException err) {
 					v.upNumberErr();
 					return;
-				}catch(WrongCvvException err) {
+				} catch (WrongCvvException err) {
 					v.upCvvErr();
 					return;
 				} catch (ParseException err) {
@@ -169,50 +223,15 @@ public class PagamentoController extends AController{
 		});
 		view = v;
 	}
-	
-	@Override
-	public void onLoad(Dimension dim) {
-		this.initialize(dim);
-	}
 
-	@Override
-	public Type getType() {
-		return Type.PAGAMENTO;
-	}
-	
-	public void checkEnteredCvv() throws WrongCvvException {
-		PagamentoView v = (PagamentoView)this.getView();
-		if (v.getCvvTxt().getText().isEmpty() || v.getCvvTxt().getText().length() != 3 || isNumber(v.getCvvTxt().getText()) == false) {
-			throw new WrongCvvException();
-		}
-	}
-	
-	public void checkEnteredNumber() throws WrongNumberException {
-		PagamentoView v = (PagamentoView)this.getView();
-		if (v.getnCartaTxt().getText().isEmpty() || v.getnCartaTxt().getText().length() != 16 || isNumber(v.getnCartaTxt().getText()) == false) {
-			throw new WrongNumberException();
-		}
-	}
-	
-	public void checkEnteredName() throws EmptyNameException {
-		PagamentoView v = (PagamentoView)this.getView();
-		if(v.getNomeTxt().getText().isEmpty() && v.getCognomeTxt().getText().isEmpty()) {
-			v.setTipoErr(2);
-			throw new EmptyNameException();
-		}else {
-			if (v.getNomeTxt().getText().isEmpty()) {
-				v.setTipoErr(0);
-				throw new EmptyNameException();
-			}else if(v.getCognomeTxt().getText().isEmpty()){
-				v.setTipoErr(1);
-				throw new EmptyNameException();
-			}
-		}
-	}
-	
 	public boolean isNumber(String str_in) {
 		final Predicate<String> isNum = (str) -> str.chars().allMatch((c) -> Character.isDigit(c));
 		return (isNum.test(str_in) && str_in.charAt(0) != '0');
+	}
+
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
 	}
 
 }

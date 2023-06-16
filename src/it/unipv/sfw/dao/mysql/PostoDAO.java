@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -17,119 +17,90 @@ import it.unipv.sfw.model.utente.Utente;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.partita.Posto}
+ *
  * @author Federico Romano
  * @see it.unipv.sfw.model.partita.Posto
  */
 public class PostoDAO implements IPostoDAO {
-	
+
 	private static final String SCHEMA = "POSTI";
-	
+
 	@Override
-	public int selectCount(String email) {
-		
-		int numeroBiglietti = 0;
-		
+	public int clientipresenti(Calendar dataPartita, String livello) {
+		int clientip = 0;
+
 		PreparedStatement st1;
 		ResultSet rs1;
-		
-		try (DBConnection db = new DBConnection(SCHEMA)) {
+
+		try (DBConnection db = new DBConnection("POSTI, ABBONAMENTI")) {
 			Connection conn = db.getConnection();
-			
-			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE EMAIL LIKE ?";
-			st1 = conn.prepareStatement(query);
-			
-			st1.setString(1, email);
-			
-			rs1 = st1.executeQuery();
-			
-			rs1.next(); 		// A ResultSet cursor is initially positioned before the first row
-			numeroBiglietti = rs1.getInt(1);
-			
-		} catch (Exception e){e.printStackTrace();}
-		
-		return numeroBiglietti;
-	}
-	
-	@Override
-	public int selectCount(Calendar dataPartita) {
-		
-		int numeroposti = 0;
-		
-		PreparedStatement st1;
-		ResultSet rs1;
-		
-		try (DBConnection db = new DBConnection(SCHEMA)) {
-			Connection conn = db.getConnection();
-			
-			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE DAT=?";
+
+			String query = "SELECT COUNT(EMAIL) FROM POSTI WHERE POSTI.EMAIL IN (SELECT EMAIL FROM ABBONAMENTI WHERE GRADO=?) AND DAT=?";
 			st1 = conn.prepareStatement(query);
 			SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			
-			st1.setString(1, "" + formattedDate.format(dataPartita.getTime()));
-			
+
+			st1.setString(1, livello);
+			st1.setString(2, "" + formattedDate.format(dataPartita.getTime()));
+
 			rs1 = st1.executeQuery();
-			
-			rs1.next(); //A ResultSet cursor is initially positioned before the first row
-			numeroposti = rs1.getInt(1);
-			
-		} catch (Exception e){e.printStackTrace();}
-		
-		return numeroposti;
-	}
-	
-	@Override
-	public ArrayList<Posto> selectAllOrderBydata() {
-		
-		ArrayList<Posto> result = new ArrayList<>();
-		
-		Statement st1;
-		ResultSet rs1;
-		
-		try (DBConnection db = new DBConnection(SCHEMA)) {
-			Connection conn = db.getConnection();	
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
-			
-			st1 = conn.createStatement();
-			String query = "SELECT * FROM " + SCHEMA + " ORDER BY DAT";
-			rs1 = st1.executeQuery(query);
-			
-			while(rs1.next()) {
-				String dateInString = rs1.getString(1);
-				Date date = (Date) sdf.parse(dateInString);
-				Calendar data = Calendar.getInstance();
-				data = new GregorianCalendar();
-				data.setTime(date);
-				Posto p = new Posto(rs1.getInt(2), rs1.getInt(4), rs1.getInt(3), rs1.getInt(5), data);
-				result.add(p);
-			}
-			
-		} catch (Exception e) {e.printStackTrace();}
-		
-		return result;
+
+			rs1.next(); // A ResultSet cursor is initially positioned before the first row
+			clientip = rs1.getInt(1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return clientip;
 	}
 
 	@Override
-	public ArrayList<Posto> selectByData(Calendar dataPartita) {
-		
-		ArrayList<Posto> result = new ArrayList<>();
-		
+	public boolean insertPosto(Posto posto, Utente utente) {
+
 		PreparedStatement st1;
-		ResultSet rs1;
-		
+		boolean esito = true;
+
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
-			
-			String query = "SELECT * FROM " + SCHEMA + " WHERE DAT=?";
+
+			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,?,?)";
 			st1 = conn.prepareStatement(query);
-			
-			st1.setString(1, sdf.format(dataPartita.getTime()));
-			
-			rs1 = st1.executeQuery();
-			
-			while(rs1.next()) {
+
+			st1.setString(1, "" + posto.getDataPerDB());
+			st1.setInt(2, posto.getNSettore());
+			st1.setInt(3, posto.getNBlocco());
+			st1.setInt(4, posto.getNAnello());
+			st1.setInt(5, posto.getNPosto());
+			st1.setString(6, utente.getEmail());
+
+			st1.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			esito = false;
+		}
+
+		return esito;
+	}
+
+	@Override
+	public ArrayList<Posto> selectAllOrderBydata() {
+
+		ArrayList<Posto> result = new ArrayList<>();
+
+		Statement st1;
+		ResultSet rs1;
+
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
+
+			st1 = conn.createStatement();
+			String query = "SELECT * FROM " + SCHEMA + " ORDER BY DAT";
+			rs1 = st1.executeQuery(query);
+
+			while (rs1.next()) {
 				String dateInString = rs1.getString(1);
 				Date date = sdf.parse(dateInString);
 				Calendar data = Calendar.getInstance();
@@ -138,66 +109,106 @@ public class PostoDAO implements IPostoDAO {
 				Posto p = new Posto(rs1.getInt(2), rs1.getInt(4), rs1.getInt(3), rs1.getInt(5), data);
 				result.add(p);
 			}
-			
-		} catch (Exception e) {e.printStackTrace();}
-		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 
 	@Override
-	public boolean insertPosto(Posto posto, Utente utente) {
-		
+	public ArrayList<Posto> selectByData(Calendar dataPartita) {
+
+		ArrayList<Posto> result = new ArrayList<>();
+
 		PreparedStatement st1;
-		boolean esito = true;
-		
+		ResultSet rs1;
+
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
-			
-			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,?,?)";
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALY);
+
+			String query = "SELECT * FROM " + SCHEMA + " WHERE DAT=?";
 			st1 = conn.prepareStatement(query);
-			
-			st1.setString(1,"" + posto.getDataPerDB());
-			st1.setInt(2, posto.getNSettore());
-			st1.setInt(3, posto.getNBlocco());
-			st1.setInt(4, posto.getNAnello());
-			st1.setInt(5, posto.getNPosto());
-			st1.setString(6, utente.getEmail());
-			
-			st1.executeUpdate();
-			
+
+			st1.setString(1, sdf.format(dataPartita.getTime()));
+
+			rs1 = st1.executeQuery();
+
+			while (rs1.next()) {
+				String dateInString = rs1.getString(1);
+				Date date = sdf.parse(dateInString);
+				Calendar data = Calendar.getInstance();
+				data = new GregorianCalendar();
+				data.setTime(date);
+				Posto p = new Posto(rs1.getInt(2), rs1.getInt(4), rs1.getInt(3), rs1.getInt(5), data);
+				result.add(p);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			esito = false;
 		}
-		
-		return esito;
+
+		return result;
 	}
 
 	@Override
-	public int clientipresenti(Calendar dataPartita,String livello) {
-		int clientip = 0;
-		
+	public int selectCount(Calendar dataPartita) {
+
+		int numeroposti = 0;
+
 		PreparedStatement st1;
 		ResultSet rs1;
-		
-		try (DBConnection db = new DBConnection("POSTI, ABBONAMENTI")) {
+
+		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
-			
-			String query = "SELECT COUNT(EMAIL) FROM POSTI WHERE POSTI.EMAIL IN (SELECT EMAIL FROM ABBONAMENTI WHERE GRADO=?) AND DAT=?";
+
+			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE DAT=?";
 			st1 = conn.prepareStatement(query);
 			SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			
-			st1.setString(1, livello);
-			st1.setString(2, "" + formattedDate.format(dataPartita.getTime()));
-			
+
+			st1.setString(1, "" + formattedDate.format(dataPartita.getTime()));
+
 			rs1 = st1.executeQuery();
-			
-			rs1.next(); 		// A ResultSet cursor is initially positioned before the first row
-			clientip = rs1.getInt(1);
-			
-		} catch (Exception e){e.printStackTrace();}
-		
-		return clientip;
+
+			rs1.next(); // A ResultSet cursor is initially positioned before the first row
+			numeroposti = rs1.getInt(1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return numeroposti;
 	}
-		
+
+	@Override
+	public int selectCount(String email) {
+
+		int numeroBiglietti = 0;
+
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try (DBConnection db = new DBConnection(SCHEMA)) {
+			Connection conn = db.getConnection();
+
+			String query = "SELECT COUNT(*) FROM " + SCHEMA + " WHERE EMAIL LIKE ?";
+			st1 = conn.prepareStatement(query);
+
+			st1.setString(1, email);
+
+			rs1 = st1.executeQuery();
+
+			rs1.next(); // A ResultSet cursor is initially positioned before the first row
+			numeroBiglietti = rs1.getInt(1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return numeroBiglietti;
+	}
+
 }

@@ -1,16 +1,30 @@
 package it.unipv.sfw.view;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.time.LocalDate;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.github.lgooddatepicker.components.DatePicker;
 
-import java.awt.*;
-import java.time.LocalDate;
-
 /**
  * Classe che rappresenta la schermata di registrazione dell'utente.
- * 
+ *
  * @author Simone Platano,Jacopo Piccoli, Gabriele Invernizzi
  * @see AView
  */
@@ -22,7 +36,6 @@ public class RegistrazioneView extends AView {
 	private JPasswordField password;
 	private JLabel imgLabel, errorLabel;
 	private JButton loginBtn, registratiBtn;
-	
 
 	public RegistrazioneView(Dimension dim) {
 
@@ -38,38 +51,37 @@ public class RegistrazioneView extends AView {
 		// Inizializzazione immagine di sinistra
 		ImageIcon img = new ImageIcon(this.getClass().getResource("/stadio.png"));
 
-		img = new ImageIcon(img.getImage().getScaledInstance((int) (dim.width) / 2, (int) (dim.height - 45) / 2,
+		img = new ImageIcon(img.getImage().getScaledInstance((dim.width) / 2, (dim.height - 45) / 2,
 				Image.SCALE_SMOOTH));
 		imgLabel = new JLabel(img);
-		imgLabel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+		imgLabel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
 
 		// Inizializzazione panel contenitore
 		contenitore = new JPanel();
-		contenitore.setPreferredSize(new Dimension(dim.width, ((int) (dim.height - 45))));
+		contenitore.setPreferredSize(new Dimension(dim.width, (dim.height - 45)));
 
 		// Panel a destra, delle info
 		destraPanel = new JPanel();
 		destraPanel.setLayout(new GridLayout(3, 1));
-		destraPanel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
-		
+		destraPanel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
+
 		JPanel errorPanel = new JPanel();
 		errorPanel.setLayout(new GridLayout(1, 1));
 		errorLabel = new JLabel("");
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setFont(smallFont);
-		errorLabel.setHorizontalAlignment(JLabel.CENTER);
-		
+		errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JPanel titoloPanel = new JPanel();
 		titoloPanel.setLayout(new GridLayout(1, 1));
 		JLabel regLabel = new JLabel("REGISTRAZIONE");
-		regLabel.setHorizontalAlignment(JLabel.CENTER);
+		regLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		regLabel.setFont(largeFont);
 		titoloPanel.add(regLabel);
 
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new GridBagLayout());
-		
+
 		int destraPanelInset = dim.width / 12;
 		destraPanel.setBorder(new EmptyBorder(0, destraPanelInset, 0, destraPanelInset));
 
@@ -84,18 +96,18 @@ public class RegistrazioneView extends AView {
 		JLabel dataLabel = new JLabel("Data di nascita");
 		dataLabel.setFont(mediumFont);
 		JLabel accountGiaEsistenteLabel = new JLabel("<html>Hai già un account? &nbsp  &nbsp  &nbsp  </html>");
-		
+
 		email = new JTextField();
 		nome = new JTextField();
 		cognome = new JTextField();
 		data = new DatePicker();
 		password = new JPasswordField();
-		
+
 		// Creazione della griglia
 		GridBagConstraints infoConstraints = new GridBagConstraints();
 		infoConstraints.fill = GridBagConstraints.HORIZONTAL;
 		infoConstraints.insets = new Insets(5, 2, 0, 15);
-		
+
 		infoConstraints.gridx = 0;
 		infoConstraints.gridy = 0;
 		infoConstraints.gridwidth = 2;
@@ -133,20 +145,19 @@ public class RegistrazioneView extends AView {
 		infoPanel.add(password, infoConstraints);
 
 		JPanel bottoniContainerPanel = new JPanel();
-		
+
 		JPanel bottoniPanel = new JPanel();
 		bottoniPanel.setLayout(new BorderLayout());
-		
+
 		JPanel regPanel = new JPanel();
 		regPanel.add(registratiBtn);
 
 		bottoniPanel.add(regPanel, BorderLayout.NORTH);
 		bottoniPanel.add(accountGiaEsistenteLabel, BorderLayout.WEST);
 		bottoniPanel.add(loginBtn, BorderLayout.EAST);
-		
+
 		bottoniContainerPanel.add(bottoniPanel);
 
-		
 		destraPanel.add(titoloPanel);
 		destraPanel.add(infoPanel);
 		destraPanel.add(bottoniContainerPanel);
@@ -157,27 +168,6 @@ public class RegistrazioneView extends AView {
 
 		this.add(contenitore);
 
-	}
-	
-	/**
-	 * @return Bottone di registrazione.
-	 */
-	public JButton getRegistratiBtn() {
-		return registratiBtn;
-	}
-	
-	/**
-	 * @return Bottone di login.
-	 */
-	public JButton getToLoginBtn() {
-		return loginBtn;
-	}
-
-	/**
-	 * @return Campo nome.
-	 */
-	public JTextField getNome() {
-		return nome;
 	}
 
 	/**
@@ -199,26 +189,33 @@ public class RegistrazioneView extends AView {
 	}
 
 	/**
+	 * @return Campo nome.
+	 */
+	public JTextField getNome() {
+		return nome;
+	}
+
+	/**
 	 * @return Campo password.
 	 */
 	public JPasswordField getPassword() {
 		return password;
 	}
-	
+
 	/**
-	 * Funzione utilizzata quando non vengono riempiti tutti i campi.
+	 * @return Bottone di registrazione.
 	 */
-	public void onEmptyField() {
-		errorLabel.setText("Non tutti i campi sono stati riempiti");
+	public JButton getRegistratiBtn() {
+		return registratiBtn;
 	}
-	
+
 	/**
-	 * Funzione utilizzata quando Il formato dell'email non è valido.
+	 * @return Bottone di login.
 	 */
-	public void onWrongEmailFormat() {
-		errorLabel.setText("Il formato dell'email non è valido");
+	public JButton getToLoginBtn() {
+		return loginBtn;
 	}
-	
+
 	/**
 	 * Funzione utilizzata quando l'account esiste già.
 	 */
@@ -226,20 +223,34 @@ public class RegistrazioneView extends AView {
 		errorLabel.setText("L'account: " + accEmail + " esiste già.");
 	}
 
+	/**
+	 * Funzione utilizzata quando non vengono riempiti tutti i campi.
+	 */
+	public void onEmptyField() {
+		errorLabel.setText("Non tutti i campi sono stati riempiti");
+	}
+
 	@Override
 	public void onWindowResized(Dimension dim) {
 
-		contenitore.setPreferredSize(new Dimension(dim.width, ((int) (dim.height - 45))));
-		destraPanel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+		contenitore.setPreferredSize(new Dimension(dim.width, (dim.height - 45)));
+		destraPanel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
 		int destraPanelInset = dim.width / 12;
 		destraPanel.setBorder(new EmptyBorder(0, destraPanelInset, 0, destraPanelInset));
-		
-		imgLabel.setPreferredSize(new Dimension(dim.width / 2, ((int) (dim.height - 45))));
+
+		imgLabel.setPreferredSize(new Dimension(dim.width / 2, (dim.height - 45)));
 		ImageIcon img = new ImageIcon(((ImageIcon) imgLabel.getIcon()).getImage()
-				.getScaledInstance((int) (dim.width) / 2, (int) (dim.height - 45) / 2, Image.SCALE_SMOOTH));
+				.getScaledInstance((dim.width) / 2, (dim.height - 45) / 2, Image.SCALE_SMOOTH));
 		imgLabel.setIcon(img);
 
 		contenitore.revalidate();
 		contenitore.repaint();
+	}
+
+	/**
+	 * Funzione utilizzata quando Il formato dell'email non è valido.
+	 */
+	public void onWrongEmailFormat() {
+		errorLabel.setText("Il formato dell'email non è valido");
 	}
 }

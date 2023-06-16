@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
-import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.model.partita.Stadio;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AnelloView;
@@ -13,12 +12,17 @@ import it.unipv.sfw.view.buttons.AnelloButton;
 
 /**
  * Controller che si occupa della AnelloView.
- * 
+ *
  * @author Gabriele Invernizzi
  * @see AController
  * @see it.unipv.sfw.view.AnelloView
  */
 public class AnelloController extends AController {
+
+	@Override
+	public Type getType() {
+		return Type.ANELLO;
+	}
 
 	@Override
 	public void initialize(Dimension dim) {
@@ -38,21 +42,16 @@ public class AnelloController extends AController {
 		Collection<AnelloButton> btns = v.getButtons();
 		for (AnelloButton b : btns)
 			b.addActionListener(a);
-		
+
 		v.getHomeButton().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				ControllerManager.getInstance().loadController(Type.PARTITE);
 			}
 		});
-		
-		view=v;
-	}
 
-	@Override
-	public Type getType() {
-		return Type.ANELLO;
+		view = v;
 	}
 }
