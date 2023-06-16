@@ -180,9 +180,9 @@ private int righe;
 	 * @param abbonatipresenti
 	 * 
 	 */
-	public void OpenInfoPartita(boolean stato,int code,int postioccupati, int clientipresenti, int abbonatipresenti) {
+	public void OpenInfoPartita(boolean stato,int code,int postioccupati, int clientipresenti, int abbonatipresenti, double ricavi) {
 		info.get(code).setPopupMenuVisible(stato);
-		infoPartita.get(code).setText("<html>Posti occupati: "+postioccupati+"<br><br>Clienti presenti: "+clientipresenti+"<br><br>Abbonati presenti: "+abbonatipresenti+"<br><br>Totale ricavi: </html>");
+		infoPartita.get(code).setText("<html>Posti occupati: "+postioccupati+"<br><br>Clienti presenti: "+clientipresenti+"<br><br>Abbonati presenti: "+abbonatipresenti+"<br><br>Totale ricavi: "+ricavi+"</html>");
 	}
 	
 	/**
