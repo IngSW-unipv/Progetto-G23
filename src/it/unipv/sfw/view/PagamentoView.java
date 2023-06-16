@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -344,16 +345,9 @@ public class PagamentoView extends AView{
 		cvvErr.setVisible(false);
 	}
 	
-	public boolean isNumber(String str) {
-		boolean flag = true;
-		
-		try {
-			Long.parseLong(str);
-		}catch(Exception e) {
-			flag = false;
-		}
-		
-		return flag;
+	public boolean isNumber(String str_in) {
+		final Predicate<String> isNum = (str) -> str.chars().allMatch((c) -> Character.isDigit(c));
+		return (isNum.test(str_in) && str_in.charAt(0) != '0');
 	}
 
 	public void checkEnteredNumber() throws WrongNumberException {

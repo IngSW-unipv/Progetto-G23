@@ -119,12 +119,12 @@ public class ClienteDAO implements IClienteDAO {
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,'" + Type.CLIENTE + "',?)";
+			String query = "INSERT INTO " + SCHEMA + " (NOME, COGNOME, EMAIL, PASS, TIPO, NASCITA) VALUES(?,?,?,?,'" + Type.CLIENTE + "',?)";
 			st1 = conn.prepareStatement(query);
 			
-			st1.setString(3, clienteInput.getNome());
+			st1.setString(1, clienteInput.getNome());
 			st1.setString(2, clienteInput.getCognome());
-			st1.setString(1, clienteInput.getEmail());
+			st1.setString(3, clienteInput.getEmail());
 			st1.setString(4, clienteInput.getPassword());
 			st1.setString(5, clienteInput.getDataNascita());
 			
