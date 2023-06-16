@@ -145,19 +145,11 @@ public class ProfiloPersonaleView extends AView {
 			acquista.add(new UtenteButton("Acquista", 1));
 			acquista.add(new UtenteButton("Acquista", 2));
 
-			JLabel abb1Label = new JLabel(
-					"<html>Il primo livello include tutti i biglietti per le partite giocate in casa,<br> "
-							+ "darà ai clienti una visibilità anticipata per la prenotazione dei biglietti,<br> "
-							+ "e inoltre permetterà loro di prenotare un massimo di quattro biglietti.</html>");
-
-			JLabel abb2Label = new JLabel("<html>Il secondo livello oltre ai vantaggi descritti per il primo livello, "
-					+ "include un supplemento di due biglietti prenotabili e permetterà loro di prenotare i biglietti "
-					+ "in un settore riservato solo agli abbonati di livello due e tre.</html>");
-
-			JLabel abb3Label = new JLabel(
-					"<html>Il livello tre oltre ai vantaggi descritti per il primo e secondo livello, "
-							+ "non limita i biglietti da loro prenotabili per le partite e include uno sconto sugli acquisti effettuabili "
-							+ "sullo store e per l’acquisto di biglietti per il museo.<html>");
+			JLabel abb1Label=new JLabel("<html>Il primo livello include sconti del 25% per i biglietti delle partite,del museo e dello store.<br> </html>");
+	        
+	        JLabel abb2Label=new JLabel("<html>Il primo livello include sconti del 50% per i biglietti delle partite,del museo e dello store.</html>");
+	        
+	        JLabel abb3Label=new JLabel("<html>Il primo livello include sconti del 75% per i biglietti delle partite,del museo e dello store.<html>");
 
 			if (((Cliente) u).getAbb() != null) {
 				switch (Sessione.getIstance().getTipoAbb()) {

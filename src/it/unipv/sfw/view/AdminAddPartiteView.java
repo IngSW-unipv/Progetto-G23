@@ -21,6 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.DateTimePicker;
+import com.github.lgooddatepicker.components.TimePickerSettings;
 
 import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.view.buttons.SquadraButton;
@@ -36,7 +39,7 @@ public class AdminAddPartiteView extends AView {
 	private JComboBox<String> orario;
 	private JButton aggiungi, home;
 	private JLabel errorLabel;
-	private DatePicker data;
+	private DateTimePicker data;
 
 	public AdminAddPartiteView(Dimension dim) {
 
@@ -47,8 +50,13 @@ public class AdminAddPartiteView extends AView {
 		squadra = new ArrayList<>();
 		imgStemma = new ArrayList<>();
 		sceltasquadra = new ArrayList<>();
-		data = new DatePicker();
-		data.setDateToToday();
+		data = new DateTimePicker();
+		LocalDate today = LocalDate.now();
+		DatePickerSettings dateSettings = new DatePickerSettings();
+		TimePickerSettings timeSettings = new TimePickerSettings();
+		data = new DateTimePicker(dateSettings, timeSettings);
+		data.setPreferredSize(new Dimension(300, 30)); ////
+		dateSettings.setDateRangeLimits(today.plusDays(1), today.plusDays(70));
 		orario = new JComboBox<>(opzioni);
 
 		JLabel titolo = new JLabel("AGGIUNGI UNA PARTITA");
@@ -165,7 +173,7 @@ public class AdminAddPartiteView extends AView {
 	}
 
 	public LocalDate getData() {
-		return data.getDate();
+		return data.getDatePicker().getDate();
 	}
 
 	public JButton getHome() {
