@@ -49,6 +49,6 @@ public interface IPostoDAO {
 	 * @param dataPartita data di cui si vuole sapere quanti clienti sono presenti.
 	 * @return numero di clienti, che sono sono abboanti, presenti a quella partita.
 	 */
-	int clientipresenti(Calendar dataPartita);
+	int clientipresenti(Calendar dataPartita,String livello);
 
 }

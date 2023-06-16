@@ -49,7 +49,7 @@ public class Abbonamento {
 		case LIV2:
 			return 0.5;
 		case LIV3:
-			return 0.1;
+			return 0.25;
 		default: 
 			return 1.0;
 		}

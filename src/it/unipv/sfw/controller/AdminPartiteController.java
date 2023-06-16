@@ -12,6 +12,8 @@ import java.util.Date;
 
 import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
+import it.unipv.sfw.model.abbonamento.Abbonamento;
+import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AdminPartiteView;
@@ -28,8 +30,8 @@ public class AdminPartiteController extends AController{
 	
 	private Partita[] p;
 	private int postioccupati;
-	private int clientipresenti;
-	private int abbonatipresenti;
+	private int clientipresenti,liv1,liv2,liv3,abbonatipresenti;
+	private double ricavi;
 	
 	@Override
 	public void initialize(Dimension dim) {
@@ -113,9 +115,18 @@ public class AdminPartiteController extends AController{
 				Calendar cal=Calendar.getInstance();
 				cal.setTime(data);
 				postioccupati = DAOFactory.createIPostoDAO().selectCount(cal);
-				clientipresenti=DAOFactory.createIPostoDAO().clientipresenti(cal);
-				abbonatipresenti=postioccupati-clientipresenti;
-				v.OpenInfoPartita(true,code,postioccupati,clientipresenti,abbonatipresenti);
+				clientipresenti=DAOFactory.createIPostoDAO().clientipresenti(cal,"LIV0");
+				liv1=DAOFactory.createIPostoDAO().clientipresenti(cal,"LIV1");
+				liv2=DAOFactory.createIPostoDAO().clientipresenti(cal,"LIV2");
+				liv3=DAOFactory.createIPostoDAO().clientipresenti(cal,"LIV3");
+				abbonatipresenti=liv1+liv2+liv3;
+				Abbonamento l1=new Abbonamento(TipoAbb.LIV1);
+				Abbonamento l2=new Abbonamento(TipoAbb.LIV2);
+				Abbonamento l3=new Abbonamento(TipoAbb.LIV3);
+				
+				ricavi=clientipresenti*(Partita.PREZZO)+liv1*(Partita.PREZZO*l1.getSconto())+liv2*(Partita.PREZZO*l2.getSconto())+liv3*(Partita.PREZZO*l3.getSconto());
+						
+				v.OpenInfoPartita(true,code,postioccupati,clientipresenti,abbonatipresenti,ricavi);
 				
 			}
 			
