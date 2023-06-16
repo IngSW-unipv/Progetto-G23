@@ -121,7 +121,6 @@ public class UtenteDAO implements IUtenteDAO {
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
-		System.out.println(result.getNome() + "    " + result.getCognome() );
 		return result;
 	}
 	

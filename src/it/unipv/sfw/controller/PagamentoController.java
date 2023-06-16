@@ -45,7 +45,29 @@ public class PagamentoController extends AController{
 	public void initialize(Dimension dim) {
 		
 		riempiCarte();
-		PagamentoView v = new PagamentoView(dim, carteDisp);
+		double prezzo = 0;
+		switch(Sessione.getIstance().getCurrentPagamento()) {
+		case 1: 
+			for(Map.Entry<Merchandising, Integer> entry: Sessione.getIstance().getCarrello().entrySet()) {
+				int price = 0;
+				price += entry.getKey().getPrezzo();
+				price = price * entry.getValue();
+				prezzo += price;
+			}
+			break;
+		case 2:
+			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
+			break;
+		case 3:
+			prezzo = Partita.PREZZO;
+			break;
+		default:
+			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
+			break;
+		}
+		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
+		
+		PagamentoView v = new PagamentoView(dim, carteDisp, prezzo, Sessione.getIstance().getCurrentUtente(), Sessione.getIstance().getCurrentPagamento());
 		
 		v.getBackBtn().addActionListener(new ActionListener() {	
 			@Override
