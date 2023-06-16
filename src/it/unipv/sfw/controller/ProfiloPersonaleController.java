@@ -36,14 +36,7 @@ public class ProfiloPersonaleController extends AController{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
-			}
-		};
-		
-		Collection<UtenteButton> btns = v.getButtons();
-		if(u.getType()==it.unipv.sfw.model.utente.Utente.Type.CLIENTE) {
-			for (UtenteButton b : btns){
-				b.addActionListener(a);
-				switch(b.getCode()) {
+				switch(((UtenteButton) e.getSource()).getCode()) {
 				case 0:
 					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV1);
 					break;
@@ -54,6 +47,13 @@ public class ProfiloPersonaleController extends AController{
 					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV3);
 					break;
 				}
+			}
+		};
+		
+		Collection<UtenteButton> btns = v.getButtons();
+		if(u.getType()==it.unipv.sfw.model.utente.Utente.Type.CLIENTE) {
+			for (UtenteButton b : btns){
+				b.addActionListener(a);
 			}
 		}
 			
