@@ -73,7 +73,7 @@ public class UtenteDAO implements IUtenteDAO {
 		try (DBConnection db = new DBConnection(SCHEMA)) {
 			Connection conn = db.getConnection();
 			
-			String query = "INSERT INTO " + SCHEMA + " VALUES(?,?,?,?,?)";
+			String query = "INSERT INTO " + SCHEMA + " (NOME, COGNOME, EMAIL, PASS, TIPO) VALUES(?,?,?,?,?)";
 			st1 = conn.prepareStatement(query);
 			
 			st1.setString(1, u.getNome());
@@ -121,7 +121,7 @@ public class UtenteDAO implements IUtenteDAO {
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
-		
+		System.out.println(result.getNome() + "    " + result.getCognome() );
 		return result;
 	}
 	
