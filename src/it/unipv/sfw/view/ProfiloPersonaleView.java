@@ -28,6 +28,12 @@ import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.model.utente.Utente.Type;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
+/**
+ * Classe che rappresenta la schermata del profilo personale dell'utente e dell'admin.
+ * 
+ * @author Jacopo Piccoli
+ * @see AView
+ */
 public class ProfiloPersonaleView extends AView {
 	
 	private JPanel contenitore;
@@ -289,50 +295,86 @@ public class ProfiloPersonaleView extends AView {
 		
 		
 	}
-	
+	/**
+	 * @return Bottoni acquista abbonamento.
+	 */
 	public Collection<UtenteButton> getButtons() {
 		return acquista;
 	}
 	
+	/**
+	 * @return Bottone della Home.
+	 */
 	public JButton getHome() {
 		return homeBtn;
 	}
-
+	
+	/**
+	 * @return Bottone delle informazioni.
+	 */
 	public JMenu getInfo() {
 		return info;
 	}
 	
+	/**
+	 * @param stato lo stato del menu di informazioni.
+	 */
 	public void setInfoAbb(boolean stato) {
 		info.setPopupMenuVisible(stato);
 	}
+	
+	/**
+	 * @return Bottone del cambio password.
+	 */
 	public JButton getCambiaPassword(){
 		return cambioPassBtn;
 	}
 	
+	/**
+	 * @return Campo della vecchia password.
+	 */
 	public JPasswordField getVecchiaPassword() {
 		return vecchiaPass;
 	}
-
+	
+	/**
+	 * @return Campo della nuova password.
+	 */
 	public JPasswordField getNuovaPassword() {
 		return nuovaPass;
 	}
 	
+	/**
+	 * @return Campodella conferma password.
+	 */
 	public JPasswordField getConfermaNuovaPassword() {
 		return confermaPass;
 	}
 	
+	/**
+	 * Funzione utilizzata quando non vengono riempiti tutti i campi.
+	 */
 	public void onEmptyField() {
 		errorLabel.setText("Non tutti i campi sono stati riempiti!");
 	}
-		
+	
+	/**
+	 * Funzione utilizzata quando la nuova password e quella precedente sono uguali.
+	 */
 	public void oldPasswordReused() {
 		errorLabel.setText("La nuova password e quella precedente sono uguali");
 	}
 	
+	/**
+	 * Funzione utilizzata quando la nuova password e la conferma sono diverse.
+	 */
 	public void onConfirmPassword() {
 		errorLabel.setText("La nuova password e la conferma sono diverse");
 	}
-	
+
+	/**
+	 * Funzione utilizzata quando la password precedente errata.
+	 */
 	public void ErroreVecchiaPassword() {
 		errorLabel.setText("Password precedente errata");
 	}

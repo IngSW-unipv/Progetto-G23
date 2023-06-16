@@ -25,6 +25,12 @@ import it.unipv.sfw.view.buttons.UtenteButton;
 import it.unipv.sfw.view.elements.InfoMenu;
 import it.unipv.sfw.view.elements.MenuUtente;
 
+/**
+ * Classe che crea la viev dell'admin per le partite. 
+ *
+ * @author Jacopo Piccoli
+ * @see it.unipv.sfw.view.buttons.InfoButton
+ */
 public class AdminPartiteView extends AView {
 private int righe;
 	
@@ -157,34 +163,75 @@ private int righe;
 		this.add(top, BorderLayout.NORTH);
 		this.add(middle, BorderLayout.CENTER);
 	}
-
+	
+	/**
+	 * @return Bottoni di informazione sulla partita.
+	 */
 	public Collection<InfoMenu> getInfo() {
 		return info;
 	}
-	
+	/**
+	 * Metodo chiamato quando si vuole avere informazioni sulla partita.
+	 * 
+	 * @param stato
+	 * @param code
+	 * @param postioccupati
+	 * @param clientipresenti
+	 * @param abbonatipresenti
+	 * 
+	 */
 	public void OpenInfoPartita(boolean stato,int code,int postioccupati, int clientipresenti, int abbonatipresenti) {
 		info.get(code).setPopupMenuVisible(stato);
 		infoPartita.get(code).setText("<html>Posti occupati: "+postioccupati+"<br><br>Clienti presenti: "+clientipresenti+"<br><br>Abbonati presenti: "+abbonatipresenti+"<br><br>Totale ricavi: </html>");
 	}
 	
+	/**
+	 * Metodo chaimato quando si vuoel chiudere il popup ddelle infromazioni sulla partita.
+	 * 
+	 * @param stato
+	 * @param code
+	 */
 	public void CloseInfoPartita(Boolean stato,int code) {
 		info.get(code).setPopupMenuVisible(stato);
 	}
-	
+
+	/**
+	 * @return Bottone dello store.
+	 */
 	public JButton getStoreButton() {
 		return bshop;
 	}
 	
+	/**
+	 * @return Bottone del museo.
+	 */
 	public JButton getMuseoButton() {
 		return bmuseo;
 	}
 	
+	/**
+	 * @return Bottone per aggiungere partite.
+	 */
 	public JButton getAddPartitaButton() {
 		return addpartita;
 	}	
 	
+	/**
+	 * @return Bottone del profilo personale.
+	 */
 	public JMenuItem getProfiloPersonaleButton() {
 		return  u.getProfiloPersonale();
+	}
+
+	/**
+	 * @return Bottone di uscita.
+	 */
+	public JMenuItem getExit() {
+		return u.getExit();
+	}
+	
+	public ArrayList<JMenuBar> getJMenuBar() {
+		return i;
 	}
 	
 	@Override
@@ -194,10 +241,4 @@ private int righe;
 		partitePanel.repaint();	
 	}
 	
-	public JMenuItem getExit() {
-		return u.getExit();
-	}
-	public ArrayList<JMenuBar> getJMenuBar() {
-		return i;
-	}
 }

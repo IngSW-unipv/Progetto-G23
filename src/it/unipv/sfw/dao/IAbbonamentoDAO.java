@@ -35,7 +35,12 @@ public interface IAbbonamentoDAO {
 	 * @return Abbonamento se esiste, null altrimenti.
 	 */
 	Abbonamento selectAbbonamentoOfClient(Cliente c);
-
+	
+	/**
+	 * Funzione che esegue la select dell'abbonamento di un utente.
+	 * @param u Utente
+	 * @return Abbonamento se esiste, null altrimenti.
+	 */	
 	Abbonamento selectAbbonamentoOfUtente(Utente u);
 
 }

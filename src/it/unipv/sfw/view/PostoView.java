@@ -101,11 +101,17 @@ public class PostoView extends AView {
 
 
 	}
-
+	
+	/**
+	 * @return Bottoni selezione posto.
+	 */
 	public Collection<PostoButton> getAllButtons() {
 		return posto;
 	}
 	
+	/**
+	 * @return Bottone della Home.
+	 */
 	public JButton getHomeButton(){
 		return homeBtn;
 	}

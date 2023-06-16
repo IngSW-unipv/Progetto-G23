@@ -36,7 +36,7 @@ public class RegistrazioneView extends AView {
 		registratiBtn = new JButton("Registrati");
 
 		// Inizializzazione immagine di sinistra
-		ImageIcon img = new ImageIcon(this.getClass().getResource("/stadio.jpg"));
+		ImageIcon img = new ImageIcon(this.getClass().getResource("/stadio.png"));
 
 		img = new ImageIcon(img.getImage().getScaledInstance((int) (dim.width) / 2, (int) (dim.height - 45) / 2,
 				Image.SCALE_SMOOTH));
@@ -158,19 +158,31 @@ public class RegistrazioneView extends AView {
 		this.add(contenitore);
 
 	}
-
+	
+	/**
+	 * @return Bottone di registrazione.
+	 */
 	public JButton getRegistratiBtn() {
 		return registratiBtn;
 	}
-
+	
+	/**
+	 * @return Bottone di login.
+	 */
 	public JButton getToLoginBtn() {
 		return loginBtn;
 	}
 
+	/**
+	 * @return Campo nome.
+	 */
 	public JTextField getNome() {
 		return nome;
 	}
 
+	/**
+	 * @return Campo cognome.
+	 */
 	public JTextField getCognome() {
 		return cognome;
 	}
@@ -179,24 +191,39 @@ public class RegistrazioneView extends AView {
 		return data.getDate();
 	}
 
+	/**
+	 * @return Campo email.
+	 */
 	public JTextField getEmail() {
 		return email;
 	}
 
+	/**
+	 * @return Campo password.
+	 */
 	public JPasswordField getPassword() {
 		return password;
 	}
 	
+	/**
+	 * Funzione utilizzata quando non vengono riempiti tutti i campi.
+	 */
 	public void onEmptyField() {
-		errorLabel.setText("Non tutti i campi sono stati riempiti!");
+		errorLabel.setText("Non tutti i campi sono stati riempiti");
 	}
 	
+	/**
+	 * Funzione utilizzata quando Il formato dell'email non è valido.
+	 */
 	public void onWrongEmailFormat() {
-		errorLabel.setText("Il formato dell'email non è valido!");
+		errorLabel.setText("Il formato dell'email non è valido");
 	}
 	
+	/**
+	 * Funzione utilizzata quando l'account esiste già.
+	 */
 	public void onAccountAlreadyExisting(String accEmail) {
-		errorLabel.setText("L'account: \"" + accEmail + "\" esiste già.");
+		errorLabel.setText("L'account: " + accEmail + " esiste già.");
 	}
 
 	@Override

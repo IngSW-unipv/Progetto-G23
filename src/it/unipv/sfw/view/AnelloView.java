@@ -103,11 +103,17 @@ public class AnelloView extends AView {
 		this.add(contenitore, BorderLayout.CENTER);
 
 	}
-
+	/**
+	 * @return Bottoni selezione anello.
+	 */
 	public Collection<AnelloButton> getButtons() {
 		return anello;
 	}
 	
+
+	/**
+	 * @return Bottone della Home.
+	 */
 	public JButton getHomeButton(){
 		return homeBtn;
 	}
