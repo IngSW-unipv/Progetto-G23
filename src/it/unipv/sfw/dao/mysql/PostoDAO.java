@@ -174,7 +174,7 @@ public class PostoDAO implements IPostoDAO {
 	}
 
 	@Override
-	public int clientipresenti(Calendar dataPartita) {
+	public int clientipresenti(Calendar dataPartita,String livello) {
 		int clientip = 0;
 		
 		PreparedStatement st1;
@@ -183,11 +183,12 @@ public class PostoDAO implements IPostoDAO {
 		try (DBConnection db = new DBConnection("POSTI, ABBONAMENTI")) {
 			Connection conn = db.getConnection();
 			
-			String query = "SELECT COUNT(EMAIL) FROM POSTI WHERE POSTI.EMAIL IN (SELECT EMAIL FROM ABBONAMENTI WHERE GRADO NOT LIKE 'LIV0') AND DAT=?";
+			String query = "SELECT COUNT(EMAIL) FROM POSTI WHERE POSTI.EMAIL IN (SELECT EMAIL FROM ABBONAMENTI WHERE GRADO=?) AND DAT=?";
 			st1 = conn.prepareStatement(query);
 			SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			
-			st1.setString(1, "" + formattedDate.format(dataPartita.getTime()));
+			st1.setString(1, livello);
+			st1.setString(2, "" + formattedDate.format(dataPartita.getTime()));
 			
 			rs1 = st1.executeQuery();
 			
