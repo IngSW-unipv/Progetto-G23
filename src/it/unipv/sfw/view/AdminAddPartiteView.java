@@ -152,24 +152,35 @@ public class AdminAddPartiteView extends AView {
 		this.add(middle,BorderLayout.CENTER);
 	}
 	
-	
+	/**
+	 * 
+	 * @return Bottoni di scelta squadra.
+	 */
 	public Collection<SquadraButton> getButtons() {
 		return sceltasquadra;
 	}
+	
+	/**
+	 * 
+	 * @return Bottone per aggiungere una partita.
+	 */
 	
 	public JButton getAggiungiButton() {
 		return aggiungi;
 	}
 	
+	/**
+	 * metodo chiamato quando voglio rimettere a false lo stato di utilizzo di una squadra.
+	 */
 	public void setUso() {
 		for(int i=0;i<19;i++) {
 			sceltasquadra.get(i).setUso(false);
 		}
 	}
-	public JButton getAggiungi() {
-		return aggiungi;
-	}
-	
+	/**
+	 * Metodo utilizzato per capire con quale squadra ly
+	 * @return Stringa della squadra selezionata.
+	 */
 	public String getSquadraScelta() {
 		for(int i=0;i<19;i++) {
 			if(sceltasquadra.get(i).getUso()==true) {

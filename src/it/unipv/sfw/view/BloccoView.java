@@ -98,11 +98,16 @@ public class BloccoView extends AView {
 		this.add(title,BorderLayout.NORTH);
 		this.add(tabellone,BorderLayout.CENTER);
 	}
-
+	/**
+	 * @return Bottoni selezione posto.
+	 */
 	public Collection<BloccoButton> getAllBloccoButton() {
 		return blocco;
 	}
 	
+	/**
+	 * @return Bottone della Home.
+	 */
 	public JButton getHomeButton(){
 		return homeBtn;
 	}

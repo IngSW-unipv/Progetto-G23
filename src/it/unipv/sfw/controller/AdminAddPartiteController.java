@@ -26,6 +26,13 @@ import it.unipv.sfw.view.AdminAddPartiteView;
 import it.unipv.sfw.view.buttons.SquadraButton;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
+/**
+ * Classe che crea la view della sezione partite nella pagina
+ * principale dell'amministratore.
+ *
+ * @author Jacopo Piccoli, Gabriele Invernizzi
+ * @see it.unipv.sfw.view.buttons.UtenteButton
+ */
 public class AdminAddPartiteController extends AController{
 	
 	
@@ -58,7 +65,7 @@ public class AdminAddPartiteController extends AController{
 		}
 		
 		
-		v.getAggiungi().addActionListener(new ActionListener() {
+		v.getAggiungiButton().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

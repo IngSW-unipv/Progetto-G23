@@ -16,6 +16,13 @@ import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.ProfiloPersonaleView;
 import it.unipv.sfw.view.buttons.UtenteButton;
 
+
+/**
+ * Controller che si occupa della ProfiloPersonaleView.
+ * @author Jacopo Piccoli
+ * @see AController
+ * @see it.unipv.sfw.view.ProfiloPersonaleView
+ */
 public class ProfiloPersonaleController extends AController{
 	
 	private Utente u; 

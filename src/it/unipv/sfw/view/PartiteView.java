@@ -164,22 +164,40 @@ public class PartiteView extends AView {
 		this.add(top, BorderLayout.NORTH);
 		this.add(middle, BorderLayout.CENTER);
 	}
-
+	
+	/**
+	 * @return Bottoni di acquista biglietto.
+	 */
 	public Collection<UtenteButton> getButtons() {
 		return acquista;
 	}
 	
+	/**
+	 * @return Bottone dello store.
+	 */
 	public JButton getStoreButton() {
 		return bshop;
 	}
 	
+	/**
+	 * @return Bottone del museo.
+	 */
 	public JButton getMuseoButton() {
 		return bmuseo;
 	}
 	
-	
+	/**
+	 * @return Bottone del profilo personale.
+	 */
 	public JMenuItem getProfiloPersonaleButton() {
 		return  u.getProfiloPersonale();
+	}
+	
+	/**
+	 * @return Bottone di uscita.
+	 */
+	public JMenuItem getExit() {
+		return u.getExit();
 	}
 	
 	@Override
@@ -189,7 +207,5 @@ public class PartiteView extends AView {
 		partitePanel.repaint();	
 	}
 	
-	public JMenuItem getExit() {
-		return u.getExit();
-	}
+	
 }

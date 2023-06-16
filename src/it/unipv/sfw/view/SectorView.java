@@ -155,10 +155,16 @@ public class SectorView extends AView {
 		this.add(settori,BorderLayout.CENTER);
 
 	}
-
+	/**
+	 * @return Bottoni selezione settore.
+	 */
 	public Collection<SectorButton> getSectorButtons() {
 		return s;
 	}
+
+	/**
+	 * @return Bottone della Home.
+	 */
 	public JButton getHomeButton(){
 		return homeBtn;
 	}

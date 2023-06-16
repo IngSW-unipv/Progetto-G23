@@ -45,7 +45,7 @@ public class LoginView extends AView {
 		
 		//Inizializzazione JLabel
 		imgLabel = new JLabel();
-		JLabel userLabel = new JLabel("Username");
+		JLabel userLabel = new JLabel("Email");
 		JLabel passLabel = new JLabel("Password");
 		JLabel logLabel = new JLabel("LOGIN");
 		
@@ -64,7 +64,7 @@ public class LoginView extends AView {
 		registratiBtn = new JButton("Registrati");
 		
 		//inizializzazione ImageIcon
-		img = new ImageIcon(this.getClass().getResource("/stadio.jpg"));
+		img = new ImageIcon(this.getClass().getResource("/stadio.png"));
 		
 		//Specifiche, Layout e Font
 		contenitore.setPreferredSize(new Dimension(dim.width,((int) (dim.height-45))));

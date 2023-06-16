@@ -18,6 +18,12 @@ import it.unipv.sfw.view.AdminPartiteView;
 import it.unipv.sfw.view.buttons.UtenteButton;
 import it.unipv.sfw.view.elements.InfoMenu;
 
+/**
+ * Controller che si occupa della AdminPartiteView.
+ * @author Gabriele Invernizzi
+ * @see AController
+ * @see it.unipv.sfw.view.AdminPartiteController
+ */
 public class AdminPartiteController extends AController{
 	
 	private Partita[] p;
