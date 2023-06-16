@@ -47,7 +47,6 @@ public class AdminAddOggettoView extends AView {
 	private boolean cSubTypeShown = false;
 	private boolean rSubTypeShown = false;
 	private JTextArea descrizioneField;
-	private JFileChooser ImageSelectorPanel;
 	private JButton addImageButton;
 	private JTextField imgPath; 
 	private JSpinner anno;
