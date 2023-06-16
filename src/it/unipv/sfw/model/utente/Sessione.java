@@ -81,9 +81,9 @@ public class Sessione {
 		if (c.getType() == Utente.Type.CLIENTE) {
 			Cliente cli = (Cliente)c;
 			cli.setAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfClient(cli));
+			this.setCurrentAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfUtente(c).getTipoAbb());
 		}
 		this.setCurrentUtente(c);
-		this.setCurrentAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfUtente(c).getTipoAbb());
 	}
 	
 	/**
