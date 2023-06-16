@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietti.BigliettoMuseo;
 import it.unipv.sfw.view.elements.BigliettoRegistratoPanel;
 
 /**
@@ -26,13 +27,13 @@ public class RegistroBigliettiMuseoView extends AView {
 	private Dimension dim;
 	private JButton backButton;
 	
-	public RegistroBigliettiMuseoView(ArrayList<Biglietto> biglietti , Dimension dim) {
+	public RegistroBigliettiMuseoView(ArrayList<BigliettoMuseo> biglietti , Dimension dim) {
 		
 		this.dim = dim;
 		
 		this.setLayout(new BorderLayout());
 		
-		ArrayList<Biglietto> venduti = biglietti;
+		ArrayList<BigliettoMuseo> venduti = biglietti;
 		int nBiglietti = venduti.size();
 		
 		JLabel blue_label_up = new JLabel();
@@ -66,7 +67,7 @@ public class RegistroBigliettiMuseoView extends AView {
 		
 		double ricaviCounter = 0;
 		
-		for(Biglietto b : venduti) {
+		for(BigliettoMuseo b : venduti) {
 			ricaviCounter += b.getPrezzo();
 			BigliettoRegistratoPanel biglietto = new BigliettoRegistratoPanel(b);
 			registro.add(biglietto);

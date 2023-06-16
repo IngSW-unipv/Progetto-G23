@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import it.unipv.sfw.dao.IBigliettoMuseoDAO;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietti.BigliettoMuseo;
 import it.unipv.sfw.model.utente.Cliente;
 
 /**
@@ -26,7 +27,7 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 	private static final String SCHEMA = "BIGLIETTI_MUSEO";
 	
 	@Override
-	public boolean insertBigliettiMuseo(Biglietto ticket, int numeroPersone) throws SQLIntegrityConstraintViolationException{
+	public boolean insertBigliettiMuseo(BigliettoMuseo ticket, int numeroPersone) throws SQLIntegrityConstraintViolationException{
 		
 		PreparedStatement st1;
 		boolean esito = true;
@@ -73,9 +74,9 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 	}
 	
 	@Override
-	public ArrayList<Biglietto> selectAll() {
+	public ArrayList<BigliettoMuseo> selectAll() {
 		
-		ArrayList<Biglietto> result = new ArrayList<>();
+		ArrayList<BigliettoMuseo> result = new ArrayList<>();
 		
 		Statement st1;
 		ResultSet rs1;
@@ -91,7 +92,7 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 				Calendar cal = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 				cal.setTime(sdf.parse(str));
-				Biglietto c = new Biglietto(rs1.getString(1), rs1.getString(2), rs1.getDouble(3)* Biglietto.prezzoMuseo , cal, rs1.getTime(5));
+				BigliettoMuseo c = new BigliettoMuseo(rs1.getString(1), rs1.getString(2), rs1.getDouble(3)* BigliettoMuseo.prezzoMuseo , cal, rs1.getTime(5));
 				result.add(c);
 			}
 			

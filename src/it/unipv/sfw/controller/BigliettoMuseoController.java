@@ -18,6 +18,7 @@ import it.unipv.sfw.exceptions.EmptyTimeException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietti.BigliettoMuseo;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.BigliettoMuseoView;
@@ -71,16 +72,16 @@ public class BigliettoMuseoController extends AController {
 					calendarDate.set(Calendar.HOUR, bview.getEnteredTime().getHour());
 					calendarDate.set(Calendar.MINUTE, bview.getEnteredTime().getMinute());
 					
-					Biglietto b = new Biglietto(bview.getEnteredEmail().toLowerCase(), bview.getEnteredEmail().toLowerCase(),
+					BigliettoMuseo b = new BigliettoMuseo(bview.getEnteredEmail().toLowerCase(), bview.getEnteredEmail().toLowerCase(),
 												bview.getPrice(), calendarDate, Time.valueOf(bview.getEnteredTime()));
 					
-					HashMap<Biglietto, Integer> bigliettoScelte = new HashMap<Biglietto, Integer>();
+					HashMap<BigliettoMuseo, Integer> bigliettoScelte = new HashMap<BigliettoMuseo, Integer>();
 					bigliettoScelte.put(b, (int) bview.getTotalPeople().getSelectedItem());
 					Sessione.getIstance().setCurrentBiglietto(bigliettoScelte);
 					
 					
 					DAOFactory.createIBigliettoMuseoDAO().insertBigliettiMuseo(
-							new Biglietto(
+							new BigliettoMuseo(
 								Sessione.getIstance().getCurrentUtente().getEmail(),
 								bview.getEnteredEmail().toLowerCase(),
 								bview.getPrice(),

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietti.BigliettoMuseo;
 
 /**
  * Classe che rappresenta il pannello contenente le informazioni
@@ -19,7 +20,7 @@ import it.unipv.sfw.model.biglietti.Biglietto;
  */
 public class BigliettoRegistratoPanel extends JPanel {
 
-	public BigliettoRegistratoPanel(Biglietto b) {
+	public BigliettoRegistratoPanel(BigliettoMuseo b) {
 		
 		JPanel tabelPanel = new JPanel();
 		tabelPanel.setLayout(new GridLayout(2, 2, 0, 5));

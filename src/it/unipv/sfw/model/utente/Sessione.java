@@ -2,6 +2,7 @@ package it.unipv.sfw.model.utente;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.AccountAlreadyExistsException;
@@ -14,6 +15,7 @@ import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.abbonamento.Abbonamento;
 import it.unipv.sfw.model.abbonamento.TipoAbb;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietti.BigliettoMuseo;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.Merchandising;
@@ -36,7 +38,7 @@ public class Sessione {
 	private Pair<Merchandising, Integer> merchAdmin;
 	private Partita currentPartita;
 	private Utente currentUtente;
-	private HashMap<Biglietto, Integer> currentBiglietto;
+	private HashMap<BigliettoMuseo, Integer> currentBiglietto;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
 	private TipoAbb abbToUpdate;
 
@@ -150,10 +152,10 @@ public class Sessione {
 		return currentUtente;
 	}
 	
-	public Biglietto getCurrentBiglietto() {
-		Biglietto b = new Biglietto();
+	public BigliettoMuseo getCurrentBiglietto() {
+		BigliettoMuseo b = new BigliettoMuseo();
 		
-		for(Map.Entry<Biglietto, Integer> entry: currentBiglietto.entrySet()) {
+		for(Entry<BigliettoMuseo, Integer> entry: currentBiglietto.entrySet()) {
 			b = entry.getKey();
 		}
 		
@@ -163,7 +165,7 @@ public class Sessione {
 	public int getNBiglietti() {
 		int n = 0;
 		
-		for(Map.Entry<Biglietto, Integer> entry: currentBiglietto.entrySet()) {
+		for(Entry<BigliettoMuseo, Integer> entry: currentBiglietto.entrySet()) {
 			n = entry.getValue();
 		}
 		
@@ -186,7 +188,7 @@ public class Sessione {
 		this.abbToUpdate = abbToUpdate;
 	}
 	
-	public void setCurrentBiglietto(HashMap<Biglietto, Integer> currentBiglietto) {
+	public void setCurrentBiglietto(HashMap<BigliettoMuseo, Integer> currentBiglietto) {
 		this.currentBiglietto = currentBiglietto;
 	}
 	

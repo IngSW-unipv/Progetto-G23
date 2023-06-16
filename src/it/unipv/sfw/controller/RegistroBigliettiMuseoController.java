@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import it.unipv.sfw.controller.AController.Type;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietti.BigliettoMuseo;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.RegistroBigliettiMuseoView;
 
@@ -23,7 +24,7 @@ public class RegistroBigliettiMuseoController extends AController {
 	@Override
 	public void initialize(Dimension dim) {
 		
-		ArrayList<Biglietto> biglietti = DAOFactory.createIBigliettoMuseoDAO().selectAll();
+		ArrayList<BigliettoMuseo> biglietti = DAOFactory.createIBigliettoMuseoDAO().selectAll();
 		
 		RegistroBigliettiMuseoView rview = new RegistroBigliettiMuseoView(biglietti, dim);
 		

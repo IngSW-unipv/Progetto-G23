@@ -29,6 +29,7 @@ import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 import it.unipv.sfw.exceptions.EmptyDateException;
 import it.unipv.sfw.exceptions.EmptyTimeException;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietti.BigliettoMuseo;
 import it.unipv.sfw.model.utente.Sessione;
 
 /**
@@ -245,7 +246,7 @@ public class BigliettoMuseoView extends AView {
 		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		numero.setSelectedIndex(0);
-		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
+		setPrice((int)numero.getSelectedItem()*BigliettoMuseo.prezzoMuseo);
 		contenitore.repaint();
 	}
 	
@@ -259,7 +260,7 @@ public class BigliettoMuseoView extends AView {
 		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		numero.setSelectedIndex(0);
-		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
+		setPrice((int)numero.getSelectedItem()*BigliettoMuseo.prezzoMuseo);
 		contenitore.repaint();
 	}
 	
@@ -273,7 +274,7 @@ public class BigliettoMuseoView extends AView {
 		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		numero.setSelectedIndex(0);
-		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
+		setPrice((int)numero.getSelectedItem()*BigliettoMuseo.prezzoMuseo);
 		contenitore.repaint();
 	}
 	
@@ -287,7 +288,7 @@ public class BigliettoMuseoView extends AView {
 		email_box.setText(Sessione.getIstance().getCurrentUtente().getEmail());
 		chDate.setDateTimeStrict(null);
 		numero.setSelectedIndex(0);
-		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
+		setPrice((int)numero.getSelectedItem()*BigliettoMuseo.prezzoMuseo);
 		contenitore.repaint();
 	}
 	
@@ -396,7 +397,7 @@ public class BigliettoMuseoView extends AView {
 		dataError.setVisible(false);
 		emailError.setVisible(false);
 		numero.setSelectedIndex(0);
-		setPrice((int)numero.getSelectedItem()*Biglietto.prezzoMuseo);
+		setPrice((int)numero.getSelectedItem()*BigliettoMuseo.prezzoMuseo);
 	}
 
 }

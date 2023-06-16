@@ -14,7 +14,7 @@ public class BigliettoPartita extends Biglietto {
 	private boolean visibilita;
 	
 	public BigliettoPartita(String email, double prezzo, Calendar data, Time ora, Calendar dataDisponibilita) {
-		super(email, null, prezzo, data, ora);
+		super(email, prezzo, data, ora);
 		this.dataDisponibilita = new GregorianCalendar();
 		this.dataDisponibilita = dataDisponibilita;
 		this.visibilita = false;
