@@ -64,10 +64,16 @@ public class Cimelio {
 		this.tipo = "" + tipo;
 	}
 	
+	/**
+	 * @param id Id del cimelio.
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
+	/**
+	 * @return L'id del cimelio.
+	 */
 	public int getId() {
 		return id;
 	}
@@ -79,22 +85,38 @@ public class Cimelio {
 		return tipo;
 	}
 
+	/**
+	 * @return L'anno del cimelio.
+	 */
 	public int getAnno() {
 		return anno;
 	}
 
+	/**
+	 * Funzione utilizzata per cambiare l'anno del cimelio.
+	 * @param anno
+	 */
 	public void setAnno(int anno) {
 		this.anno = anno;
 	}
 
+	/**
+	 * @return Id dell'immagine del cimelio.
+	 */
 	public String getImgid() {
 		return imgid;
 	}
 
+	/**
+	 * @param imgid Id dell'immagine da settare per il cimelio.
+	 */
 	public void setImgid(String imgid) {
 		this.imgid = imgid;
 	}
 	
+	/**
+	 * @return Il tipo di Cimelio.
+	 */
 	public static TipoCimelio[] getTipoCimelio() {
 		return Cimelio.TipoCimelio.values();
 	}

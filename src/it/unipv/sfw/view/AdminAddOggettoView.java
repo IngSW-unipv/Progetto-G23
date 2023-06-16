@@ -42,7 +42,7 @@ public class AdminAddOggettoView extends AView {
 	private JComboBox<String> selectNewObjectType;
 	private JPanel sottoTipoPanel;
 	TipoCimelio[] sottoTipiCimelio = Cimelio.getTipoCimelio();
-	TipoRiconoscimento[] sottoTipiRiconoscimento = Riconoscimento.getTipoCimelio();
+	TipoRiconoscimento[] sottoTipiRiconoscimento = Riconoscimento.getTipoRiconoscimento();
 	private JComboBox<String> selectObjectSubType;
 	private boolean cSubTypeShown = false;
 	private boolean rSubTypeShown = false;

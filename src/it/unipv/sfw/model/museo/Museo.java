@@ -36,10 +36,16 @@ public class Museo {
 		riconoscimenti = DAOFactory.createIRiconoscimentoDAO().selectAll();
 	}
 	
+	/**
+	 * @param ric ArrayList di riconoscimenti da inserire nel museo.
+	 */
 	public void setRiconsocimenti(ArrayList<Riconoscimento> ric) {
 		this.riconoscimenti = ric;
 	}
 	
+	/**
+	 * @param ric ArrayList di cimeli da inserire nel museo.
+	 */
 	public void setCimeli(ArrayList<Cimelio> cim) {
 		this.cimeli = cim;
 	}

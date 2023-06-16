@@ -49,18 +49,31 @@ public class Merchandising implements Comparable<Merchandising> {
 		return prezzo;
 	}
 	
+	/**
+	 * @return Il nome dell'item.
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * @return L'id dell'item.
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * Metodo che cambia la descrizione dell'item.
+	 * @param descrizione Descrizione da associare all'item.
+	 */
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
 	
+	/**
+	 * @return La descrizione dell'item.
+	 */
 	public String getDescrizione() {
 		return descrizione;
 	}

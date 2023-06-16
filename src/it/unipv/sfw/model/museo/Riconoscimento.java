@@ -34,6 +34,7 @@ public class Riconoscimento {
 		this.imgid = imgid;
 	}
 	
+	//costruttore per admin
 	public Riconoscimento(int anno, String descrizione, TipoRiconoscimento tipo, String imgid) {
 		this.anno = anno;
 		this.descrizione = descrizione;
@@ -64,10 +65,16 @@ public class Riconoscimento {
 		this.tipo = "" + tipo;
 	}
 	
+	/**
+	 * @return L'id del riconoscimento.
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * @param id Id del riconoscimento.
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -94,15 +101,24 @@ public class Riconoscimento {
 		return anno;
 	}
 
+	/**
+	 * @return Id dell'immagine del riconoscimento.
+	 */
 	public String getImgid() {
 		return imgid;
 	}
 
+	/**
+	 * @param imgid Id dell'immagine da settare per il riconoscimento.
+	 */
 	public void setImgid(String imgid) {
 		this.imgid = imgid;
 	}
 	
-	public static TipoRiconoscimento[] getTipoCimelio() {
+	/**
+	 * @return Il tipo di Riconoscimento.
+	 */
+	public static TipoRiconoscimento[] getTipoRiconoscimento() {
 		return Riconoscimento.TipoRiconoscimento.values();
 	}
 	

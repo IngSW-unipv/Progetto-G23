@@ -57,6 +57,9 @@ public abstract class Utente {
 		this.password = pass;
 	}
 	
+	/**
+	 * @return La password dell'utente.
+	 */
 	public String getPassword() {
 		return this.password;
 	}

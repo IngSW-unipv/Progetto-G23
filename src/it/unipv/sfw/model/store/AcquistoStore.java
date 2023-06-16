@@ -21,26 +21,44 @@ public class AcquistoStore {
 		this.setQuantita(quantita);
 	}
 
+	/**
+	 * @return L'item acquistato.
+	 */
 	public Merchandising getItem() {
 		return item;
 	}
 
+	/**
+	 * @param item Item da mettere nell'acquisto.
+	 */
 	public void setItem(Merchandising item) {
 		this.item = item;
 	}
 
+	/**
+	 * @return L'utente che ha effettuato l'acquisto.
+	 */
 	public Utente getBuyer() {
 		return buyer;
 	}
 
+	/**
+	 * @param buyer L'utente che effettua l'acquisto.
+	 */
 	public void setBuyer(Utente buyer) {
 		this.buyer = buyer;
 	}
 
+	/**
+	 * @return La quantità di item acquistata.
+	 */
 	public int getQuantita() {
 		return quantita;
 	}
 
+	/**
+	 * @param quantita Quantità di item acquistata.
+	 */
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
 	}
