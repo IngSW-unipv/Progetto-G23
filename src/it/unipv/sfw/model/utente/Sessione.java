@@ -81,16 +81,18 @@ public class Sessione {
 		if (c.getType() == Utente.Type.CLIENTE) {
 			Cliente cli = (Cliente)c;
 			cli.setAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfClient(cli));
+			this.setCurrentUtente(c);
 			this.setCurrentAbb(DAOFactory.createIAbbonamentoDAO().selectAbbonamentoOfUtente(c).getTipoAbb());
+		} else {
+			this.setCurrentUtente(c);
 		}
-		this.setCurrentUtente(c);
 	}
 	
 	/**
 	 * Funzione che inserisce un nuovo cliente nel database ed esegue il login.
 	 * @param c Cliente da registrare.
 	 * @throws AccountAlreadyExistsException.
-	 * @throws EmptyFieldException.
+	 * @throws EmptyFieldException
 	 * @throws WrongEmailFormatException.
 	 */
 	public void register(Cliente c)

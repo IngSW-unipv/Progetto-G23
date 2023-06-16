@@ -7,6 +7,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -38,10 +39,13 @@ import it.unipv.sfw.view.elements.CartItemPanel;
 
 public class PagamentoController extends AController{
 
+	ArrayList<Carta> carteDisp;
+	
 	@Override
 	public void initialize(Dimension dim) {
 		
-		PagamentoView v = new PagamentoView(dim);
+		riempiCarte();
+		PagamentoView v = new PagamentoView(dim, carteDisp);
 		
 		v.getBackBtn().addActionListener(new ActionListener() {	
 			@Override
@@ -58,7 +62,7 @@ public class PagamentoController extends AController{
 			}
 		});
 		
-		if(v.riempiCarte() == true) {
+		if(carteIsEmpty() == false) {
 			
 			v.getCarte().addActionListener(new ActionListener() {
 				
@@ -164,6 +168,15 @@ public class PagamentoController extends AController{
 	@Override
 	public Type getType() {
 		return Type.PAGAMENTO;
+	}
+	
+	private void riempiCarte() {
+		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(Sessione.getIstance().getCurrentUtente());
+		
+	}
+	
+	public boolean carteIsEmpty() {
+		return carteDisp.isEmpty();
 	}
 
 }

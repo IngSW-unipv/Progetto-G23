@@ -26,12 +26,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
+import it.unipv.sfw.controller.PagamentoController;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyDateException;
 import it.unipv.sfw.exceptions.EmptyNameException;
 import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
 import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
@@ -49,10 +51,13 @@ public class PagamentoView extends AView{
 	private JComboBox <Integer> meseOp, annoOp;
 	private JLabel nomeErr, cognomeErr, numeroErr, scadenzaErr, cvvErr;
 	private int tipoErr; // 0 - nome, 1 - cognome, 2 - entrambi
-	private ArrayList <Carta> carteDisp = new ArrayList<>();
 	private JComboBox <String> cartaOp;
+	private ArrayList<Carta> carteDisp;
 	
-	public PagamentoView(Dimension dim) {
+	public PagamentoView(Dimension dim, ArrayList<Carta> carte) {
+		
+		carteDisp = carte;
+		
 		// Fonts
 		Font shortFont = new Font("Arial", 1, 14);
 		Font mediumFont = new Font("Arial", 1, 16);
@@ -112,7 +117,7 @@ public class PagamentoView extends AView{
 			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
 			break;
 		case 3:
-			prezzo = 50;
+			prezzo = Partita.PREZZO;
 			break;
 		default:
 			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
@@ -219,7 +224,7 @@ public class PagamentoView extends AView{
 		infoPanel.add(selectScadenza);
 		infoPanel.add(cvvPanel);
 		infoPanel.add(cvvTxt);
-		if(riempiCarte() == true) {
+		if(carteDisp.isEmpty() == false) {
 			String [] numeri = new String[99];
 			for(int i=0; i<carteDisp.size(); i++) {
 				numeri[i] = "" + carteDisp.get(i).getnCartaCredito();
@@ -288,14 +293,6 @@ public class PagamentoView extends AView{
 				annoOp.setSelectedItem(carteDisp.get(i).getAnnoScadenza());
 			}
 		}
-	}
-	
-	public boolean riempiCarte() {
-		boolean flag = true;
-		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(Sessione.getIstance().getCurrentUtente());
-		
-		if(carteDisp.isEmpty()) flag = false;
-		return flag;
 	}
 	
 	public void setTipoErr(int tipoErr) {

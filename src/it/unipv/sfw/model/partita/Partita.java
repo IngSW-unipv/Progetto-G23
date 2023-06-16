@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 public class Partita {
 
 	private final String casa = "Inter";
+	public static final double PREZZO = 50.0;
 
 	/**
 	 * Enumerazione che descrive le squadre.
