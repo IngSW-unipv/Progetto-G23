@@ -77,6 +77,11 @@ public class AdminAddPartiteView extends AView {
 			}
 		}
 		
+		JPanel selezionesquadra=new JPanel();
+		
+		selezionesquadra.setPreferredSize(new Dimension(dim.width,dim.height/3));
+		selezionesquadra.setLayout(new GridLayout(2,10));
+		
 		for(int i=0;i<19;i++) {
 			nomesquadra.get(i).setHorizontalAlignment((int) CENTER_ALIGNMENT);
 			sceltasquadra.add(new SquadraButton(imgStemma.get(i),false));
@@ -85,31 +90,9 @@ public class AdminAddPartiteView extends AView {
 			squadra.get(i).add(sceltasquadra.get(i),BorderLayout.CENTER);
 			squadra.get(i).add(nomesquadra.get(i),BorderLayout.SOUTH);
 			squadra.get(i).setBorder(BorderFactory.createLineBorder(Color.black,5));
+			selezionesquadra.add(squadra.get(i));
 		}
 		
-		JPanel selezionesquadra=new JPanel();
-		
-		selezionesquadra.setPreferredSize(new Dimension(dim.width,dim.height/3));
-		selezionesquadra.setLayout(new GridLayout(2,10));
-		selezionesquadra.add(squadra.get(0));
-		selezionesquadra.add(squadra.get(1));
-		selezionesquadra.add(squadra.get(2));
-		selezionesquadra.add(squadra.get(3));
-		selezionesquadra.add(squadra.get(4));
-		selezionesquadra.add(squadra.get(5));
-		selezionesquadra.add(squadra.get(6));
-		selezionesquadra.add(squadra.get(7));
-		selezionesquadra.add(squadra.get(8));
-		selezionesquadra.add(squadra.get(9));
-		selezionesquadra.add(squadra.get(10));
-		selezionesquadra.add(squadra.get(11));
-		selezionesquadra.add(squadra.get(12));
-		selezionesquadra.add(squadra.get(13));
-		selezionesquadra.add(squadra.get(14));
-		selezionesquadra.add(squadra.get(15));
-		selezionesquadra.add(squadra.get(16));
-		selezionesquadra.add(squadra.get(17));
-		selezionesquadra.add(squadra.get(18));
 		selezionesquadra.setBorder(BorderFactory.createEmptyBorder(20,0,20,0));
 		selezionesquadra.setBackground(Color.black);
 		
