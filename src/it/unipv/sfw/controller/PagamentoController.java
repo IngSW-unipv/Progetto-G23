@@ -194,7 +194,7 @@ public class PagamentoController extends AController {
 						else
 							a.sendEmail(messaggio);
 					} catch (MessagingException err) {
-						System.out.println("Email non valida");
+						err.printStackTrace();
 					}
 
 					ControllerManager.getInstance().loadController(Type.PARTITE);

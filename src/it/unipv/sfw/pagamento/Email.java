@@ -130,23 +130,19 @@ public class Email {
 	}
 
 	public void sendEmail(String messaggio, String destinatario) throws MessagingException {
-		try {
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
-			if (Sessione.getIstance().getCurrentPagamento() == 1)
-				message.setSubject("Pagamento store StadiumSystem");
-			else if (Sessione.getIstance().getCurrentPagamento() == 2)
-				message.setSubject("Pagamento biglietto museo StadiumSystem");
-			else if (Sessione.getIstance().getCurrentPagamento() == 3)
-				message.setSubject("Pagamento biglietto partita StadiumSystem");
-			else
-				message.setSubject("Pagamento abbonamento");
-			message.setContent(messaggio, "text/plain");
-			Transport.send(message);
-		} catch (MessagingException e) {
-			throw new MessagingException();
-		}
+		Message message = new MimeMessage(session);
+		message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+		if (Sessione.getIstance().getCurrentPagamento() == 1)
+			message.setSubject("Pagamento store StadiumSystem");
+		else if (Sessione.getIstance().getCurrentPagamento() == 2)
+			message.setSubject("Pagamento biglietto museo StadiumSystem");
+		else if (Sessione.getIstance().getCurrentPagamento() == 3)
+			message.setSubject("Pagamento biglietto partita StadiumSystem");
+		else
+			message.setSubject("Pagamento abbonamento");
+		message.setContent(messaggio, "text/plain");
+		Transport.send(message);
 	}
 
 	public String spaziatura(String stringa) {

@@ -3,6 +3,8 @@ package it.unipv.sfw.dao.mysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,6 +50,8 @@ public class ClienteDAO implements IClienteDAO {
 
 			st1.executeUpdate();
 
+		} catch (SQLIntegrityConstraintViolationException e) {
+			esito = false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			esito = false;
