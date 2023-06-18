@@ -26,7 +26,6 @@ public class AdminStoreAcquistoPanel extends JPanel {
 
 		// Fonts
 		Font mediumFont = new Font("Arial", 1, 16);
-		// Font largeFont = new Font("Arial", 1, 18);
 		Font smallFont = new Font("Arial", 1, 11);
 
 		JLabel item_name = new JLabel(a.getItem().getTipoMerch().toString());
@@ -40,7 +39,6 @@ public class AdminStoreAcquistoPanel extends JPanel {
 		JPanel item_data = new JPanel();
 		item_data.setLayout(new GridLayout(3, 1));
 		item_data.setBorder(new EmptyBorder(0, 3, 0, 0));
-		item_data.setPreferredSize(new Dimension(280, 50));
 		item_data.setMinimumSize(new Dimension(280, 50));
 		item_data.add(item_name);
 		item_data.add(item_price);
@@ -49,10 +47,15 @@ public class AdminStoreAcquistoPanel extends JPanel {
 		accountPanel.setLayout(new BoxLayout(accountPanel, BoxLayout.Y_AXIS));
 		accountPanel.setBorder(new EmptyBorder(5, 0, 0, 3));
 
-		JLabel accountStr = new JLabel("Acquistato da: " + a.getBuyer().getEmail());
+		JLabel acquistatoLabel = new JLabel("Acquistato da:");
+		acquistatoLabel.setFont(smallFont);
+		JLabel accountStr = new JLabel(a.getBuyer().getEmail());
 		accountStr.setFont(smallFont);
+		
+		accountPanel.add(acquistatoLabel);
 		accountPanel.add(accountStr);
 
+		this.setPreferredSize(new Dimension(360, 50));
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.add(item_data, BorderLayout.WEST);
