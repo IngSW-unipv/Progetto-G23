@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 import it.unipv.sfw.model.partita.Partita.Squadre;
 import it.unipv.sfw.view.buttons.SquadraButton;
@@ -47,8 +48,12 @@ public class AdminAddPartiteView extends AView {
 		squadra = new ArrayList<>();
 		imgStemma = new ArrayList<>();
 		sceltasquadra = new ArrayList<>();
-		data = new DatePicker();
+		
+		DatePickerSettings dateSettings = new DatePickerSettings();
+		data = new DatePicker(dateSettings);
 		data.setDateToToday();
+		dateSettings.setDateRangeLimits(LocalDate.now().plusDays(1), LocalDate.now().plusDays(70));
+		
 		orario = new JComboBox<>(opzioni);
 
 		JLabel titolo = new JLabel("AGGIUNGI UNA PARTITA");
