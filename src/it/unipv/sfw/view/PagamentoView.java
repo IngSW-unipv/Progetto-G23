@@ -233,62 +233,107 @@ public class PagamentoView extends AView {
 		this.add(centralPanel, BorderLayout.CENTER);
 	}
 
+	/**
+	 * @return anno di scadenza della carta.
+	 */
 	public int getAnno() {
 		return (int) annoOp.getSelectedItem();
 	}
 
+	/**
+	 * @return Bottone per tornare indietro.
+	 */
 	public JButton getBackBtn() {
 		return backBtn;
 	}
 
+	/**
+	 * @return Bottone per caricare la carta.
+	 */
 	public JButton getCarte() {
 		return carteBtn;
 	}
 
+	/**
+	 * @return cognome del proprietario della carta.
+	 */
 	public String getCognome() {
 		return cognomeTxt.getText();
 	}
 
+	/**
+	 * @return JTextField con il cognome.
+	 */
 	public JTextField getCognomeTxt() {
 		return cognomeTxt;
 	}
 
+	/**
+	 * @return cvv della carta.
+	 */
 	public int getCvv() {
 		return Integer.parseInt(cvvTxt.getText());
 	}
 
+	/**
+	 * @return JTextField con il cvv.
+	 */
 	public JTextField getCvvTxt() {
 		return cvvTxt;
 	}
 
+	/**
+	 * @return mese di scadenza della carta.
+	 */
 	public int getMese() {
 		return (int) meseOp.getSelectedItem();
 	}
 
+	/**
+	 * @return numero della carta.
+	 */
 	public long getNCarta() {
 		return Long.parseLong(nCartaTxt.getText());
 	}
 
+	/**
+	 * @return JTextField con il numero.
+	 */
 	public JTextField getnCartaTxt() {
 		return nCartaTxt;
 	}
 
+	/**
+	 * @return nome del proprietario della carta.
+	 */
 	public String getNome() {
 		return nomeTxt.getText();
 	}
 
+	/**
+	 * @return JTextField con il nome.
+	 */
 	public JTextField getNomeTxt() {
 		return nomeTxt;
 	}
 
+	/**
+	 * @return Bottone per proseguire con il pagamento.
+	 */
 	public JButton getOkBtn() {
 		return okBtn;
 	}
 
+	/**
+	 * @return JCheckBox per salvare la carta.
+	 */
 	public JCheckBox getsalvaCB() {
 		return salvaCb;
 	}
 
+	/**
+	 * @return tipo di errore.
+	 */
 	public int getTipoErr() {
 		return tipoErr;
 	}
@@ -304,6 +349,9 @@ public class PagamentoView extends AView {
 		btnsPanel.repaint();
 	}
 
+	/**
+	 * ricarica la view.
+	 */
 	public void reLoad() {
 		nomeErr.setVisible(false);
 		cognomeErr.setVisible(false);
@@ -311,6 +359,9 @@ public class PagamentoView extends AView {
 		cvvErr.setVisible(false);
 	}
 
+	/**
+	 * Carica le carte dal database.
+	 */
 	public boolean riempiCarte() {
 		boolean flag = true;
 		carteDisp = DAOFactory.createICartaPagamentoDAO().selectByUtente(u);
@@ -320,6 +371,9 @@ public class PagamentoView extends AView {
 		return flag;
 	}
 
+	/**
+	 * Usa una carta salvata.
+	 */
 	public void setCarta() {
 		for (Carta element : carteDisp) {
 			if (element.getnCartaCreditoStr().equals(cartaOp.getSelectedItem())) {
@@ -332,22 +386,37 @@ public class PagamentoView extends AView {
 		}
 	}
 
+	/**
+	 * Cambia il tipo di errore.
+	 */
 	public void setTipoErr(int tipoErr) {
 		this.tipoErr = tipoErr;
 	}
-
+	
+	/**
+	 * Mostra l'errore legato al cvv.
+	 */
 	public void upCvvErr() {
 		cvvErr.setVisible(true);
 	}
 
+	/**
+	 * Mostra l'errore legato al nome.
+	 */
 	public void upNameErr() {
 		nomeErr.setVisible(true);
 	}
 
+	/**
+	 * Mostra l'errore legato al numero.
+	 */
 	public void upNumberErr() {
 		numeroErr.setVisible(true);
 	}
 
+	/**
+	 * Mostra l'errore legato al cognome.
+	 */
 	public void upSurnameErr() {
 		cognomeErr.setVisible(true);
 	}

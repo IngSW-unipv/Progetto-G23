@@ -24,6 +24,9 @@ public interface IBigliettoMuseoDAO {
 	boolean insertBigliettiMuseo(BigliettoMuseo ticket, int numeroPersone)
 			throws SQLIntegrityConstraintViolationException;
 
+	/**
+	 * Rimuove l'ultimo biglietto registrato nel database.
+	 */
 	void removeLast();
 
 	/**

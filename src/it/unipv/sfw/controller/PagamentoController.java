@@ -27,6 +27,11 @@ import it.unipv.sfw.pagamento.Carta;
 import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
 
+/**
+ * Controller che si occupa del pagamento.
+ *
+ * @author Lorenzo Reale
+ */
 public class PagamentoController extends AController {
 
 	public void checkEnteredCvv() throws WrongCvvException {
@@ -224,6 +229,13 @@ public class PagamentoController extends AController {
 		view = v;
 	}
 
+	/**
+	 * Controlla che la stringa passata sia un numero.
+	 * 
+	 * @param str_in Strniga da controllare.
+	 * 
+	 * @return True se è un numero, False atrimenti.
+	 */
 	public boolean isNumber(String str_in) {
 		final Predicate<String> isNum = (str) -> str.chars().allMatch((c) -> Character.isDigit(c));
 		return (isNum.test(str_in) && str_in.charAt(0) != '0');

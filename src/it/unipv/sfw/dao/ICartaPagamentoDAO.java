@@ -23,10 +23,13 @@ public interface ICartaPagamentoDAO {
 	boolean insertCarta(Carta carta, Utente c) throws SQLIntegrityConstraintViolationException;
 
 	/**
-	 * @return Un arrayList che contiene tutte le carte possedute da un certo utente
-	 *         registrate nel database.
+	 * @return Un arrayList che contiene tutte le carte registrate nel database.
 	 */
 	ArrayList<Carta> selectAll();
 
+	/**
+	 * @return Un arrayList che contiene tutte le carte possedute da un certo utente
+	 *         registrate nel database.
+	 */
 	ArrayList<Carta> selectByUtente(Utente c);
 }
