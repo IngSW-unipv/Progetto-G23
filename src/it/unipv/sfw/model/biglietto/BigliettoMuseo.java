@@ -1,4 +1,4 @@
-package it.unipv.sfw.model.biglietti;
+package it.unipv.sfw.model.biglietto;
 
 import java.sql.Time;
 import java.util.Calendar;

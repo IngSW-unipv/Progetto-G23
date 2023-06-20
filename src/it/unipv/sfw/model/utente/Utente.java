@@ -21,26 +21,10 @@ public abstract class Utente {
 		ADMIN, CLIENTE
 	}
 
-	/**
-	 * Controlla che l'email passata sia valida.
-	 *
-	 * @param email
-	 * @throws WrongEmailFormatException
-	 */
-	public static void checkEmail(String email) throws WrongEmailFormatException {
-		final Predicate<String> isEmail = Pattern
-				.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE).asPredicate();
-
-		if ((!isEmail.test(email)) || email.length() > 255) {
-			throw new WrongEmailFormatException(email);
-		}
-	}
-
 	protected String nome;
 	protected String cognome;
 	protected String email;
 	protected String password;
-	protected String s;
 
 	protected Calendar dataNascita;
 
@@ -77,6 +61,21 @@ public abstract class Utente {
 			throw new EmptyFieldException();
 		// Controlla formato email
 		checkEmail(email);
+	}
+	
+	/**
+	 * Controlla che l'email passata sia valida.
+	 *
+	 * @param email
+	 * @throws WrongEmailFormatException
+	 */
+	public static void checkEmail(String email) throws WrongEmailFormatException {
+		final Predicate<String> isEmail = Pattern
+				.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", Pattern.CASE_INSENSITIVE).asPredicate();
+
+		if ((!isEmail.test(email)) || email.length() > 255) {
+			throw new WrongEmailFormatException(email);
+		}
 	}
 
 	/**

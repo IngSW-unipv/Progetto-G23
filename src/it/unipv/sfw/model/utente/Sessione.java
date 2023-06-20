@@ -13,8 +13,8 @@ import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
 import it.unipv.sfw.exceptions.WrongPasswordException;
 import it.unipv.sfw.model.abbonamento.Abbonamento;
-import it.unipv.sfw.model.abbonamento.TipoAbb;
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.abbonamento.AbbType;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.Merchandising;
@@ -51,8 +51,7 @@ public class Sessione {
 	private Utente currentUtente;
 	private HashMap<BigliettoMuseo, Integer> currentBiglietto;
 	private int currentPagamento; // 0 - niente, 1 - carrello, 2 - museo, 3 - partita, 4 - abbonamento
-
-	private TipoAbb abbToUpdate;
+	private AbbType abbToUpdate;
 
 	private Sessione() {
 		merchAdmin = null;
@@ -88,9 +87,9 @@ public class Sessione {
 	}
 
 	/**
-	 * @return {@link TipoAbb} della sessione corrente.
+	 * @return {@link AbbType} della sessione corrente.
 	 */
-	public TipoAbb getAbbToUpdate() {
+	public AbbType getAbbToUpdate() {
 		return abbToUpdate;
 	}
 
@@ -116,7 +115,7 @@ public class Sessione {
 	}
 
 	/**
-	 * @return {@link TipoAbb}.
+	 * @return {@link AbbType}.
 	 */
 	public Abbonamento getCurrentAbb() {
 		if (currentUtente.getType() == Utente.Type.CLIENTE)
@@ -188,9 +187,9 @@ public class Sessione {
 	}
 
 	/**
-	 * @return {@link TipoAbb}.
+	 * @return {@link AbbType}.
 	 */
-	public TipoAbb getTipoAbb() {
+	public AbbType getTipoAbb() {
 		return this.getCurrentAbb().getTipoAbb();
 	}
 
@@ -265,12 +264,12 @@ public class Sessione {
 	}
 
 	/**
-	 * Funzione che permette di impostare come {@link TipoAbb} corrente quello
+	 * Funzione che permette di impostare come {@link AbbType} corrente quello
 	 * passato come parametro.
 	 *
 	 * @param abbToUpdate
 	 */
-	public void setAbbToUpdate(TipoAbb abbToUpdate) {
+	public void setAbbToUpdate(AbbType abbToUpdate) {
 		this.abbToUpdate = abbToUpdate;
 	}
 
@@ -300,12 +299,12 @@ public class Sessione {
 	}
 
 	/**
-	 * Funzione che permette di impostare come {@link TipoAbb} corrente quello
+	 * Funzione che permette di impostare come {@link AbbType} corrente quello
 	 * passato come parametro.
 	 *
 	 * @param currentAbb Tipo di abbonamento corrente.
 	 */
-	public void setCurrentAbb(TipoAbb currentAbb) {
+	public void setCurrentAbb(AbbType currentAbb) {
 		this.getCurrentAbb().setTipoAbb(currentAbb);
 	}
 

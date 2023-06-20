@@ -12,13 +12,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import it.unipv.sfw.dao.IBigliettoMuseoDAO;
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.model.biglietto.Biglietto}.
  *
  * @author Federico Romano
- * @see it.unipv.sfw.model.biglietti.Biglietto
+ * @see it.unipv.sfw.model.biglietto.Biglietto
  */
 public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 

@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import it.unipv.sfw.dao.IClienteDAO;
-import it.unipv.sfw.model.abbonamento.TipoAbb;
+import it.unipv.sfw.model.abbonamento.AbbType;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente.Type;
 
@@ -81,7 +81,7 @@ public class ClienteDAO implements IClienteDAO {
 				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 				cal.setTime(sdf.parse(str));
 				Cliente c = new Cliente(rs1.getString(2), rs1.getString(3), rs1.getString(1), rs1.getString(4), cal);
-				c.abbona(TipoAbb.valueOf(rs1.getString(5)));
+				c.abbona(AbbType.valueOf(rs1.getString(5)));
 				result.add(c);
 			}
 
@@ -115,7 +115,7 @@ public class ClienteDAO implements IClienteDAO {
 				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH);
 				cal.setTime(sdf.parse(str));
 				result = new Cliente(rs1.getString(2), rs1.getString(3), rs1.getString(1), rs1.getString(4), cal);
-				result.abbona(TipoAbb.valueOf(rs1.getString(5)));
+				result.abbona(AbbType.valueOf(rs1.getString(5)));
 			}
 
 		} catch (Exception e) {

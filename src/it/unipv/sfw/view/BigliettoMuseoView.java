@@ -28,7 +28,7 @@ import com.github.lgooddatepicker.components.TimePickerSettings.TimeIncrement;
 
 import it.unipv.sfw.exceptions.EmptyDateException;
 import it.unipv.sfw.exceptions.EmptyTimeException;
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 import it.unipv.sfw.model.utente.Sessione;
 
 /**

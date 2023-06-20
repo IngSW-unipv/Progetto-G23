@@ -8,6 +8,6 @@ package it.unipv.sfw.model.abbonamento;
  * @see Abbonamento
  * @see it.unipv.sfw.model.utente.Cliente
  */
-public enum TipoAbb {
+public enum AbbType {
 	LIV0, LIV1, LIV2, LIV3;
 }
