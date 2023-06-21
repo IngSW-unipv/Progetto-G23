@@ -21,6 +21,9 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
+import it.unipv.sfw.exceptions.EmptyDateException;
+import it.unipv.sfw.exceptions.EmptyFieldException;
+import it.unipv.sfw.exceptions.EmptyTimeException;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Cimelio.TipoCimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
@@ -46,6 +49,7 @@ public class AdminAddOggettoView extends AView {
 	private JButton addImageButton;
 	private JTextField imgPath;
 	private JSpinner anno;
+	private JLabel EmptyErrorLabel;
 	private JButton aggiungiButton, backButton;
 
 	public AdminAddOggettoView() {
@@ -178,7 +182,7 @@ public class AdminAddOggettoView extends AView {
 
 		// 3
 		JPanel lastRowContainer = new JPanel();
-		lastRowContainer.setLayout(new GridLayout(1, 2, 200, 0));
+		lastRowContainer.setLayout(new GridLayout(2, 2, 200, 0));
 
 		// 3.1
 		JPanel annoPanel = new JPanel();
@@ -203,8 +207,15 @@ public class AdminAddOggettoView extends AView {
 		aggiungiButton.setBackground(Color.WHITE);
 		aggiungiButton.setPreferredSize(new Dimension(200, 50));
 
+		// 3.4
+		EmptyErrorLabel = new JLabel("Alcuni campi non sono stati selezionati");
+		EmptyErrorLabel.setVisible(false);
+		EmptyErrorLabel.setForeground(Color.RED);
+		
 		lastRowContainer.add(annoPanel);
 		lastRowContainer.add(aggiungiButton);
+		lastRowContainer.add(new JPanel());
+		lastRowContainer.add(EmptyErrorLabel);
 
 		centralContainer.add(selectPanel);
 		centralContainer.add(containerDescription);
@@ -215,6 +226,24 @@ public class AdminAddOggettoView extends AView {
 
 	}
 
+	/**
+	 * Metodo che lancia un'eccezione se si verifica non si sono selezionati tutti i campi.
+	 *
+	 * @throws EmptyDateException
+	 */
+	public void checkAllFields() throws EmptyFieldException {
+		if(!(cSubTypeShown || rSubTypeShown) || imgPath.getText().equals("") || descrizioneField.getText().equals("")) {
+			throw new EmptyFieldException();
+		}
+	}
+	
+	/**
+	 * Metodo per rendere visibile l'errore dei campi non selezionati.
+	 */
+	public void setEmptyErrorVisible() {
+		EmptyErrorLabel.setVisible(true);
+	}
+	
 	/**
 	 * @return il bottone "SELEZIONA IMMAGINE".
 	 */
