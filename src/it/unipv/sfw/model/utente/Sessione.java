@@ -18,7 +18,6 @@ import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.Merchandising;
-import it.unipv.sfw.pagamento.Pagamento;
 import it.unipv.sfw.utilities.Pair;
 
 /**

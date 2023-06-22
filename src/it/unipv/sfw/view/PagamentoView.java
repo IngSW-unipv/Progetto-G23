@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import it.unipv.sfw.dao.DAOFactory;
+import it.unipv.sfw.model.pagamento.Carta;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.pagamento.Carta;
 
 public class PagamentoView extends AView {
 

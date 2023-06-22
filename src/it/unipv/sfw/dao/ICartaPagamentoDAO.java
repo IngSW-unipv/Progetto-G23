@@ -4,8 +4,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 import it.unipv.sfw.dao.mysql.CartaPagamentoDAO;
+import it.unipv.sfw.model.pagamento.Carta;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.pagamento.Carta;
 
 /**
  * Interfaccia DAO per {@link it.unipv.sfw.model.pagamento.Carta}.

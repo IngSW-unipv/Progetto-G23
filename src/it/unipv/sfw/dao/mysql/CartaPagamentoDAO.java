@@ -9,8 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.sfw.dao.ICartaPagamentoDAO;
+import it.unipv.sfw.model.pagamento.Carta;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.pagamento.Carta;
 
 /**
  * Classe DAO per {@link it.unipv.sfw.pagammento.Carta}.

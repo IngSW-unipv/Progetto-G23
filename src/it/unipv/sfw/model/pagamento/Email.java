@@ -1,4 +1,4 @@
-package it.unipv.sfw.pagamento;
+package it.unipv.sfw.model.pagamento;
 
 import java.util.Calendar;
 import java.util.HashMap;

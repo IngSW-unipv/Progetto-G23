@@ -1,4 +1,4 @@
-package it.unipv.sfw.pagamento;
+package it.unipv.sfw.model.pagamento;
 
 /**
  * Classe che rappresenta una carta di pagamento.

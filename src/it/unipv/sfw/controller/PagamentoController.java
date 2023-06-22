@@ -17,14 +17,14 @@ import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyNameException;
 import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
+import it.unipv.sfw.model.pagamento.Carta;
+import it.unipv.sfw.model.pagamento.Email;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.pagamento.Carta;
-import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
 
 /**
