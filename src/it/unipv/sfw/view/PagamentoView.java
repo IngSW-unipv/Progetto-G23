@@ -85,7 +85,8 @@ public class PagamentoView extends AView {
 
 		JLabel title = new JLabel("Totale: " + String.format("%.2f", prezzo) + " €");
 		title.setFont(veryLargeFont);
-		title.setBackground(Color.CYAN);
+		title.setForeground(Color.WHITE);
+		title.setBackground(Color.BLACK);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
 
