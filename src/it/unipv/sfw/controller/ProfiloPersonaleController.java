@@ -48,6 +48,7 @@ public class ProfiloPersonaleController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ControllerManager.getInstance().loadController(Type.PAGAMENTO);
+				v.setInfoAbbBtn(false);
 				switch (((UtenteButton) e.getSource()).getCode()) {
 				case 0:
 					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV1);

@@ -388,4 +388,11 @@ public class ProfiloPersonaleView extends AView {
 	public void setInfoAbb(boolean stato) {
 		info.setPopupMenuVisible(stato);
 	}
+	
+	/**
+	 * @param stato lo stato del menu degli abbonamenti.
+	 */
+	public void setInfoAbbBtn(boolean stato) {
+		abbBtn.setPopupMenuVisible(stato);
+	}
 }
