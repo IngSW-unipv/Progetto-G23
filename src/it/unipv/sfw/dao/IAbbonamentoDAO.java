@@ -2,7 +2,7 @@ package it.unipv.sfw.dao;
 
 import it.unipv.sfw.dao.mysql.AbbonamentoDAO;
 import it.unipv.sfw.model.abbonamento.Abbonamento;
-import it.unipv.sfw.model.abbonamento.TipoAbb;
+import it.unipv.sfw.model.abbonamento.AbbType;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Utente;
 
@@ -50,6 +50,6 @@ public interface IAbbonamentoDAO {
 	 * @return True se l'aggiornamento è avvenuto con successo, altrimenti ritorna
 	 *         False.
 	 */
-	boolean updateAbbonamento(Cliente nuovoAbbonato, TipoAbb livello);
+	boolean updateAbbonamento(Cliente nuovoAbbonato, AbbType livello);
 
 }

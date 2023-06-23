@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import it.unipv.sfw.dao.DAOFactory;
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.RegistroBigliettiMuseoView;
 

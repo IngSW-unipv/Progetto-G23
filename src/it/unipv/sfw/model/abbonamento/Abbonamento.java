@@ -5,17 +5,17 @@ package it.unipv.sfw.model.abbonamento;
  * {@link it.unipv.sfw.model.utente.Cliente}.
  *
  * @author Federico Romano
- * @see TipoAbb
+ * @see AbbType
  * @see it.unipv.sfw.model.utente.Cliente
  */
 public class Abbonamento {
-	private TipoAbb tipoAbb;
+	private AbbType tipoAbb;
 	private double prezzo;
 
 	public Abbonamento() {
 	}
 
-	public Abbonamento(TipoAbb tipo) {
+	public Abbonamento(AbbType tipo) {
 		this.tipoAbb = tipo;
 		this.prezzo = this.getPrezzo();
 	}
@@ -57,7 +57,7 @@ public class Abbonamento {
 	/**
 	 * @return Il tipo di abbonamento.
 	 */
-	public TipoAbb getTipoAbb() {
+	public AbbType getTipoAbb() {
 		return tipoAbb;
 	}
 
@@ -80,7 +80,7 @@ public class Abbonamento {
 	 *
 	 * @param tipo Tipo dell'abbonamento.
 	 */
-	public void setTipoAbb(TipoAbb tipo) {
+	public void setTipoAbb(AbbType tipo) {
 		tipoAbb = tipo;
 	}
 

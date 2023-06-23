@@ -4,8 +4,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 import it.unipv.sfw.dao.mysql.CartaPagamentoDAO;
+import it.unipv.sfw.model.pagamento.Carta;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.pagamento.Carta;
 
 /**
  * Interfaccia DAO per {@link it.unipv.sfw.model.pagamento.Carta}.
@@ -23,10 +23,13 @@ public interface ICartaPagamentoDAO {
 	boolean insertCarta(Carta carta, Utente c) throws SQLIntegrityConstraintViolationException;
 
 	/**
-	 * @return Un arrayList che contiene tutte le carte possedute da un certo utente
-	 *         registrate nel database.
+	 * @return Un arrayList che contiene tutte le carte registrate nel database.
 	 */
 	ArrayList<Carta> selectAll();
 
+	/**
+	 * @return Un arrayList che contiene tutte le carte possedute da un certo utente
+	 *         registrate nel database.
+	 */
 	ArrayList<Carta> selectByUtente(Utente c);
 }

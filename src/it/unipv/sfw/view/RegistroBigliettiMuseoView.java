@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 import it.unipv.sfw.view.elements.BigliettoRegistratoPanel;
 
 /**

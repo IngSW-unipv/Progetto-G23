@@ -1,4 +1,4 @@
-package it.unipv.sfw.pagamento;
+package it.unipv.sfw.model.pagamento;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import it.unipv.sfw.model.biglietti.Biglietto;
+import it.unipv.sfw.model.biglietto.Biglietto;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Sessione;
 
@@ -38,6 +38,9 @@ public class Email {
 		openConnection();
 	}
 
+	/**
+	 * @return Messaggio di conferma di acquisto di un abbonamento.
+	 */
 	public String messaggioAbbonamento() {
 		String messaggio = "";
 
@@ -47,6 +50,9 @@ public class Email {
 		return messaggio;
 	}
 
+	/**
+	 * @return Messaggio di conferma di acquisto di un biglietto per il museo.
+	 */
 	public String messaggioMuseo() {
 		String messaggio = "";
 		Biglietto b = Sessione.getIstance().getCurrentBiglietto();
@@ -64,6 +70,9 @@ public class Email {
 		return messaggio;
 	}
 
+	/**
+	 * @return Messaggio di conferma di acquisto di un biglietto per una partita.
+	 */
 	public String messaggioPartita() {
 		String messaggio = "";
 		Sessione s = Sessione.getIstance();
@@ -77,6 +86,9 @@ public class Email {
 		return messaggio;
 	}
 
+	/**
+	 * @return Messaggio di conferma di acquisto dallo store.
+	 */
 	public String messaggioStore() {
 		String messaggio = "";
 
@@ -94,6 +106,9 @@ public class Email {
 		return messaggio;
 	}
 
+	/**
+	 * Funzione che apre la connessione con il servizio di posta.
+	 */
 	private void openConnection() {
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "465");
@@ -110,6 +125,11 @@ public class Email {
 		});
 	}
 
+	/**
+	 * Funzione che manda la mail.
+	 * 
+	 * @param messaggio Messaggio da inviare.
+	 */
 	public void sendEmail(String messaggio) throws MessagingException {
 		try {
 			Message message = new MimeMessage(session);
@@ -129,6 +149,13 @@ public class Email {
 		}
 	}
 
+	/**
+	 * Funzione che manda la mail.
+	 * 
+	 * @param messaggio Messaggio da inviare.
+	 * 
+	 * @param destinatario Destinatario della mail.
+	 */
 	public void sendEmail(String messaggio, String destinatario) throws MessagingException {
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(props.getProperty("MITTENTE")));
@@ -145,6 +172,9 @@ public class Email {
 		Transport.send(message);
 	}
 
+	/**
+	 * Funzione che spazia nella maniera corretta i messaggi delle mail.
+	 */
 	public String spaziatura(String stringa) {
 		String spazi = "";
 		for (int i = 0; i < (21 - stringa.length()); i++) {

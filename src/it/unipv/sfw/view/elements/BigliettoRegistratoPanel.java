@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 
 /**
  * Classe che rappresenta il pannello contenente le informazioni di un biglietto

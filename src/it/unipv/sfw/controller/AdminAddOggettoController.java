@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import it.unipv.sfw.dao.DAOFactory;
+import it.unipv.sfw.exceptions.EmptyFieldException;
 import it.unipv.sfw.model.museo.Cimelio;
 import it.unipv.sfw.model.museo.Cimelio.TipoCimelio;
 import it.unipv.sfw.model.museo.Riconoscimento;
@@ -81,26 +82,41 @@ public class AdminAddOggettoController extends AController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String tipo = (String) mview.getObjectSubType().getSelectedItem();
-				int anno = mview.getAnno();
-				String descrizione = mview.getDescrizioneField();
-				String image = mview.getNomeImg();
-
-				if (mview.getObjectType().getSelectedItem().equals(Cimelio.class.getSimpleName())) {
-					Cimelio c = new Cimelio(descrizione, TipoCimelio.valueOf(tipo), anno, image);
-					DAOFactory.createICimelioDAO().insertCimelio(c);
-					c.setId(DAOFactory.createICimelioDAO().selectId(c));
-				} else if (mview.getObjectType().getSelectedItem().equals(Riconoscimento.class.getSimpleName())) {
-					Riconoscimento r = new Riconoscimento(anno, descrizione, TipoRiconoscimento.valueOf(tipo), image);
-					DAOFactory.createIRiconoscimentoDAO().insertRiconoscimento(r);
-					r.setId(DAOFactory.createIRiconoscimentoDAO().selectId(r));
+				try {
+					
+					mview.checkAllFields();
+					String tipo = (String) mview.getObjectSubType().getSelectedItem();
+					int anno = mview.getAnno();
+					String descrizione = mview.getDescrizioneField();
+					String image = mview.getNomeImg();
+	
+					if (mview.getObjectType().getSelectedItem().equals(Cimelio.class.getSimpleName())) {
+						Cimelio c = new Cimelio(descrizione, TipoCimelio.valueOf(tipo), anno, image);
+						DAOFactory.createICimelioDAO().insertCimelio(c);
+						c.setId(DAOFactory.createICimelioDAO().selectId(c));
+					} else if (mview.getObjectType().getSelectedItem().equals(Riconoscimento.class.getSimpleName())) {
+						Riconoscimento r = new Riconoscimento(anno, descrizione, TipoRiconoscimento.valueOf(tipo), image);
+						DAOFactory.createIRiconoscimentoDAO().insertRiconoscimento(r);
+						r.setId(DAOFactory.createIRiconoscimentoDAO().selectId(r));
+					}
+					ControllerManager.getInstance().loadController(AController.Type.AMUSEO);
+				
+				} catch (EmptyFieldException e3) {
+					mview.setEmptyErrorVisible();
+					return;
 				}
-				ControllerManager.getInstance().loadController(AController.Type.AMUSEO);
+				
 			}
 		});
 
 		view = mview;
 
 	}
+	
+	@Override
+	public void onLoad(Dimension dim) {
+		this.initialize(dim);
+	}
 
 }
+

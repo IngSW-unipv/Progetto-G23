@@ -14,7 +14,7 @@ import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyDateException;
 import it.unipv.sfw.exceptions.EmptyTimeException;
 import it.unipv.sfw.exceptions.WrongEmailFormatException;
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.BigliettoMuseoView;

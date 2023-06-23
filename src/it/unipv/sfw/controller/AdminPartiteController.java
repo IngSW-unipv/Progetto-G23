@@ -12,7 +12,7 @@ import java.util.Date;
 
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.model.abbonamento.Abbonamento;
-import it.unipv.sfw.model.abbonamento.TipoAbb;
+import it.unipv.sfw.model.abbonamento.AbbType;
 import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.view.AdminPartiteView;
@@ -110,9 +110,9 @@ public class AdminPartiteController extends AController {
 				liv2 = DAOFactory.createIPostoDAO().clientipresenti(cal, "LIV2");
 				liv3 = DAOFactory.createIPostoDAO().clientipresenti(cal, "LIV3");
 				abbonatipresenti = liv1 + liv2 + liv3;
-				Abbonamento l1 = new Abbonamento(TipoAbb.LIV1);
-				Abbonamento l2 = new Abbonamento(TipoAbb.LIV2);
-				Abbonamento l3 = new Abbonamento(TipoAbb.LIV3);
+				Abbonamento l1 = new Abbonamento(AbbType.LIV1);
+				Abbonamento l2 = new Abbonamento(AbbType.LIV2);
+				Abbonamento l3 = new Abbonamento(AbbType.LIV3);
 
 				ricavi = clientipresenti * (Partita.PREZZO) + liv1 * (Partita.PREZZO * l1.getSconto())
 						+ liv2 * (Partita.PREZZO * l2.getSconto()) + liv3 * (Partita.PREZZO * l3.getSconto());

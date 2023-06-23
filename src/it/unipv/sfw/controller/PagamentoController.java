@@ -17,16 +17,21 @@ import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.EmptyNameException;
 import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
+import it.unipv.sfw.model.pagamento.Carta;
+import it.unipv.sfw.model.pagamento.Email;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
 import it.unipv.sfw.model.utente.Cliente;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
-import it.unipv.sfw.pagamento.Carta;
-import it.unipv.sfw.pagamento.Email;
 import it.unipv.sfw.view.PagamentoView;
 
+/**
+ * Controller che si occupa del pagamento.
+ *
+ * @author Lorenzo Reale
+ */
 public class PagamentoController extends AController {
 
 	public void checkEnteredCvv() throws WrongCvvException {
@@ -224,6 +229,13 @@ public class PagamentoController extends AController {
 		view = v;
 	}
 
+	/**
+	 * Controlla che la stringa passata sia un numero.
+	 * 
+	 * @param str_in Strniga da controllare.
+	 * 
+	 * @return True se è un numero, False atrimenti.
+	 */
 	public boolean isNumber(String str_in) {
 		final Predicate<String> isNum = (str) -> str.chars().allMatch((c) -> Character.isDigit(c));
 		return (isNum.test(str_in) && str_in.charAt(0) != '0');

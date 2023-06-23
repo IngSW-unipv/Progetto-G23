@@ -4,14 +4,14 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 import it.unipv.sfw.dao.mysql.BigliettoMuseoDAO;
-import it.unipv.sfw.model.biglietti.BigliettoMuseo;
+import it.unipv.sfw.model.biglietto.BigliettoMuseo;
 
 /**
- * Interfaccia DAO per {@link it.unipv.sfw.model.biglietti.Biglietto}.
+ * Interfaccia DAO per {@link it.unipv.sfw.model.biglietto.Biglietto}.
  *
  * @author Federico Romano
  * @see BigliettoMuseoDAO
- * @see it.unipv.sfw.model.biglietti.Biglietto
+ * @see it.unipv.sfw.model.biglietto.Biglietto
  */
 public interface IBigliettoMuseoDAO {
 
@@ -24,6 +24,9 @@ public interface IBigliettoMuseoDAO {
 	boolean insertBigliettiMuseo(BigliettoMuseo ticket, int numeroPersone)
 			throws SQLIntegrityConstraintViolationException;
 
+	/**
+	 * Rimuove l'ultimo biglietto registrato nel database.
+	 */
 	void removeLast();
 
 	/**

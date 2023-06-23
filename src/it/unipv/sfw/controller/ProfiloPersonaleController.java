@@ -10,7 +10,7 @@ import java.util.Collection;
 import it.unipv.sfw.dao.DAOFactory;
 import it.unipv.sfw.exceptions.OldPasswordReusedException;
 import it.unipv.sfw.exceptions.PasswordPrecedenteErrataException;
-import it.unipv.sfw.model.abbonamento.TipoAbb;
+import it.unipv.sfw.model.abbonamento.AbbType;
 import it.unipv.sfw.model.utente.Sessione;
 import it.unipv.sfw.model.utente.Utente;
 import it.unipv.sfw.view.ProfiloPersonaleView;
@@ -51,13 +51,13 @@ public class ProfiloPersonaleController extends AController {
 				v.setInfoAbbBtn(false);
 				switch (((UtenteButton) e.getSource()).getCode()) {
 				case 0:
-					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV1);
+					Sessione.getIstance().setAbbToUpdate(AbbType.LIV1);
 					break;
 				case 1:
-					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV2);
+					Sessione.getIstance().setAbbToUpdate(AbbType.LIV2);
 					break;
 				default:
-					Sessione.getIstance().setAbbToUpdate(TipoAbb.LIV3);
+					Sessione.getIstance().setAbbToUpdate(AbbType.LIV3);
 					break;
 				}
 			}
