@@ -91,6 +91,14 @@ public class Sessione {
 	public AbbType getAbbToUpdate() {
 		return abbToUpdate;
 	}
+	
+	/**
+	 * @return prezzo dell'abbonamento da aggiornare.
+	 */
+	public double getPrezzoAbbToUpdate() {
+		Abbonamento a = new Abbonamento(abbToUpdate);
+		return a.getPrezzo();
+	}
 
 	/**
 	 * @return {@link Anello} della sessione corrente.

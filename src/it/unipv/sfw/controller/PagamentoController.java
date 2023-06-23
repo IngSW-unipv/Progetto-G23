@@ -19,6 +19,7 @@ import it.unipv.sfw.exceptions.WrongCvvException;
 import it.unipv.sfw.exceptions.WrongNumberException;
 import it.unipv.sfw.model.pagamento.Carta;
 import it.unipv.sfw.model.pagamento.Email;
+import it.unipv.sfw.model.partita.Partita;
 import it.unipv.sfw.model.partita.Posto;
 import it.unipv.sfw.model.store.AcquistoStore;
 import it.unipv.sfw.model.store.Merchandising;
@@ -88,10 +89,10 @@ public class PagamentoController extends AController {
 			prezzo = Sessione.getIstance().getCurrentBiglietto().getPrezzo();
 			break;
 		case 3:
-			prezzo = 50;
+			prezzo = Partita.PREZZO;
 			break;
 		default:
-			prezzo = Sessione.getIstance().getCurrentAbb().getPrezzo();
+			prezzo = Sessione.getIstance().getPrezzoAbbToUpdate();
 			break;
 		}
 		prezzo = prezzo * Sessione.getIstance().getCurrentAbb().getSconto();
