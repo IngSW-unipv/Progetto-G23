@@ -142,6 +142,8 @@ public class Email {
 				message.setSubject("Pagamento biglietto museo StadiumSystem");
 			else if (Sessione.getIstance().getCurrentPagamento() == 3)
 				message.setSubject("Pagamento biglietto partita StadiumSystem");
+			else 
+				message.setSubject("Pagamento abbonamento StadiumSystem");
 			message.setContent(messaggio, "text/plain");
 			Transport.send(message);
 		} catch (MessagingException e) {

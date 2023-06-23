@@ -87,12 +87,12 @@ public class BigliettoMuseoDAO implements IBigliettoMuseoDAO {
 			rs1 = st1.executeQuery(query);
 
 			while (rs1.next()) {
-				String str = rs1.getString(4);
+				String str = rs1.getString(5);
 				Calendar cal = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd", Locale.ITALY);
 				cal.setTime(sdf.parse(str));
-				BigliettoMuseo c = new BigliettoMuseo(rs1.getString(1), rs1.getString(2),
-						rs1.getDouble(3) * BigliettoMuseo.prezzoMuseo, cal, rs1.getTime(5));
+				BigliettoMuseo c = new BigliettoMuseo(rs1.getString(2), rs1.getString(3),
+						rs1.getDouble(4) * BigliettoMuseo.prezzoMuseo, cal, rs1.getTime(6));
 				result.add(c);
 			}
 
