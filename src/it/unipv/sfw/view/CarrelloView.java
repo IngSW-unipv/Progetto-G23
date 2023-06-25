@@ -71,13 +71,21 @@ public class CarrelloView extends AView {
 		JLabel emptyCartLabel = new JLabel("Il carrello è vuoto.");
 		emptyCartLabel.setFont(largeFont);
 		emptyCartPanel.add(emptyCartLabel);
+		
+		JPanel titlePanel = new JPanel();
+		titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		titlePanel.setBackground(Color.BLACK);
 
-		JLabel title = new JLabel("Carrello:");
+		JLabel title = new JLabel("CARRELLO");
+		title.setForeground(Color.WHITE);
 		title.setFont(veryLargeFont);
-		title.setBackground(Color.CYAN);
+		title.setBackground(Color.BLACK);
 		title.setOpaque(true);
 		title.setBorder(BorderFactory.createLineBorder(Color.black));
-		centralPanel.add(title, BorderLayout.NORTH);
+		
+		titlePanel.add(title);
+		
+		centralPanel.add(titlePanel, BorderLayout.NORTH);
 
 		acquistaBtn = new JButton("ACQUISTA");
 		acquistaBtn.setFont(largeFont);

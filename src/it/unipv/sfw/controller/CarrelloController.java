@@ -30,8 +30,10 @@ public class CarrelloController extends AController {
 	@Override
 	public void initialize(Dimension dim) {
 		Sessione s = Sessione.getIstance();
+		
+		carrello = s.getCarrello();
 
-		CarrelloView v = new CarrelloView(s.getCarrello(), (Cliente) s.getCurrentUtente(), dim);
+		CarrelloView v = new CarrelloView(carrello, (Cliente) s.getCurrentUtente(), dim);
 
 		v.getStoreBtn().addActionListener(new ActionListener() {
 			@Override
